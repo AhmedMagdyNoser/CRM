@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { globalErrorMessage } from '../../utils/utils';
 import RegisterInputField from '../../components/auth/RegisterInputField';
 import { validationRegex } from '../../utils/utils';
 
 function Register() {
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUserName] = useState('');
@@ -32,6 +34,7 @@ function Register() {
         setLoading(true);
         // Send the data to the server
         // Navigate to the email verification page
+        navigate('/verify-email', { state: { email, goal: 'register' } });
       } catch (error) {
         setLoading(false);
         setError(globalErrorMessage);

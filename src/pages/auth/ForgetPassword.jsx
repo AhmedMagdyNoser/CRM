@@ -1,15 +1,18 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { globalErrorMessage } from '../../utils/utils';
 import { validationRegex } from '../../utils/utils';
 
 function ForgetPassword() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
+
+  const validEmail = validationRegex.email.test(email);
+
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const validEmail = validationRegex.email.test(email);
-
   console.log('Rendering ForgetPassword', { loading, error });
 
   function handleSubmit(e) {
@@ -20,6 +23,7 @@ function ForgetPassword() {
         setLoading(true);
         // Send the data to the server
         // Navigate to the email verification page
+        navigate('/verify-email', { state: { email, goal: 'forgot-password' } });
       } catch (error) {
         setLoading(false);
         setError(globalErrorMessage);
@@ -45,7 +49,7 @@ function ForgetPassword() {
         </div>
         {error && <div>{error}</div>}
       </form>
-      <Link to="/login">← Back</Link>
+      <button onClick={() => navigate(-1)}>← Back</button>
     </section>
   );
 }
