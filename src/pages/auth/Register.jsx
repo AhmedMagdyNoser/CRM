@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { globalErrorMessages } from '../../utils/utils';
 import RegisterInputField from '../../components/auth/RegisterInputField';
-
-const nameRegex = /^[^0-9 !@#$%^&*()_+\-={}[\]\\|'";:/?.>,<].*/; // Should not start with a number or special character
-const userNameRegex = /^[a-zA-Z0-9_]*$/; // Should contain only letters, numbers, and underscores
-const emailRegex = /^.+@.+/; // Should contain @ and at least one character before and after it
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/; // Should contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long
+import { validationRegex } from '../../utils/utils';
 
 function Register() {
   const [firstName, setFirstName] = useState('');
@@ -16,11 +12,11 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const validFirstName = nameRegex.test(firstName);
-  const validLastName = nameRegex.test(lastName);
-  const validUserName = userNameRegex.test(userName);
-  const validEmail = emailRegex.test(email);
-  const validPassword = passwordRegex.test(password);
+  const validFirstName = validationRegex.name.test(firstName);
+  const validLastName = validationRegex.name.test(lastName);
+  const validUserName = validationRegex.userName.test(userName);
+  const validEmail = validationRegex.email.test(email);
+  const validPassword = validationRegex.password.test(password);
   const validConfirmPassword = confirmPassword === password;
 
   const [error, setError] = useState('');
