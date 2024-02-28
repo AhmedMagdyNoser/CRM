@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { globalErrorMessages } from '../../utils/utils';
+import { validationRegex } from '../../utils/utils';
 
 function ForgetPassword() {
   const [email, setEmail] = useState('');
+
+  const validEmail = validationRegex.email.test(email);
+
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  console.log('Rendering ForgetPassword', { loading, error });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,7 +40,7 @@ function ForgetPassword() {
           <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
         </div>
         <div>
-          <button type="submit" disabled={!email || loading}>
+          <button type="submit" disabled={!validEmail || loading}>
             {loading ? 'Loading...' : 'Continue'}
           </button>
         </div>
