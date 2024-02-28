@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { globalErrorMessages } from '../../utils/utils';
+import { Link } from 'react-router-dom';
 
 function Login() {
   const [identity, setIdentity] = useState(''); // username or email
@@ -33,7 +34,7 @@ function Login() {
   return (
     <section>
       <h2>Welcome back!</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <div>
           <label htmlFor="identity">Username or Email</label>
           <input
@@ -49,11 +50,19 @@ function Login() {
           <label htmlFor="password">Password</label>
           <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
+        <div>
+          <Link to="/forgot-password">Forgot your password?</Link>
+        </div>
         <button type="submit" disabled={!identity || !password || loading}>
           Login
         </button>
         {error ? <div>{error}</div> : loading ? <div>Loading...</div> : null}
       </form>
+      <div>
+        <p>
+          Don't have an account? <Link to="/register">Sign Up</Link>
+        </p>
+      </div>
     </section>
   );
 }
