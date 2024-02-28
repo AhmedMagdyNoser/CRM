@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { globalErrorMessages } from '../../utils/utils';
+import RegisterInputField from '../../components/auth/RegisterInputField';
 
-const nameRegex = /^[^0-9!@#$%^&*()_+\-={}[\]\\|'";:/?.>,<].*/; // Should not start with a number or special character
+const nameRegex = /^[^0-9 !@#$%^&*()_+\-={}[\]\\|'";:/?.>,<].*/; // Should not start with a number or special character
 const userNameRegex = /^[a-zA-Z0-9_]*$/; // Should contain only letters, numbers, and underscores
 const emailRegex = /^.+@.+/; // Should contain @ and at least one character before and after it
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/; // Should contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long
@@ -49,72 +50,67 @@ function Register() {
     <section>
       <h1>Create your account</h1>
       <form onSubmit={handleSubmit} autoComplete="off">
-        <div>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            maxLength={18}
-            required
-            autoFocus
-          />
-          {firstName && (validFirstName ? 1 : 0)}
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            maxLength={18}
-            required
-          />
-          {lastName && (validLastName ? 1 : 0)}
-        </div>
-        <div>
-          <label htmlFor="userName">Username</label>
-          <input
-            type="text"
-            id="userName"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            maxLength={18}
-            required
-          />
-          {userName && (validUserName ? 1 : 0)}
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={50} required />
-          {email && (validEmail ? 1 : 0)}
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            maxLength={32}
-            required
-          />
-          {password && (validPassword ? 1 : 0)}
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            maxLength={32}
-            required
-          />
-          {confirmPassword && (validConfirmPassword ? 1 : 0)}
-        </div>
+        <RegisterInputField
+          label="First Name"
+          type="text"
+          id="firstName"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          isValid={validFirstName}
+          maxLength={18}
+          required
+          autoFocus
+        />
+        <RegisterInputField
+          label="Last Name"
+          type="text"
+          id="lastName"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          isValid={validLastName}
+          maxLength={18}
+          required
+        />
+        <RegisterInputField
+          label="Username"
+          type="text"
+          id="userName"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          isValid={validUserName}
+          maxLength={18}
+          required
+        />
+        <RegisterInputField
+          label="Email"
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          isValid={validEmail}
+          maxLength={50}
+          required
+        />
+        <RegisterInputField
+          label="Password"
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          isValid={validPassword}
+          maxLength={32}
+          required
+        />
+        <RegisterInputField
+          label="Confirm Password"
+          type="password"
+          id="confirmPassword"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          isValid={validConfirmPassword}
+          maxLength={32}
+          required
+        />
         <button
           type="submit"
           disabled={
