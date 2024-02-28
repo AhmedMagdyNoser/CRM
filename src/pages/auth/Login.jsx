@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Login() {
   const [identity, setIdentity] = useState(''); // username or email
   const [password, setPassword] = useState('');
-  // needs persist state
+  const [persist, setPersist] = useState(false);
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -52,6 +52,12 @@ function Login() {
         </div>
         <div>
           <Link to="/forgot-password">Forgot your password?</Link>
+        </div>
+        <div>
+          <label htmlFor="persist">
+            <input type="checkbox" id="persist" checked={persist} onChange={(e) => setPersist(e.target.checked)} />
+            Remember me
+          </label>
         </div>
         <button type="submit" disabled={!identity || !password || loading}>
           Login
