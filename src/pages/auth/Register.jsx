@@ -26,7 +26,7 @@ function Register() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  console.log('Rendering Register');
+  console.log('Rendering Register', { loading, error });
 
   function handleSubmit(e) {
     e.preventDefault();
