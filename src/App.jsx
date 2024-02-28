@@ -4,6 +4,7 @@ import NotFound from './pages/routes/NotFound';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import Home from './pages/users/Home';
+import ForgetPassword from './pages/auth/ForgetPassword';
 
 function App() {
   console.log('Rendering App');
@@ -15,6 +16,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
+          <Route path="forgot-password" element={<ForgetPassword />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
