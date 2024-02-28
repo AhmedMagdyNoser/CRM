@@ -1,4 +1,4 @@
-export const globalErrorMessages = 'Something went wrong. Please try again later.';
+export const globalErrorMessage = 'Something went wrong. Please try again later.';
 
 export const validationRegex = {
   name: /^[^0-9 !@#$%^&*()_+\-={}[\]\\|'";:/?.>,<].*/, // Should not start with a number or special character

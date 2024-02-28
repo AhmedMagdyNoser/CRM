@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { globalErrorMessages } from '../../utils/utils';
+import { globalErrorMessage } from '../../utils/utils';
 import RegisterInputField from '../../components/auth/RegisterInputField';
 import { validationRegex } from '../../utils/utils';
 
@@ -34,7 +34,7 @@ function Register() {
         // Navigate to the email verification page
       } catch (error) {
         setLoading(false);
-        setError(error.response?.data || globalErrorMessages);
+        setError(globalErrorMessage);
       }
     } else {
       // If the submit button is enabled with JS hacks
@@ -114,9 +114,9 @@ function Register() {
             loading
           }
         >
-          Register
+          {loading ? 'Loading...' : 'Register'}
         </button>
-        {error ? <div>{error}</div> : loading ? <div>Loading...</div> : null}
+        {error && <div>{error}</div>}
       </form>
       <div>
         <p>

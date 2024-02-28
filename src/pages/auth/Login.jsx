@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { globalErrorMessages } from '../../utils/utils';
+import { globalErrorMessage } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 
 function Login() {
@@ -23,7 +23,7 @@ function Login() {
         // Save the persist state in the local storage
       } catch (error) {
         setLoading(false);
-        setError(error.response?.data || globalErrorMessages);
+        setError(globalErrorMessage);
       }
     } else {
       // If the submit button is enabled with JS hacks
@@ -60,9 +60,9 @@ function Login() {
           </label>
         </div>
         <button type="submit" disabled={!identity || !password || loading}>
-          Login
+          {loading ? 'Loading...' : 'Login'}
         </button>
-        {error ? <div>{error}</div> : loading ? <div>Loading...</div> : null}
+        {error && <div>{error}</div>}
       </form>
       <div>
         <p>

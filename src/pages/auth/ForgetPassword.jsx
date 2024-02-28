@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { globalErrorMessages } from '../../utils/utils';
+import { globalErrorMessage } from '../../utils/utils';
 import { validationRegex } from '../../utils/utils';
 
 function ForgetPassword() {
   const [email, setEmail] = useState('');
-
-  const validEmail = validationRegex.email.test(email);
-
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  const validEmail = validationRegex.email.test(email);
 
   console.log('Rendering ForgetPassword', { loading, error });
 
@@ -23,7 +22,7 @@ function ForgetPassword() {
         // Navigate to the email verification page
       } catch (error) {
         setLoading(false);
-        setError(error.response?.data || globalErrorMessages);
+        setError(globalErrorMessage);
       }
     } else {
       // If the submit button is enabled with JS hacks
