@@ -39,7 +39,7 @@ function EmailVerification() {
       }
     } catch (error) {
       setLoading(false);
-      setError(globalErrorMessage);
+      setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
     }
   }
 

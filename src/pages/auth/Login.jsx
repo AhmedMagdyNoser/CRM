@@ -31,7 +31,7 @@ function Login() {
         // Save the persist state in the local storage
       } catch (error) {
         setLoading(false);
-        setError(globalErrorMessage);
+        setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
       }
     } else {
       // If the submit button is enabled with JS hacks

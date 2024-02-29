@@ -41,12 +41,7 @@ function Register() {
         navigate('/verify-email', { state: { email, goal: 'register' } });
       } catch (error) {
         setLoading(false);
-        if (error.response?.data?.errors) {
-          let errorMessages = error.response.data.errors;
-          setError(errorMessages[0]);
-        } else {
-          setError(globalErrorMessage);
-        }
+        setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
       }
     } else {
       // If the submit button is enabled with JS hacks

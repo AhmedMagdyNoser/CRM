@@ -31,7 +31,7 @@ function ForgetPassword() {
         navigate('/verify-email', { state: { email, goal: 'forgot-password' } });
       } catch (error) {
         setLoading(false);
-        setError(globalErrorMessage);
+        setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
       }
     } else {
       // If the submit button is enabled with JS hacks
