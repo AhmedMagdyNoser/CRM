@@ -26,7 +26,7 @@ function EmailVerification() {
           method: 'POST',
           url: '/Auth/ConfirmEmail',
           data: { email: location.state.email, code },
-          // withCredentials: true, // CORS block
+          withCredentials: true,
         });
         setAuth(response.data); // rerender and navigate to the home page
       } else if (location.state?.goal === 'forgot-password') {
@@ -57,7 +57,7 @@ function EmailVerification() {
         </div>
       </form>
       {error && <div>{error}</div>}
-      <button onClick={() => navigate(-1)}>← Back</button>
+      <button onClick={() => navigate(-1, { state: null })}>← Back</button>
     </section>
   );
 }

@@ -25,7 +25,7 @@ function Login() {
           method: 'POST',
           url: '/auth/login',
           data: { loginIdentifier: identity, password },
-          // withCredentials: true, // CORS block
+          withCredentials: true,
         });
         setAuth(response.data); // rerender and navigate to the home page
         // Save the persist state in the local storage

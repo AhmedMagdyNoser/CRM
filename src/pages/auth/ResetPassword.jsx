@@ -16,6 +16,7 @@ function ResetPassword() {
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -33,8 +34,9 @@ function ResetPassword() {
             confirmPassword,
           },
         });
-        // display a success message
-        navigate('/login', { state: null });
+        setLoading(false);
+        setSuccess(true);
+        setTimeout(() => navigate('/login', { state: null }), 3500);
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
@@ -45,7 +47,9 @@ function ResetPassword() {
     }
   }
 
-  return (
+  return success ? (
+    <SuccessMessage />
+  ) : (
     <section>
       <h1>Hello Ahmed</h1>
       <p>Please choose your new password</p>
@@ -84,3 +88,13 @@ function ResetPassword() {
 }
 
 export default ResetPassword;
+
+function SuccessMessage() {
+  return (
+    <section>
+      <p>{String.fromCharCode(10003)}</p>
+      <h1>Password reset successful</h1>
+      <p>You can now login with your new password</p>
+    </section>
+  );
+}
