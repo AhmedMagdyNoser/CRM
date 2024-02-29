@@ -2,10 +2,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { globalErrorMessage } from '../../utils/utils';
 import { useState } from 'react';
 import axios from '../../api/axios';
+import useAuth from '../../hooks/useAuth';
 
 function EmailVerification() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
 
   const [code, setCode] = useState('');
 
@@ -22,12 +24,11 @@ function EmailVerification() {
       if (location.state?.goal === 'register') {
         let response = await axios({
           method: 'POST',
-          url: '/ConfirmEmail',
+          url: '/Auth/ConfirmEmail',
           data: { email: location.state.email, code },
-          withCredentials: true, // CORS block
+          // withCredentials: true, // CORS block
         });
-        console.log(response);
-        // Save the token in memory which rerender and navigate to the home page
+        setAuth(response.data); // rerender and navigate to the home page
       } else if (location.state?.goal === 'forgot-password') {
         // send { email, code } to the /VerifyCode
         // Navigate to the reset password page and pass the email and token to it

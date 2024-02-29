@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { globalErrorMessage } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import axios from '../../api/axios';
+import useAuth from '../../hooks/useAuth';
 
 function Login() {
+  const { setAuth } = useAuth();
   const [identity, setIdentity] = useState(''); // username or email
   const [password, setPassword] = useState('');
   const [persist, setPersist] = useState(false);
@@ -23,10 +25,9 @@ function Login() {
           method: 'POST',
           url: '/auth/login',
           data: { loginIdentifier: identity, password },
-          withCredentials: true, // CORS block
+          // withCredentials: true, // CORS block
         });
-        console.log(response);
-        // Save the token in memory which rerender and navigate to the home page
+        setAuth(response.data); // rerender and navigate to the home page
         // Save the persist state in the local storage
       } catch (error) {
         setLoading(false);
