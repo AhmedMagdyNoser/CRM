@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { globalErrorMessage } from '../../utils/utils';
 import RegisterInputField from '../../components/auth/RegisterInputField';
 import { validationRegex } from '../../utils/utils';
+import axios from '../../api/axios';
 
 function Register() {
   const navigate = useNavigate();
@@ -26,18 +27,26 @@ function Register() {
 
   console.log('Rendering Register', { loading, error });
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (validFirstName && validLastName && validUserName && validEmail && validPassword && validConfirmPassword) {
       try {
         if (error) setError('');
         setLoading(true);
-        // Send the data to the server
-        // Navigate to the email verification page
+        await axios({
+          method: 'POST',
+          url: '/auth/register',
+          data: { firstName, lastName, userName, email, password, confirmPassword },
+        });
         navigate('/verify-email', { state: { email, goal: 'register' } });
       } catch (error) {
         setLoading(false);
-        setError(globalErrorMessage);
+        if (error.response?.data?.errors) {
+          let errorMessages = error.response.data.errors;
+          setError(errorMessages[0]);
+        } else {
+          setError(globalErrorMessage);
+        }
       }
     } else {
       // If the submit button is enabled with JS hacks

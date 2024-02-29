@@ -15,7 +15,6 @@ function EmailVerification() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     try {
       if (error) setError('');
       setLoading(true);
@@ -25,7 +24,7 @@ function EmailVerification() {
       } else if (location.state?.goal === 'forgot-password') {
         // send { email, code } to the /VerifyCode
         // Navigate to the reset password page and pass the email and token to it
-        navigate('/reset-password', { state: { email: location.state.email, token:'abc123' } });
+        navigate('/reset-password', { state: { email: location.state.email, token: 'abc123' } });
       }
     } catch (error) {
       setLoading(false);
