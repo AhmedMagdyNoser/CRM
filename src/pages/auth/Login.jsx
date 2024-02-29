@@ -27,7 +27,7 @@ function Login() {
           data: { loginIdentifier: identity, password },
           withCredentials: true,
         });
-        setAuth(response.data); // rerender and navigate to the home page
+        setAuth(response.data);
         // Save the persist state in the local storage
       } catch (error) {
         setLoading(false);

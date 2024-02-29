@@ -28,7 +28,7 @@ function EmailVerification() {
           data: { email: location.state.email, code },
           withCredentials: true,
         });
-        setAuth(response.data); // rerender and navigate to the home page
+        setAuth(response.data);
       } else if (location.state?.goal === 'forgot-password') {
         let response = await axios({
           method: 'POST',
