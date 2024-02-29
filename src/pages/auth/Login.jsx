@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth';
 
 function Login() {
   const { setAuth } = useAuth();
+
   const [identity, setIdentity] = useState(''); // username or email
   const [password, setPassword] = useState('');
   const [persist, setPersist] = useState(false);
@@ -28,7 +29,7 @@ function Login() {
           withCredentials: true,
         });
         setAuth(response.data);
-        // Save the persist state in the local storage
+        persist && localStorage.setItem('persist', 'true');
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);

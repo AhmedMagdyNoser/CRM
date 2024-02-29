@@ -5,7 +5,7 @@ function Authentication({ requireUnauthenticated }) {
   const { auth } = useAuth();
   const location = useLocation();
 
-  console.log('Rendering Authentication', { authenticated: Boolean(auth.accessToken) });
+  console.log('Rendering Authentication', { requireUnauthenticated, authenticated: Boolean(auth.accessToken) });
 
   if (requireUnauthenticated) {
     return !auth.accessToken ? <Outlet /> : <Navigate to={location.state?.from || '/'} replace={true} />;
