@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { globalErrorMessage, validationRegex } from '../../utils/utils';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from '../../api/axios';
 
 function ResetPassword() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -11,17 +16,27 @@ function ResetPassword() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (password && confirmPassword) {
       try {
         if (error) setError('');
         setLoading(true);
-        // Send the data to the server
-        // display a success message and navigate to the login page
+        await axios({
+          method: 'POST',
+          url: '/Auth/ResetPassword',
+          data: {
+            token: location.state?.token,
+            email: location.state?.email,
+            password,
+            confirmPassword,
+          },
+        });
+        // display a success message
+        navigate('/login', { state: null });
       } catch (error) {
         setLoading(false);
-        setError(globalErrorMessage);
+        setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
       }
     } else {
       // If the submit button is enabled with JS hacks
