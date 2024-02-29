@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { globalErrorMessage } from '../../utils/utils';
 import { validationRegex } from '../../utils/utils';
+import axios from '../../api/axios';
 
 function ForgetPassword() {
   const navigate = useNavigate();
@@ -12,17 +13,21 @@ function ForgetPassword() {
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
+
   console.log('Rendering ForgetPassword', { loading, error });
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (email) {
       try {
         if (error) setError('');
         setLoading(true);
-        // Send the data to the server
-        // Navigate to the email verification page
+        await axios({
+          method: 'POST',
+          url: '/Auth/ForgotPassword',
+          data: { email },
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
         navigate('/verify-email', { state: { email, goal: 'forgot-password' } });
       } catch (error) {
         setLoading(false);
