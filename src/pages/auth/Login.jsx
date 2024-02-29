@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { globalErrorMessage } from '../../utils/utils';
 import { Link } from 'react-router-dom';
+import axios from '../../api/axios';
 
 function Login() {
   const [identity, setIdentity] = useState(''); // username or email
@@ -12,13 +13,19 @@ function Login() {
 
   console.log('Rendering Login', { loading, error });
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (identity && password) {
       try {
         if (error) setError('');
         setLoading(true);
-        // Send the data to the server
+        let response = await axios({
+          method: 'POST',
+          url: '/auth/login',
+          data: { loginIdentifier: identity, password },
+          withCredentials: true, // CORS block
+        });
+        console.log(response);
         // Save the token in memory which rerender and navigate to the home page
         // Save the persist state in the local storage
       } catch (error) {

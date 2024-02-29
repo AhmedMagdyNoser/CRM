@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { globalErrorMessage } from '../../utils/utils';
 import { useState } from 'react';
+import axios from '../../api/axios';
 
 function EmailVerification() {
   const location = useLocation();
@@ -13,13 +14,19 @@ function EmailVerification() {
 
   console.log('Rendering EmailVerification', { loading, error, state: location.state });
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     try {
       if (error) setError('');
       setLoading(true);
       if (location.state?.goal === 'register') {
-        // send { email, code } to the /ConfirmEmail
+        let response = await axios({
+          method: 'POST',
+          url: '/ConfirmEmail',
+          data: { email: location.state.email, code },
+          withCredentials: true, // CORS block
+        });
+        console.log(response);
         // Save the token in memory which rerender and navigate to the home page
       } else if (location.state?.goal === 'forgot-password') {
         // send { email, code } to the /VerifyCode
