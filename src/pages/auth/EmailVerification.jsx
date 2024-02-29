@@ -30,9 +30,12 @@ function EmailVerification() {
         });
         setAuth(response.data); // rerender and navigate to the home page
       } else if (location.state?.goal === 'forgot-password') {
-        // send { email, code } to the /VerifyCode
-        // Navigate to the reset password page and pass the email and token to it
-        navigate('/reset-password', { state: { email: location.state.email, token: 'abc123' } });
+        let response = await axios({
+          method: 'POST',
+          url: '/Auth/VerifyCode',
+          data: { email: location.state.email, code },
+        });
+        navigate('/reset-password', { state: { email: location.state.email, token: response.data.token } });
       }
     } catch (error) {
       setLoading(false);
