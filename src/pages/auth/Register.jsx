@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { globalErrorMessage } from '../../utils/utils';
+import { globalErrorMessage, validationRegex, inputFieldsInstructions } from '../../utils/utils';
 import RegisterInputField from '../../components/auth/RegisterInputField';
-import { validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
 
 function Register() {
@@ -10,14 +9,14 @@ function Register() {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [userName, setUserName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const validFirstName = validationRegex.name.test(firstName);
   const validLastName = validationRegex.name.test(lastName);
-  const validUserName = validationRegex.userName.test(userName);
+  const validUserName = validationRegex.username.test(username);
   const validEmail = validationRegex.email.test(email);
   const validPassword = validationRegex.password.test(password);
   const validConfirmPassword = confirmPassword === password;
@@ -36,7 +35,7 @@ function Register() {
         await axios({
           method: 'POST',
           url: '/auth/register',
-          data: { firstName, lastName, userName, email, password, confirmPassword },
+          data: { firstName, lastName, userName: username, email, password, confirmPassword },
         });
         navigate('/verify-email', { state: { email, goal: 'register' } });
       } catch (error) {
@@ -59,6 +58,7 @@ function Register() {
           id="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
+          instructions={inputFieldsInstructions.name}
           isValid={validFirstName}
           maxLength={18}
           required
@@ -70,6 +70,7 @@ function Register() {
           id="lastName"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
+          instructions={inputFieldsInstructions.name}
           isValid={validLastName}
           maxLength={18}
           required
@@ -78,8 +79,9 @@ function Register() {
           label="Username"
           type="text"
           id="userName"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          instructions={inputFieldsInstructions.username}
           isValid={validUserName}
           maxLength={18}
           required
@@ -90,6 +92,7 @@ function Register() {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          instructions={inputFieldsInstructions.email}
           isValid={validEmail}
           maxLength={50}
           required
@@ -100,6 +103,7 @@ function Register() {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          instructions={inputFieldsInstructions.password}
           isValid={validPassword}
           maxLength={32}
           required
@@ -110,6 +114,7 @@ function Register() {
           id="confirmPassword"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          instructions={inputFieldsInstructions.confirmPassword}
           isValid={validConfirmPassword}
           maxLength={32}
           required

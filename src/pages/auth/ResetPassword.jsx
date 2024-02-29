@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { globalErrorMessage, validationRegex } from '../../utils/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
+import RegisterInputField from '../../components/auth/RegisterInputField';
 
 function ResetPassword() {
   const location = useLocation();
@@ -49,20 +50,28 @@ function ResetPassword() {
       <h1>Hello Ahmed</h1>
       <p>Please choose your new password</p>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
+        <RegisterInputField
+          label="Password"
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          instructions={inputFieldsInstructions.password}
+          isValid={validPassword}
+          maxLength={32}
+          required
+        />
+        <RegisterInputField
+          label="Confirm Password"
+          type="password"
+          id="confirmPassword"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          instructions={inputFieldsInstructions.confirmPassword}
+          isValid={validConfirmPassword}
+          maxLength={32}
+          required
+        />
         <div>
           <button type="submit" disabled={!validPassword || !validConfirmPassword || loading}>
             {loading ? 'Loading...' : 'Reset'}
