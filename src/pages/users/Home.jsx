@@ -13,7 +13,7 @@ function Home() {
         <hr />
       </header>
       <h1>Home</h1>
-      <button onClick={refresh}>Refresh</button>
+      <button onClick={refresh}>Refresh (For Testing)</button>
     </div>
   );
 }
