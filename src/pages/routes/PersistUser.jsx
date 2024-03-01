@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import useRefresh from "../../hooks/useRefresh";
-import useLogout from "../../hooks/useLogout";
+import { useEffect, useRef } from 'react';
+import { Outlet } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import useRefresh from '../../hooks/useRefresh';
+import useLogout from '../../hooks/useLogout';
 
 /**
  * @description This component is responsible for getting the user's authentication state when the app is loaded.
@@ -21,14 +21,18 @@ import useLogout from "../../hooks/useLogout";
 function PersistUser() {
   const { auth } = useAuth();
   const accessToken = auth.accessToken;
-  const persist = JSON.parse(localStorage.getItem("persist")) ?? false;
+  const persist = JSON.parse(localStorage.getItem('persist')) ?? false;
   const refreshAccessToken = useRefresh();
   const logout = useLogout();
 
-  console.log("Rendering PersistUser", { authenticated: !!auth.accessToken, persist });
+  // in StrictMode, this component will be rendered twice causing the refreshAccessToken to be called twice.
+  const effectHasRun = useRef(false);
+
+  console.log('Rendering PersistUser', { authenticated: !!auth.accessToken, persist });
 
   useEffect(() => {
-    if (!accessToken && persist) {
+    if (!accessToken && persist && !effectHasRun.current) {
+      effectHasRun.current = true;
       (async () => {
         try {
           await refreshAccessToken();
