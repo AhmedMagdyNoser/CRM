@@ -61,7 +61,7 @@ function Register() {
         className="flex h-full w-full flex-col justify-between gap-3 p-6 sm:h-[600px] sm:w-[600px] sm:p-12"
       >
         <div className="flex flex-1 flex-col gap-3 overflow-auto">
-          <h1 className="my-4 text-2xl font-bold capitalize text-pro-500 sm:text-3xl">Create your account</h1>
+          <h1 className="text-progray-300 my-4 text-2xl font-bold capitalize sm:text-3xl">Create your account</h1>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-stretch">
             <RegisterInputField
               type="text"
@@ -144,8 +144,8 @@ function Register() {
             }
           />
           <div className="flex justify-center gap-1">
-            <span className="text-pro-500">Already have an account?</span>
-            <Link className="font-bold text-pro-300 transition-colors hover:text-pro-400" to="/login">
+            <span className="text-progray-300">Already have an account?</span>
+            <Link className="font-bold text-pro-200 transition-colors hover:text-pro-300" to="/login">
               Login
             </Link>
           </div>

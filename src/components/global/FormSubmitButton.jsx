@@ -5,7 +5,7 @@ function FormSubmitButton({ label, loading, ...rest }) {
   return (
     <button
       type="submit"
-      className="w-full rounded-md bg-pro-400 p-3 font-bold uppercase text-white transition hover:bg-pro-300 disabled:bg-pro-300"
+      className="text-pro-50 w-full rounded-md bg-pro-300 p-3 font-bold uppercase transition hover:bg-pro-200 disabled:bg-pro-200"
       {...rest}
     >
       {loading ? <FontAwesomeIcon icon={faSpinner} className="animate-spin-slow" /> : label}

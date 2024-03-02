@@ -2,7 +2,7 @@ import defaultImage from '../../assets/defaultImage.svg';
 
 function ImageFormBox({ image, children }) {
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-50">
+    <div className="bg-progray-50 flex h-screen items-center justify-center">
       <div className="flex h-full w-full bg-white sm:h-fit sm:w-fit sm:rounded-xl sm:shadow-lg">
         <ImageBox image={image} />
         <Divider />
@@ -15,7 +15,7 @@ function ImageFormBox({ image, children }) {
 export default ImageFormBox;
 
 function Divider() {
-  return <div className="my-12 hidden w-[2px] rounded bg-gray-100 xl:flex"></div>;
+  return <div className="bg-progray-100 my-12 hidden w-[2px] rounded xl:flex"></div>;
 }
 
 function ImageBox({ image = defaultImage }) {

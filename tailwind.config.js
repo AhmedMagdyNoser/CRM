@@ -10,11 +10,20 @@ module.exports = {
     extend: {
       colors: {
         pro: {
-          100: '#f9fbff', // Light Background
-          200: '#dbe2ff', // Light Background Hover
-          300: '#958eff', // Dark Background Hover
-          400: '#6c63ff', // Dark Background + Default Text
-          500: '#2f2e41', // Dark Text
+          50: '#F5F5FF', // Light Background
+          100: '#EAEAff', // Light Background Hover
+          200: '#9085FF', // Dark Background Hover
+          300: '#6A60FF', // Dark Background + Default Text
+        },
+        progray: {
+          50: '#F8F8F8', // Very Light Background
+          100: '#F2F2F2', // Light Background
+          200: '#656565', // Light Text
+          300: '#252525', // Dark Text
+        },
+        proerror: {
+          50: '#FEEAEA', // Error Background
+          100: '#EE4545', // Error Text
         },
       },
       animation: {
