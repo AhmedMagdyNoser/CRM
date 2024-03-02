@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { globalErrorMessage, validationRegex, inputFieldsInstructions } from '../../utils/utils';
 import RegisterInputField from '../../components/auth/RegisterInputField';
 import axios from '../../api/axios';
-import { faAddressBook, faEnvelope, faLock, faSpinner, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faArrowLeft, faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ErrorAlert from '../../components/global/ErrorAlert';
+import FormSubmitButton from '../../components/global/FormSubmitButton';
+import welcome from '../../assets/welcome.svg';
 
 function Register() {
   const navigate = useNavigate();
@@ -53,11 +55,29 @@ function Register() {
 
   return (
     <div className="flex h-screen items-center justify-center bg-gray-50">
-      <section className="rounded-xl bg-white shadow-lg">
-        <div className="w-[545px] p-12">
-          <h1 className="mb-5 text-3xl font-bold capitalize text-gray-800">Create your account</h1>
-          <form onSubmit={handleSubmit} autoComplete="off" className="flex flex-col gap-3">
-            <div className="flex justify-stretch gap-3">
+      <section className="flex h-full w-full bg-white sm:h-fit sm:w-fit sm:rounded-xl sm:shadow-lg">
+        <div className="hidden w-[545px] flex-1 p-12 xl:flex">
+          <div className="flex h-full items-center justify-center">
+            <img src={welcome} alt="Join our community" className="w-3/4" />
+          </div>
+        </div>
+        <div className="mx-2 my-12 hidden w-[2px] rounded bg-gray-100 xl:flex"></div>
+        <form
+          onSubmit={handleSubmit}
+          autoComplete="off"
+          className="flex h-full w-full flex-col justify-between gap-2 p-6 sm:w-[545px] sm:p-12"
+        >
+          <div className="flex flex-col gap-3">
+            <div className="sm:hidden">
+              <Link
+                to="/login"
+                className="flex h-8 w-8 items-center justify-center rounded-full text-gray-800 transition-colors hover:bg-gray-100"
+              >
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </Link>
+            </div>
+            <h1 className="my-4 text-2xl font-bold capitalize text-gray-800 sm:text-3xl">Create your account</h1>
+            <div className="flex flex-col gap-3 sm:flex-row">
               <RegisterInputField
                 type="text"
                 placeholder="First Name"
@@ -126,27 +146,26 @@ function Register() {
               maxLength={32}
               required
             />
-            <button
-              type="submit"
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <FormSubmitButton
+              label="Register"
+              loading={loading}
               disabled={
                 !(validFirstName && validLastName && validUserName && validEmail && validPassword && validConfirmPassword) ||
                 loading
               }
-              className="w-full rounded-md bg-pro-400 p-3 font-bold uppercase text-white transition hover:bg-pro-300 disabled:opacity-50 disabled:hover:bg-pro-400"
-            >
-              {loading ? <FontAwesomeIcon icon={faSpinner} className="animate-spin-slow" /> : 'Register'}
-            </button>
+            />
             {error && <ErrorAlert message={error} />}
-          </form>
-          <div className="mt-3 flex justify-center">
-            <p>
+            <div className="flex justify-center gap-1">
               <span className="text-gray-800">Already have an account?</span>{' '}
               <Link className="font-bold text-pro-300 transition-colors hover:text-pro-400" to="/login">
                 Login
               </Link>
-            </p>
+            </div>
           </div>
-        </div>
+        </form>
       </section>
     </div>
   );

@@ -3,9 +3,9 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 function ErrorAlert({ message }) {
   return (
-    <div className="animate-fade-in-fast flex items-center gap-2 rounded-md bg-red-100 p-3 shadow-sm">
-      <FontAwesomeIcon icon={faExclamationCircle} className="text-red-600" />
-      <div className="text-red-600">{message}</div>
+    <div className="flex animate-fade-in-fast items-center gap-2 rounded-md bg-red-100 p-3 text-red-600">
+      <FontAwesomeIcon icon={faExclamationCircle} />
+      <div>{message}</div>
     </div>
   );
 }
