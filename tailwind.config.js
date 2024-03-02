@@ -10,11 +10,11 @@ module.exports = {
     extend: {
       colors: {
         pro: {
-          100: '#f3f7ff', // Light Background
-          200: '#e7f0ff', // Light Background Hover
-          300: '#3b84fd', // Dark Background Hover
-          400: '#0a65fe', // Dark Background + Default Text
-          500: '#061257', // Dark Text
+          100: '#f9fbff', // Light Background
+          200: '#dbe2ff', // Light Background Hover
+          300: '#958eff', // Dark Background Hover
+          400: '#6c63ff', // Dark Background + Default Text
+          500: '#2f2e41', // Dark Text
         },
       },
       animation: {
