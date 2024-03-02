@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import useRefresh from '../../hooks/useRefresh';
 import useLogout from '../../hooks/useLogout';
+import Loader from '../../components/global/Loader';
 
 /**
  * @description This component is responsible for getting the user's authentication state when the app is loaded.
@@ -43,7 +44,7 @@ function PersistUser() {
     }
   }, [accessToken, persist]);
 
-  return !accessToken && persist ? <p>Verifying.. </p> : <Outlet />;
+  return !accessToken && persist ? <Loader /> : <Outlet />;
 }
 
 export default PersistUser;
