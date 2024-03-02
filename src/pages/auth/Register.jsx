@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { globalErrorMessage, validationRegex, inputFieldsInstructions } from '../../utils/utils';
-import RegisterInputField from '../../components/auth/RegisterInputField';
+import RegisterInputField from '../../components/global/InputField';
 import axios from '../../api/axios';
 import { faAddressBook, faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import ErrorAlert from '../../components/global/ErrorAlert';
-import FormSubmitButton from '../../components/global/FormSubmitButton';
+import FormSubmitButton from '../../components/global/SubmitButton';
 import register from '../../assets/register.svg';
 import ImageFormBox from '../../components/auth/ImageFormBox';
 

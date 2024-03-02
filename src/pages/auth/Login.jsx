@@ -5,9 +5,9 @@ import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
 import ImageFormBox from '../../components/auth/ImageFormBox';
 import login from '../../assets/login.svg';
-import RegisterInputField from '../../components/auth/RegisterInputField';
+import RegisterInputField from '../../components/global/InputField';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import FormSubmitButton from '../../components/global/FormSubmitButton';
+import FormSubmitButton from '../../components/global/SubmitButton';
 import ErrorAlert from '../../components/global/ErrorAlert';
 import Checkbox from '../../components/global/Checkbox';
 

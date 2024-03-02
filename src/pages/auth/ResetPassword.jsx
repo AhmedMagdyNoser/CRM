@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
-import RegisterInputField from '../../components/auth/RegisterInputField';
+import RegisterInputField from '../../components/global/InputField';
 
 function ResetPassword() {
   const location = useLocation();
