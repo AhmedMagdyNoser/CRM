@@ -15,7 +15,7 @@ function RegisterInputField({ value, isValid, icon, instructions, grow, ...rest 
           {...rest}
         />
       </div>
-      {value && !isValid && (
+      {isValid !== undefined && value && !isValid && (
         <>
           <div className="bg-proerror-100 mt-1 h-[3px] w-full animate-progress-fast rounded-md"></div>
           <div className="text-proerror-100 flex animate-fade-in-fast py-1 text-sm">{instructions}</div>
