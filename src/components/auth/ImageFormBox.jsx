@@ -15,12 +15,12 @@ function ImageFormBox({ image, children }) {
 export default ImageFormBox;
 
 function Divider() {
-  return <div className="mx-2 my-12 hidden w-[2px] rounded bg-gray-100 xl:flex"></div>;
+  return <div className="my-12 hidden w-[2px] rounded bg-gray-100 xl:flex"></div>;
 }
 
 function ImageBox({ image = defaultImage }) {
   return (
-    <div className="hidden w-[545px] flex-1 p-12 xl:flex">
+    <div className="hidden w-[550px] p-12 xl:flex">
       <div className="flex h-full items-center justify-center">
         <img src={image} alt="Join our community" className="w-4/5" />
       </div>

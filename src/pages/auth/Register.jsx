@@ -3,11 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { globalErrorMessage, validationRegex, inputFieldsInstructions } from '../../utils/utils';
 import RegisterInputField from '../../components/auth/RegisterInputField';
 import axios from '../../api/axios';
-import { faAddressBook, faArrowLeft, faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAddressBook, faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import ErrorAlert from '../../components/global/ErrorAlert';
 import FormSubmitButton from '../../components/global/FormSubmitButton';
-import welcome from '../../assets/welcome.svg';
+import register from '../../assets/register.svg';
 import ImageFormBox from '../../components/auth/ImageFormBox';
 
 function Register() {
@@ -55,23 +54,15 @@ function Register() {
   }
 
   return (
-    <ImageFormBox image={welcome}>
+    <ImageFormBox image={register}>
       <form
         onSubmit={handleSubmit}
         autoComplete="off"
-        className="flex h-full w-full flex-col justify-between gap-2 p-6 sm:w-[545px] sm:p-12"
+        className="flex h-full w-full flex-col justify-between gap-3 p-6 sm:h-[600px] sm:w-[600px] sm:p-12"
       >
-        <div className="flex flex-col gap-3">
-          <div className="sm:hidden">
-            <Link
-              to="/login"
-              className="flex h-8 w-8 items-center justify-center rounded-full text-gray-800 transition-colors hover:bg-gray-100"
-            >
-              <FontAwesomeIcon icon={faArrowLeft} />
-            </Link>
-          </div>
-          <h1 className="my-4 text-2xl font-bold capitalize text-gray-800 sm:text-3xl">Create your account</h1>
-          <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex flex-1 flex-col gap-3 overflow-auto">
+          <h1 className="my-4 text-2xl font-bold capitalize text-pro-500 sm:text-3xl">Create your account</h1>
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-stretch">
             <RegisterInputField
               type="text"
               placeholder="First Name"
@@ -142,7 +133,8 @@ function Register() {
           />
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
+          {error && <ErrorAlert message={error} />}
           <FormSubmitButton
             label="Register"
             loading={loading}
@@ -151,9 +143,8 @@ function Register() {
               loading
             }
           />
-          {error && <ErrorAlert message={error} />}
           <div className="flex justify-center gap-1">
-            <span className="text-gray-800">Already have an account?</span>{' '}
+            <span className="text-pro-500">Already have an account?</span>
             <Link className="font-bold text-pro-300 transition-colors hover:text-pro-400" to="/login">
               Login
             </Link>
