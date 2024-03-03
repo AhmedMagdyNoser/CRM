@@ -3,11 +3,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 function SubmitButton({ label, loading, ...rest }) {
   return (
-    <button
-      type="submit"
-      className="w-full rounded-md bg-pro-300 p-3 font-bold uppercase text-pro-50 transition hover:bg-pro-200 disabled:bg-pro-200"
-      {...rest}
-    >
+    <button type="submit" className="btn-primary py-3 uppercase" {...rest}>
       {loading ? <FontAwesomeIcon icon={faSpinner} className="animate-spin-slow" /> : label}
     </button>
   );

@@ -13,12 +13,12 @@ function Checkbox({ label, checked, onClick }) {
   return (
     <div
       tabIndex={0}
-      className="text-progray-300 flex cursor-pointer items-center gap-1"
       onClick={onClick}
       onKeyDown={handleKeyDown}
+      className="flex cursor-pointer items-center gap-1 text-progray-300"
     >
       <FontAwesomeIcon icon={checked ? faCheckSquare : faSquare} className="text-lg text-pro-300" />
-      <p className="select-none">{label}</p>
+      <p>{label}</p>
     </div>
   );
 }

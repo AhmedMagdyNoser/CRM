@@ -38,11 +38,7 @@ function MiniFormBox({
           {error && <ErrorAlert message={error} />}
           <SubmitButton label={submitButtonLabel} loading={loading} disabled={submitButtonDisabled || loading} />
           {backButton && (
-            <button
-              type="button"
-              onClick={() => navigate(-1)}
-              className="self-start rounded-md px-5 py-2 uppercase text-progray-200 transition-colors hover:bg-progray-100"
-            >
+            <button type="button" onClick={() => navigate(-1)} className="btn-light self-start px-5 py-2 uppercase">
               <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
               Back
             </button>
