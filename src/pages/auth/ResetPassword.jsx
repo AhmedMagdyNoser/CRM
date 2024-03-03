@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
-import RegisterInputField from '../../components/global/InputField';
+import MiniFormBox from '../../components/auth/MiniFormBox';
+import InputField from '../../components/global/InputField';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
+import success from '../../assets/success.svg';
 
 function ResetPassword() {
   const location = useLocation();
@@ -18,9 +21,13 @@ function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  if (!location.state?.email || !location.state?.token) return <Navigate to="/login" replace={true} />;
+
+  console.log('Rendering ResetPassword', { loading, error, state: location.state });
+
   async function handleSubmit(e) {
     e.preventDefault();
-    if (password && confirmPassword) {
+    if (validPassword && validConfirmPassword) {
       try {
         if (error) setError('');
         setLoading(true);
@@ -43,47 +50,46 @@ function ResetPassword() {
       }
     } else {
       // If the submit button is enabled with JS hacks
-      setError('Please fill all the fields');
+      setError('Please fill all the fields correctly');
     }
   }
 
   return success ? (
     <SuccessMessage />
   ) : (
-    <section>
-      <h1>Hello Ahmed</h1>
-      <p>Please choose your new password</p>
-      <form onSubmit={handleSubmit}>
-        <RegisterInputField
-          label="Password"
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          instructions={inputFieldsInstructions.password}
-          isValid={validPassword}
-          maxLength={32}
-          required
-        />
-        <RegisterInputField
-          label="Confirm Password"
-          type="password"
-          id="confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          instructions={inputFieldsInstructions.confirmPassword}
-          isValid={validConfirmPassword}
-          maxLength={32}
-          required
-        />
-        <div>
-          <button type="submit" disabled={!validPassword || !validConfirmPassword || loading}>
-            {loading ? 'Loading...' : 'Reset'}
-          </button>
-        </div>
-        {error && <div>{error}</div>}
-      </form>
-    </section>
+    <MiniFormBox
+      onSubmit={handleSubmit}
+      title="Hello again!"
+      paragraph="Please choose your new password."
+      submitButtonLabel="Reset"
+      submitButtonDisabled={!validPassword || !validConfirmPassword}
+      loading={loading}
+      error={error}
+    >
+      <InputField
+        type="password"
+        placeholder="New Password"
+        icon={faLock}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        instructions={inputFieldsInstructions.password}
+        isValid={validPassword}
+        maxLength={32}
+        autoFocus
+        required
+      />
+      <InputField
+        type="password"
+        placeholder="Confirm New Password"
+        icon={faLock}
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        instructions={inputFieldsInstructions.confirmPassword}
+        isValid={validConfirmPassword}
+        maxLength={32}
+        required
+      />
+    </MiniFormBox>
   );
 }
 
@@ -91,10 +97,16 @@ export default ResetPassword;
 
 function SuccessMessage() {
   return (
-    <section>
-      <p>{String.fromCharCode(10003)}</p>
-      <h1>Password reset successful</h1>
-      <p>You can now login with your new password</p>
-    </section>
+    <div className="flex h-screen items-center justify-center bg-progray-50">
+      <div className="flex h-full w-full animate-fade-in-fast flex-col items-center gap-3 bg-white p-6 sm:h-fit sm:w-[500px] sm:rounded-xl sm:p-12 sm:shadow-lg lg:w-[650px]">
+        <div className="h-[215px] w-[215px]">
+          <img className="h-full" src={success} alt="Password reset successfully" />
+        </div>
+        <h1 className="text-center text-2xl font-bold capitalize text-progray-300 sm:text-3xl">
+          Password reset successfully
+        </h1>
+        <p className="text-center text-progray-200">Now you can login with your new password.</p>
+      </div>
+    </div>
   );
 }
