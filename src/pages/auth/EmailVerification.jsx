@@ -1,8 +1,11 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { globalErrorMessage } from '../../utils/utils';
 import { useState } from 'react';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
+import MiniFormBox from '../../components/auth/MiniFormBox';
+import InputField from '../../components/global/InputField';
+import email from '../../assets/email.svg';
 
 function EmailVerification() {
   const location = useLocation();
@@ -13,6 +16,8 @@ function EmailVerification() {
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  if (!location.state?.email) return <Navigate to="/login" replace={true} />;
 
   console.log('Rendering EmailVerification', { loading, error, state: location.state });
 
@@ -44,21 +49,29 @@ function EmailVerification() {
   }
 
   return (
-    <section>
-      <p>{String.fromCharCode(9993)}</p>
-      <h1>Check your email</h1>
-      <p>We sent a verification code to your email address. Please enter the code below to verify your email address.</p>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={code} onChange={(e) => setCode(e.target.value)} required autoFocus />
-        <div>
-          <button type="submit" disabled={!code || loading}>
-            {loading ? 'Loading...' : 'Verify'}
-          </button>
-        </div>
-      </form>
-      {error && <div>{error}</div>}
-      <button onClick={() => navigate(-1, { state: null })}>← Back</button>
-    </section>
+    <MiniFormBox
+      onSubmit={handleSubmit}
+      image={email}
+      title="Check your email"
+      paragraph="Kindly enter the verification code we sent to you."
+      submitButtonLabel="Verify"
+      submitButtonDisabled={code.length !== 6}
+      loading={loading}
+      error={error}
+      backButton
+      resestStateOnBack
+    >
+      <InputField
+        type="text"
+        placeholder="Verification Code"
+        className="text-center text-lg font-bold placeholder:font-normal"
+        value={code}
+        onChange={(e) => setCode(e.target.value)}
+        maxLength={6}
+        autoFocus
+        required
+      />
+    </MiniFormBox>
   );
 }
 

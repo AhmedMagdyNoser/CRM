@@ -1,15 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function InputField({ value, isValid, icon, instructions, grow, ...rest }) {
+function InputField({ value, isValid, icon, instructions, className, ...rest }) {
   return (
     <div className="w-full">
       <div className="flex items-center gap-2 rounded-md bg-progray-50 px-3 shadow-sm">
-        <FontAwesomeIcon
-          icon={icon}
-          className={(value && isValid ? 'text-pro-300' : 'text-progray-200') + ' transition-colors duration-1000'}
-        />
+        {icon && (
+          <FontAwesomeIcon
+            icon={icon}
+            className={(value && isValid ? 'text-pro-300' : 'text-progray-200') + ' transition-colors duration-1000'}
+          />
+        )}
         <input
-          className="flex-1 bg-inherit py-3 text-progray-300 outline-none placeholder:text-progray-200"
+          className={"flex-1 bg-inherit py-3 text-progray-300 outline-none placeholder:text-progray-200 " + className}
           value={value}
           size={1}
           {...rest}
