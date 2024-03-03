@@ -21,7 +21,7 @@ function Divider() {
 function ImageBox({ image = defaultImage }) {
   return (
     <div className="hidden w-[550px] p-12 xl:flex">
-      <div className="flex h-full items-center justify-center">
+      <div className="flex h-full animate-fade-in-medium items-center justify-center">
         <img src={image} alt="Join our community" className="w-4/5" />
       </div>
     </div>

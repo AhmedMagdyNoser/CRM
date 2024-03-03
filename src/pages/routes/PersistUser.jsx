@@ -42,7 +42,7 @@ function PersistUser() {
         }
       })();
     }
-  }, [accessToken, persist]);
+  }, [accessToken, persist, refreshAccessToken, logout]);
 
   return !accessToken && persist ? <Loader /> : <Outlet />;
 }
