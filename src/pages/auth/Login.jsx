@@ -63,6 +63,7 @@ function Login() {
             value={identity}
             onChange={(e) => setIdentity(e.target.value)}
             maxLength={50}
+            autoFocus
             required
           />
           <RegisterInputField
