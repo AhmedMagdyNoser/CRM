@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { globalErrorMessage, validationRegex, inputFieldsInstructions } from '../../utils/utils';
-import RegisterInputField from '../../components/global/InputField';
+import InputField from '../../components/global/InputField';
 import axios from '../../api/axios';
 import { faAddressBook, faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import ErrorAlert from '../../components/global/ErrorAlert';
-import FormSubmitButton from '../../components/global/SubmitButton';
+import SubmitButton from '../../components/global/SubmitButton';
 import register from '../../assets/register.svg';
 import ImageFormBox from '../../components/auth/ImageFormBox';
 
@@ -62,9 +62,9 @@ function Register() {
         className="flex h-full w-full flex-col justify-between gap-3 p-6 sm:h-[600px] sm:w-[600px] sm:p-12"
       >
         <div className="flex flex-1 flex-col gap-3 overflow-auto">
-          <h1 className="text-progray-300 mb-3 text-2xl font-bold capitalize sm:text-3xl">Create your account</h1>
+          <h1 className="mb-3 text-2xl font-bold capitalize text-progray-300 sm:text-3xl">Create your account</h1>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-stretch">
-            <RegisterInputField
+            <InputField
               type="text"
               placeholder="First Name"
               icon={faUser}
@@ -76,7 +76,7 @@ function Register() {
               required
               autoFocus
             />
-            <RegisterInputField
+            <InputField
               type="text"
               placeholder="Last Name"
               icon={faUser}
@@ -88,7 +88,7 @@ function Register() {
               required
             />
           </div>
-          <RegisterInputField
+          <InputField
             type="text"
             placeholder="Username"
             icon={faAddressBook}
@@ -99,7 +99,7 @@ function Register() {
             maxLength={18}
             required
           />
-          <RegisterInputField
+          <InputField
             type="email"
             placeholder="Email"
             icon={faEnvelope}
@@ -110,7 +110,7 @@ function Register() {
             maxLength={50}
             required
           />
-          <RegisterInputField
+          <InputField
             type="password"
             placeholder="Password"
             icon={faLock}
@@ -121,7 +121,7 @@ function Register() {
             maxLength={32}
             required
           />
-          <RegisterInputField
+          <InputField
             type="password"
             placeholder="Confirm Password"
             icon={faLock}
@@ -136,7 +136,7 @@ function Register() {
 
         <div className="flex flex-col gap-3">
           {error && <ErrorAlert message={error} />}
-          <FormSubmitButton
+          <SubmitButton
             label="Register"
             loading={loading}
             disabled={

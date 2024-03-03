@@ -5,9 +5,9 @@ import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
 import ImageFormBox from '../../components/auth/ImageFormBox';
 import login from '../../assets/login.svg';
-import RegisterInputField from '../../components/global/InputField';
+import InputField from '../../components/global/InputField';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import FormSubmitButton from '../../components/global/SubmitButton';
+import SubmitButton from '../../components/global/SubmitButton';
 import ErrorAlert from '../../components/global/ErrorAlert';
 import Checkbox from '../../components/global/Checkbox';
 
@@ -55,8 +55,8 @@ function Login() {
         className="flex h-full w-full flex-col justify-between gap-3 p-6 sm:w-[600px] sm:p-12 xl:h-[600px]"
       >
         <div className="flex flex-1 flex-col gap-3 overflow-auto">
-          <h1 className="text-progray-300 mb-3 text-2xl font-bold capitalize sm:text-3xl">Welcome back!</h1>
-          <RegisterInputField
+          <h1 className="mb-3 text-2xl font-bold capitalize text-progray-300 sm:text-3xl">Welcome back!</h1>
+          <InputField
             type="text"
             placeholder="Username or Email"
             icon={faUser}
@@ -66,7 +66,7 @@ function Login() {
             autoFocus
             required
           />
-          <RegisterInputField
+          <InputField
             type="password"
             placeholder="Password"
             icon={faLock}
@@ -85,7 +85,7 @@ function Login() {
 
         <div className="flex flex-col gap-3">
           {error && <ErrorAlert message={error} />}
-          <FormSubmitButton label="Login" loading={loading} disabled={!identity || !password || loading} />
+          <SubmitButton label="Login" loading={loading} disabled={!identity || !password || loading} />
           <div className="flex justify-center gap-1">
             <span className="text-progray-300">Don't have an account?</span>
             <Link className="font-bold text-pro-200 transition-colors hover:text-pro-300" to="/register">
