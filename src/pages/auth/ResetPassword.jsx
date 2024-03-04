@@ -6,6 +6,7 @@ import MiniFormBox from '../../components/auth/MiniFormBox';
 import InputField from '../../components/global/InputField';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import success from '../../assets/success.svg';
+import ScreenBox from '../../components/auth/ScreenBox';
 
 function ResetPassword() {
   const location = useLocation();
@@ -21,9 +22,9 @@ function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  if (!location.state?.email || !location.state?.token) return <Navigate to="/login" replace={true} />;
-
   console.log('Rendering ResetPassword', { loading, error });
+
+  if (!location.state?.email || !location.state?.token) return <Navigate to="/login" replace={true} />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -97,16 +98,12 @@ export default ResetPassword;
 
 function SuccessMessage() {
   return (
-    <div className="flex h-screen items-center justify-center bg-progray-50">
-      <div className="flex h-full w-full animate-fade-in-fast flex-col items-center gap-3 bg-white p-6 sm:h-fit sm:w-[500px] sm:rounded-xl sm:p-12 sm:shadow-lg lg:w-[650px]">
-        <div className="h-[215px] w-[215px]">
-          <img className="h-full" src={success} alt="Password reset successfully" />
-        </div>
-        <h1 className="text-center text-2xl font-bold capitalize text-progray-300 sm:text-3xl">
-          Password reset successfully
-        </h1>
-        <p className="text-center text-progray-200">Now you can login with your new password.</p>
+    <ScreenBox className="flex-col items-center gap-3 p-6 sm:p-12">
+      <div className="h-[215px] w-[215px]">
+        <img className="h-full" src={success} alt="Password reset successfully" />
       </div>
-    </div>
+      <h1 className="text-center">Password reset successfully</h1>
+      <p className="text-center">Now you can login with your new password.</p>
+    </ScreenBox>
   );
 }

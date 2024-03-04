@@ -48,7 +48,7 @@ function ForgetPassword() {
       onSubmit={handleSubmit}
       image={forgotPassword}
       title="Forgot password"
-      paragraph="Please enter your email address below"
+      paragraph="Please enter your email address below."
       submitButtonLabel="Continue"
       submitButtonDisabled={!validEmail}
       loading={loading}

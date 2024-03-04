@@ -55,7 +55,7 @@ function Login() {
         className="flex h-full w-full flex-col justify-between gap-3 p-6 sm:w-[600px] sm:p-12 xl:h-[600px]"
       >
         <div className="flex flex-1 flex-col gap-3 overflow-auto">
-          <h1 className="mb-3 text-2xl font-bold capitalize text-progray-300 sm:text-3xl">Welcome back!</h1>
+          <h1 className="mb-3">Welcome back!</h1>
           <InputField
             type="text"
             placeholder="Username or Email"

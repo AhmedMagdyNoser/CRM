@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1 {
+    @apply text-2xl font-bold capitalize text-progray-300 sm:text-3xl;
+  }
+  h2 {
+    @apply text-xl font-bold capitalize text-progray-300 sm:text-2xl;
+  }
+  h3 {
+    @apply text-lg font-bold capitalize text-progray-300 sm:text-xl;
+  }
+  p {
+    @apply text-progray-200;
+  }
+}
+
 @layer components {
   .btn-primary {
     @apply rounded-md bg-pro-300 font-bold text-pro-50 transition-colors hover:bg-pro-200 disabled:bg-pro-200;

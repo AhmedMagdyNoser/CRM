@@ -62,7 +62,7 @@ function Register() {
         className="flex h-full w-full flex-col justify-between gap-3 p-6 sm:h-[600px] sm:w-[600px] sm:p-12"
       >
         <div className="flex flex-1 flex-col gap-3 overflow-auto">
-          <h1 className="mb-3 text-2xl font-bold capitalize text-progray-300 sm:text-3xl">Create your account</h1>
+          <h1 className="mb-3">Create your account</h1>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-stretch">
             <InputField
               type="text"
