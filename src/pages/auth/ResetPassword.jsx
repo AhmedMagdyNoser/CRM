@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { globalErrorMessage, validationRegex } from '../../utils/utils';
+import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
-import MiniFormBox from '../../components/auth/MiniFormBox';
 import InputField from '../../components/global/InputField';
 import success from '../../assets/success.svg';
-import ScreenBox from '../../components/auth/ScreenBox';
+import AuthMiniBox from '../../components/auth/AuthMiniBox';
+import CaptionCard from '../../components/global/CaptionCard';
+import Form from '../../components/global/Form';
 
 function ResetPassword() {
   const location = useLocation();
@@ -57,31 +58,33 @@ function ResetPassword() {
   return success ? (
     <SuccessMessage />
   ) : (
-    <MiniFormBox
-      onSubmit={handleSubmit}
-      title="Hello again!"
-      paragraph="Please choose your new password."
-      submitButtonLabel="Reset"
-      submitButtonDisabled={!validPassword || !validConfirmPassword}
-      loading={loading}
-      error={error}
-    >
-      <InputField.Password
-        placeholder="New Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        isValid={validPassword}
-        required
-        autoFocus
-      />
-      <InputField.Password
-        placeholder="Confirm New Password"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        isValid={validConfirmPassword}
-        required
-      />
-    </MiniFormBox>
+    <AuthMiniBox>
+      <CaptionCard title="Hello again!" paragraph="Please choose your new password." />
+      <Form
+        onSubmit={handleSubmit}
+        loading={loading}
+        error={error}
+        submitButtonLabel="Reset"
+        submitButtonDisabled={!validPassword || !validConfirmPassword}
+      >
+        <InputField.Password
+          placeholder="New Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          isValid={validPassword}
+          required
+          autoFocus
+        />
+        <InputField.Password
+          placeholder="Confirm New Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          instructions={inputFieldsInstructions.confirmPassword}
+          isValid={validConfirmPassword}
+          required
+        />
+      </Form>
+    </AuthMiniBox>
   );
 }
 
@@ -89,12 +92,12 @@ export default ResetPassword;
 
 function SuccessMessage() {
   return (
-    <ScreenBox className="flex-col items-center gap-3 p-6 sm:p-12">
-      <div className="h-[215px] w-[215px]">
-        <img className="h-full" src={success} alt="Password reset successfully" />
-      </div>
-      <h1 className="text-center">Password reset successfully</h1>
-      <p className="text-center">Now you can login with your new password.</p>
-    </ScreenBox>
+    <AuthMiniBox>
+      <CaptionCard
+        image={success}
+        title="Password reset successfully"
+        paragraph="Now you can login with your new password."
+      />
+    </AuthMiniBox>
   );
 }
