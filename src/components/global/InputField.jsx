@@ -57,7 +57,7 @@ InputField.Name = function Name({ ...rest }) {
  * Username is a specific type of InputField for username inputs.
  * It has specific props for username inputs. like type, icon, instructions, and maxLength.
  * You don't need to pass these props when using this component.
- * 
+ *
  * @param {Object} props The properties passed to the component.
  * @returns {ReactElement} An InputField element with specific props for username inputs.
  */
@@ -71,7 +71,7 @@ InputField.Username = function Username({ ...rest }) {
  * Email is a specific type of InputField for email inputs.
  * It has specific props for email inputs. like type, icon, instructions, and maxLength.
  * You don't need to pass these props when using this component.
- * 
+ *
  * @param {Object} props The properties passed to the component.
  * @returns {ReactElement} An InputField element with specific props for email inputs.
  */
@@ -83,12 +83,32 @@ InputField.Email = function Email({ ...rest }) {
  * Password is a specific type of InputField for password inputs.
  * It has specific props for password inputs. like type, icon, instructions, and maxLength.
  * You don't need to pass these props when using this component.
- * 
+ *
  * @param {Object} props The properties passed to the component.
  * @returns {ReactElement} An InputField element with specific props for password inputs.
  */
 InputField.Password = function Password({ ...rest }) {
   return (
     <InputField type="password" icon={faLock} instructions={inputFieldsInstructions.password} maxLength={32} {...rest} />
+  );
+};
+
+/**
+ * ConfirmPassword is a specific type of InputField for confirm password inputs.
+ * It has specific props for confirm password inputs. like type, icon, instructions, and maxLength.
+ * You don't need to pass these props when using this component.
+ *
+ * @param {Object} props The properties passed to the component.
+ * @returns {ReactElement} An InputField element with specific props for confirm password inputs.
+ */
+InputField.ConfirmPassword = function ConfirmPassword({ ...rest }) {
+  return (
+    <InputField
+      type="password"
+      icon={faLock}
+      instructions={inputFieldsInstructions.confirmPassword}
+      maxLength={32}
+      {...rest}
+    />
   );
 };

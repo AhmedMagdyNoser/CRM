@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
+import { globalErrorMessage, validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
 import InputField from '../../components/global/InputField';
 import success from '../../assets/success.svg';
@@ -75,11 +75,10 @@ function ResetPassword() {
           required
           autoFocus
         />
-        <InputField.Password
+        <InputField.ConfirmPassword
           placeholder="Confirm New Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          instructions={inputFieldsInstructions.confirmPassword}
           isValid={validConfirmPassword}
           required
         />

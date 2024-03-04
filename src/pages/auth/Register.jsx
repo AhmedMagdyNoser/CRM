@@ -102,7 +102,7 @@ function Register() {
         isValid={validPassword}
         required
       />
-      <InputField.Password
+      <InputField.ConfirmPassword
         placeholder="Confirm Password"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
