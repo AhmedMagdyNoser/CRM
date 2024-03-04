@@ -5,15 +5,31 @@ import ErrorAlert from '../global/ErrorAlert';
 import SubmitButton from '../global/SubmitButton';
 import ScreenBox from './ScreenBox';
 
+/**
+ * MiniFormBox is a component that displays an image and a form in a smaller box.
+ * 
+ * @param {Object} props The properties passed to the component.
+ * @param {Function} props.onSubmit The function to call when the form is submitted.
+ * @param {boolean} props.loading Whether the form is currently being submitted.
+ * @param {string} props.error An error message to display.
+ * @param {string} props.image The URL of the image to display.
+ * @param {string} props.title The title to display above the form.
+ * @param {string} props.paragraph The paragraph to display below the title.
+ * @param {string} props.submitButtonLabel The label for the submit button.
+ * @param {boolean} props.submitButtonDisabled A condition whether submit button should be disabled.
+ * @param {boolean} props.backButton A condition whether back button should be displayed.
+ * @param {ReactNode} props.children The child elements to be rendered inside the form.
+ */
+
 function MiniFormBox({
   onSubmit,
+  loading,
+  error,
   image,
   title,
   paragraph,
   submitButtonLabel,
   submitButtonDisabled,
-  loading,
-  error,
   backButton,
   children,
 }) {

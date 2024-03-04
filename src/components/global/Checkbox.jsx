@@ -3,9 +3,9 @@ import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Checkbox({ label, checked, onClick }) {
-  const handleKeyDown = (event) => {
-    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-      event.preventDefault();
+  const handleKeyDown = (e) => {
+    if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') {
+      e.preventDefault();
       onClick();
     }
   };
