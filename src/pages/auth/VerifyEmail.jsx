@@ -59,17 +59,16 @@ function VerifyEmail() {
       loading={loading}
       error={error}
       backButton
-      resestStateOnBack
     >
       <InputField
-        type="text"
         placeholder="Verification Code"
         className="text-center text-lg font-bold placeholder:font-normal"
+        type="text"
         value={code}
         onChange={(e) => setCode(e.target.value)}
         maxLength={6}
-        autoFocus
         required
+        autoFocus
       />
     </MiniFormBox>
   );

@@ -6,7 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import FormBox from '../../components/auth/FormBox';
 import login from '../../assets/login.svg';
 import InputField from '../../components/global/InputField';
-import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Checkbox from '../../components/global/Checkbox';
 
 function Login() {
@@ -58,24 +58,16 @@ function Login() {
       leave={{ hint: "Don't have an account?", link: '/register', label: 'Register Here' }}
     >
       <InputField
-        type="text"
         placeholder="Username or Email"
+        type="text"
         icon={faUser}
         value={identity}
         onChange={(e) => setIdentity(e.target.value)}
         maxLength={50}
+        required
         autoFocus
-        required
       />
-      <InputField
-        type="password"
-        placeholder="Password"
-        icon={faLock}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        maxLength={32}
-        required
-      />
+      <InputField.Password placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       <div className="flex flex-wrap justify-between gap-2 px-1">
         <Checkbox label="Remember me" checked={persist} onClick={() => setPersist(!persist)} />
         <Link to="/forgot-password" className="hover:text-pro-200">

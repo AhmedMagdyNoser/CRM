@@ -5,7 +5,6 @@ import { validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
 import forgotPassword from '../../assets/forgotPassword.svg';
 import InputField from '../../components/global/InputField';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import MiniFormBox from '../../components/auth/MiniFormBox';
 
 function ForgetPassword() {
@@ -55,15 +54,12 @@ function ForgetPassword() {
       error={error}
       backButton
     >
-      <InputField
-        type="email"
+      <InputField.Email
         placeholder="Email"
-        icon={faEnvelope}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        maxLength={50}
-        autoFocus
         required
+        autoFocus
       />
     </MiniFormBox>
   );

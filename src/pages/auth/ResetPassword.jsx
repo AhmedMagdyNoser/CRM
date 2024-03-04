@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
+import { globalErrorMessage, validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
 import MiniFormBox from '../../components/auth/MiniFormBox';
 import InputField from '../../components/global/InputField';
-import { faLock } from '@fortawesome/free-solid-svg-icons';
 import success from '../../assets/success.svg';
 import ScreenBox from '../../components/auth/ScreenBox';
 
@@ -67,27 +66,19 @@ function ResetPassword() {
       loading={loading}
       error={error}
     >
-      <InputField
-        type="password"
+      <InputField.Password
         placeholder="New Password"
-        icon={faLock}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        instructions={inputFieldsInstructions.password}
         isValid={validPassword}
-        maxLength={32}
-        autoFocus
         required
+        autoFocus
       />
-      <InputField
-        type="password"
+      <InputField.Password
         placeholder="Confirm New Password"
-        icon={faLock}
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
-        instructions={inputFieldsInstructions.confirmPassword}
         isValid={validConfirmPassword}
-        maxLength={32}
         required
       />
     </MiniFormBox>
