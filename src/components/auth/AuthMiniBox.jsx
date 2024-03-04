@@ -8,11 +8,7 @@ function AuthMiniBox({ className = '', backButton, children }) {
 
   return (
     <ScreenCenterContainer>
-      <div
-        className={
-          'flex h-full w-full flex-col gap-3 bg-white p-6 sm:h-fit sm:w-fit sm:rounded-xl sm:p-12 sm:shadow-lg ' + className
-        }
-      >
+      <div className={'auth-box flex-col gap-3 ' + className}>
         {children}
         {backButton && (
           <button onClick={() => navigate(-1)} className="btn-light flex-center gap-2 self-start px-5 py-2 uppercase">

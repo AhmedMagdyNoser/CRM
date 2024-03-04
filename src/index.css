@@ -33,6 +33,9 @@
   .flex-center {
     @apply flex items-center justify-center;
   }
+  .auth-box {
+    @apply flex h-full w-full animate-fade-in-fast bg-white p-6 sm:h-fit sm:w-fit sm:rounded-xl sm:p-12 sm:shadow-lg;
+  }
 }
 
 ::-webkit-scrollbar {

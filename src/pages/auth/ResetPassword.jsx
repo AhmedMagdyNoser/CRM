@@ -96,6 +96,7 @@ function SuccessMessage() {
         image={success}
         title="Password reset successfully"
         paragraph="Now you can login with your new password."
+        className="px-8"
       />
     </AuthMiniBox>
   );
