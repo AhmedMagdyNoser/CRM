@@ -29,7 +29,8 @@ function Register() {
 
   console.log('Rendering Register', { loading, error });
 
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
     if (validFirstName && validLastName && validUserName && validEmail && validPassword && validConfirmPassword) {
       try {
         if (error) setError('');

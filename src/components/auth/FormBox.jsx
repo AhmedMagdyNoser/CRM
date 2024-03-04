@@ -36,17 +36,12 @@ function FormBox({
   leave,
   children,
 }) {
-  function handleSubmit(e) {
-    e.preventDefault();
-    onSubmit();
-  }
-
   return (
     <ScreenBox>
       <ImageBox image={image} />
       <Divider />
       <form
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
         autoComplete="off"
         className={
           'flex h-full w-full flex-col justify-between gap-3 p-6 sm:w-[600px] sm:p-12 ' +

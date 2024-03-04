@@ -21,7 +21,8 @@ function Login() {
 
   console.log('Rendering Login', { loading, error });
 
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
     if (identity && password) {
       try {
         if (error) setError('');
