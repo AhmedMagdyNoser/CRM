@@ -3,12 +3,10 @@ import { globalErrorMessage } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
-import ImageFormBox from '../../components/auth/ImageFormBox';
+import FormBox from '../../components/auth/FormBox';
 import login from '../../assets/login.svg';
 import InputField from '../../components/global/InputField';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import SubmitButton from '../../components/global/SubmitButton';
-import ErrorAlert from '../../components/global/ErrorAlert';
 import Checkbox from '../../components/global/Checkbox';
 
 function Login() {
@@ -23,8 +21,7 @@ function Login() {
 
   console.log('Rendering Login', { loading, error });
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit() {
     if (identity && password) {
       try {
         if (error) setError('');
@@ -48,53 +45,43 @@ function Login() {
   }
 
   return (
-    <ImageFormBox image={login}>
-      <form
-        onSubmit={handleSubmit}
-        autoComplete="off"
-        className="flex h-full w-full flex-col justify-between gap-3 p-6 sm:w-[600px] sm:p-12 xl:h-[600px]"
-      >
-        <div className="flex flex-1 flex-col gap-3 overflow-auto">
-          <h1 className="mb-3">Welcome back!</h1>
-          <InputField
-            type="text"
-            placeholder="Username or Email"
-            icon={faUser}
-            value={identity}
-            onChange={(e) => setIdentity(e.target.value)}
-            maxLength={50}
-            autoFocus
-            required
-          />
-          <InputField
-            type="password"
-            placeholder="Password"
-            icon={faLock}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            maxLength={32}
-            required
-          />
-          <div className="flex justify-between px-1">
-            <Checkbox label="Remember me" checked={persist} onClick={() => setPersist(!persist)} />
-            <Link to="/forgot-password" className="hover:text-pro-200">
-              Forgot your password?
-            </Link>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          {error && <ErrorAlert message={error} />}
-          <SubmitButton label="Login" loading={loading} disabled={!identity || !password || loading} />
-          <div className="flex justify-center gap-1">
-            <span className="text-progray-300">Don't have an account?</span>
-            <Link className="font-bold text-pro-200 transition-colors hover:text-pro-300" to="/register">
-              Register Here
-            </Link>
-          </div>
-        </div>
-      </form>
-    </ImageFormBox>
+    <FormBox
+      onSubmit={handleSubmit}
+      loading={loading}
+      error={error}
+      image={login}
+      fixedHeightOnXLScreen
+      title="Welcome back!"
+      submitButtonLabel="Login"
+      submitButtonDisabled={!identity || !password}
+      leave={{ hint: "Don't have an account?", link: '/register', label: 'Register Here' }}
+    >
+      <InputField
+        type="text"
+        placeholder="Username or Email"
+        icon={faUser}
+        value={identity}
+        onChange={(e) => setIdentity(e.target.value)}
+        maxLength={50}
+        autoFocus
+        required
+      />
+      <InputField
+        type="password"
+        placeholder="Password"
+        icon={faLock}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        maxLength={32}
+        required
+      />
+      <div className="flex flex-wrap justify-between gap-2 px-1">
+        <Checkbox label="Remember me" checked={persist} onClick={() => setPersist(!persist)} />
+        <Link to="/forgot-password" className="hover:text-pro-200">
+          Forgot your password?
+        </Link>
+      </div>
+    </FormBox>
   );
 }
 

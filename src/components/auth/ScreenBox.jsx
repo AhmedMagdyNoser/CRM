@@ -8,6 +8,7 @@
  * @param {ReactNode} props.children The child elements to be rendered inside the ScreenBox.
  * @returns {ReactElement} A div element that wraps the child elements.
  */
+
 function ScreenBox({ className, children }) {
   return (
     <div className="flex-center h-screen bg-progray-50">
