@@ -3,7 +3,7 @@ import Layout from './pages/routes/Layout';
 import NotFound from './pages/routes/NotFound';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
-import EmailVerification from './pages/auth/EmailVerification';
+import VerifyEmail from './pages/auth/VerifyEmail';
 import ForgetPassword from './pages/auth/ForgetPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import Home from './pages/users/Home';
@@ -25,7 +25,7 @@ function App() {
             <Route element={<Authentication requireUnauthenticated />}>
               <Route path="register" element={<Register />} />
               <Route path="login" element={<Login />} />
-              <Route path="verify-email" element={<EmailVerification />} />
+              <Route path="verify-email" element={<VerifyEmail />} />
               <Route path="forgot-password" element={<ForgetPassword />} />
               <Route path="reset-password" element={<ResetPassword />} />
             </Route>

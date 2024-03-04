@@ -23,7 +23,7 @@ function MiniFormBox({
       <form
         onSubmit={onSubmit}
         autoComplete="off"
-        className="flex w-full flex-col justify-between gap-3 p-6 sm:w-[500px] sm:p-12 lg:w-[650px]"
+        className="flex w-full flex-col justify-between gap-3 p-6 sm:w-[500px] sm:p-12 md:w-[650px]"
       >
         {/* We have 2 divs inside as, in mobile devices, we need one in top and one in bottom (justify-between in parent) */}
         <div className="flex flex-col items-center gap-3">

@@ -7,7 +7,7 @@ import MiniFormBox from '../../components/auth/MiniFormBox';
 import InputField from '../../components/global/InputField';
 import email from '../../assets/email.svg';
 
-function EmailVerification() {
+function VerifyEmail() {
   const location = useLocation();
   const navigate = useNavigate();
   const { setAuth } = useAuth();
@@ -17,7 +17,7 @@ function EmailVerification() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  console.log('Rendering EmailVerification', { loading, error });
+  console.log('Rendering VerifyEmail', { loading, error });
 
   if (!location.state?.email) return <Navigate to="/login" replace={true} />;
 
@@ -75,4 +75,4 @@ function EmailVerification() {
   );
 }
 
-export default EmailVerification;
+export default VerifyEmail;
