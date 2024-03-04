@@ -4,7 +4,8 @@ import { globalErrorMessage, validationRegex } from '../../utils/utils';
 import InputField from '../../components/global/InputField';
 import axios from '../../api/axios';
 import register from '../../assets/register.svg';
-import FormBox from '../../components/auth/FormBox';
+import AuthMaxBox from '../../components/auth/AuthMaxBox';
+import Form from '../../components/global/Form';
 
 function Register() {
   const navigate = useNavigate();
@@ -51,65 +52,68 @@ function Register() {
   }
 
   return (
-    <FormBox
-      onSubmit={handleSubmit}
-      loading={loading}
-      error={error}
+    <AuthMaxBox
       image={register}
-      fixedHeightOnSMScreen
       title="Create your account"
-      submitButtonLabel="Register"
-      submitButtonDisabled={
-        !(validFirstName && validLastName && validUserName && validEmail && validPassword && validConfirmPassword)
-      }
       leave={{ hint: 'Already have an account?', label: 'Login', link: '/login' }}
     >
-      <div className="flex flex-col gap-3 sm:flex-row sm:justify-stretch">
-        <InputField.Name
-          placeholder="First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          isValid={validFirstName}
+      <Form
+        onSubmit={handleSubmit}
+        loading={loading}
+        error={error}
+        submitButtonLabel="Register"
+        submitButtonDisabled={
+          !(validFirstName && validLastName && validUserName && validEmail && validPassword && validConfirmPassword)
+        }
+        className="overflow-auto sm:h-[415px]"
+      >
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <InputField.Name
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            isValid={validFirstName}
+            required
+            autoFocus
+          />
+          <InputField.Name
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            isValid={validLastName}
+            required
+          />
+        </div>
+        <InputField.Username
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          isValid={validUserName}
           required
-          autoFocus
         />
-        <InputField.Name
-          placeholder="Last Name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          isValid={validLastName}
+        <InputField.Email
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          isValid={validEmail}
           required
         />
-      </div>
-      <InputField.Username
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        isValid={validUserName}
-        required
-      />
-      <InputField.Email
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        isValid={validEmail}
-        required
-      />
-      <InputField.Password
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        isValid={validPassword}
-        required
-      />
-      <InputField.ConfirmPassword
-        placeholder="Confirm Password"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        isValid={validConfirmPassword}
-        required
-      />
-    </FormBox>
+        <InputField.Password
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          isValid={validPassword}
+          required
+        />
+        <InputField.ConfirmPassword
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          isValid={validConfirmPassword}
+          required
+        />
+      </Form>
+    </AuthMaxBox>
   );
 }
 
