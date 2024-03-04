@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './pages/routes/Layout';
 import NotFound from './pages/routes/NotFound';
 import Register from './pages/auth/Register';
@@ -14,7 +14,7 @@ function App() {
   console.log('Rendering App');
 
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route element={<PersistUser />}>
           <Route path="/" element={<Layout />}>
@@ -34,7 +34,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
