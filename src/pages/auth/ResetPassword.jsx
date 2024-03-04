@@ -23,7 +23,7 @@ function ResetPassword() {
 
   if (!location.state?.email || !location.state?.token) return <Navigate to="/login" replace={true} />;
 
-  console.log('Rendering ResetPassword', { loading, error, state: location.state });
+  console.log('Rendering ResetPassword', { loading, error });
 
   async function handleSubmit(e) {
     e.preventDefault();

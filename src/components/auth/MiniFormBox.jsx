@@ -18,7 +18,7 @@ function MiniFormBox({
 }) {
   const navigate = useNavigate();
   return (
-    <div className="flex h-screen items-center justify-center bg-progray-50">
+    <div className="flex-center h-screen bg-progray-50">
       <form
         onSubmit={onSubmit}
         autoComplete="off"

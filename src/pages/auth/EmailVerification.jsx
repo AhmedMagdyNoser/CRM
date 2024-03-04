@@ -19,7 +19,7 @@ function EmailVerification() {
 
   if (!location.state?.email) return <Navigate to="/login" replace={true} />;
 
-  console.log('Rendering EmailVerification', { loading, error, state: location.state });
+  console.log('Rendering EmailVerification', { loading, error });
 
   async function handleSubmit(e) {
     e.preventDefault();
