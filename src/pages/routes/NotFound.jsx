@@ -1,7 +1,17 @@
-import React from "react";
+import pageNotFound from '../../assets/pageNotFound.svg';
 
 function NotFound() {
-  return <div>NotFound</div>;
+  return (
+    <div className="flex-center h-screen bg-progray-50">
+      <div className="flex flex-col items-center gap-3">
+        <div className="h-[215px] w-[215px]">
+          <img className="h-full" src={pageNotFound} alt="Page Not Found" />
+        </div>
+        <h1 className="text-center">Page Not Found</h1>
+        <p className="text-center text-sm sm:text-base">The page you are looking for does not exist.</p>
+      </div>
+    </div>
+  );
 }
 
 export default NotFound;
