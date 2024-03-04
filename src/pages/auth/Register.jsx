@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { globalErrorMessage, validationRegex, inputFieldsInstructions } from '../../utils/utils';
+import { globalErrorMessage, validationRegex } from '../../utils/utils';
 import InputField from '../../components/global/InputField';
 import axios from '../../api/axios';
-import { faAddressBook, faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import register from '../../assets/register.svg';
 import FormBox from '../../components/auth/FormBox';
 
@@ -66,72 +65,48 @@ function Register() {
       leave={{ hint: 'Already have an account?', label: 'Login', link: '/login' }}
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-stretch">
-        <InputField
-          type="text"
+        <InputField.Name
           placeholder="First Name"
-          icon={faUser}
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          instructions={inputFieldsInstructions.name}
           isValid={validFirstName}
-          maxLength={18}
           required
           autoFocus
         />
-        <InputField
-          type="text"
+        <InputField.Name
           placeholder="Last Name"
-          icon={faUser}
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-          instructions={inputFieldsInstructions.name}
           isValid={validLastName}
-          maxLength={18}
           required
         />
       </div>
-      <InputField
-        type="text"
+      <InputField.Username
         placeholder="Username"
-        icon={faAddressBook}
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        instructions={inputFieldsInstructions.username}
         isValid={validUserName}
-        maxLength={18}
         required
       />
-      <InputField
-        type="email"
+      <InputField.Email
         placeholder="Email"
-        icon={faEnvelope}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        instructions={inputFieldsInstructions.email}
         isValid={validEmail}
-        maxLength={50}
         required
       />
-      <InputField
-        type="password"
+      <InputField.Password
         placeholder="Password"
-        icon={faLock}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        instructions={inputFieldsInstructions.password}
         isValid={validPassword}
-        maxLength={32}
         required
       />
-      <InputField
-        type="password"
+      <InputField.Password
         placeholder="Confirm Password"
-        icon={faLock}
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
-        instructions={inputFieldsInstructions.confirmPassword}
         isValid={validConfirmPassword}
-        maxLength={32}
         required
       />
     </FormBox>
