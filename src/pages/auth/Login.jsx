@@ -3,11 +3,12 @@ import { globalErrorMessage } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
-import FormBox from '../../components/auth/FormBox';
 import login from '../../assets/login.svg';
 import InputField from '../../components/global/InputField';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Checkbox from '../../components/global/Checkbox';
+import AuthMaxBox from '../../components/auth/AuthMaxBox';
+import Form from '../../components/global/Form';
 
 function Login() {
   const { setAuth } = useAuth();
@@ -46,35 +47,43 @@ function Login() {
   }
 
   return (
-    <FormBox
-      onSubmit={handleSubmit}
-      loading={loading}
-      error={error}
+    <AuthMaxBox
       image={login}
-      fixedHeightOnXLScreen
       title="Welcome back!"
-      submitButtonLabel="Login"
-      submitButtonDisabled={!identity || !password}
       leave={{ hint: "Don't have an account?", link: '/register', label: 'Register Here' }}
     >
-      <InputField
-        placeholder="Username or Email"
-        type="text"
-        icon={faUser}
-        value={identity}
-        onChange={(e) => setIdentity(e.target.value)}
-        maxLength={50}
-        required
-        autoFocus
-      />
-      <InputField.Password placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      <div className="flex flex-wrap justify-between gap-2 px-1">
-        <Checkbox label="Remember me" checked={persist} onClick={() => setPersist(!persist)} />
-        <Link to="/forgot-password" className="hover:text-pro-200">
-          Forgot your password?
-        </Link>
-      </div>
-    </FormBox>
+      <Form
+        onSubmit={handleSubmit}
+        loading={loading}
+        error={error}
+        submitButtonLabel="Login"
+        submitButtonDisabled={!identity || !password}
+        className="overflow-hidden xl:h-[415px]"
+      >
+        <InputField
+          placeholder="Username or Email"
+          type="text"
+          icon={faUser}
+          value={identity}
+          onChange={(e) => setIdentity(e.target.value)}
+          maxLength={50}
+          required
+          autoFocus
+        />
+        <InputField.Password
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <div className="flex flex-wrap justify-between gap-2 px-1">
+          <Checkbox label="Remember me" checked={persist} onClick={() => setPersist(!persist)} />
+          <Link to="/forgot-password" className="hover:text-pro-200">
+            Forgot your password?
+          </Link>
+        </div>
+      </Form>
+    </AuthMaxBox>
   );
 }
 
