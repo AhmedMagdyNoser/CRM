@@ -13,7 +13,7 @@
     @apply text-lg font-bold capitalize text-progray-300 sm:text-xl;
   }
   p {
-    @apply text-progray-200;
+    @apply text-sm text-progray-200 sm:text-base;
   }
   a {
     @apply text-pro-300;

@@ -5,7 +5,9 @@ import { validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
 import forgotPassword from '../../assets/forgotPassword.svg';
 import InputField from '../../components/global/InputField';
-import MiniFormBox from '../../components/auth/MiniFormBox';
+import CaptionCard from '../../components/global/CaptionCard';
+import AuthMiniBox from '../../components/auth/AuthMiniBox';
+import Form from '../../components/global/Form';
 
 function ForgetPassword() {
   const navigate = useNavigate();
@@ -43,25 +45,18 @@ function ForgetPassword() {
   }
 
   return (
-    <MiniFormBox
-      onSubmit={handleSubmit}
-      image={forgotPassword}
-      title="Forgot password"
-      paragraph="Please enter your email address below."
-      submitButtonLabel="Continue"
-      submitButtonDisabled={!validEmail}
-      loading={loading}
-      error={error}
-      backButton
-    >
-      <InputField.Email
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        autoFocus
-      />
-    </MiniFormBox>
+    <AuthMiniBox backButton>
+      <CaptionCard image={forgotPassword} title="Forgot password?" paragraph="Please enter your email address below." />
+      <Form
+        onSubmit={handleSubmit}
+        loading={loading}
+        error={error}
+        submitButtonLabel="Continue"
+        submitButtonDisabled={!validEmail}
+      >
+        <InputField.Email placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
+      </Form>
+    </AuthMiniBox>
   );
 }
 

@@ -3,9 +3,11 @@ import { globalErrorMessage } from '../../utils/utils';
 import { useState } from 'react';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
-import MiniFormBox from '../../components/auth/MiniFormBox';
 import InputField from '../../components/global/InputField';
 import email from '../../assets/email.svg';
+import AuthMiniBox from '../../components/auth/AuthMiniBox';
+import CaptionCard from '../../components/global/CaptionCard';
+import Form from '../../components/global/Form';
 
 function VerifyEmail() {
   const location = useLocation();
@@ -19,7 +21,7 @@ function VerifyEmail() {
 
   console.log('Rendering VerifyEmail', { loading, error });
 
-  if (!location.state?.email) return <Navigate to="/login" replace={true} />;
+  // if (!location.state?.email) return <Navigate to="/login" replace={true} />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -49,28 +51,27 @@ function VerifyEmail() {
   }
 
   return (
-    <MiniFormBox
-      onSubmit={handleSubmit}
-      image={email}
-      title="Check your email"
-      paragraph="Kindly enter the verification code we sent to you."
-      submitButtonLabel="Verify"
-      submitButtonDisabled={code.length !== 6}
-      loading={loading}
-      error={error}
-      backButton
-    >
-      <InputField
-        placeholder="Verification Code"
-        className="text-center text-lg font-bold placeholder:font-normal"
-        type="text"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        maxLength={6}
-        required
-        autoFocus
-      />
-    </MiniFormBox>
+    <AuthMiniBox backButton>
+      <CaptionCard image={email} title="Check your email" paragraph="Kindly enter the verification code we sent to you." />
+      <Form
+        onSubmit={handleSubmit}
+        loading={loading}
+        error={error}
+        submitButtonLabel="Verify"
+        submitButtonDisabled={code.length !== 6}
+      >
+        <InputField
+          placeholder="Verification Code"
+          className="text-center text-lg font-bold placeholder:font-normal"
+          type="text"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          maxLength={6}
+          required
+          autoFocus
+        />
+      </Form>
+    </AuthMiniBox>
   );
 }
 
