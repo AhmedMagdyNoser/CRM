@@ -9,7 +9,7 @@ import ErrorAlert from './ErrorAlert';
  * 1. The child elements, which are rendered inside the form.
  * 2. An `ErrorAlert` and a `submit button`, which are displayed below the child elements.
  * 
- * The form is styled as a full-height and full-width flex container. The `justify-between` class is used to distribute the form's children evenly in the vertical direction. This distribution will be noticeable if the parent container has a specific height.
+ * The form is styled as a full-height and full-width flex container. The `justify-between` class is used to distribute the form's children evenly in the vertical direction. This distribution will be noticeable if you give the form (or its parent) a specific height.
  * 
  * Additional CSS classes and other props can be passed to the component.
  *
