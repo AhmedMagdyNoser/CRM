@@ -3,16 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { inputFieldsInstructions } from '../../utils/utils';
 
 /**
- * InputField is a general input field component that can be used for all types of inputs.
+ * `InputField` is a general input field component that can be used for all types of inputs.
  *
- * @param {Object} props The properties passed to the input field.
- * @param {IconDefinition} props.icon (Addition) The icon to be displayed before the input field.
- * @param {boolean} props.isValid (Addition) The validation status of the input field.
- * @param {string} props.instructions (Addition) The validation error message to be displayed.
+ * It displays an icon (if provided) and an input field. If the input field fails validation, it also displays a validation error message.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.icon - The Font Awesome icon to be displayed before the input field.
+ * @param {boolean} props.isValid - Indicates the validation status of the input field. If `false`, the `instructions` text is displayed as an error message.
+ * @param {string} props.instructions - The validation error message to be displayed when `isValid` is `false`.
  * @returns {ReactElement} A div element that wraps the input field and the validation error message.
  */
 
-function InputField({ value, isValid, icon, instructions, className, ...rest }) {
+function InputField({ icon, value, isValid, instructions, className = '', ...rest }) {
   return (
     <div className="w-full">
       <div className="flex items-center gap-2 rounded-md bg-progray-50 px-3 shadow-sm">
@@ -30,10 +32,10 @@ function InputField({ value, isValid, icon, instructions, className, ...rest }) 
         />
       </div>
       {isValid !== undefined && value && !isValid && (
-        <>
-          <div className="mt-1 h-[3px] w-full animate-progress-fast rounded-md bg-proerror-100"></div>
-          <div className="animate-fade-in-fast py-1 text-sm text-proerror-100">{instructions}</div>
-        </>
+        <div className="flex flex-col gap-1 py-1 text-proerror-100">
+          <div className="h-[3px] animate-progress-fast rounded-md bg-proerror-100"></div>
+          <div className="animate-fade-in-fast text-sm">{instructions}</div>
+        </div>
       )}
     </div>
   );
@@ -42,11 +44,12 @@ function InputField({ value, isValid, icon, instructions, className, ...rest }) 
 export default InputField;
 
 /**
- * Name is a specific type of InputField for name inputs.
- * It has specific props for name inputs. like type, icon, instructions, and maxLength.
- * You don't need to pass these props when using this component.
+ * `InputField.Name` is a specific type of `InputField` for name inputs.
+ * You don't need to pass props like `type`, `icon`, and `instructions` when using this component.
+ * Also, the `maxLength` prop is set to `18` by default.
  *
  * @param {Object} props The properties passed to the component.
+ * @param {boolean} props.isValid - Indicates the validation status of the input field.
  * @returns {ReactElement} An InputField element with specific props for name inputs.
  */
 InputField.Name = function Name({ ...rest }) {
@@ -54,11 +57,12 @@ InputField.Name = function Name({ ...rest }) {
 };
 
 /**
- * Username is a specific type of InputField for username inputs.
- * It has specific props for username inputs. like type, icon, instructions, and maxLength.
- * You don't need to pass these props when using this component.
+ * `InputField.Username` is a specific type of `InputField` for username inputs.
+ * You don't need to pass props like `type`, `icon`, and `instructions` when using this component.
+ * Also, the `maxLength` prop is set to `18` by default.
  *
  * @param {Object} props The properties passed to the component.
+ * @param {boolean} props.isValid - Indicates the validation status of the input field.
  * @returns {ReactElement} An InputField element with specific props for username inputs.
  */
 InputField.Username = function Username({ ...rest }) {
@@ -68,11 +72,12 @@ InputField.Username = function Username({ ...rest }) {
 };
 
 /**
- * Email is a specific type of InputField for email inputs.
- * It has specific props for email inputs. like type, icon, instructions, and maxLength.
- * You don't need to pass these props when using this component.
+ * `InputField.Email` is a specific type of `InputField` for email inputs.
+ * You don't need to pass props like `type`, `icon`, and `instructions` when using this component.
+ * Also, the `maxLength` prop is set to `50` by default.
  *
  * @param {Object} props The properties passed to the component.
+ * @param {boolean} props.isValid - Indicates the validation status of the input field.
  * @returns {ReactElement} An InputField element with specific props for email inputs.
  */
 InputField.Email = function Email({ ...rest }) {
@@ -80,35 +85,16 @@ InputField.Email = function Email({ ...rest }) {
 };
 
 /**
- * Password is a specific type of InputField for password inputs.
- * It has specific props for password inputs. like type, icon, instructions, and maxLength.
- * You don't need to pass these props when using this component.
+ * `InputField.Password` is a specific type of `InputField` for password inputs.
+ * You don't need to pass props like `type`, `icon`, and `instructions` when using this component.
+ * Also, the `maxLength` prop is set to `32` by default.
  *
  * @param {Object} props The properties passed to the component.
+ * @param {boolean} props.isValid - Indicates the validation status of the input field.
  * @returns {ReactElement} An InputField element with specific props for password inputs.
  */
 InputField.Password = function Password({ ...rest }) {
   return (
     <InputField type="password" icon={faLock} instructions={inputFieldsInstructions.password} maxLength={32} {...rest} />
-  );
-};
-
-/**
- * ConfirmPassword is a specific type of InputField for confirm password inputs.
- * It has specific props for confirm password inputs. like type, icon, instructions, and maxLength.
- * You don't need to pass these props when using this component.
- *
- * @param {Object} props The properties passed to the component.
- * @returns {ReactElement} An InputField element with specific props for confirm password inputs.
- */
-InputField.ConfirmPassword = function ConfirmPassword({ ...rest }) {
-  return (
-    <InputField
-      type="password"
-      icon={faLock}
-      instructions={inputFieldsInstructions.confirmPassword}
-      maxLength={32}
-      {...rest}
-    />
   );
 };

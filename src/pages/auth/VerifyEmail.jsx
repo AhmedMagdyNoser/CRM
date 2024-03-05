@@ -57,8 +57,8 @@ function VerifyEmail() {
         onSubmit={handleSubmit}
         loading={loading}
         error={error}
-        submitButtonLabel="Verify"
-        submitButtonDisabled={code.length !== 6}
+        submitLabel="Verify"
+        submitDisabled={code.length !== 6}
         className="sm:w-[475px] md:w-[575px]"
       >
         <InputField

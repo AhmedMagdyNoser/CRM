@@ -56,8 +56,8 @@ function Login() {
         onSubmit={handleSubmit}
         loading={loading}
         error={error}
-        submitButtonLabel="Login"
-        submitButtonDisabled={!identity || !password}
+        submitLabel="Login"
+        submitDisabled={!identity || !password}
         className="sm:w-[500px] xl:h-[425px] xl:overflow-auto"
       >
         <InputField

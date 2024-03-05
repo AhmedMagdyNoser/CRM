@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { globalErrorMessage, validationRegex } from '../../utils/utils';
+import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
 import InputField from '../../components/global/InputField';
 import axios from '../../api/axios';
 import register from '../../assets/register.svg';
@@ -68,8 +68,8 @@ function Register() {
         onSubmit={handleSubmit}
         loading={loading}
         error={error}
-        submitButtonLabel="Register"
-        submitButtonDisabled={
+        submitLabel="Register"
+        submitDisabled={
           !(
             isValidFirstName &&
             isValidLastName &&
@@ -119,10 +119,11 @@ function Register() {
           isValid={isValidPassword}
           required
         />
-        <InputField.ConfirmPassword
+        <InputField.Password
           placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          instructions={inputFieldsInstructions.confirmPassword}
           isValid={isValidConfirmPassword}
           required
         />

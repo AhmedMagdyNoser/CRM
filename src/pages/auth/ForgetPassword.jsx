@@ -51,8 +51,8 @@ function ForgetPassword() {
         onSubmit={handleSubmit}
         loading={loading}
         error={error}
-        submitButtonLabel="Continue"
-        submitButtonDisabled={!validEmail}
+        submitLabel="Continue"
+        submitDisabled={!validEmail}
         className="sm:w-[475px] md:w-[575px]"
       >
         <InputField.Email placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { globalErrorMessage, validationRegex } from '../../utils/utils';
+import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
 import InputField from '../../components/global/InputField';
 import success from '../../assets/success.svg';
@@ -64,8 +64,8 @@ function ResetPassword() {
         onSubmit={handleSubmit}
         loading={loading}
         error={error}
-        submitButtonLabel="Reset"
-        submitButtonDisabled={!isValidPassword || !isValidConfirmPassword}
+        submitLabel="Reset"
+        submitDisabled={!isValidPassword || !isValidConfirmPassword}
         className="sm:w-[475px] md:w-[575px]"
       >
         <InputField.Password
@@ -76,10 +76,11 @@ function ResetPassword() {
           required
           autoFocus
         />
-        <InputField.ConfirmPassword
+        <InputField.Password
           placeholder="Confirm New Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          instructions={inputFieldsInstructions.confirmPassword}
           isValid={isValidConfirmPassword}
           required
         />
