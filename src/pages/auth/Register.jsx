@@ -47,7 +47,7 @@ function Register() {
           url: '/auth/register',
           data: { firstName, lastName, userName: username, email, password, confirmPassword },
         });
-        navigate('/verify-email', { state: { email, goal: 'register' } });
+        navigate('/verify-email', { state: { purpose: 'ConfirmNewEmail', email } });
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);

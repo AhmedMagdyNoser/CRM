@@ -5,7 +5,7 @@ function useRefresh() {
   const { setAuth } = useAuth();
 
   const refreshAccessToken = async () => {
-    const { data } = await axios({ url: '/Auth/RefreshToken', withCredentials: true });
+    const { data } = await axios({ url: '/Auth/refresh-token', withCredentials: true });
     setAuth(data);
     return data.accessToken;
   };

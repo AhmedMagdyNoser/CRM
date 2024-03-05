@@ -27,13 +27,8 @@ function ForgetPassword() {
       try {
         if (error) setError('');
         setLoading(true);
-        await axios({
-          method: 'POST',
-          url: '/Auth/ForgotPassword',
-          data: { email },
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
-        navigate('/verify-email', { state: { email, goal: 'forgot-password' } });
+        await axios({ method: 'POST', url: '/auth/forgot-password', data: { email } });
+        navigate('/verify-email', { state: { email, purpose: 'ResetPassword' } });
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);

@@ -28,19 +28,19 @@ function VerifyEmail() {
     try {
       if (error) setError('');
       setLoading(true);
-      if (location.state?.goal === 'register') {
+      if (location.state?.purpose === 'ConfirmNewEmail') {
         let response = await axios({
           method: 'POST',
-          url: '/Auth/ConfirmEmail',
-          data: { email: location.state.email, code },
+          url: '/auth/verify-code',
+          data: { purpose: location.state.purpose, email: location.state.email, code },
           withCredentials: true,
         });
         setAuth(response.data);
-      } else if (location.state?.goal === 'forgot-password') {
+      } else if (location.state?.purpose === 'ResetPassword') {
         let response = await axios({
           method: 'POST',
-          url: '/Auth/VerifyCode',
-          data: { email: location.state.email, code },
+          url: '/auth/verify-code',
+          data: { purpose: location.state.purpose, email: location.state.email, code },
         });
         navigate('/reset-password', { state: { email: location.state.email, token: response.data.token } });
       }

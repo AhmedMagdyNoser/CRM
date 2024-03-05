@@ -6,7 +6,7 @@ function useLogout() {
 
   const logout = async () => {
     localStorage.removeItem('persist');
-    await axios({ method: 'POST', url: '/Auth/RevokeToken', withCredentials: true });
+    await axios({ method: 'POST', url: '/auth/revoke-token', withCredentials: true });
     setAuth({});
   };
 

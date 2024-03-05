@@ -34,7 +34,7 @@ function ResetPassword() {
         setLoading(true);
         await axios({
           method: 'POST',
-          url: '/Auth/ResetPassword',
+          url: '/auth/reset-password',
           data: {
             token: location.state?.token,
             email: location.state?.email,
