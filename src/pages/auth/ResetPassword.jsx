@@ -15,8 +15,8 @@ function ResetPassword() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const validPassword = validationRegex.password.test(password);
-  const validConfirmPassword = confirmPassword === password;
+  const isValidPassword = validationRegex.password.test(password);
+  const isValidConfirmPassword = confirmPassword === password;
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ function ResetPassword() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (validPassword && validConfirmPassword) {
+    if (isValidPassword && isValidConfirmPassword) {
       try {
         if (error) setError('');
         setLoading(true);
@@ -65,13 +65,14 @@ function ResetPassword() {
         loading={loading}
         error={error}
         submitButtonLabel="Reset"
-        submitButtonDisabled={!validPassword || !validConfirmPassword}
+        submitButtonDisabled={!isValidPassword || !isValidConfirmPassword}
+        className="sm:w-[475px] md:w-[575px]"
       >
         <InputField.Password
           placeholder="New Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          isValid={validPassword}
+          isValid={isValidPassword}
           required
           autoFocus
         />
@@ -79,7 +80,7 @@ function ResetPassword() {
           placeholder="Confirm New Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          isValid={validConfirmPassword}
+          isValid={isValidConfirmPassword}
           required
         />
       </Form>
@@ -96,7 +97,7 @@ function SuccessMessage() {
         image={success}
         title="Password reset successfully"
         paragraph="Now you can login with your new password."
-        className="px-8"
+        className="px-10"
       />
     </AuthMiniBox>
   );

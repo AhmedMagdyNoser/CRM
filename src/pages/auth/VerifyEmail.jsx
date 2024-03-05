@@ -59,6 +59,7 @@ function VerifyEmail() {
         error={error}
         submitButtonLabel="Verify"
         submitButtonDisabled={code.length !== 6}
+        className="sm:w-[475px] md:w-[575px]"
       >
         <InputField
           placeholder="Verification Code"

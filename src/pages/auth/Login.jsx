@@ -58,7 +58,7 @@ function Login() {
         error={error}
         submitButtonLabel="Login"
         submitButtonDisabled={!identity || !password}
-        className="overflow-hidden xl:h-[415px]"
+        className="sm:w-[500px] xl:h-[425px] xl:overflow-auto"
       >
         <InputField
           placeholder="Username or Email"
