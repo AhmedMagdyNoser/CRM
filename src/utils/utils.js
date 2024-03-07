@@ -15,3 +15,5 @@ export const inputFieldsInstructions = {
     'Password must be at least 8 characters long and include a lowercase letter, an uppercase letter, a digit, and a special character.',
   confirmPassword: 'Confirm password must match the entered password.',
 };
+
+export const navBarDimension = '90px';
