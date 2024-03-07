@@ -82,16 +82,14 @@ function Register() {
         className="sm:h-[425px] sm:w-[500px] sm:overflow-auto"
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <InputField.Name
-            placeholder="First Name"
+          <InputField.FirstName
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             isValid={isValidFirstName}
             required
             autoFocus
           />
-          <InputField.Name
-            placeholder="Last Name"
+          <InputField.LastName
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             isValid={isValidLastName}
@@ -99,21 +97,13 @@ function Register() {
           />
         </div>
         <InputField.Username
-          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           isValid={isValidUserName}
           required
         />
-        <InputField.Email
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          isValid={isValidEmail}
-          required
-        />
+        <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} isValid={isValidEmail} required />
         <InputField.Password
-          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           isValid={isValidPassword}

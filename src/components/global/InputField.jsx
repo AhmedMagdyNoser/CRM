@@ -7,7 +7,7 @@ import { inputFieldsInstructions } from '../../utils/utils';
  *
  * It displays an icon (if provided) and an input field. If the input field fails validation, it also displays a validation error message.
  *
- * @param {Object} props - The properties passed to the component.
+ * @param {Object} props - The properties passed to an `input` field.
  * @param {Object} props.icon - The Font Awesome icon to be displayed before the input field.
  * @param {boolean} props.isValid - Indicates the validation status of the input field. If `false`, the `instructions` text is displayed as an error message.
  * @param {string} props.instructions - The validation error message to be displayed when `isValid` is `false`.
@@ -45,56 +45,114 @@ export default InputField;
 
 /**
  * `InputField.Name` is a specific type of `InputField` for name inputs.
- * You don't need to pass props like `type`, `icon`, and `instructions` when using this component.
+ * You don't need to pass props like `type`, `icon`, `placehoder`, and `instructions` when using this component.
  * Also, the `maxLength` prop is set to `18` by default.
  *
- * @param {Object} props The properties passed to the component.
+ * @param {Object} props The properties passed to the `InputField` component
  * @param {boolean} props.isValid - Indicates the validation status of the input field.
  * @returns {ReactElement} An InputField element with specific props for name inputs.
  */
 InputField.Name = function Name({ ...rest }) {
-  return <InputField type="text" icon={faUser} instructions={inputFieldsInstructions.name} maxLength={18} {...rest} />;
+  return (
+    <InputField
+      type="text"
+      icon={faUser}
+      placeholder="Name"
+      instructions={inputFieldsInstructions.name}
+      maxLength={18}
+      {...rest}
+    />
+  );
+};
+
+/**
+ * `InputField.FirstName` is a specific type of `InputField` for first name inputs.
+ * You don't need to pass props like `type`, `icon`, `placehoder`, and `instructions` when using this component.
+ * Also, the `maxLength` prop is set to `18` by default.
+ *
+ * @param {Object} props The properties passed to the `InputField` component
+ * @param {boolean} props.isValid - Indicates the validation status of the input field.
+ * @returns {ReactElement} An InputField element with specific props for first name inputs.
+ */
+InputField.FirstName = function FirstName({ ...rest }) {
+  return <InputField.Name placeholder="First Name" {...rest} />;
+};
+
+/**
+ * `InputField.LastName` is a specific type of `InputField` for last name inputs.
+ * You don't need to pass props like `type`, `icon`, `placehoder`, and `instructions` when using this component.
+ * Also, the `maxLength` prop is set to `18` by default.
+ * 
+ * @param {Object} props The properties passed to the `InputField` component
+ * @param {boolean} props.isValid - Indicates the validation status of the input field.
+ * @returns {ReactElement} An InputField element with specific props for last name inputs.
+ */
+InputField.LastName = function LastName({ ...rest }) {
+  return <InputField.Name placeholder="Last Name" {...rest} />;
 };
 
 /**
  * `InputField.Username` is a specific type of `InputField` for username inputs.
- * You don't need to pass props like `type`, `icon`, and `instructions` when using this component.
+ * You don't need to pass props like `type`, `icon`, `placehoder`, and `instructions` when using this component.
  * Also, the `maxLength` prop is set to `18` by default.
  *
- * @param {Object} props The properties passed to the component.
+ * @param {Object} props The properties passed to the `InputField` component
  * @param {boolean} props.isValid - Indicates the validation status of the input field.
  * @returns {ReactElement} An InputField element with specific props for username inputs.
  */
 InputField.Username = function Username({ ...rest }) {
   return (
-    <InputField type="text" icon={faAddressBook} instructions={inputFieldsInstructions.username} maxLength={18} {...rest} />
+    <InputField
+      type="text"
+      icon={faAddressBook}
+      placeholder="Username"
+      instructions={inputFieldsInstructions.username}
+      maxLength={18}
+      {...rest}
+    />
   );
 };
 
 /**
  * `InputField.Email` is a specific type of `InputField` for email inputs.
- * You don't need to pass props like `type`, `icon`, and `instructions` when using this component.
+ * You don't need to pass props like `type`, `icon`, `placehoder`, and `instructions` when using this component.
  * Also, the `maxLength` prop is set to `50` by default.
  *
- * @param {Object} props The properties passed to the component.
+ * @param {Object} props The properties passed to the `InputField` component
  * @param {boolean} props.isValid - Indicates the validation status of the input field.
  * @returns {ReactElement} An InputField element with specific props for email inputs.
  */
 InputField.Email = function Email({ ...rest }) {
-  return <InputField type="email" icon={faEnvelope} instructions={inputFieldsInstructions.email} maxLength={50} {...rest} />;
+  return (
+    <InputField
+      type="email"
+      icon={faEnvelope}
+      placeholder="Email"
+      instructions={inputFieldsInstructions.email}
+      maxLength={50}
+      {...rest}
+    />
+  );
 };
 
 /**
  * `InputField.Password` is a specific type of `InputField` for password inputs.
- * You don't need to pass props like `type`, `icon`, and `instructions` when using this component.
+ * You don't need to pass props like `type`, `icon`, `placehoder`, and `instructions` when using this component.
  * Also, the `maxLength` prop is set to `32` by default.
  *
- * @param {Object} props The properties passed to the component.
+ * @param {Object} props The properties passed to the `InputField` component
  * @param {boolean} props.isValid - Indicates the validation status of the input field.
  * @returns {ReactElement} An InputField element with specific props for password inputs.
  */
 InputField.Password = function Password({ ...rest }) {
   return (
-    <InputField type="password" icon={faLock} instructions={inputFieldsInstructions.password} maxLength={32} {...rest} />
+    <InputField
+      type="password"
+      icon={faLock}
+      placeholder="Password"
+      instructions={inputFieldsInstructions.password}
+      maxLength={32}
+      {...rest}
+    />
   );
 };

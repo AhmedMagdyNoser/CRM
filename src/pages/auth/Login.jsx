@@ -70,12 +70,7 @@ function Login() {
           required
           autoFocus
         />
-        <InputField.Password
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <InputField.Password value={password} onChange={(e) => setPassword(e.target.value)} required />
         <div className="flex flex-wrap justify-between gap-2 px-1">
           <Checkbox label="Remember me" checked={persist} onClick={() => setPersist(!persist)} />
           <Link to="/forgot-password" className="hover:text-pro-200">

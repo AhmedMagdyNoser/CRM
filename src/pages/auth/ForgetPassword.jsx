@@ -50,7 +50,7 @@ function ForgetPassword() {
         submitDisabled={!validEmail}
         className="sm:w-[475px] md:w-[575px]"
       >
-        <InputField.Email placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
+        <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
       </Form>
     </AuthMiniBox>
   );
