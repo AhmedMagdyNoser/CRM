@@ -1,21 +1,12 @@
-import React from 'react';
-import useLogout from '../../hooks/useLogout';
 import useAuth from '../../hooks/useAuth';
 
 function Home() {
-  const logout = useLogout();
   const { auth } = useAuth();
 
   return (
-    <section className="p-4">
-      <h1 className="text-progray-300 border-b pb-2 text-2xl font-bold">Home</h1>
-      <p className="text-progray-200 my-2">Hello {auth.firstName}! Welcome to your dashboard.</p>
-      <button
-        onClick={logout}
-        className="text-pro-50 flex h-12 w-32 items-center justify-center rounded bg-pro-300 font-bold transition hover:bg-pro-200"
-      >
-        Logout
-      </button>
+    <section className="p-6 sm:px-8">
+      <h1 className="border-b pb-2 text-2xl font-bold text-progray-300">Home</h1>
+      <p className="my-2 text-progray-200">Hello {auth.firstName}! Welcome to your dashboard.</p>
     </section>
   );
 }

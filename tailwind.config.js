@@ -16,8 +16,8 @@ module.exports = {
           300: '#6A60FF', // Dark Background + Default Text
         },
         progray: {
-          50: '#F8F6FA', // Very Light Background
-          100: '#F2F2F2', // Light Background
+          50: '#F9F6F9', // Very Light Background
+          100: '#F3F2F4', // Light Background
           150: '#A5A5A5',
           200: '#656565', // Paragraphs
           300: '#252525', // Titles
