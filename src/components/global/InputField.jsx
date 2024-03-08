@@ -17,7 +17,7 @@ import { inputFieldsInstructions } from '../../utils/utils';
 function InputField({ icon, value, isValid, instructions, className = '', ...rest }) {
   return (
     <div className="w-full">
-      <div className="flex items-center gap-2 rounded-md bg-progray-100 px-3 shadow-sm">
+      <div className="flex items-center gap-2 rounded-md bg-progray-100 px-3 ">
         {icon && (
           <FontAwesomeIcon
             icon={icon}

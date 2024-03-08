@@ -19,7 +19,7 @@ module.exports = {
           50: '#FAF8FA', // Very Light Background
           100: '#F3F2F4', // Light Background
           150: '#A1A1A1',
-          200: '#656565', // Paragraphs
+          200: '#757575', // Paragraphs
           300: '#252525', // Titles
         },
         proerror: {
