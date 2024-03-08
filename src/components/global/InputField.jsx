@@ -17,15 +17,15 @@ import { inputFieldsInstructions } from '../../utils/utils';
 function InputField({ icon, value, isValid, instructions, className = '', ...rest }) {
   return (
     <div className="w-full">
-      <div className="flex items-center gap-2 rounded-md bg-progray-100 px-3 ">
+      <div className="flex items-center overflow-hidden rounded-xl bg-progray-100">
         {icon && (
           <FontAwesomeIcon
             icon={icon}
-            className={(value && isValid ? 'text-pro-300' : 'text-progray-200') + ' transition-colors duration-1000'}
+            className={(value && isValid ? 'text-pro-300' : 'text-progray-200') + ' px-3 transition-colors duration-1000'}
           />
         )}
         <input
-          className={'flex-1 bg-inherit py-3 text-progray-300 outline-none placeholder:text-progray-200 ' + className}
+          className={'flex-1 bg-inherit p-3 pl-0 text-progray-300 outline-none placeholder:text-progray-200 ' + className}
           value={value}
           size={1}
           {...rest}
@@ -33,7 +33,7 @@ function InputField({ icon, value, isValid, instructions, className = '', ...res
       </div>
       {isValid !== undefined && value && !isValid && (
         <div className="flex flex-col gap-1 py-1 text-proerror-100">
-          <div className="h-[3px] animate-progress-fast rounded-md bg-proerror-100"></div>
+          <div className="h-[3px] animate-progress-fast rounded bg-proerror-100"></div>
           <div className="animate-fade-in-fast text-sm">{instructions}</div>
         </div>
       )}
@@ -82,7 +82,7 @@ InputField.FirstName = function FirstName({ ...rest }) {
  * `InputField.LastName` is a specific type of `InputField` for last name inputs.
  * You don't need to pass props like `type`, `icon`, `placehoder`, and `instructions` when using this component.
  * Also, the `maxLength` prop is set to `18` by default.
- * 
+ *
  * @param {Object} props The properties passed to the `InputField` component
  * @param {boolean} props.isValid - Indicates the validation status of the input field.
  * @returns {ReactElement} An InputField element with specific props for last name inputs.

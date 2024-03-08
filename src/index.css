@@ -22,19 +22,22 @@
 
 @layer components {
   .btn-primary {
-    @apply rounded-md bg-pro-300 font-bold text-pro-50 transition-colors hover:bg-pro-200 disabled:bg-pro-200;
+    @apply rounded-xl bg-pro-300 font-bold text-pro-50 transition-colors hover:bg-pro-200 disabled:bg-pro-200;
   }
   .btn-secondary {
-    @apply rounded-md bg-pro-50 font-bold text-pro-300 transition-colors hover:bg-pro-100 disabled:bg-pro-100;
+    @apply rounded-xl bg-pro-50 font-bold text-pro-300 transition-colors hover:bg-pro-100 disabled:bg-pro-100;
   }
   .btn-light {
-    @apply rounded-md text-progray-200 transition-colors hover:bg-progray-100;
+    @apply rounded-xl text-progray-200 transition-colors hover:bg-progray-100;
   }
   .flex-center {
     @apply flex items-center justify-center;
   }
   .auth-box {
-    @apply flex h-full w-full animate-fade-in-fast bg-white p-6 sm:h-fit sm:w-fit sm:rounded-xl sm:p-12 sm:shadow-lg;
+    @apply flex h-full w-full animate-fade-in-fast bg-white p-6 sm:h-fit sm:w-fit sm:rounded-2xl sm:p-12 sm:shadow-lg;
+  }
+  .nav-link {
+    @apply flex-center h-12 w-12 rounded-2xl;
   }
 }
 
@@ -48,7 +51,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f5f5f5; /* progray-100 */
+  background: #f5f5f5;
   border-radius: 5px;
   border: 2.5px white solid;
 }

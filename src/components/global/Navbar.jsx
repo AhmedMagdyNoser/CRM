@@ -36,7 +36,7 @@ function Navbar() {
 export default Navbar;
 
 function NavbarLink({ to, icon }) {
-  const constClasses = 'flex-center h-12 w-12 rounded-2xl';
+  const constClasses = 'nav-link';
   const className = ({ isActive }) =>
     isActive
       ? constClasses + ' text-pro-300 bg-pro-100'
@@ -60,7 +60,7 @@ function LogoutButton({ className }) {
         await logout();
       }}
       className={
-        'flex-center h-[50px] w-[50px] rounded-xl text-progray-200 transition-colors duration-300 hover:text-progray-300 ' +
+        'nav-link text-progray-200 transition-colors duration-300 hover:bg-progray-100 hover:text-progray-300 ' +
         className
       }
     >
