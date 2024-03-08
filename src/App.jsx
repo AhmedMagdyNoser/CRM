@@ -9,6 +9,10 @@ import ResetPassword from './pages/auth/ResetPassword';
 import Home from './pages/users/Home';
 import Authentication from './pages/routes/Authentication';
 import PersistUser from './pages/routes/PersistUser';
+import CompanyInfo from './pages/users/CompanyInfo';
+import Roles from './pages/users/Roles';
+import Reports from './pages/users/Reports';
+import Profile from './pages/users/Profile';
 
 function App() {
   console.log('Rendering App');
@@ -20,6 +24,10 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route element={<Authentication />}>
               <Route index element={<Home />} />
+              <Route path='/profile' element={<Profile />} />
+              <Route path='/company-info' element={<CompanyInfo />} />
+              <Route path='/roles' element={<Roles />} />
+              <Route path='/reports' element={<Reports />} />
             </Route>
 
             <Route element={<Authentication requireUnauthenticated />}>

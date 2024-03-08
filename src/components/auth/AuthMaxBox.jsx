@@ -25,7 +25,7 @@ import defaultImage from '../../assets/defaultImage.svg';
 
 function AuthMaxBox({ className = '', image = defaultImage, title, leave, children }) {
   return (
-    <ScreenCenterContainer>
+    <ScreenCenterContainer className='bg-progray-100'>
       <div className={'auth-box ' + className}>
         <section className="xl:flex-center hidden w-[500px] p-12">
           <img src={image} alt={title} className="w-[85%]" />

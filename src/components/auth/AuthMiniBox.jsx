@@ -21,7 +21,7 @@ function AuthMiniBox({ className = '', backButton, children }) {
   const navigate = useNavigate();
 
   return (
-    <ScreenCenterContainer>
+    <ScreenCenterContainer className='bg-progray-100'>
       <div className={'auth-box flex-col gap-3 ' + className}>
         {children}
         {backButton && (
