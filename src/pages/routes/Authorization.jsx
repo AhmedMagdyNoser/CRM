@@ -1,5 +1,4 @@
 import { Link, Outlet } from 'react-router-dom';
-import ScreenCenterContainer from '../../components/global/ScreenCenterContainer';
 import CaptionCard from '../../components/global/CaptionCard';
 import unauthorized from '../../assets/unauthorized.svg';
 import useAuth from '../../hooks/useAuth';
@@ -16,7 +15,7 @@ export default Authorization;
 
 function Unauthorized({ name }) {
   return (
-    <ScreenCenterContainer className="flex-col gap-3">
+    <div className="flex-center h-full flex-col gap-3">
       <CaptionCard
         image={unauthorized}
         title="Unauthorized Access"
@@ -25,6 +24,6 @@ function Unauthorized({ name }) {
       <Link to="/" className="btn-secondary px-4 py-2">
         Back to Home
       </Link>
-    </ScreenCenterContainer>
+    </div>
   );
 }

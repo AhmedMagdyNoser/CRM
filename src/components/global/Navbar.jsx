@@ -16,7 +16,7 @@ function Navbar() {
   return (
     <aside
       className={
-        'fixed bottom-0 left-0 flex h-20 w-full items-center justify-between gap-3 overflow-auto border-t px-4 sm:relative sm:h-auto sm:w-20 sm:flex-col sm:overflow-visible sm:border-r sm:border-t-0 sm:px-0 sm:py-4'
+        'fixed bottom-0 rounded-none left-0 flex h-20 w-full items-center justify-between gap-3 overflow-auto border-t bg-white px-4 sm:h-screen sm:w-20 sm:flex-col sm:border-r sm:border-t-0 sm:px-0 sm:py-4'
       }
     >
       <div className="sm:flex-center hidden h-10 font-bold text-pro-300">Pro</div>
@@ -39,8 +39,8 @@ function NavbarLink({ to, icon }) {
   const constClasses = 'nav-link';
   const className = ({ isActive }) =>
     isActive
-      ? constClasses + ' text-pro-300 bg-pro-100'
-      : constClasses + ' text-progray-200 hover:bg-pro-100 transition-colors';
+      ? constClasses + ' text-pro-300 bg-pro-50'
+      : constClasses + ' btn-light text-progray-100';
 
   return (
     <NavLink to={to} className={className}>
@@ -60,8 +60,7 @@ function LogoutButton({ className }) {
         await logout();
       }}
       className={
-        'nav-link text-progray-200 transition-colors duration-300 hover:bg-progray-100 hover:text-progray-300 ' +
-        className
+        'nav-link btn-light ' + className
       }
     >
       {loading ? (

@@ -6,10 +6,10 @@ import axios from '../../api/axios';
 import forgotPassword from '../../assets/forgotPassword.svg';
 import InputField from '../../components/global/InputField';
 import CaptionCard from '../../components/global/CaptionCard';
-import AuthMiniBox from '../../components/auth/AuthMiniBox';
+import CenterBox from '../../components/global/CenterBox';
 import Form from '../../components/global/Form';
 
-function ForgetPassword() {
+function ForgotPassword() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -40,7 +40,7 @@ function ForgetPassword() {
   }
 
   return (
-    <AuthMiniBox backButton>
+    <CenterBox backButton className="flex-col">
       <CaptionCard image={forgotPassword} title="Forgot password?" paragraph="Please enter your email address below." />
       <Form
         onSubmit={handleSubmit}
@@ -52,8 +52,8 @@ function ForgetPassword() {
       >
         <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
       </Form>
-    </AuthMiniBox>
+    </CenterBox>
   );
 }
 
-export default ForgetPassword;
+export default ForgotPassword;

@@ -4,7 +4,7 @@ import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '..
 import axios from '../../api/axios';
 import InputField from '../../components/global/InputField';
 import success from '../../assets/success.svg';
-import AuthMiniBox from '../../components/auth/AuthMiniBox';
+import CenterBox from '../../components/global/CenterBox';
 import CaptionCard from '../../components/global/CaptionCard';
 import Form from '../../components/global/Form';
 
@@ -58,7 +58,7 @@ function ResetPassword() {
   return success ? (
     <SuccessMessage />
   ) : (
-    <AuthMiniBox>
+    <CenterBox className="flex-col">
       <CaptionCard title="Hello again!" paragraph="Please choose your new password." />
       <Form
         onSubmit={handleSubmit}
@@ -85,7 +85,7 @@ function ResetPassword() {
           required
         />
       </Form>
-    </AuthMiniBox>
+    </CenterBox>
   );
 }
 
@@ -93,13 +93,13 @@ export default ResetPassword;
 
 function SuccessMessage() {
   return (
-    <AuthMiniBox>
+    <CenterBox>
       <CaptionCard
         image={success}
         title="Password reset successfully"
         paragraph="Now you can login with your new password."
         className="px-10"
       />
-    </AuthMiniBox>
+    </CenterBox>
   );
 }

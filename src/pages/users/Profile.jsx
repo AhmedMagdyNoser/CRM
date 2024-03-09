@@ -3,7 +3,7 @@ function Profile() {
     <section>
       <h1>Profile</h1>
     </section>
-  )
+  );
 }
 
-export default Profile
+export default Profile;

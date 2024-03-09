@@ -81,7 +81,7 @@ function UserCard({ user }) {
   }
 
   return (
-    <div className="flex flex-col gap-2 rounded-xl bg-pro-50 p-4 shadow">
+    <div className="flex flex-col gap-2 bg-pro-50 p-4 shadow">
       <span>
         Name: {user.firstName} {user.lastName}
       </span>

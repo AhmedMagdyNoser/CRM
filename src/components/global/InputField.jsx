@@ -17,15 +17,15 @@ import { inputFieldsInstructions } from '../../utils/utils';
 function InputField({ icon, value, isValid, instructions, className = '', ...rest }) {
   return (
     <div className="w-full">
-      <div className="flex items-center overflow-hidden rounded-xl bg-progray-100">
+      <div className="flex items-center overflow-hidden bg-progray-50">
         {icon && (
           <FontAwesomeIcon
             icon={icon}
-            className={(value && isValid ? 'text-pro-300' : 'text-progray-200') + ' px-3 transition-colors duration-1000'}
+            className={(value && isValid ? 'text-pro-300' : 'text-progray-200') + ' pl-3 transition-colors duration-1000'}
           />
         )}
         <input
-          className={'flex-1 bg-inherit p-3 pl-0 text-progray-300 outline-none placeholder:text-progray-200 ' + className}
+          className={'flex-1 bg-inherit p-3 text-progray-300 outline-none placeholder:text-progray-200 ' + className}
           value={value}
           size={1}
           {...rest}

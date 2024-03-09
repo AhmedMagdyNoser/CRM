@@ -5,7 +5,7 @@ import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
 import InputField from '../../components/global/InputField';
 import email from '../../assets/email.svg';
-import AuthMiniBox from '../../components/auth/AuthMiniBox';
+import CenterBox from '../../components/global/CenterBox';
 import CaptionCard from '../../components/global/CaptionCard';
 import Form from '../../components/global/Form';
 
@@ -51,7 +51,7 @@ function VerifyEmail() {
   }
 
   return (
-    <AuthMiniBox backButton>
+    <CenterBox backButton className="flex-col">
       <CaptionCard image={email} title="Check your email" paragraph="Kindly enter the verification code we sent to you." />
       <Form
         onSubmit={handleSubmit}
@@ -72,7 +72,7 @@ function VerifyEmail() {
           autoFocus
         />
       </Form>
-    </AuthMiniBox>
+    </CenterBox>
   );
 }
 
