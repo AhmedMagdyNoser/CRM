@@ -31,7 +31,7 @@ function usePrivateAxios() {
       (response) => response,
       async (error) => {
         const originalRequest = error.config;
-        if (error.response?.status === 403 && !originalRequest._retry) {
+        if (error.response?.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true; // _retry is a custom property to prevent infinite loops of requests when the refresh token is expired
           try {
             const newAccessToken = await refreshAccessToken();
@@ -41,15 +41,15 @@ function usePrivateAxios() {
             logout();
           }
         }
-        return Promise.reject(error); // If the refresh token is expired (or it isn't 403 at all), simply reject the error.
-      }
+        return Promise.reject(error); // If the refresh token is expired (or it isn't 401 at all), simply reject the error.
+      },
     );
 
     return () => {
       privateAxios.interceptors.request.eject(requestInterceptor);
       privateAxios.interceptors.response.eject(responseInterceptor);
     };
-  }, []);
+  }, [auth.accessToken, logout, refreshAccessToken]);
 
   return privateAxios;
 }

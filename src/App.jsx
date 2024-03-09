@@ -32,7 +32,6 @@ function App() {
                 <Route path="/roles" element={<Roles />} />
                 <Route path="/reports" element={<Reports />} />
               </Route>
-
             </Route>
 
             <Route element={<Authentication requireUnauthenticated />}>

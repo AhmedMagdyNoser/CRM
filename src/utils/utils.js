@@ -16,4 +16,8 @@ export const inputFieldsInstructions = {
   confirmPassword: 'Confirm password must match the entered password.',
 };
 
-export const navBarDimension = '90px';
+export const roles = {
+  manager: 'Manager',
+  moderator: 'Marketing Moderator',
+  sales: 'Sales Representative',
+};
