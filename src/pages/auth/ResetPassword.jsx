@@ -93,7 +93,7 @@ export default ResetPassword;
 
 function SuccessMessage() {
   return (
-    <CenterBox>
+    <CenterBox className="flex-center">
       <CaptionCard
         image={success}
         title="Password reset successfully"

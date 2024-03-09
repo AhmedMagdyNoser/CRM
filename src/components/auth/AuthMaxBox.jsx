@@ -3,16 +3,12 @@ import defaultImage from '../../assets/defaultImage.svg';
 import CenterBox from '../global/CenterBox';
 
 /**
- * `AuthMaxBox` is a component that presents an image, a title, and its children in a centered box on the screen.
+ * `AuthMaxBox` is a `CenterBox` component that presents an image, a title, and its children in a centered box on the screen.
  * It can optionally display a link that redirects to a different page when clicked.
  *
  * The component is divided into two main sections:
  * 1. The first section is for an image, which is displayed on large screens only.
  * 2. The second section is for the title, the child elements, and an optional leave link.
- *
- * The component is styled as a white flex container and its children are stacked horizontally.
- * On mobile devices, it takes the full height and width and a small padding.
- * From small screens and up, it adjusts its height and width to fit its content, applies rounded corners, increases the padding, and adds a shadow. So it looks like a card.
  *
  * @param {Object} props - The properties passed to the component.
  * @param {string} props.image - The URL of the image to be displayed. If not provided, a default image is used.

@@ -7,13 +7,13 @@ import useLogout from './useLogout';
 const privateAxios = axios.create();
 
 /**
- *
- * @returns a new instance of axios with the Authorization header set to the access token.
- *
- * If the access token is expired, It sends a request to the server to refresh the token.
- *
- * If the refresh token is expired, it logs out the user.
- *
+ * `usePrivateAxios` is a custom hook that provides a pre-configured axios instance.
+ * 
+ * @returns {Object} An axios instance with an Authorization header.
+ * 
+ * This axios instance automatically adds the user's access token to the Authorization header of all requests.
+ * If a request fails due to an expired access token, it tries to refresh the token and retry the request.
+ * If the refresh token is also expired, it logs out the user.
  */
 
 function usePrivateAxios() {

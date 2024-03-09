@@ -4,9 +4,10 @@ import useAuth from '../../hooks/useAuth';
 
 function Layout() {
   const { auth } = useAuth();
+  
   return (
     <div className="flex text-pro-300">
-      {auth.accessToken && <Navbar />}
+      {auth.accessToken && <Navbar dimentions='h-20 w-full px-4 sm:h-screen sm:w-20 sm:px-0 sm:py-4' />}
       <div className={'min-h-screen w-full ' + (auth.accessToken ? 'p-6 pb-28 sm:p-8 sm:pl-28' : '')}>
         <Outlet />
       </div>

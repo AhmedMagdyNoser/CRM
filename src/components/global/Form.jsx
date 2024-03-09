@@ -4,13 +4,13 @@ import ErrorAlert from './ErrorAlert';
 
 /**
  * `Form` is a component that has a submit button displaying a loading spinner during submission and an error message if one occurs.
- * 
+ *
  * The component is divided into two main sections:
  * 1. The child elements, which are rendered inside the form.
  * 2. An `ErrorAlert` and a `submit button`, which are displayed below the child elements.
- * 
+ *
  * The form is styled as a full-height and full-width flex container. The `justify-between` class is used to distribute the form's children evenly in the vertical direction. This distribution will be noticeable if you give the form (or its parent) a specific height.
- * 
+ *
  * Additional CSS classes and other props can be passed to the component.
  *
  * @param {Object} props - The properties passed to the component.
