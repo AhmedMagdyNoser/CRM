@@ -22,7 +22,7 @@ function OnlineStatueAlert() {
   }
 
   return (
-    <div className="fixed bottom-0 right-0 z-40 w-full animate-fade-in-fast p-5 sm:w-[450px]">
+    <div className="fixed bottom-0 right-0 z-40 w-full animate-fade-in-fast p-3 sm:w-[450px]">
       <div
         className="flex flex-wrap items-center justify-between gap-3 bg-white p-5"
         style={{ boxShadow: '0px 0px 5px 0px #0001, 0 1px 3px 0 #0002, 0 1px 2px -1px #0002' }}

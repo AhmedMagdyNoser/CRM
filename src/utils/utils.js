@@ -21,3 +21,9 @@ export const roles = {
   moderator: 'Marketing Moderator',
   sales: 'Sales Representative',
 };
+
+export const layoutDimensions = {
+  navbarSize: 80,
+  navbarPadding: 20,
+  layoutPadding: 24,
+};

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import useLogout from '../../hooks/useLogout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,20 +8,19 @@ import {
   faChartSimple,
   faUserCircle,
   faRightFromBracket,
-  faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 
-function Navbar({ dimentions = '' }) {
+function Navbar({ className = '' }) {
   return (
     <aside
       className={
         'fixed bottom-0 left-0 z-30 flex items-center justify-between gap-3 overflow-auto rounded-none border-t bg-white sm:flex-col sm:border-r sm:border-t-0 ' +
-        dimentions
+        className
       }
     >
       <div className="sm:flex-center hidden h-10 font-bold text-pro-300">Pro</div>
       <div className="flex flex-1 justify-between gap-2 sm:flex-grow-0 sm:flex-col">
-        <NavbarLink label="Home" to="/" icon={faHome} active />
+        <NavbarLink label="Home" to="/" icon={faHome} />
         <NavbarLink label="Company Info" to="/company-info" icon={faBuilding} />
         <NavbarLink label="Roles" to="roles" icon={faUserGroup} />
         <NavbarLink label="Reports" to="reports" icon={faChartSimple} />
@@ -49,22 +47,11 @@ function NavbarLink({ to, icon }) {
 }
 
 function LogoutButton({ className }) {
-  const [loading, setLoading] = useState(false);
   const logout = useLogout();
 
   return (
-    <button
-      onClick={async () => {
-        setLoading(true);
-        await logout();
-      }}
-      className={'nav-link btn-light ' + className}
-    >
-      {loading ? (
-        <FontAwesomeIcon icon={faSpinner} className="animate-spin-slow" />
-      ) : (
-        <FontAwesomeIcon icon={faRightFromBracket} className="sm:rotate-180" />
-      )}
+    <button onClick={() => logout()} className={'nav-link btn-light ' + className}>
+      <FontAwesomeIcon icon={faRightFromBracket} className="sm:rotate-180" />
     </button>
   );
 }

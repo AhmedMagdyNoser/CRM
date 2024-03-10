@@ -2,17 +2,45 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../../components/global/Navbar';
 import useAuth from '../../hooks/useAuth';
 import OnlineStatueAlert from '../../components/global/OnlineStatusAlert';
+import { layoutDimensions as dimensions } from '../../utils/utils';
 
 function Layout() {
   const { auth } = useAuth();
 
   return (
     <div className="flex text-pro-300">
-      {auth.accessToken && <Navbar dimentions="h-20 w-full px-4 sm:h-screen sm:w-20 sm:px-0 sm:py-4" />}
-      <div className={'relative min-h-screen w-full ' + (auth.accessToken ? 'p-6 pb-28 sm:p-8 sm:pl-28' : '')}>
+      <OnlineStatueAlert />
+      {auth.accessToken && <Navbar className="navbar" />}
+      <div className={'min-h-screen w-full ' + (auth.accessToken ? 'layout-padding' : '')}>
         <Outlet />
-        <OnlineStatueAlert />
       </div>
+      <style>
+        {`
+          .navbar {
+            height: ${dimensions.navbarSize}px;
+            width: 100%;
+            padding: 0 ${dimensions.navbarPadding}px;
+          }
+
+          @media (min-width: 612px) {
+            .navbar {
+              height: 100vh;
+              width: ${dimensions.navbarSize}px;
+              padding: ${dimensions.navbarPadding}px 0;
+            }
+          }
+
+          .layout-padding {
+            padding: ${dimensions.layoutPadding}px ${dimensions.layoutPadding}px ${24 + dimensions.navbarSize}px ${dimensions.layoutPadding}px;
+          }
+
+          @media (min-width: 612px) {
+            .layout-padding {
+              padding: ${dimensions.layoutPadding}px ${dimensions.layoutPadding}px ${dimensions.layoutPadding}px ${24 + dimensions.navbarSize}px;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }

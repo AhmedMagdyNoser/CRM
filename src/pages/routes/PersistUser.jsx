@@ -19,9 +19,9 @@ import Loader from '../../components/global/Loader';
  * if (!accessToken && persist) => this component will try to refresh the accessToken:
  *   - if the refreshToken is valid, the auth state will be updated (with the new accessToken) and thus the component will re-render.
  *   - else, the logout() will be called and it will:
- *        1. remove the persist flag from the local storage
- *        2. revoke the refreshToken
- *        3. reset the auth state. Thus, the component will re-render.
+ *        1. reset the auth state. Thus, the component will re-render.
+ *        2. remove the persist flag from the local storage
+ *        3. revoke the refreshToken
  *
  * else => the component will render the children.
  * 
