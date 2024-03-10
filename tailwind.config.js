@@ -30,7 +30,7 @@ module.exports = {
         'spin-fast': 'spin 0.5s linear infinite',
         'spin-medium': 'spin 1.5s linear infinite',
         'spin-slow': 'spin 2.5s linear infinite',
-        'fade-in-fast': 'fade-in 0.2s',
+        'fade-in-fast': 'fade-in 0.25s',
         'fade-in-medium': 'fade-in 0.5s',
         'fade-in-slow': 'fade-in 1s',
         'progress-fast': 'progress 0.25s',
