@@ -16,7 +16,7 @@ function Navbar({ dimentions = '' }) {
   return (
     <aside
       className={
-        'fixed bottom-0 left-0 flex items-center justify-between gap-3 overflow-auto rounded-none border-t bg-white sm:flex-col sm:border-r sm:border-t-0 ' +
+        'fixed bottom-0 left-0 z-30 flex items-center justify-between gap-3 overflow-auto rounded-none border-t bg-white sm:flex-col sm:border-r sm:border-t-0 ' +
         dimentions
       }
     >
