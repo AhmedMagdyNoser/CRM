@@ -1,4 +1,4 @@
-import { faAddressBook, faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faCity, faEnvelope, faHatCowboy, faLock, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { inputFieldsInstructions } from '../../utils/utils';
 
@@ -155,4 +155,43 @@ InputField.Password = function Password({ ...rest }) {
       {...rest}
     />
   );
+};
+
+/**
+ * `InputField.Phone` is a specific type of `InputField` for phone inputs.
+ * You don't need to pass props like `type`, `icon`, `placehoder`, and `instructions` when using this component.
+ * Also, the `maxLength` prop is set to `18` by default.
+ *
+ * @param {Object} props The properties passed to the `InputField` component
+ * @param {boolean} props.isValid - Indicates the validation status of the input field.
+ * @returns {ReactElement} An InputField element with specific props for phone inputs.
+ */
+InputField.Phone = function Phone({ ...rest }) {
+  return <InputField type="tel" icon={faPhone} placeholder="Phone" maxLength={18} {...rest} />;
+};
+
+/**
+ * `InputField.City` is a specific type of `InputField` for city inputs.
+ * You don't need to pass props like `type`, `icon`, `placehoder`, and `instructions` when using this component.
+ * Also, the `maxLength` prop is set to `32` by default.
+ *
+ * @param {Object} props The properties passed to the `InputField` component
+ * @param {boolean} props.isValid - Indicates the validation status of the input field.
+ * @returns {ReactElement} An InputField element with specific props for city inputs.
+ */
+InputField.City = function City({ ...rest }) {
+  return <InputField type="text" icon={faCity} placeholder="City" maxLength={32} {...rest} />;
+};
+
+/**
+ * `InputField.Age` is a specific type of `InputField` for age inputs.
+ * You don't need to pass props like `type`, `icon`, `placehoder`, and `instructions` when using this component.
+ * Also, the `maxLength` prop is set to `3` by default.
+ *
+ * @param {Object} props The properties passed to the `InputField` component
+ * @param {boolean} props.isValid - Indicates the validation status of the input field.
+ * @returns {ReactElement} An InputField element with specific props for age inputs.
+ */
+InputField.Age = function Age({ ...rest }) {
+  return <InputField type="text" icon={faHatCowboy} placeholder="Age" maxLength={3} {...rest} />;
 };
