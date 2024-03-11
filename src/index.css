@@ -4,7 +4,7 @@
 
 @layer base {
   * {
-    @apply rounded-xl;
+    @apply rounded-xl selection:bg-pro-300 selection:text-pro-50;
   }
   h1 {
     @apply text-2xl font-bold capitalize text-progray-300 sm:text-3xl;
@@ -47,6 +47,33 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes half-pop-up {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes half-pop-down {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.5);
   }
 }
 
