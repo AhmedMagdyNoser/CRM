@@ -24,10 +24,19 @@ function Home() {
 
 export default Home;
 
+const salesRepresentatives = [
+  { id: 1, name: 'Jane Doe' },
+  { id: 2, name: 'John Smith' },
+  { id: 3, name: 'Jane Smith' },
+];
+
 function NewCustomerPopup({ closePopup }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
+  const [salesRepresntativeId, setSalesRepresntativeId] = useState('');
+  const [sourceName, setSourceName] = useState('');
+  const [interests, setInterests] = useState([]);
   const [email, setEmail] = useState(undefined);
   const [city, setCity] = useState(undefined);
   const [age, setAge] = useState(undefined);
@@ -39,6 +48,9 @@ function NewCustomerPopup({ closePopup }) {
       firstName,
       lastName,
       phone,
+      salesRepresntativeId,
+      sourceName,
+      interests,
       email,
       city,
       age,
@@ -56,6 +68,15 @@ function NewCustomerPopup({ closePopup }) {
             <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} required />
           </div>
           <InputField.Phone value={phone} onChange={(e) => setPhone(e.target.value)} required />
+          <SelectMenu
+            icon={faUser}
+            placeholder="Assign to"
+            value={salesRepresntativeId}
+            setValue={setSalesRepresntativeId}
+            options={salesRepresentatives.map((rep) => ({ value: rep.id, label: rep.name }))}
+            search
+            required
+          />
         </fieldset>
         <fieldset className="flex flex-col gap-3">
           <legend className="mb-2 text-progray-200">Optional Information</legend>

@@ -9,19 +9,25 @@ function SelectMenu({ icon, search, options, value, setValue, className = '', ..
   const [filteredOptions, setFilteredOptions] = useState(options);
 
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutsideElement(event) {
       if (element.current && !element.current.contains(event.target)) {
         setOpenMenu(false);
-        setFilteredOptions(options);
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutsideElement);
+    return () => document.removeEventListener('mousedown', handleClickOutsideElement);
   }, [element]);
 
   return (
-    <div ref={element} className="relative w-full cursor-pointer" onClick={() => setOpenMenu(!openMenu)}>
+    <div
+      ref={element}
+      className="relative w-full cursor-pointer"
+      onClick={() => {
+        setOpenMenu(!openMenu);
+        setFilteredOptions(options);
+      }}
+    >
       <div className="flex items-center overflow-hidden bg-progray-50">
         {icon && <FontAwesomeIcon icon={icon} className={'pl-3 text-progray-200 transition-colors duration-1000'} />}
         <input
@@ -30,9 +36,14 @@ function SelectMenu({ icon, search, options, value, setValue, className = '', ..
           }
           value={label}
           onChange={(e) => {
-            setLabel(e.target.value);
+            const input = e.target.value;
+            setLabel(input);
             setFilteredOptions(
-              options.filter((option) => option.label.toLowerCase().includes(e.target.value.toLowerCase())),
+              options.filter((option) => {
+                if (input.toLowerCase() === option.label.toLowerCase()) setValue(option.value); // If the input matches an option, set the value
+                else setValue('');
+                return option.label.toLowerCase().includes(input.toLowerCase());
+              }),
             );
             setOpenMenu(true);
           }}
