@@ -3,7 +3,7 @@ import usePrivateAxios from '../../hooks/usePrivateAxios';
 import PopupBox from '../../components/global/PopupBox';
 import Form from '../../components/global/Form';
 import InputField from '../../components/global/InputField';
-import SelectMenu from '../../components/global/SelectMenu';
+import DropdownMenu from '../global/DropdownMenu';
 import { faPaperPlane, faPenClip, faUser } from '@fortawesome/free-solid-svg-icons';
 
 function AddNewCustomerPopup({ closePopup }) {
@@ -89,7 +89,7 @@ function AddNewCustomerPopup({ closePopup }) {
             <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} required />
           </div>
           <InputField.Phone value={phone} onChange={(e) => setPhone(e.target.value)} required />
-          <SelectMenu
+          <DropdownMenu
             icon={faPenClip}
             placeholder="Assign to"
             value={salesRepresntativeId}
@@ -98,7 +98,7 @@ function AddNewCustomerPopup({ closePopup }) {
             search
             required
           />
-          <SelectMenu
+          <DropdownMenu
             icon={faPaperPlane}
             placeholder="Source"
             value={sourceName}
@@ -114,7 +114,7 @@ function AddNewCustomerPopup({ closePopup }) {
           <InputField.City value={city} onChange={(e) => setCity(e.target.value)} />
           <div className="flex gap-3">
             <InputField.Age value={age} onChange={(e) => setAge(e.target.value)} />
-            <SelectMenu
+            <DropdownMenu
               icon={faUser}
               placeholder="Gender"
               value={gender}

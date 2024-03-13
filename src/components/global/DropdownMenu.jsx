@@ -2,7 +2,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 
-function SelectMenu({ icon, search, options = [], value, setValue, className = '', ...rest }) {
+function DropdownMenu({ icon, search, options = [], value, setValue, className = '', ...rest }) {
   const element = useRef(null);
   const [label, setLabel] = useState('');
   const [openMenu, setOpenMenu] = useState(false);
@@ -79,4 +79,4 @@ function SelectMenu({ icon, search, options = [], value, setValue, className = '
   );
 }
 
-export default SelectMenu;
+export default DropdownMenu;
