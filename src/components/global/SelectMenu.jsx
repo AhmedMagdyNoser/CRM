@@ -2,7 +2,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 
-function SelectMenu({ icon, search, options, value, setValue, className = '', ...rest }) {
+function SelectMenu({ icon, search, options = [], value, setValue, className = '', ...rest }) {
   const element = useRef(null);
   const [label, setLabel] = useState('');
   const [openMenu, setOpenMenu] = useState(false);
@@ -40,7 +40,8 @@ function SelectMenu({ icon, search, options, value, setValue, className = '', ..
             setLabel(input);
             setFilteredOptions(
               options.filter((option) => {
-                if (input.toLowerCase() === option.label.toLowerCase()) setValue(option.value); // If the input matches an option, set the value
+                if (input.toLowerCase() === option.label.toLowerCase())
+                  setValue(option.value); // If the input matches an option, set the value
                 else setValue('');
                 return option.label.toLowerCase().includes(input.toLowerCase());
               }),

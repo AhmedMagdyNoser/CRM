@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { layoutDimensions } from '../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,7 +31,7 @@ function PopupBox({ title, closePopup, animationTime = 250, children }) {
   return (
     <div
       ref={screen}
-      className="popup-height flex-center fixed left-0 top-0 z-40 w-full rounded-none bg-[#00000025] sm:bg-[#00000050]"
+      className="flex-center fixed left-0 top-0 z-40 h-full w-full rounded-none bg-[#00000025] sm:bg-[#00000050]"
       style={{ animation: `fade-in ${animationTime}ms` }}
     >
       <div
@@ -48,18 +47,6 @@ function PopupBox({ title, closePopup, animationTime = 250, children }) {
         </header>
         {children}
       </div>
-      <style>
-        {`
-          .popup-height {
-            height: calc(100% - ${layoutDimensions.navbarSize}px);
-          }
-          @media (min-width: 612px) {
-            .popup-height {
-              height: 100%;
-            }
-          }
-        `}
-      </style>
     </div>
   );
 }
