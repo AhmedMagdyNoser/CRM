@@ -18,8 +18,8 @@ function AddNewCustomerPopup({ closePopup }) {
   const [interests, setInterests] = useState([]);
 
   // Optional fields
-  const [email, setEmail] = useState('');
-  const [city, setCity] = useState('');
+  const [email, setEmail] = useState(undefined);
+  const [city, setCity] = useState(undefined);
   const [age, setAge] = useState(undefined);
   const [gender, setGender] = useState(0);
 
@@ -64,7 +64,7 @@ function AddNewCustomerPopup({ closePopup }) {
     getAllInterestsOptions();
   }, [privateAxios]);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     console.log({
       firstName,
@@ -78,6 +78,27 @@ function AddNewCustomerPopup({ closePopup }) {
       age,
       gender,
     });
+
+    try {
+      await privateAxios({
+        url: '/moderator/add-customer',
+        method: 'post',
+        data: {
+          firstName,
+          lastName,
+          phone,
+          salesRepresntativeId,
+          sourceName,
+          interests,
+          email,
+          city,
+          age,
+        },
+      });
+      closePopup();
+    } catch (error) {
+      console.dir(error);
+    }
   }
 
   return (
