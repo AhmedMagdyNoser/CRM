@@ -31,12 +31,12 @@ function Layout() {
           }
 
           .layout-padding {
-            padding: ${dimensions.layoutPadding}px ${dimensions.layoutPadding}px ${24 + dimensions.navbarSize}px ${dimensions.layoutPadding}px;
+            padding: ${dimensions.mobileLayoutPadding}px ${dimensions.mobileLayoutPadding}px ${dimensions.mobileLayoutPadding + dimensions.navbarSize}px ${dimensions.mobileLayoutPadding}px;
           }
 
           @media (min-width: 612px) {
             .layout-padding {
-              padding: ${dimensions.layoutPadding}px ${dimensions.layoutPadding}px ${dimensions.layoutPadding}px ${24 + dimensions.navbarSize}px;
+              padding: ${dimensions.layoutPadding}px ${dimensions.layoutPadding}px ${dimensions.layoutPadding}px ${dimensions.layoutPadding + dimensions.navbarSize}px;
             }
           }
         `}

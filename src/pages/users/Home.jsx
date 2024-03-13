@@ -1,21 +1,50 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
-import AddNewCustomerPopup from '../../components/moderator/AddNewCustomerPopup';
-
+import usePrivateAxios from '../../hooks/usePrivateAxios';
+import { roles } from '../../utils/utils';
+import CustomersHeaderSection from '../../components/moderator/CustomersHeaderSection';
+import LastWeekCustomersSection from '../../components/moderator/LastWeekCustomersSection';
 
 function Home() {
   const { auth } = useAuth();
-  const [showPopup, setShowPopup] = useState(false);
+  const privateAxios = usePrivateAxios();
+
+  const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.title = 'Home Dashboard';
+    return () => (document.title = 'Pro Sales');
+  }, []);
+
+  useEffect(() => {
+    let controller = new AbortController();
+    let canceled = false;
+
+    (async function getAllCustomers() {
+      try {
+        const { data } = await privateAxios({ url: '/moderator/get-all-customers', signal: controller.signal });
+        if (!canceled) setCustomers(data);
+      } catch (error) {
+        if (!canceled) console.dir(error);
+      } finally {
+        if (!canceled) setLoading(false);
+      }
+    })();
+
+    return () => {
+      canceled = true;
+      controller.abort();
+    };
+  }, [privateAxios]);
 
   return (
-    <section>
-      <h1>Home</h1>
-      <p className="my-2">Hello {auth.firstName}! Welcome to your dashboard.</p>
-      <button className="btn-primary px-5 py-3 text-sm" onClick={() => setShowPopup(true)}>
-        New Customer
-      </button>
-      {showPopup && <AddNewCustomerPopup closePopup={() => setShowPopup(false)} />}
-    </section>
+    auth.roles.includes(roles.moderator) && (
+      <section className="flex flex-col gap-3">
+        <CustomersHeaderSection />
+        <LastWeekCustomersSection customers={customers} loading={loading} />
+      </section>
+    )
   );
 }
 
