@@ -18,15 +18,15 @@ function AddNewCustomerPopup({ closePopup }) {
   const [interests, setInterests] = useState([]);
 
   // Optional fields
-  const [email, setEmail] = useState(undefined);
-  const [city, setCity] = useState(undefined);
+  const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
   const [age, setAge] = useState(undefined);
-  const [gender, setGender] = useState(undefined);
+  const [gender, setGender] = useState(0);
 
   // Options
   const [salesRepresentativesOptions, setSalesRepresentativesOptions] = useState([]);
   const [sourcesOptions, setSourcesOptions] = useState([]);
-  // const [interestsOptions, setInterestsOptions] = useState([]);
+  const [interestsOptions, setInterestsOptions] = useState([]);
 
   useEffect(() => {
     async function getAllSalesOptions() {
@@ -52,16 +52,17 @@ function AddNewCustomerPopup({ closePopup }) {
     getAllSourcesOptions();
   }, [privateAxios]);
 
-  // useEffect(() => {
-  //   async function getAllInterestsOptions() {
-  //     try {
-  //       await privateAxios({ url: '/shared/get-all-interests' });
-  //     } catch (error) {
-  //       console.dir(error);
-  //     }
-  //   }
-  //   getAllInterestsOptions();
-  // }, [privateAxios]);
+  useEffect(() => {
+    async function getAllInterestsOptions() {
+      try {
+        const res = await privateAxios({ url: '/shared/get-all-interests' });
+        setInterestsOptions(res.data.map((interest) => ({ value: interest.interestName })));
+      } catch (error) {
+        console.dir(error);
+      }
+    }
+    getAllInterestsOptions();
+  }, [privateAxios]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -107,6 +108,7 @@ function AddNewCustomerPopup({ closePopup }) {
             search
             required
           />
+          <InterestsField interestsOptions={interestsOptions} interests={interests} setInterests={setInterests} />
         </fieldset>
         <fieldset className="flex flex-col gap-3">
           <legend className="mb-2 text-progray-200">Optional Information</legend>
@@ -132,3 +134,35 @@ function AddNewCustomerPopup({ closePopup }) {
 }
 
 export default AddNewCustomerPopup;
+
+function InterestsField({ interestsOptions, interests, setInterests }) {
+  return (
+    <fieldset className="max-h-48 overflow-auto bg-progray-50 p-2">
+      <legend className="text-progray-200">Interests</legend>
+      <div className="flex flex-col">
+        {interestsOptions.map((interest) => (
+          <InterestCheckbox key={interest.value} value={interest.value} interests={interests} setInterests={setInterests} />
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+function InterestCheckbox({ value, interests, setInterests }) {
+  return (
+    <div className="w-full px-4 hover:bg-pro-100">
+      <label className="flex h-10 cursor-pointer items-center gap-1 text-progray-300">
+        <input
+          type="checkbox"
+          value={value}
+          checked={interests.includes(value)}
+          onChange={(e) => {
+            if (e.target.checked) setInterests([...interests, value]);
+            else setInterests(interests.filter((interest) => interest !== value));
+          }}
+        />
+        {value}
+      </label>
+    </div>
+  );
+}
