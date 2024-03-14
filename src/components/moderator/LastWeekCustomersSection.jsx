@@ -48,8 +48,8 @@ function CustomerCard({ customer }) {
           <FontAwesomeIcon icon={faUser} className="text-pro-200" />
         </div>
         <div>
-          <h3>{customer.firstName + ' ' + customer.lastName}</h3>
-          <p>{customer.phone}</p>
+          <h3 className='text-lg'>{customer.firstName + ' ' + customer.lastName}</h3>
+          <p className='text-sm'>{customer.phone}</p>
         </div>
       </div>
       <div className="flex flex-wrap gap-2">

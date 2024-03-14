@@ -1,12 +1,36 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import InterestBadge from '../../components/global/InterestBadge';
+import InputField from '../global/InputField';
 
 function AllCustomersSection({ customers, loading }) {
+  const [search, setSearch] = useState('');
+
+  const filteredCustomers = customers.filter(
+    (customer) =>
+      customer.firstName.toLowerCase().includes(search.toLowerCase()) ||
+      customer.lastName.toLowerCase().includes(search.toLowerCase()) ||
+      customer.phone.includes(search) ||
+      (customer.email && customer.email.toLowerCase().includes(search.toLowerCase())),
+  );
+
   return (
     <>
-      <span className="my-4 w-fit rounded-full bg-pro-300 px-4 py-2 text-sm capitalize text-white">All customers</span>
+      <div className="flex flex-wrap items-center justify-between">
+        <span className="my-4 rounded-full bg-pro-300 px-4 py-2 text-sm capitalize text-white">All customers</span>
+        <div className="w-full sm:w-[375px]">
+          <InputField
+            type="text"
+            icon={faSearch}
+            placeholder="Search by name, phone, or email..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="px-3 py-2"
+          />
+        </div>
+      </div>
+
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="border-b bg-progray-50">
@@ -19,7 +43,7 @@ function AllCustomersSection({ customers, loading }) {
           </thead>
           {loading ? (
             <TableSkeleton />
-          ) : customers.length === 0 ? (
+          ) : filteredCustomers.length === 0 ? (
             <tbody>
               <tr>
                 <td colSpan="4" className="px-6 py-4 text-progray-200">
@@ -29,7 +53,7 @@ function AllCustomersSection({ customers, loading }) {
             </tbody>
           ) : (
             <tbody className="bg-white">
-              {customers.map((customer) => (
+              {filteredCustomers.map((customer) => (
                 <TableRow key={customer.customerId} customer={customer} />
               ))}
             </tbody>
@@ -71,10 +95,10 @@ function TableSkeleton() {
 
 function TableRow({ customer }) {
   return (
-    <tr key={customer.customerId} className="border-b transition hover:bg-progray-50">
+    <tr key={customer.customerId} className="border-b text-xs transition hover:bg-progray-50 sm:text-sm">
       <td className="flex items-center gap-2 whitespace-nowrap px-6 py-4 font-bold text-progray-300">
         <div className="flex-center h-10 w-10 rounded-full bg-pro-100">
-          <FontAwesomeIcon icon={faUser} className="text-pro-200" />
+          <FontAwesomeIcon icon={faUser} className="text-sm text-pro-200" />
         </div>
         <span>
           {customer.firstName} {customer.lastName}

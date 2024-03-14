@@ -8,7 +8,7 @@ function CustomersHeaderSection() {
 
   return (
     <section className="flex items-center justify-between">
-      <h1>Custormers</h1>
+      <h1>Customers</h1>
       <button className="btn-primary flex-center gap-2 p-3 px-5 text-xs sm:text-sm" onClick={() => setShowPopup(true)}>
         <FontAwesomeIcon icon={faPlus} />
         <span className="capitalize ">New customer</span>
