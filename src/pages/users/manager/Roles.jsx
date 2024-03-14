@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import usePrivateAxios from '../../hooks/usePrivateAxios';
-import { roles } from '../../utils/utils';
+import usePrivateAxios from '../../../hooks/usePrivateAxios';
+import { roles } from '../../../utils/utils';
 
 function Roles() {
   const privateAxios = usePrivateAxios();

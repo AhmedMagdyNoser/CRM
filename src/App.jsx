@@ -10,10 +10,12 @@ import Home from './pages/users/Home';
 import Authentication from './pages/routes/Authentication';
 import PersistUser from './pages/routes/PersistUser';
 import CompanyInfo from './pages/users/CompanyInfo';
-import Roles from './pages/users/Roles';
-import Reports from './pages/users/Reports';
+import Roles from './pages/users/manager/Roles';
+import Reports from './pages/users/manager/Reports';
 import Profile from './pages/users/Profile';
 import Authorization from './pages/routes/Authorization';
+import AddNewCustomer from './pages/users/moderator/AddNewCustomer';
+import { roles } from './utils/utils';
 
 function App() {
   console.log('Rendering App');
@@ -28,9 +30,13 @@ function App() {
               <Route path="/company-info" element={<CompanyInfo />} />
               <Route path="/profile" element={<Profile />} />
 
-              <Route element={<Authorization allowedRole="Manager" />}>
+              <Route element={<Authorization allowedRole={roles.manager} />}>
                 <Route path="/roles" element={<Roles />} />
                 <Route path="/reports" element={<Reports />} />
+              </Route>
+
+              <Route element={<Authorization allowedRole={roles.moderator} />}>
+                <Route path="/add-new-customer" element={<AddNewCustomer />} />
               </Route>
             </Route>
 
