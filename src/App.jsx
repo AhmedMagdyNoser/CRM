@@ -25,10 +25,10 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route element={<Authentication />}>
               <Route index element={<Home />} />
+              <Route path="/company-info" element={<CompanyInfo />} />
               <Route path="/profile" element={<Profile />} />
 
               <Route element={<Authorization allowedRole="Manager" />}>
-                <Route path="/company-info" element={<CompanyInfo />} />
                 <Route path="/roles" element={<Roles />} />
                 <Route path="/reports" element={<Reports />} />
               </Route>
