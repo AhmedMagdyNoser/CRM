@@ -5,6 +5,7 @@ import { roles } from '../../utils/utils';
 import CustomersHeaderSection from '../../components/moderator/CustomersHeaderSection';
 import LastWeekCustomersSection from '../../components/moderator/LastWeekCustomersSection';
 import AllCustomersSection from '../../components/moderator/AllCustomersSection';
+import NoRolesUserMessage from '../../components/global/NoRolesUserMessage';
 
 function Home() {
   const { auth } = useAuth();
@@ -22,16 +23,18 @@ function Home() {
     let controller = new AbortController();
     let canceled = false;
 
-    (async function getAllCustomers() {
-      try {
-        const { data } = await privateAxios({ url: '/moderator/get-all-customers', signal: controller.signal });
-        if (!canceled) setCustomers(data);
-      } catch (error) {
-        if (!canceled) console.dir(error);
-      } finally {
-        if (!canceled) setLoading(false);
-      }
-    })();
+    if (auth.roles.includes(roles.moderator)) {
+      (async function getAllCustomers() {
+        try {
+          const { data } = await privateAxios({ url: '/moderator/get-all-customers', signal: controller.signal });
+          if (!canceled) setCustomers(data);
+        } catch (error) {
+          if (!canceled) console.dir(error);
+        } finally {
+          if (!canceled) setLoading(false);
+        }
+      })();
+    }
 
     return () => {
       canceled = true;
@@ -40,13 +43,19 @@ function Home() {
   }, [privateAxios]);
 
   return (
-    auth.roles.includes(roles.moderator) && (
-      <section className="flex flex-col gap-3">
-        <CustomersHeaderSection />
-        <LastWeekCustomersSection customers={customers} loading={loading} />
-        <AllCustomersSection customers={customers} loading={loading} />
-      </section>
-    )
+    <>
+      {auth.roles.length === 0 ? (
+        <NoRolesUserMessage name={auth.firstName} />
+      ) : (
+        auth.roles.includes(roles.moderator) && (
+          <section className="flex flex-col gap-3">
+            <CustomersHeaderSection />
+            <LastWeekCustomersSection customers={customers} loading={loading} />
+            <AllCustomersSection customers={customers} loading={loading} />
+          </section>
+        )
+      )}
+    </>
   );
 }
 
