@@ -4,6 +4,7 @@ import usePrivateAxios from '../../hooks/usePrivateAxios';
 import { roles } from '../../utils/utils';
 import CustomersHeaderSection from '../../components/moderator/CustomersHeaderSection';
 import LastWeekCustomersSection from '../../components/moderator/LastWeekCustomersSection';
+import AllCustomersSection from '../../components/moderator/AllCustomersSection';
 
 function Home() {
   const { auth } = useAuth();
@@ -43,6 +44,7 @@ function Home() {
       <section className="flex flex-col gap-3">
         <CustomersHeaderSection />
         <LastWeekCustomersSection customers={customers} loading={loading} />
+        <AllCustomersSection customers={customers} loading={loading} />
       </section>
     )
   );

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { colorPairs } from '../../utils/utils';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Fragment } from 'react';
+import InterestBadge from '../global/InterestBadge';
 
 function LastWeekCustomersSection({ customers, loading }) {
   return (
@@ -45,7 +45,7 @@ function CustomerCard({ customer }) {
     <div className="flex min-w-[300px] flex-col gap-6 bg-white p-4 shadow">
       <div className="flex items-center gap-3">
         <div className="flex-center h-10 w-10 rounded-full bg-pro-100">
-          <FontAwesomeIcon icon={faUser} className="text-xl text-pro-200" />
+          <FontAwesomeIcon icon={faUser} className="text-pro-200" />
         </div>
         <div>
           <h3>{customer.firstName + ' ' + customer.lastName}</h3>
@@ -53,22 +53,10 @@ function CustomerCard({ customer }) {
         </div>
       </div>
       <div className="flex flex-wrap gap-2">
-        {customer.userInterests.map((interest, index) => (
-          <InterestBadge key={index} interest={interest.name} />
+        {customer.userInterests.map((interest) => (
+          <InterestBadge key={interest.name} interest={interest.name} />
         ))}
       </div>
-    </div>
-  );
-}
-
-function InterestBadge({ interest }) {
-  const colorPair = colorPairs[Math.floor(Math.random() * colorPairs.length)];
-  return (
-    <div
-      className="rounded-full p-1 px-3 text-sm"
-      style={{ backgroundColor: colorPair.bg, color: colorPair.text, boxShadow: `0px 1px 1px ${colorPair.text}35` }}
-    >
-      {interest}
     </div>
   );
 }
