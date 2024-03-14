@@ -2,7 +2,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 
-function DropdownMenu({ icon, search, options = [], value, setValue, className = '', ...rest }) {
+function DropdownMenu({ icon, search, options = [], loading, value, setValue, className = '', ...rest }) {
   const element = useRef(null);
   const [label, setLabel] = useState('');
   const [openMenu, setOpenMenu] = useState(false);
@@ -57,7 +57,9 @@ function DropdownMenu({ icon, search, options = [], value, setValue, className =
 
       {openMenu && (
         <div className="absolute top-full z-50 w-full cursor-default border bg-white py-3 text-progray-300 shadow-md outline-none placeholder:text-progray-200">
-          {filteredOptions.length === 0 ? (
+          {loading ? (
+            <div className="p-2 px-4 text-sm text-progray-200">Loading Options...</div>
+          ) : filteredOptions.length === 0 ? (
             <div className="p-2 px-4 text-sm text-progray-200">No options matched</div>
           ) : (
             filteredOptions.map((option) => (
