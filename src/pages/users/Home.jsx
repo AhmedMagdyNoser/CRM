@@ -40,7 +40,7 @@ function Home() {
       canceled = true;
       controller.abort();
     };
-  }, [privateAxios]);
+  }, [privateAxios, auth.roles]);
 
   return (
     <>
