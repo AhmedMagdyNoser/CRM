@@ -28,7 +28,7 @@ export default LastWeekCustomersSection;
 
 function CustomersSkeleton({ length = 3 }) {
   const customerCardSkeleton = (
-    <div className="flex max-w-[300px] flex-1 animate-pulse items-center gap-3 bg-white p-4 pb-12 shadow">
+    <div className="flex h-[135px] min-w-[300px] animate-pulse gap-3 bg-white p-5 shadow">
       <div className="flex-center h-10 w-10 rounded-full bg-pro-100"></div>
       <div className="flex flex-1 flex-col gap-2">
         <div className="h-4 w-full bg-pro-100"></div>
@@ -42,17 +42,17 @@ function CustomersSkeleton({ length = 3 }) {
 
 function CustomerCard({ customer }) {
   return (
-    <div className="flex min-w-[300px] flex-col gap-6 bg-white p-4 shadow">
+    <div className="flex h-[135px] min-w-[300px] flex-col justify-between bg-white p-4 shadow">
       <div className="flex items-center gap-3">
         <div className="flex-center h-10 w-10 rounded-full bg-pro-100">
           <FontAwesomeIcon icon={faUser} className="text-pro-200" />
         </div>
         <div>
-          <h3 className='text-lg'>{customer.firstName + ' ' + customer.lastName}</h3>
-          <p className='text-sm'>{customer.phone}</p>
+          <h3 className="text-base sm:text-lg">{customer.firstName + ' ' + customer.lastName}</h3>
+          <p className="text-sm">{customer.phone}</p>
         </div>
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="scrollbar-hide flex gap-2 overflow-auto py-1">
         {customer.userInterests.map((interest) => (
           <InterestBadge key={interest.name} interest={interest.name} />
         ))}

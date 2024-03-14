@@ -96,7 +96,7 @@ function TableSkeleton() {
 function TableRow({ customer }) {
   return (
     <tr key={customer.customerId} className="border-b text-xs transition hover:bg-progray-50 sm:text-sm">
-      <td className="flex items-center gap-2 whitespace-nowrap px-6 py-4 font-bold text-progray-300">
+      <td className="flex items-center gap-3 whitespace-nowrap px-6 py-4 font-bold text-progray-300">
         <div className="flex-center h-10 w-10 rounded-full bg-pro-100">
           <FontAwesomeIcon icon={faUser} className="text-sm text-pro-200" />
         </div>
