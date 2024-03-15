@@ -1,31 +1,27 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-function PopupBox({ title, closePopup, animationTime = 250, children }) {
+function PopupBox({ title, setOpen, animationTime = 250, children }) {
   const screen = useRef(null);
   const box = useRef(null);
 
-  function handleClose() {
+  const handleClose = useCallback(() => {
     setTimeout(() => {
-      closePopup();
+      setOpen(false);
     }, animationTime);
     box.current.style.animation = `half-pop-down ${+animationTime}ms`;
     screen.current.style.animation = `fade-out ${+animationTime}ms`;
     screen.current.style.opacity = `0`;
-  }
+  }, [animationTime, setOpen]);
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (box.current && !box.current.contains(event.target)) {
-        handleClose();
-      }
+      if (box.current && !box.current.contains(event.target)) handleClose();
     }
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [handleClose]);
 
   return (

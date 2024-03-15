@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
+import { applicationName } from '../utils/utils';
 
-function useDocumentTitle(title, defaultTitle = 'Pro Sales') {
+function useDocumentTitle(title, defaultTitle = applicationName) {
   useEffect(() => {
     document.title = title;
     return () => {

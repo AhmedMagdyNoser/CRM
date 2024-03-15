@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import usePrivateAxios from './usePrivateAxios';
 import { globalErrorMessage } from '../utils/utils';
+import usePrivateAxios from './usePrivateAxios';
 
 function useOnLoadFetch(url) {
   const privateAxios = usePrivateAxios();
@@ -18,7 +18,7 @@ function useOnLoadFetch(url) {
         const { data } = await privateAxios({ url, signal: controller.signal });
         if (!canceled) setData(data);
       } catch (error) {
-        if (!canceled) setError(error.response?.data?.errors[0] || globalErrorMessage);
+        if (!canceled) setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
       } finally {
         if (!canceled) setLoading(false);
       }

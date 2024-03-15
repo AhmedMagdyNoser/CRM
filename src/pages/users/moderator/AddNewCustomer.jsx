@@ -56,7 +56,7 @@ function AddNewCustomer() {
     } else {
       return true;
     }
-}
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -87,7 +87,7 @@ function AddNewCustomer() {
   }
 
   return (
-    <div className="flex-center h-full">
+    <div className="flex-center h-full animate-fade-in-fast">
       <Form
         onSubmit={handleSubmit}
         loading={loading}
@@ -100,11 +100,11 @@ function AddNewCustomer() {
         {/* Required Information Fieldset */}
         <fieldset className="flex flex-col gap-3">
           <legend className="mb-2 text-progray-200">Required information</legend>
-          <div className="flex gap-3">
+          <div className="flex flex-col gap-3 md:flex-row">
             <InputField.FirstName value={firstName} onChange={(e) => setFirstName(e.target.value)} autoFocus />
             <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} />
+            <InputField.Phone value={phone} onChange={(e) => setPhone(e.target.value)} />
           </div>
-          <InputField.Phone value={phone} onChange={(e) => setPhone(e.target.value)} />
           <div className="flex flex-col gap-3 sm:flex-row">
             <DropdownMenu
               icon={faPenClip}
