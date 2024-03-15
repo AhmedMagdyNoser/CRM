@@ -1,10 +1,7 @@
-import { useEffect } from 'react';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function CompanyInfo() {
-  useEffect(() => {
-    document.title = 'Company Info';
-    return () => (document.title = 'Pro Sales');
-  }, []);
+  useDocumentTitle('Company Info');
 
   return (
     <section>

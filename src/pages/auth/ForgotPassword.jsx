@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { globalErrorMessage } from '../../utils/utils';
+import { applicationName, globalErrorMessage } from '../../utils/utils';
 import { validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
 import forgotPassword from '../../assets/forgotPassword.svg';
@@ -8,8 +8,11 @@ import InputField from '../../components/global/InputField';
 import CaptionCard from '../../components/global/CaptionCard';
 import CenterBox from '../../components/global/CenterBox';
 import Form from '../../components/global/Form';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function ForgotPassword() {
+  useDocumentTitle(`${applicationName} | Forgot Password?`);
+
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -41,7 +44,7 @@ function ForgotPassword() {
 
   return (
     <CenterBox backButton className="flex-col">
-      <CaptionCard image={forgotPassword} title="Forgot password?" paragraph="Please enter your email address below." />
+      <CaptionCard image={forgotPassword} title="Forgot password" paragraph="Please enter your email address below." />
       <Form
         onSubmit={handleSubmit}
         loading={loading}

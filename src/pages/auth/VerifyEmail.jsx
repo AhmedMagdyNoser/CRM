@@ -8,8 +8,11 @@ import email from '../../assets/email.svg';
 import CenterBox from '../../components/global/CenterBox';
 import CaptionCard from '../../components/global/CaptionCard';
 import Form from '../../components/global/Form';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function VerifyEmail() {
+  useDocumentTitle('Verify Your Email');
+
   const location = useLocation();
   const navigate = useNavigate();
   const { setAuth } = useAuth();

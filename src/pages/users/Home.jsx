@@ -6,18 +6,16 @@ import CustomersHeaderSection from '../../components/moderator/CustomersHeaderSe
 import LastWeekCustomersSection from '../../components/moderator/LastWeekCustomersSection';
 import AllCustomersSection from '../../components/moderator/AllCustomersSection';
 import NoRolesUserMessage from '../../components/global/NoRolesUserMessage';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function Home() {
+  useDocumentTitle('Home Dashboard');
+
   const { auth } = useAuth();
   const privateAxios = usePrivateAxios();
 
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    document.title = 'Home Dashboard';
-    return () => (document.title = 'Pro Sales');
-  }, []);
 
   useEffect(() => {
     let controller = new AbortController();

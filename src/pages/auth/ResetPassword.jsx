@@ -7,8 +7,11 @@ import success from '../../assets/success.svg';
 import CenterBox from '../../components/global/CenterBox';
 import CaptionCard from '../../components/global/CaptionCard';
 import Form from '../../components/global/Form';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function ResetPassword() {
+  useDocumentTitle('Reset Your Password');
+
   const location = useLocation();
   const navigate = useNavigate();
 

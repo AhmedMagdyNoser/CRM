@@ -1,3 +1,5 @@
+export const applicationName = 'Pro Sales';
+
 export const globalErrorMessage = 'Something went wrong. Please try again later.';
 
 export const validationRegex = {

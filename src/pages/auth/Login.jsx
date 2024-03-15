@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { globalErrorMessage } from '../../utils/utils';
+import { applicationName, globalErrorMessage } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
@@ -9,8 +9,11 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Checkbox from '../../components/global/Checkbox';
 import AuthMaxBox from '../../components/auth/AuthMaxBox';
 import Form from '../../components/global/Form';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function Login() {
+  useDocumentTitle(`${applicationName} | Login`);
+
   const { setAuth } = useAuth();
 
   const [identity, setIdentity] = useState(''); // username or email

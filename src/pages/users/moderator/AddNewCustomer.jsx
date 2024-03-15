@@ -7,8 +7,11 @@ import usePrivateAxios from '../../../hooks/usePrivateAxios';
 import { useNavigate } from 'react-router-dom';
 import { globalErrorMessage } from '../../../utils/utils';
 import InterestsInputField from '../../../components/global/InterestsInputFields';
+import useDocumentTitle from '../../../hooks/useDocumentTitle';
 
 function AddNewCustomer() {
+  useDocumentTitle('Add New Customer');
+  
   const privateAxios = usePrivateAxios();
   const navigate = useNavigate();
 
@@ -38,11 +41,6 @@ function AddNewCustomer() {
   const [error, setError] = useState('');
 
   const [openOptionalFields, setOpenOptionalFields] = useState(false);
-
-  useEffect(() => {
-    document.title = 'Add New Customer';
-    return () => (document.title = 'Pro Sales');
-  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
