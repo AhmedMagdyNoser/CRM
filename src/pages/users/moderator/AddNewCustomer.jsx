@@ -37,6 +37,8 @@ function AddNewCustomer() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const [openOptionalFields, setOpenOptionalFields] = useState(false);
+
   useEffect(() => {
     document.title = 'Add New Customer';
     return () => (document.title = 'Pro Sales');
@@ -106,23 +108,29 @@ function AddNewCustomer() {
     };
   }, [privateAxios]);
 
+  function validateInputs() {
+    if (!firstName) {
+      setError('First name is required');
+    } else if (!lastName) {
+      setError('Last name is required');
+    } else if (!phone) {
+      setError('Phone is required');
+    } else if (!salesRepresntativeId) {
+      setError('Please assign this customer to a sales representative');
+    } else if (!sourceName) {
+      setError('Please select the source of this customer');
+    } else if (interests.length === 0) {
+      setError('Please select at least one interest');
+    } else {
+      return true;
+    }
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log({
-      firstName,
-      lastName,
-      phone,
-      salesRepresntativeId,
-      sourceName,
-      interests,
-      email,
-      city,
-      age,
-      gender,
-    });
-
     try {
       setError('');
+      if (!validateInputs()) return;
       setLoading(true);
       await privateAxios({
         url: '/moderator/add-customer',
@@ -139,7 +147,7 @@ function AddNewCustomer() {
           age,
         },
       });
-      navigate('/');
+      navigate('/'); // Task: Navigate to the customer page
     } catch (error) {
       setLoading(false);
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
@@ -147,26 +155,25 @@ function AddNewCustomer() {
   }
 
   return (
-    <div className="h-full">
+    <div className="flex-center h-full">
       <Form
         onSubmit={handleSubmit}
         loading={loading}
         error={error}
         submitLabel="Add"
-        submitDisabled={!firstName || !lastName || !phone || !salesRepresntativeId || !sourceName || interests.length === 0}
-        className="h-auto overflow-auto"
+        className="h-full w-full overflow-auto md:h-fit md:w-[650px] md:border md:p-8 md:shadow-xl lg:w-[800px]"
       >
         <h1>Add New Customer</h1>
-        <fieldset className="mb-8 flex flex-col gap-3">
-          <legend className="mb-3 w-full rounded-bl-none rounded-br-none bg-pro-100 p-5 font-bold uppercase text-pro-200">
-            Required information
-          </legend>
+
+        {/* Required Information Fieldset */}
+        <fieldset className="flex flex-col gap-3">
+          <legend className="mb-2 text-progray-200">Required information</legend>
           <div className="flex gap-3">
-            <InputField.FirstName value={firstName} onChange={(e) => setFirstName(e.target.value)} required autoFocus />
-            <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} required />
-            <InputField.Phone value={phone} onChange={(e) => setPhone(e.target.value)} required />
+            <InputField.FirstName value={firstName} onChange={(e) => setFirstName(e.target.value)} autoFocus />
+            <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} />
           </div>
-          <div className="flex gap-3">
+          <InputField.Phone value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <div className="flex flex-col gap-3 sm:flex-row">
             <DropdownMenu
               icon={faPenClip}
               placeholder="Assign to"
@@ -175,7 +182,6 @@ function AddNewCustomer() {
               loading={salesRepresentativesOptionsLoading}
               options={salesRepresentativesOptions}
               search
-              required
             />
             <DropdownMenu
               icon={faPaperPlane}
@@ -185,7 +191,6 @@ function AddNewCustomer() {
               loading={sourcesOptionsLoading}
               options={sourcesOptions}
               search
-              required
             />
           </div>
           <InterestsInputField
@@ -195,27 +200,36 @@ function AddNewCustomer() {
             loading={interestsOptionsLoading}
           />
         </fieldset>
-        <fieldset className="flex flex-col gap-3">
-          <legend className="mb-2 w-full rounded-bl-none rounded-br-none bg-pro-100 p-5 font-bold uppercase text-pro-200">
+
+        {/* Optional Information Fieldset */}
+        <fieldset>
+          <legend
+            className="cursor-pointer text-progray-200 hover:underline"
+            onClick={() => setOpenOptionalFields(!openOptionalFields)}
+          >
             Optional Information
           </legend>
-          <div className="flex gap-3">
-            <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} />
-            <InputField.City value={city} onChange={(e) => setCity(e.target.value)} />
-          </div>
-          <div className="flex gap-3">
-            <InputField.Age value={age} onChange={(e) => setAge(e.target.value)} />
-            <DropdownMenu
-              icon={faUser}
-              placeholder="Gender"
-              value={gender}
-              setValue={setGender}
-              options={[
-                { value: 0, label: 'Male' },
-                { value: 1, label: 'Female' },
-              ]}
-            />
-          </div>
+          {openOptionalFields && (
+            <div className="mt-2 flex animate-fade-in-medium flex-col gap-3">
+              <div className="flex gap-3">
+                <InputField.Age value={age} onChange={(e) => setAge(e.target.value)} />
+                <DropdownMenu
+                  icon={faUser}
+                  placeholder="Gender"
+                  value={gender}
+                  setValue={setGender}
+                  options={[
+                    { value: 0, label: 'Male' },
+                    { value: 1, label: 'Female' },
+                  ]}
+                />
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} />
+                <InputField.City value={city} onChange={(e) => setCity(e.target.value)} />
+              </div>
+            </div>
+          )}
         </fieldset>
       </Form>
     </div>

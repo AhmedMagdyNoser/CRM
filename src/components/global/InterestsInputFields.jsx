@@ -4,13 +4,13 @@ import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 
 function InterestsInputField({ interestsOptions, interests, setInterests, loading }) {
   return (
-    <fieldset className="max-h-48 overflow-auto bg-progray-50 p-2">
+    <fieldset className="scrollbar-hide max-h-48 overflow-auto border p-2">
       <legend className="text-progray-200">Interests</legend>
-      <div className="grid grid-cols-2">
+      <div className="grid sm:grid-cols-2">
         {loading ? (
           <InterestsSkeleton />
         ) : interestsOptions.length === 0 ? (
-          <p>No interests found</p>
+          <p className="p-2">No interests found</p>
         ) : (
           interestsOptions.map((interest) => (
             <InterestCheckbox
@@ -30,13 +30,16 @@ export default InterestsInputField;
 
 function InterestCheckbox({ value, interests, setInterests }) {
   return (
-    <div className="w-full px-4 hover:bg-pro-100">
-      <label className="flex h-10 cursor-pointer items-center gap-1 font-medium text-pro-300">
-        <FontAwesomeIcon icon={interests.includes(value) ? faCheckSquare : faSquare} className="text-lg text-pro-300" />
+    <div className="w-full animate-fade-in-medium px-4 hover:bg-progray-50">
+      <label className="flex h-10 cursor-pointer items-center gap-2 text-nowrap text-sm font-medium text-progray-200 sm:text-base">
+        <FontAwesomeIcon
+          icon={interests.includes(value) ? faCheckSquare : faSquare}
+          className={interests.includes(value) ? 'text-pro-300' : 'text-progray-200'}
+        />
         <input
           type="checkbox"
           value={value}
-          className="absolute opacity-0"
+          className="hidden"
           checked={interests.includes(value)}
           onChange={(e) => {
             if (e.target.checked) setInterests([...interests, value]);
@@ -52,8 +55,8 @@ function InterestCheckbox({ value, interests, setInterests }) {
 function InterestsSkeleton({ length = 3 }) {
   return Array.from({ length }).map((_, index) => (
     <div key={index} className="flex h-10 animate-pulse items-center gap-3 px-4">
-      <div className="h-4 w-4 rounded-none bg-progray-100"></div>
-      <div className="h-3 w-24 rounded bg-progray-100"></div>
+      <div className="h-4 w-4 rounded-none bg-progray-50"></div>
+      <div className="h-3 w-24 rounded bg-progray-50"></div>
     </div>
   ));
 }

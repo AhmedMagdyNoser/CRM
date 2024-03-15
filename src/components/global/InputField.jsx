@@ -1,4 +1,4 @@
-import { faAddressBook, faCity, faEnvelope, faHatCowboy, faLock, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faCity, faEnvelope, faLock, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { inputFieldsInstructions } from '../../utils/utils';
 
@@ -193,5 +193,5 @@ InputField.City = function City({ ...rest }) {
  * @returns {ReactElement} An InputField element with specific props for age inputs.
  */
 InputField.Age = function Age({ ...rest }) {
-  return <InputField type="text" icon={faHatCowboy} placeholder="Age" maxLength={3} {...rest} />;
+  return <InputField type="text" icon={faUser} placeholder="Age" maxLength={3} {...rest} />;
 };
