@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Form from '../../../components/global/Form';
 import InputField from '../../../components/global/InputField';
 import DropdownMenu from '../../../components/global/DropdownMenu';
@@ -8,10 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import { globalErrorMessage } from '../../../utils/utils';
 import InterestsInputField from '../../../components/global/InterestsInputFields';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
+import useOnLoadFetch from '../../../hooks/useOnLoadFetch';
 
 function AddNewCustomer() {
   useDocumentTitle('Add New Customer');
-  
+
   const privateAxios = usePrivateAxios();
   const navigate = useNavigate();
 
@@ -30,89 +31,22 @@ function AddNewCustomer() {
   const [gender, setGender] = useState(0);
 
   // Options
-  const [salesRepresentativesOptions, setSalesRepresentativesOptions] = useState([]);
-  const [salesRepresentativesOptionsLoading, setSalesRepresentativesOptionsLoading] = useState(true);
-  const [sourcesOptions, setSourcesOptions] = useState([]);
-  const [sourcesOptionsLoading, setSourcesOptionsLoading] = useState(true);
-  const [interestsOptions, setInterestsOptions] = useState([]);
-  const [interestsOptionsLoading, setInterestsOptionsLoading] = useState(true);
+  const { data: salesOptions, loading: salesOptionsLoading } = useOnLoadFetch('/moderator/get-all-sales');
+  const { data: sourcesOptions, loading: sourcesOptionsLoading } = useOnLoadFetch('/shared/get-all-sources');
+  const { data: interestsOptions, loading: interestsOptionsLoading } = useOnLoadFetch('/shared/get-all-interests');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const [openOptionalFields, setOpenOptionalFields] = useState(false);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    let canceled = false;
-
-    (async function getAllSalesRepresentativesOptions() {
-      try {
-        const { data } = await privateAxios({ url: '/moderator/get-all-sales' });
-        if (!canceled) setSalesRepresentativesOptions(data.map((rep) => ({ value: rep.userId, label: rep.name })));
-      } catch (error) {
-        if (!canceled) console.dir(error);
-      } finally {
-        if (!canceled) setSalesRepresentativesOptionsLoading(false);
-      }
-    })();
-
-    return () => {
-      canceled = true;
-      controller.abort();
-    };
-  }, [privateAxios]);
-
-  useEffect(() => {
-    let controller = new AbortController();
-    let canceled = false;
-
-    (async function getAllSourcesOptions() {
-      try {
-        const { data } = await privateAxios({ url: '/shared/get-all-sources' });
-        if (!canceled) setSourcesOptions(data.map((rep) => ({ value: rep.sourceName, label: rep.sourceName })));
-      } catch (error) {
-        if (!canceled) console.dir(error);
-      } finally {
-        if (!canceled) setSourcesOptionsLoading(false);
-      }
-    })();
-
-    return () => {
-      canceled = true;
-      controller.abort();
-    };
-  }, [privateAxios]);
-
-  useEffect(() => {
-    let controller = new AbortController();
-    let canceled = false;
-
-    async function getAllInterestsOptions() {
-      try {
-        const { data } = await privateAxios({ url: '/shared/get-all-interests' });
-        if (!canceled) setInterestsOptions(data.map((interest) => ({ value: interest.interestName })));
-      } catch (error) {
-        if (!canceled) console.dir(error);
-      } finally {
-        if (!canceled) setInterestsOptionsLoading(false);
-      }
-    }
-    getAllInterestsOptions();
-
-    return () => {
-      canceled = true;
-      controller.abort();
-    };
-  }, [privateAxios]);
-
   function validateInputs() {
     if (!firstName) {
-      setError('First name is required');
+      setError('Please provide a first name');
     } else if (!lastName) {
-      setError('Last name is required');
+      setError('Please provide a last name');
     } else if (!phone) {
-      setError('Phone is required');
+      setError('Please provide a phone number');
     } else if (!salesRepresntativeId) {
       setError('Please assign this customer to a sales representative');
     } else if (!sourceName) {
@@ -122,7 +56,7 @@ function AddNewCustomer() {
     } else {
       return true;
     }
-  }
+}
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -177,8 +111,8 @@ function AddNewCustomer() {
               placeholder="Assign to"
               value={salesRepresntativeId}
               setValue={setSalesRepresntativeId}
-              loading={salesRepresentativesOptionsLoading}
-              options={salesRepresentativesOptions}
+              loading={salesOptionsLoading}
+              options={salesOptions.map((sales) => ({ value: sales.userId, label: sales.name }))}
               search
             />
             <DropdownMenu
@@ -187,7 +121,7 @@ function AddNewCustomer() {
               value={sourceName}
               setValue={setSourceName}
               loading={sourcesOptionsLoading}
-              options={sourcesOptions}
+              options={sourcesOptions.map((source) => ({ value: source.sourceName, label: source.sourceName }))}
               search
             />
           </div>

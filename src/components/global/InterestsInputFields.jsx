@@ -14,8 +14,8 @@ function InterestsInputField({ interestsOptions, interests, setInterests, loadin
         ) : (
           interestsOptions.map((interest) => (
             <InterestCheckbox
-              key={interest.value}
-              value={interest.value}
+              key={interest.interestID}
+              value={interest.interestName}
               interests={interests}
               setInterests={setInterests}
             />
