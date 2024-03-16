@@ -1,6 +1,7 @@
 import { faCalendarAlt, faCommentDots, faEdit, faHandshake, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import useHover from '../../hooks/useHover';
 
 function getActionIcon(type) {
   const iconClasses = `flex-center h-10 w-10 rounded-full`;
@@ -38,19 +39,11 @@ function Action({ action: { type, date, summary } }) {
   const [showEdit, setShowEdit] = useState(false);
   const element = useRef(null);
 
-  useEffect(() => {
-    const showEdit = () => setShowEdit(true);
-    const hideEdit = () => setShowEdit(false);
-
-    const actionElement = element.current;
-
-    actionElement.addEventListener('mouseenter', showEdit);
-    actionElement.addEventListener('mouseleave', hideEdit);
-    return () => {
-      actionElement.removeEventListener('mouseenter', showEdit);
-      actionElement.removeEventListener('mouseleave', hideEdit);
-    };
-  }, []);
+  useHover(
+    element,
+    () => setShowEdit(true),
+    () => setShowEdit(false),
+  );
 
   return (
     <div ref={element} className="mb-10 flex gap-4">
