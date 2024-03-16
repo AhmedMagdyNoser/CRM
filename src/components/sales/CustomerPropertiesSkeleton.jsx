@@ -1,6 +1,6 @@
 function CustomerPropertiesSkeleton() {
   return (
-    <div className="flex w-full flex-col gap-3 px-10 py-5">
+    <>
       {Array.from({ length: 9 }).map((_, index) => (
         <div key={index} className="flex animate-pulse justify-between">
           <div className="flex items-center gap-2">
@@ -16,7 +16,7 @@ function CustomerPropertiesSkeleton() {
           <div key={index} className="h-6 w-20 animate-pulse rounded-full bg-pro-100"></div>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 

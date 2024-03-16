@@ -4,7 +4,7 @@ import InterestBadge from '../global/InterestBadge';
 
 function CustomerProperties({ customer }) {
   return (
-    <div className="flex w-full flex-col gap-2 px-10 py-5">
+    <>
       <Property icon={icons.user} title="Name" value={`${customer.firstName} ${customer.lastName}`} />
       <Property icon={icons.phone} title="Phone" value={customer.phone} />
       <Property icon={icons.email} title="Email" value={customer.email || 'N/A'} />
@@ -24,7 +24,7 @@ function CustomerProperties({ customer }) {
           (interest) => interest.isSelected && <InterestBadge key={interest.name} interest={interest.name} />,
         )}
       </div>
-    </div>
+    </>
   );
 }
 
