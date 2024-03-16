@@ -15,7 +15,7 @@ function Customer() {
   return error ? (
     <ErrorAlert message={error} />
   ) : (
-    <div className='flex min-h-full gap-5'>
+    <div className='flex min-h-full gap-5 flex-wrap'>
       <CustomerFullCard customer={data} loading={loading} />
       <CustomerActions />
     </div>

@@ -101,12 +101,12 @@ function CustomerActions() {
 
   return (
     <div className="flex-1">
-      <nav className="scrollbar-hide flex justify-between overflow-auto rounded-b-none bg-gray-100">
+      <nav className="flex justify-between rounded-b-none bg-gray-100 text-sm">
         {tabs.map((tab, index) => (
           <ActionsTab key={index} tab={tab} isActive={activeTab.title === tab.title} onClick={() => setActiveTab(tab)} />
         ))}
       </nav>
-      <div className="p-5">
+      <div className="py-5 md:px-5">
         {filterActions(activeTab).map((action) => (
           <Action key={action.id} action={action} />
         ))}
