@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import InterestBadge from '../../components/global/InterestBadge';
 import InputField from '../global/InputField';
+import { Link } from 'react-router-dom';
 
 function AllCustomersSection({ customers, loading }) {
   const [search, setSearch] = useState('');
@@ -39,6 +40,7 @@ function AllCustomersSection({ customers, loading }) {
               <th className="rounded-none px-6 py-3">Phone</th>
               <th className="rounded-none px-6 py-3">Interests</th>
               <th className="rounded-none px-6 py-3">Added On</th>
+              <th className="rounded-none px-6 py-3"></th>
             </tr>
           </thead>
           {loading ? (
@@ -95,7 +97,7 @@ function TableSkeleton() {
 
 function TableRow({ customer }) {
   return (
-    <tr key={customer.customerId} className="border-b text-xs transition hover:bg-progray-50 sm:text-sm">
+    <tr className="border-b text-xs transition hover:bg-progray-50 sm:text-sm">
       <td className="flex items-center gap-3 whitespace-nowrap px-6 py-4 font-bold text-progray-300">
         <div className="flex-center h-10 w-10 rounded-full bg-pro-100">
           <FontAwesomeIcon icon={faUser} className="text-sm text-pro-200" />
@@ -112,6 +114,14 @@ function TableRow({ customer }) {
       </td>
       <td className="whitespace-nowrap rounded-none px-6 py-4 text-progray-200">
         {new Date(customer.additionDate).toDateString()}
+      </td>
+      <td className="whitespace-nowrap rounded-none px-6 py-4">
+        <Link
+          to={`/customer/${customer.customerId}`}
+          className="px-4 py-2 text-pro-300 transition-colors hover:bg-pro-300 hover:text-white"
+        >
+          View
+        </Link>
       </td>
     </tr>
   );

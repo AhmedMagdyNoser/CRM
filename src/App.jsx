@@ -16,6 +16,7 @@ import Profile from './pages/users/Profile';
 import Authorization from './pages/routes/Authorization';
 import AddNewCustomer from './pages/users/moderator/AddNewCustomer';
 import { roles } from './utils/utils';
+import Customer from './pages/users/sales/Customer';
 
 function App() {
   console.log('Rendering App');
@@ -37,6 +38,10 @@ function App() {
 
               <Route element={<Authorization allowedRole={roles.moderator} />}>
                 <Route path="/add-new-customer" element={<AddNewCustomer />} />
+              </Route>
+
+              <Route element={<Authorization allowedRole={roles.sales} />}>
+                <Route path="/customer/:id" element={<Customer />} />
               </Route>
             </Route>
 

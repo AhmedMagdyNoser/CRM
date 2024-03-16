@@ -1,3 +1,29 @@
+import {
+  faAt,
+  faCalendar,
+  faLocationDot,
+  faPenClip,
+  faPhone,
+  faShare,
+  faSpa,
+  faSpinner,
+  faUser,
+  faVenusMars,
+} from '@fortawesome/free-solid-svg-icons';
+
+export const icons = {
+  spinner: faSpinner,
+  user: faUser,
+  phone: faPhone,
+  email: faAt,
+  date: faCalendar,
+  source: faShare,
+  assign: faPenClip,
+  age: faSpa,
+  gender: faVenusMars,
+  city: faLocationDot,
+};
+
 export const applicationName = 'Pro Sales';
 
 export const globalErrorMessage = 'Something went wrong. Please try again later.';
