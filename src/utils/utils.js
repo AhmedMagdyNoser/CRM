@@ -1,7 +1,9 @@
 import {
+  faAddressBook,
   faAt,
   faCalendar,
   faLocationDot,
+  faLock,
   faPenClip,
   faPhone,
   faShare,
@@ -14,6 +16,8 @@ import {
 export const icons = {
   spinner: faSpinner,
   user: faUser,
+  username: faAddressBook,
+  password: faLock,
   phone: faPhone,
   email: faAt,
   date: faCalendar,

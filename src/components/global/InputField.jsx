@@ -1,4 +1,4 @@
-import { faAddressBook, faCity, faEnvelope, faLock, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
+import { icons } from '../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { inputFieldsInstructions } from '../../utils/utils';
 
@@ -56,7 +56,7 @@ InputField.Name = function Name({ ...rest }) {
   return (
     <InputField
       type="text"
-      icon={faUser}
+      icon={icons.user}
       placeholder="Name"
       instructions={inputFieldsInstructions.name}
       maxLength={18}
@@ -104,7 +104,7 @@ InputField.Username = function Username({ ...rest }) {
   return (
     <InputField
       type="text"
-      icon={faAddressBook}
+      icon={icons.username}
       placeholder="Username"
       instructions={inputFieldsInstructions.username}
       maxLength={18}
@@ -126,7 +126,7 @@ InputField.Email = function Email({ ...rest }) {
   return (
     <InputField
       type="email"
-      icon={faEnvelope}
+      icon={icons.email}
       placeholder="Email"
       instructions={inputFieldsInstructions.email}
       maxLength={50}
@@ -148,7 +148,7 @@ InputField.Password = function Password({ ...rest }) {
   return (
     <InputField
       type="password"
-      icon={faLock}
+      icon={icons.password}
       placeholder="Password"
       instructions={inputFieldsInstructions.password}
       maxLength={32}
@@ -167,7 +167,7 @@ InputField.Password = function Password({ ...rest }) {
  * @returns {ReactElement} An InputField element with specific props for phone inputs.
  */
 InputField.Phone = function Phone({ ...rest }) {
-  return <InputField type="tel" icon={faPhone} placeholder="Phone" maxLength={18} {...rest} />;
+  return <InputField type="tel" icon={icons.phone} placeholder="Phone" maxLength={18} {...rest} />;
 };
 
 /**
@@ -180,7 +180,7 @@ InputField.Phone = function Phone({ ...rest }) {
  * @returns {ReactElement} An InputField element with specific props for city inputs.
  */
 InputField.City = function City({ ...rest }) {
-  return <InputField type="text" icon={faCity} placeholder="City" maxLength={32} {...rest} />;
+  return <InputField type="text" icon={icons.city} placeholder="City" maxLength={32} {...rest} />;
 };
 
 /**
@@ -193,5 +193,5 @@ InputField.City = function City({ ...rest }) {
  * @returns {ReactElement} An InputField element with specific props for age inputs.
  */
 InputField.Age = function Age({ ...rest }) {
-  return <InputField type="text" icon={faUser} placeholder="Age" maxLength={3} {...rest} />;
+  return <InputField type="text" icon={icons.age} placeholder="Age" maxLength={3} {...rest} />;
 };

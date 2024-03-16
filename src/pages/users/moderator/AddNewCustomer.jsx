@@ -1,14 +1,14 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useDocumentTitle from '../../../hooks/useDocumentTitle';
+import useOnLoadFetch from '../../../hooks/useOnLoadFetch';
+import usePrivateAxios from '../../../hooks/usePrivateAxios';
 import Form from '../../../components/global/Form';
 import InputField from '../../../components/global/InputField';
 import DropdownMenu from '../../../components/global/DropdownMenu';
-import { faPaperPlane, faPenClip, faUser } from '@fortawesome/free-solid-svg-icons';
-import usePrivateAxios from '../../../hooks/usePrivateAxios';
-import { useNavigate } from 'react-router-dom';
-import { globalErrorMessage } from '../../../utils/utils';
 import InterestsInputField from '../../../components/global/InterestsInputFields';
-import useDocumentTitle from '../../../hooks/useDocumentTitle';
-import useOnLoadFetch from '../../../hooks/useOnLoadFetch';
+import { globalErrorMessage } from '../../../utils/utils';
+import { icons } from '../../../utils/utils';
 
 function AddNewCustomer() {
   useDocumentTitle('Add New Customer');
@@ -93,7 +93,7 @@ function AddNewCustomer() {
         loading={loading}
         error={error}
         submitLabel="Add"
-        className="h-full w-full overflow-auto md:h-fit md:w-[650px] md:border md:p-8 md:shadow-xl lg:w-[800px]"
+        className="h-full w-full overflow-auto md:h-fit md:w-[650px] md:border md:p-8 md:shadow-lg lg:w-[800px]"
       >
         <h1>Add New Customer</h1>
 
@@ -107,7 +107,7 @@ function AddNewCustomer() {
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <DropdownMenu
-              icon={faPenClip}
+              icon={icons.assign}
               placeholder="Assign to"
               value={salesRepresntativeId}
               setValue={setSalesRepresntativeId}
@@ -116,7 +116,7 @@ function AddNewCustomer() {
               search
             />
             <DropdownMenu
-              icon={faPaperPlane}
+              icon={icons.source}
               placeholder="Source"
               value={sourceName}
               setValue={setSourceName}
@@ -139,14 +139,14 @@ function AddNewCustomer() {
             className="cursor-pointer text-progray-200 hover:underline"
             onClick={() => setOpenOptionalFields(!openOptionalFields)}
           >
-            Optional Information
+            More Details (Optional)
           </legend>
           {openOptionalFields && (
             <div className="mt-2 flex animate-fade-in-medium flex-col gap-3">
               <div className="flex gap-3">
                 <InputField.Age value={age} onChange={(e) => setAge(e.target.value)} />
                 <DropdownMenu
-                  icon={faUser}
+                  icon={icons.gender}
                   placeholder="Gender"
                   value={gender}
                   setValue={setGender}
