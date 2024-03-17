@@ -5,6 +5,8 @@ import InterestBadge from '../../components/global/InterestBadge';
 import InputField from '../global/InputField';
 import { Link } from 'react-router-dom';
 
+// Task: This component needs to be refactored with the new data structure
+
 function AllCustomersSection({ customers, loading }) {
   const [search, setSearch] = useState('');
 
@@ -113,7 +115,7 @@ function TableRow({ customer }) {
         ))}
       </td>
       <td className="whitespace-nowrap rounded-none px-6 py-4 text-progray-200">
-        {new Date(customer.additionDate).toDateString()}
+        {new Date(customer.additionDate).toDateString()} {/* Task: formatDate */}
       </td>
       <td className="whitespace-nowrap rounded-none px-6 py-4">
         <Link

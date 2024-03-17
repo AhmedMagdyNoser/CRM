@@ -1,7 +1,7 @@
-function CustomerPropertiesSkeleton() {
+function CustomerPropertiesSkeleton({ length = 5 }) {
   return (
     <>
-      {Array.from({ length: 9 }).map((_, index) => (
+      {Array.from({ length }).map((_, index) => (
         <div key={index} className="flex animate-pulse justify-between">
           <div className="flex items-center gap-2">
             <div className="h-5 w-5 rounded-full bg-pro-100"></div>

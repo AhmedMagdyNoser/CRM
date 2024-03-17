@@ -35,6 +35,11 @@ function getActionIcon(type) {
   }
 }
 
+// Task: This component needs to be refactored
+// - To read all data according to the action type
+// - To allow editing of the action
+// - To allow deleting of the action
+
 function Action({ action: { type, date, summary } }) {
   const [showEdit, setShowEdit] = useState(false);
   const element = useRef(null);

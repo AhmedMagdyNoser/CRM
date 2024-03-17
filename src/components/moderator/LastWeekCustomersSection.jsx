@@ -4,6 +4,8 @@ import { Fragment } from 'react';
 import InterestBadge from '../global/InterestBadge';
 import { Link } from 'react-router-dom';
 
+// Task: This component needs to be refactored with the new data structure and new endpoint
+
 function LastWeekCustomersSection({ customers, loading }) {
   return (
     <section className="flex flex-col gap-2 bg-pro-50 p-4">

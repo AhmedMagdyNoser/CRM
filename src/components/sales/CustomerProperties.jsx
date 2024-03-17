@@ -2,10 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icons } from '../../utils/utils';
 import InterestBadge from '../global/InterestBadge';
 
+// Task: Need to be refactored with the new data structure
+
 function CustomerProperties({ customer }) {
   return (
     <>
-      <Property icon={icons.user} title="Name" value={`${customer.firstName} ${customer.lastName}`} />
       <Property icon={icons.phone} title="Phone" value={customer.phone} />
       <Property icon={icons.email} title="Email" value={customer.email || 'N/A'} />
       <Property icon={icons.age} title="Age" value={customer.age || 'N/A'} />
@@ -15,15 +16,16 @@ function CustomerProperties({ customer }) {
         value={customer.gender === 0 ? 'N/A' : customer.gender === 1 ? 'Male' : customer.genter === 2 ? 'Female' : null}
       />
       <Property icon={icons.city} title="City" value={customer.city || 'N/A'} />
-      <Property icon={icons.assign} title="Sales Representative" /> {/* Task: value={customer.salesRepName} */}
+      <Property icon={icons.assign} title="Sales Representative" />
       <Property icon={icons.source} title="Source" value={customer.sourceName} />
-      <Property icon={icons.date} title="Added On" value={new Date(customer.addedOn).toLocaleDateString()} />
+      <Property icon={icons.date} title="Added On" value={new Date(customer.addedOn).toLocaleDateString()} /> {/* Task: formatDate */}
       <div className="mt-5 font-medium text-progray-300">Interests</div>
       <div className="flex flex-wrap gap-2">
         {customer.userInterests.map(
           (interest) => interest.isSelected && <InterestBadge key={interest.name} interest={interest.name} />,
         )}
       </div>
+      {/* Task: Add last action */}
     </>
   );
 }

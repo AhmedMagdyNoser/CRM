@@ -7,8 +7,10 @@ import Form from '../../../components/global/Form';
 import InputField from '../../../components/global/InputField';
 import DropdownMenu from '../../../components/global/DropdownMenu';
 import InterestsInputField from '../../../components/global/InterestsInputFields';
-import { globalErrorMessage } from '../../../utils/utils';
+import { globalErrorMessage, validateCustomerFields } from '../../../utils/utils';
 import { icons } from '../../../utils/utils';
+
+// Task: This page needs to be refactored
 
 function AddNewCustomer() {
   useDocumentTitle('Add New Customer');
@@ -25,10 +27,10 @@ function AddNewCustomer() {
   const [interests, setInterests] = useState([]);
 
   // Optional fields
+  const [age, setAge] = useState(undefined);
+  const [gender, setGender] = useState(undefined);
   const [email, setEmail] = useState(undefined);
   const [city, setCity] = useState(undefined);
-  const [age, setAge] = useState(undefined);
-  const [gender, setGender] = useState(0);
 
   // Options
   const { data: salesOptions, loading: salesOptionsLoading } = useOnLoadFetch('/moderator/get-all-sales');
@@ -40,29 +42,11 @@ function AddNewCustomer() {
 
   const [openOptionalFields, setOpenOptionalFields] = useState(false);
 
-  function validateInputs() {
-    if (!firstName) {
-      setError('Please provide a first name');
-    } else if (!lastName) {
-      setError('Please provide a last name');
-    } else if (!phone) {
-      setError('Please provide a phone number');
-    } else if (!salesRepresntativeId) {
-      setError('Please assign this customer to a sales representative');
-    } else if (!sourceName) {
-      setError('Please select the source of this customer');
-    } else if (interests.length === 0) {
-      setError('Please select at least one interest');
-    } else {
-      return true;
-    }
-  }
-
   async function handleSubmit(event) {
     event.preventDefault();
     try {
       setError('');
-      if (!validateInputs()) return;
+      if (!validateCustomerFields(firstName, lastName, phone, salesRepresntativeId, sourceName, interests, setError)) return;
       setLoading(true);
       await privateAxios({
         url: '/moderator/add-customer',
@@ -74,12 +58,13 @@ function AddNewCustomer() {
           salesRepresntativeId,
           sourceName,
           interests,
+          age,
+          gender,
           email,
           city,
-          age,
         },
       });
-      navigate('/'); // Task: Navigate to the customer page
+      navigate('/'); // Task: Redirect to the customer's details page using the id
     } catch (error) {
       setLoading(false);
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);

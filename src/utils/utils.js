@@ -68,3 +68,23 @@ export const colorPairs = [
   { bg: '#fdf2f2', text: '#e0464a' },
   { bg: '#f5f5f5', text: '#4a5568' },
 ];
+
+export function validateCustomerFields(firstName, lastName, phone, salesRepresntativeId, sourceName, interests, setError) {
+  if (!firstName) {
+    setError('Please provide a first name');
+  } else if (!lastName) {
+    setError('Please provide a last name');
+  } else if (!phone) {
+    setError('Please provide a phone number');
+  } else if (!salesRepresntativeId) {
+    setError('Please assign this customer to a sales representative');
+  } else if (!sourceName) {
+    setError('Please select the source of this customer');
+  } else if (interests.length === 0) {
+    setError('Please select at least one interest');
+  } else {
+    return true;
+  }
+}
+
+// Task: The utils needs to be organized
