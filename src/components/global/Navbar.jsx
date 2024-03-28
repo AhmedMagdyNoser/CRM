@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import useLogout from '../../hooks/useLogout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -48,9 +48,16 @@ function NavbarLink({ to, icon }) {
 
 function LogoutButton({ className }) {
   const logout = useLogout();
+  const navigate = useNavigate();
 
   return (
-    <button onClick={() => logout()} className={'nav-link btn-light ' + className}>
+    <button
+      onClick={() => {
+        logout();
+        navigate('/login'); // Redirect to login page without providing a state in the location object
+      }}
+      className={'nav-link btn-light ' + className}
+    >
       <FontAwesomeIcon icon={faRightFromBracket} className="sm:rotate-180" />
     </button>
   );
