@@ -1,14 +1,9 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import useLogout from '../../hooks/useLogout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHome,
-  faBuilding,
-  faUserGroup,
-  faChartSimple,
-  faUserCircle,
-  faRightFromBracket,
-} from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+
+import NavIcon from './NavIcon';
 
 function Navbar({ className = '' }) {
   return (
@@ -19,12 +14,14 @@ function Navbar({ className = '' }) {
       }
     >
       <div className="sm:flex-center hidden h-10 font-bold text-pro-300">Pro</div>
-      <div className="flex flex-1 justify-between gap-2 sm:flex-grow-0 sm:flex-col">
-        <NavbarLink label="Home" to="/" icon={faHome} />
-        <NavbarLink label="Company Info" to="/company-info" icon={faBuilding} />
-        <NavbarLink label="Roles" to="roles" icon={faUserGroup} />
-        <NavbarLink label="Reports" to="reports" icon={faChartSimple} />
-        <NavbarLink label="Profile" to="profile" icon={faUserCircle} />
+      <div className="flex flex-1 justify-between gap-3 sm:flex-grow-0 sm:flex-col sm:gap-2">
+        <NavbarLink label="Dashboard" to="/dashboard" icon={<NavIcon.Dashboard />} />
+        <NavbarLink label="Roles" to="/roles" icon={<NavIcon.Roles />} />
+        <NavbarLink label="All Customers" to="/all-customers" icon={<NavIcon.AllCustomers />} />
+        <NavbarLink label="Assigned Customers" to="/assigned-customers" icon={<NavIcon.AssignedCustomers />} />
+        <NavbarLink label="Locked" to="/locked" icon={<NavIcon.Locked />} />
+        <NavbarLink label="Company Info" to="/company-info" icon={<NavIcon.CompanyInfo />} />
+        <NavbarLink label="Profile" to="/profile" icon={<NavIcon.Profile />} />
         <LogoutButton className="block sm:hidden" />
       </div>
       <LogoutButton className="hidden sm:block" />
@@ -34,14 +31,16 @@ function Navbar({ className = '' }) {
 
 export default Navbar;
 
-function NavbarLink({ to, icon }) {
+function NavbarLink({ label, to, icon }) {
   const constClasses = 'nav-link';
   const className = ({ isActive }) =>
-    isActive ? constClasses + ' text-pro-300 bg-pro-50' : constClasses + ' btn-light text-progray-100';
+    isActive
+      ? constClasses + ' text-pro-300 fill-pro-300 bg-pro-50'
+      : constClasses + ' btn-light fill-gray-500 text-progray-100';
 
   return (
     <NavLink to={to} className={className}>
-      <FontAwesomeIcon icon={icon} />
+      {icon && <div className="w-6">{icon}</div>}
     </NavLink>
   );
 }
