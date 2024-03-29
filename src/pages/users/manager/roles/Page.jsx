@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import usePrivateAxios from '../../../hooks/usePrivateAxios';
-import { roles } from '../../../utils/utils';
-import useDocumentTitle from '../../../hooks/useDocumentTitle';
+import usePrivateAxios from '../../../../hooks/usePrivateAxios';
+import { roles } from '../../../../utils/utils';
+import useDocumentTitle from '../../../../hooks/useDocumentTitle';
 
 function Roles() {
   useDocumentTitle('Roles');

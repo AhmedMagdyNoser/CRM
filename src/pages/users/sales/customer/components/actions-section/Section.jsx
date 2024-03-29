@@ -11,7 +11,7 @@ const tabs = [
 
 // Task: This component needs to be refactored to allow adding new actions
 
-function CustomerActions({ actions }) {
+function ActionsSection({ actions }) {
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   function filterActions(tab) {
@@ -35,7 +35,7 @@ function CustomerActions({ actions }) {
   );
 }
 
-export default CustomerActions;
+export default ActionsSection;
 
 function ActionsTab({ tab, isActive, onClick }) {
   return (

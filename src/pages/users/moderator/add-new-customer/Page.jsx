@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useDocumentTitle from '../../../hooks/useDocumentTitle';
-import useOnLoadFetch from '../../../hooks/useOnLoadFetch';
-import usePrivateAxios from '../../../hooks/usePrivateAxios';
-import Form from '../../../components/global/Form';
-import InputField from '../../../components/global/InputField';
-import DropdownMenu from '../../../components/global/DropdownMenu';
-import InterestsInputField from '../../../components/global/InterestsInputFields';
-import { globalErrorMessage, validateCustomerFields } from '../../../utils/utils';
-import { icons } from '../../../utils/utils';
+import useDocumentTitle from '../../../../hooks/useDocumentTitle';
+import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
+import usePrivateAxios from '../../../../hooks/usePrivateAxios';
+import Form from '../../../../components/global/Form';
+import InputField from '../../../../components/global/InputField';
+import DropdownMenu from '../../../../components/global/DropdownMenu';
+import InterestsInputField from '../../../../components/global/InterestsInputFields';
+import { globalErrorMessage, validateCustomerFields } from '../../../../utils/utils';
+import { icons } from '../../../../utils/utils';
 
 // Task: This page needs to be refactored
 

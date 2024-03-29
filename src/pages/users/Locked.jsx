@@ -12,7 +12,7 @@ import unauthorized from '../../assets/unauthorized.svg';
 
 function Locked() {
   useDocumentTitle('Locked');
-  const {auth} = useAuth();
+  const { auth } = useAuth();
   if (auth.roles.length === 0) return <NoRolesUserMessage name={auth.firstName} />;
   else return <Navigate to="/" replace={true} />;
 }

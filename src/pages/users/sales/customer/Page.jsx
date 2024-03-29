@@ -1,14 +1,14 @@
 import { useParams } from 'react-router-dom';
-import useDocumentTitle from '../../../hooks/useDocumentTitle';
-import useOnLoadFetch from '../../../hooks/useOnLoadFetch';
-import CustomerFullCard from '../../../components/sales/CustomerFullCard';
-import ErrorAlert from '../../../components/global/ErrorAlert';
-import CustomerActions from '../../../components/sales/CustomerActions';
+import useDocumentTitle from '../../../../hooks/useDocumentTitle';
+import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
+import DetailsSection from './components/details-section/Section';
+import ActionsSection from './components/actions-section/Section';
+import ErrorAlert from '../../../../components/global/ErrorAlert';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import useAuth from '../../../hooks/useAuth';
-import { roles } from '../../../utils/utils';
+import useAuth from '../../../../hooks/useAuth';
+import { roles } from '../../../../utils/utils';
 
 const testActions = [
   {
@@ -110,7 +110,7 @@ function Customer() {
         {auth.roles.includes(roles.moderator) && (
           <button
             onClick={() => setEditingMode(!editingMode)}
-            className={`btn-primary flex-center animate-fade-in-medium gap-1 px-4 py-2 text-sm sm:text-base font-semibold`}
+            className={`btn-primary flex-center animate-fade-in-medium gap-1 px-4 py-2 text-sm font-semibold sm:text-base`}
           >
             <FontAwesomeIcon icon={faEdit} />
             {editingMode ? 'Cancel Editing' : 'Edit'}
@@ -118,8 +118,8 @@ function Customer() {
         )}
       </div>
       <div className="flex flex-1 flex-wrap gap-5">
-        <CustomerFullCard customer={data} loading={loading} editingMode={editingMode} setEditingMode={setEditingMode} />
-        <CustomerActions actions={testActions} />
+        <DetailsSection customer={data} loading={loading} editingMode={editingMode} setEditingMode={setEditingMode} />
+        <ActionsSection actions={testActions} />
       </div>
     </div>
   );

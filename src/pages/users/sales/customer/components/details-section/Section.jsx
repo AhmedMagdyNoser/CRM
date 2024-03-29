@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { icons } from '../../utils/utils';
+import { icons } from '../../../../../../utils/utils';
 import CustomerPropertiesSkeleton from './CustomerPropertiesSkeleton';
 import CustomerProperties from './CustomerProperties';
 import CustomerEditingMode from './CustomerEditingMode';
 
-function CustomerFullCard({ customer, loading, editingMode, setEditingMode }) {
+function DetailsSection({ customer, loading, editingMode, setEditingMode }) {
   return (
     <div className="flex w-full flex-col items-center overflow-hidden border lg:w-[450px]">
       <div className="relative mb-14 h-32 w-full rounded-none bg-pro-50">
@@ -34,4 +34,4 @@ function CustomerFullCard({ customer, loading, editingMode, setEditingMode }) {
   );
 }
 
-export default CustomerFullCard;
+export default DetailsSection;

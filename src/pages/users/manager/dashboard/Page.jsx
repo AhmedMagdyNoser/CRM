@@ -1,4 +1,4 @@
-import useDocumentTitle from '../../../hooks/useDocumentTitle';
+import useDocumentTitle from '../../../../hooks/useDocumentTitle';
 
 function Dashboard() {
   useDocumentTitle('Manager Dashboard');

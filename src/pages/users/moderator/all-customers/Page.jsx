@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import useAuth from '../../../hooks/useAuth';
-import useDocumentTitle from '../../../hooks/useDocumentTitle';
-import usePrivateAxios from '../../../hooks/usePrivateAxios';
-import { roles } from '../../../utils/utils';
-import CustomersHeaderSection from '../../../components/moderator/CustomersHeaderSection';
-import LastWeekCustomersSection from '../../../components/moderator/LastWeekCustomersSection';
-import AllCustomersSection from '../../../components/moderator/AllCustomersSection';
+import useAuth from '../../../../hooks/useAuth';
+import useDocumentTitle from '../../../../hooks/useDocumentTitle';
+import usePrivateAxios from '../../../../hooks/usePrivateAxios';
+import { roles } from '../../../../utils/utils';
+import CustomersHeaderSection from './components/header-section/Section';
+import LastWeekCustomersSection from './components/last-week-customers-section/Section';
+import AllCustomersSection from './components/all-customers-section/Section';
 
 function AllCustomers() {
   useDocumentTitle('All Customers');

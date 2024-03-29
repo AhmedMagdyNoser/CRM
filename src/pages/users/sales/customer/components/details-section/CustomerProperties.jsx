@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { icons } from '../../utils/utils';
-import InterestBadge from '../global/InterestBadge';
+import { icons } from '../../../../../../utils/utils';
+import InterestBadge from '../../../../../../components/global/InterestBadge';
 
 // Task: Need to be refactored with the new data structure
 
@@ -18,7 +18,8 @@ function CustomerProperties({ customer }) {
       <Property icon={icons.city} title="City" value={customer.city || 'N/A'} />
       <Property icon={icons.assign} title="Sales Representative" />
       <Property icon={icons.source} title="Source" value={customer.sourceName} />
-      <Property icon={icons.date} title="Added On" value={new Date(customer.addedOn).toLocaleDateString()} /> {/* Task: formatDate */}
+      <Property icon={icons.date} title="Added On" value={new Date(customer.addedOn).toLocaleDateString()} />{' '}
+      {/* Task: formatDate */}
       <div className="mt-5 font-medium text-progray-300">Interests</div>
       <div className="flex flex-wrap gap-2">
         {customer.userInterests.map(
