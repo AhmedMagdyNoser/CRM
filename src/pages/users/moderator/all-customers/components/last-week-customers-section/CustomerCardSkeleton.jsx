@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-function CustomersSkeleton({ length = 3 }) {
+function CustomersCardSkeleton({ length = 1 }) {
   const customerCardSkeleton = (
     <div className="flex h-[135px] min-w-[300px] animate-pulse gap-3 bg-white p-5 shadow">
       <div className="flex-center h-10 w-10 rounded-full bg-pro-100"></div>
@@ -14,4 +14,4 @@ function CustomersSkeleton({ length = 3 }) {
   return Array.from({ length }).map((_, index) => <Fragment key={index}>{customerCardSkeleton}</Fragment>);
 }
 
-export default CustomersSkeleton;
+export default CustomersCardSkeleton;

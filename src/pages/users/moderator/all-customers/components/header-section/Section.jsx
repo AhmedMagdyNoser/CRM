@@ -2,12 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
-function CustomersHeaderSection() {
+function AllCustomersHeaderSection() {
   const navigate = useNavigate();
 
   return (
     <section className="flex items-center justify-between">
-      <h1>Customers</h1>
+      <h1>All Customers</h1>
       <button
         className="btn-primary flex-center gap-2 p-3 px-5 text-xs sm:text-sm"
         onClick={() => navigate('/add-new-customer')}
@@ -19,4 +19,4 @@ function CustomersHeaderSection() {
   );
 }
 
-export default CustomersHeaderSection;
+export default AllCustomersHeaderSection;

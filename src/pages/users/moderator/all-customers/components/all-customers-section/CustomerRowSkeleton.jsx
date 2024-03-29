@@ -1,30 +1,24 @@
 import { Fragment } from 'react';
 
-function CustomerRowSkeleton() {
+function CustomerRowSkeleton({ length = 1 }) {
   const row = (
     <tr className="animate-pulse">
-      <td className="px-6 py-4 text-progray-200">
-        <div className="h-4 bg-progray-50 "></div>
+      <td className="px-6 pt-8">
+        <div className="h-4 bg-gray-200"></div>
       </td>
-      <td className="px-6 py-4 text-progray-200">
-        <div className="h-4 bg-progray-50 "></div>
+      <td className="px-6 pt-8">
+        <div className="h-4 bg-gray-200"></div>
       </td>
-      <td className="px-6 py-4 text-progray-200">
-        <div className="h-4 bg-progray-50 "></div>
+      <td className="px-6 pt-8">
+        <div className="h-4 bg-gray-200"></div>
       </td>
-      <td className="px-6 py-4 text-progray-200">
-        <div className="h-4 bg-progray-50 "></div>
+      <td className="px-6 pt-8">
+        <div className="h-4 bg-gray-200"></div>
       </td>
     </tr>
   );
 
-  return (
-    <tbody>
-      {Array.from({ length: 5 }).map((_, index) => (
-        <Fragment key={index}>{row}</Fragment>
-      ))}
-    </tbody>
-  );
+  return Array.from({ length }).map((_, index) => <Fragment key={index}>{row}</Fragment>);
 }
 
 export default CustomerRowSkeleton;

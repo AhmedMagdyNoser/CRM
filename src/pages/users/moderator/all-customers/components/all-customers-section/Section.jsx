@@ -35,8 +35,8 @@ function AllCustomersSection({ customers, loading }) {
 
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="border-b bg-progray-50">
-            <tr className="text-left text-xs uppercase tracking-wider text-progray-300">
+          <thead className="border-b bg-gray-100">
+            <tr className="text-left text-xs uppercase tracking-wider text-gray-800">
               <th className="rounded-none px-6 py-3">Name</th>
               <th className="rounded-none px-6 py-3">Phone</th>
               <th className="rounded-none px-6 py-3">Interests</th>
@@ -45,11 +45,13 @@ function AllCustomersSection({ customers, loading }) {
             </tr>
           </thead>
           {loading ? (
-            <CustomerRowSkeleton />
+            <tbody>
+              <CustomerRowSkeleton length={5} />
+            </tbody>
           ) : filteredCustomers.length === 0 ? (
             <tbody>
               <tr>
-                <td colSpan="4" className="px-6 py-4 text-progray-200">
+                <td colSpan="4" className="px-6 py-4 text-gray-500">
                   No customers found
                 </td>
               </tr>

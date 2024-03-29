@@ -3,7 +3,7 @@ import useAuth from '../../../../hooks/useAuth';
 import useDocumentTitle from '../../../../hooks/useDocumentTitle';
 import usePrivateAxios from '../../../../hooks/usePrivateAxios';
 import { roles } from '../../../../utils/utils';
-import CustomersHeaderSection from './components/header-section/Section';
+import AllCustomersHeaderSection from './components/header-section/Section';
 import LastWeekCustomersSection from './components/last-week-customers-section/Section';
 import AllCustomersSection from './components/all-customers-section/Section';
 
@@ -41,7 +41,7 @@ function AllCustomers() {
   return (
     auth.roles.includes(roles.moderator) && (
       <section className="flex flex-col gap-3">
-        <CustomersHeaderSection />
+        <AllCustomersHeaderSection />
         <LastWeekCustomersSection customers={customers} loading={loading} />
         <AllCustomersSection customers={customers} loading={loading} />
       </section>
