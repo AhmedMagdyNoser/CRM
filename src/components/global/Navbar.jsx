@@ -14,7 +14,7 @@ function Navbar({ className = '' }) {
       }
     >
       <div className="sm:flex-center hidden h-10 font-bold text-pro-300">Pro</div>
-      <div className="flex flex-1 justify-between gap-3 sm:flex-grow-0 sm:flex-col sm:gap-2">
+      <div className="flex flex-1 justify-between gap-3 sm:flex-grow-0 sm:flex-col">
         <NavbarLink label="Dashboard" to="/dashboard" icon={<NavIcon.Dashboard />} />
         <NavbarLink label="Roles" to="/roles" icon={<NavIcon.Roles />} />
         <NavbarLink label="All Customers" to="/all-customers" icon={<NavIcon.AllCustomers />} />
@@ -55,7 +55,7 @@ function LogoutButton({ className }) {
         logout();
         navigate('/login'); // Redirect to login page without providing a state in the location object
       }}
-      className={'nav-link btn-light ' + className}
+      className={'nav-link btn-light text-gray-500 ' + className}
     >
       <FontAwesomeIcon icon={faRightFromBracket} className="sm:rotate-180" />
     </button>
