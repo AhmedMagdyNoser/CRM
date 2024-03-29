@@ -1,11 +1,13 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import useLogout from '../../hooks/useLogout';
+import { roles } from '../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-
 import NavIcon from './NavIcon';
 
 function Navbar({ className = '' }) {
+  const { auth } = useAuth();
   return (
     <aside
       className={
@@ -15,11 +17,19 @@ function Navbar({ className = '' }) {
     >
       <div className="sm:flex-center hidden h-10 font-bold text-pro-300">Pro</div>
       <div className="flex flex-1 justify-between gap-3 sm:flex-grow-0 sm:flex-col">
-        <NavbarLink label="Dashboard" to="/dashboard" icon={<NavIcon.Dashboard />} />
-        <NavbarLink label="Roles" to="/roles" icon={<NavIcon.Roles />} />
-        <NavbarLink label="All Customers" to="/all-customers" icon={<NavIcon.AllCustomers />} />
-        <NavbarLink label="Assigned Customers" to="/assigned-customers" icon={<NavIcon.AssignedCustomers />} />
-        <NavbarLink label="Locked" to="/locked" icon={<NavIcon.Locked />} />
+        {auth.roles.includes(roles.manager) && (
+          <>
+            <NavbarLink label="Dashboard" to="/dashboard" icon={<NavIcon.Dashboard />} />
+            <NavbarLink label="Roles" to="/roles" icon={<NavIcon.Roles />} />
+          </>
+        )}
+        {auth.roles.includes(roles.moderator) && (
+          <NavbarLink label="All Customers" to="/all-customers" icon={<NavIcon.AllCustomers />} />
+        )}
+        {auth.roles.includes(roles.sales) && (
+          <NavbarLink label="Assigned Customers" to="/assigned-customers" icon={<NavIcon.AssignedCustomers />} />
+        )}
+        {auth.roles.length === 0 && <NavbarLink label="Locked" to="/locked" icon={<NavIcon.Locked />} />}
         <NavbarLink label="Company Info" to="/company-info" icon={<NavIcon.CompanyInfo />} />
         <NavbarLink label="Profile" to="/profile" icon={<NavIcon.Profile />} />
         <LogoutButton className="block sm:hidden" />
