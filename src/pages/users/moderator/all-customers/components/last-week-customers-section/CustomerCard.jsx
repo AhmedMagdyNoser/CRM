@@ -1,12 +1,12 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import InterestBadge from '../../../../../../components/global/InterestBadge';
 import { Link } from 'react-router-dom';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import InterestBadge from '../../../../../../components/global/InterestBadge';
 
 function CustomerCard({ customer }) {
   return (
     <Link
-      to={`/customer/${customer.customerId}`}
+      to={`/customer/${customer.id}`}
       className="flex h-[135px] min-w-[300px] flex-col justify-between rounded-xl bg-white p-4 shadow hover:bg-gray-50"
     >
       <div className="flex items-center gap-3">
@@ -19,8 +19,8 @@ function CustomerCard({ customer }) {
         </div>
       </div>
       <div className="scrollbar-hide flex gap-2 overflow-auto py-1">
-        {customer.userInterests.map((interest) => (
-          <InterestBadge key={interest.name} interest={interest.name} />
+        {customer.interests.map((interest) => (
+          <InterestBadge key={interest.id} interest={interest.name} />
         ))}
       </div>
     </Link>

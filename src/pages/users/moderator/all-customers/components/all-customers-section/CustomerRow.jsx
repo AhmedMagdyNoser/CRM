@@ -16,16 +16,19 @@ function CustomerRow({ customer }) {
       </td>
       <td className="whitespace-nowrap px-6 py-4 text-gray-500">{customer.phone}</td>
       <td className="flex flex-wrap gap-2 whitespace-nowrap px-6 py-4">
-        {customer.userInterests.map((interest) => (
+        {customer.interests.map((interest) => (
           <InterestBadge key={interest.name} interest={interest.name} />
         ))}
+      </td>
+      <td className="whitespace-nowrap px-6 py-4 text-gray-500">
+        {customer.lastAction?.type ? customer.lastAction.type.toUpperCase() : 'N/A'}
       </td>
       <td className="whitespace-nowrap px-6 py-4 text-gray-500">
         {new Date(customer.additionDate).toDateString()} {/* Task: formatDate */}
       </td>
       <td className="whitespace-nowrap px-6 py-4">
         <Link
-          to={`/customer/${customer.customerId}`}
+          to={`/customer/${customer.id}`}
           className="rounded-xl px-4 py-2 text-pro-300 transition-colors hover:bg-pro-300 hover:text-white"
         >
           View

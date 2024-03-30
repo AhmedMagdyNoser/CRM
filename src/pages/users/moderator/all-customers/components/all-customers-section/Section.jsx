@@ -1,15 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import InputField from '../../../../../../components/ui/InputField';
 import CustomerRowSkeleton from './CustomerRowSkeleton';
 import CustomerRow from './CustomerRow';
+import { AllCustomers } from '../../testingStaticData';
 
 // Task: This component needs to be refactored with the new data structure
 
-function AllCustomersSection({ customers, loading }) {
+function AllCustomersSection() {
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  const filteredCustomers = customers.filter(
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const filteredCustomers = AllCustomers.filter(
     (customer) =>
       customer.firstName.toLowerCase().includes(search.toLowerCase()) ||
       customer.lastName.toLowerCase().includes(search.toLowerCase()) ||
@@ -40,6 +51,7 @@ function AllCustomersSection({ customers, loading }) {
               <th className="px-6 py-3">Name</th>
               <th className="px-6 py-3">Phone</th>
               <th className="px-6 py-3">Interests</th>
+              <th className="px-6 py-3">Last Action</th>
               <th className="px-6 py-3">Added On</th>
               <th className="px-6 py-3"></th>
             </tr>
@@ -59,7 +71,7 @@ function AllCustomersSection({ customers, loading }) {
           ) : (
             <tbody className="bg-white">
               {filteredCustomers.map((customer) => (
-                <CustomerRow key={customer.customerId} customer={customer} />
+                <CustomerRow key={customer.id} customer={customer} />
               ))}
             </tbody>
           )}

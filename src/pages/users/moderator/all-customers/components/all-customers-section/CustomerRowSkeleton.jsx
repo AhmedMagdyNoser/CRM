@@ -15,6 +15,9 @@ function CustomerRowSkeleton({ length = 1 }) {
       <td className="px-6 pt-7">
         <div className="h-4 rounded-xl bg-gray-200"></div>
       </td>
+      <td className="px-6 pt-7">
+        <div className="h-4 rounded-xl bg-gray-200"></div>
+      </td>
     </tr>
   );
 
