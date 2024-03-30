@@ -51,7 +51,7 @@ function AllCustomersSection() {
               <th className="px-6 py-3">Name</th>
               <th className="px-6 py-3">Phone</th>
               <th className="px-6 py-3">Interests</th>
-              <th className="px-6 py-3">Last Action</th>
+              <th className="px-6 py-3 text-nowrap">Last Action</th>
               <th className="px-6 py-3">Added On</th>
               <th className="px-6 py-3"></th>
             </tr>

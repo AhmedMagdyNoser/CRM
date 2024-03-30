@@ -3,8 +3,21 @@ import icons from '../../../../../../utils/faIcons';
 import CustomerPropertiesSkeleton from './CustomerPropertiesSkeleton';
 import CustomerProperties from './CustomerProperties';
 import CustomerEditingMode from './CustomerEditingMode';
+import { useEffect, useState } from 'react';
+import { customerDetails as customer } from '../../testingStaticData';
 
-function DetailsSection({ customer, loading, editingMode, setEditingMode }) {
+function DetailsSection({ editingMode, setEditingMode }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="flex w-full flex-col items-center overflow-hidden rounded-xl border lg:w-[450px]">
       <div className="relative mb-14 h-32 w-full bg-pro-50">
@@ -21,7 +34,7 @@ function DetailsSection({ customer, loading, editingMode, setEditingMode }) {
           `${customer.firstName} ${customer.lastName}`
         )}
       </h2>
-      <div className="flex w-full flex-col gap-3 px-5 py-5 sm:px-10">
+      <div className="flex w-full flex-col gap-3 px-5 py-5 sm:px-10 sm:pb-10">
         {loading ? (
           <CustomerPropertiesSkeleton length={7} />
         ) : editingMode ? (
