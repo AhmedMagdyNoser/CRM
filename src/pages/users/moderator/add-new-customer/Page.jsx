@@ -7,8 +7,10 @@ import Form from '../../../../components/ui/Form';
 import InputField from '../../../../components/ui/InputField';
 import DropdownMenu from '../../../../components/ui/DropdownMenu';
 import InterestsInputField from '../../../../components/global/InterestsInputFields';
-import { globalErrorMessage, validateCustomerFields } from '../../../../utils/utils';
-import { icons } from '../../../../utils/utils';
+import { globalErrorMessage } from '../../../../utils/utils';
+import { validateCustomerFields } from '../../../../utils/validation';
+import icons from '../../../../utils/faIcons';
+
 
 // Task: This page needs to be refactored
 

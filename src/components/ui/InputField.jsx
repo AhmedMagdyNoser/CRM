@@ -1,6 +1,6 @@
-import { icons } from '../../utils/utils';
+import icons from '../../utils/faIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { inputFieldsInstructions } from '../../utils/utils';
+import { inputFieldsInstructions } from '../../utils/validation';
 
 /**
  * `InputField` is a general input field component that can be used for all types of inputs.

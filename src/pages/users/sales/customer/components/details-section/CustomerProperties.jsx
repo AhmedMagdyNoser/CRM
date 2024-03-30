@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { icons } from '../../../../../../utils/utils';
+import icons from '../../../../../../utils/faIcons';
 import InterestBadge from '../../../../../../components/global/InterestBadge';
 
 // Task: Need to be refactored with the new data structure

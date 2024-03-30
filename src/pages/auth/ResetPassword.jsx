@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
+import { globalErrorMessage } from '../../utils/utils';
+import { inputFieldsInstructions, validationRegex } from '../../utils/validation';
 import axios from '../../api/axios';
 import InputField from '../../components/ui/InputField';
 import success from '../../assets/success.svg';

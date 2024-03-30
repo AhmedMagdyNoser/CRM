@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { icons } from '../../../../../../utils/utils';
+import icons from '../../../../../../utils/faIcons';
 import CustomerPropertiesSkeleton from './CustomerPropertiesSkeleton';
 import CustomerProperties from './CustomerProperties';
 import CustomerEditingMode from './CustomerEditingMode';
