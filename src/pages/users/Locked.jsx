@@ -1,7 +1,7 @@
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import useAuth from '../../hooks/useAuth';
 import { Navigate } from 'react-router-dom';
-import CaptionCard from '../../components/global/CaptionCard';
+import CaptionCard from '../../components/ui/CaptionCard';
 import unauthorized from '../../assets/unauthorized.svg';
 
 /**

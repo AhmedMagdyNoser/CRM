@@ -20,7 +20,7 @@ function CenterBox({ className = '', backButton, children }) {
   const navigate = useNavigate();
 
   return (
-    <div className="flex-center h-full bg-progray-50">
+    <div className="flex-center h-full bg-gray-100">
       <div
         className={
           'flex h-full w-full animate-fade-in-fast gap-3 bg-white p-6 sm:h-fit sm:w-fit sm:rounded-2xl sm:p-12 sm:shadow-lg ' +

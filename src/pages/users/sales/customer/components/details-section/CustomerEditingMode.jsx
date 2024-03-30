@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
-import InputField from '../../../../../../components/global/InputField';
-import Form from '../../../../../../components/global/Form';
+import InputField from '../../../../../../components/ui/InputField';
+import Form from '../../../../../../components/ui/Form';
 import { globalErrorMessage, validateCustomerFields } from '../../../../../../utils/utils';
 
 // Task: This page needs to be refactored with the new data structure

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import pageNotFound from '../../assets/pageNotFound.svg';
-import CaptionCard from '../../components/global/CaptionCard';
+import CaptionCard from '../../components/ui/CaptionCard';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function NotFound() {

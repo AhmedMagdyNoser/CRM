@@ -4,10 +4,10 @@ import { applicationName, globalErrorMessage } from '../../utils/utils';
 import { validationRegex } from '../../utils/utils';
 import axios from '../../api/axios';
 import forgotPassword from '../../assets/forgotPassword.svg';
-import InputField from '../../components/global/InputField';
-import CaptionCard from '../../components/global/CaptionCard';
-import CenterBox from '../../components/global/CenterBox';
-import Form from '../../components/global/Form';
+import InputField from '../../components/ui/InputField';
+import CaptionCard from '../../components/ui/CaptionCard';
+import CenterBox from '../../components/ui/CenterBox';
+import Form from '../../components/ui/Form';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function ForgotPassword() {

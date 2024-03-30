@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import defaultImage from '../../assets/defaultImage.svg';
-import CenterBox from '../global/CenterBox';
+import defaultImage from '../../../assets/defaultImage.svg';
+import CenterBox from '../../../components/ui/CenterBox';
 
 /**
  * `AuthMaxBox` is a `CenterBox` component that presents an image, a title, and its children in a centered box on the screen.

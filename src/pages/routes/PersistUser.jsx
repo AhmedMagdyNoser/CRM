@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import useRefresh from '../../hooks/useRefresh';
 import useLogout from '../../hooks/useLogout';
-import Loader from '../../components/global/Loader';
+import Loader from '../../components/ui/Loader';
 
 /**
  * `PersistUser` is a component that manages the user's authentication state when the app is loaded.

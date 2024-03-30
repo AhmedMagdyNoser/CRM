@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { applicationName, globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
-import InputField from '../../components/global/InputField';
+import InputField from '../../components/ui/InputField';
 import axios from '../../api/axios';
 import register from '../../assets/register.svg';
-import AuthMaxBox from '../../components/auth/AuthMaxBox';
-import Form from '../../components/global/Form';
+import AuthMaxBox from './components/AuthMaxBox';
+import Form from '../../components/ui/Form';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function Register() {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import InputField from '../../../../../../components/global/InputField';
+import InputField from '../../../../../../components/ui/InputField';
 import CustomerRowSkeleton from './CustomerRowSkeleton';
 import CustomerRow from './CustomerRow';
 

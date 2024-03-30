@@ -3,11 +3,11 @@ import { globalErrorMessage } from '../../utils/utils';
 import { useState } from 'react';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
-import InputField from '../../components/global/InputField';
+import InputField from '../../components/ui/InputField';
 import email from '../../assets/email.svg';
-import CenterBox from '../../components/global/CenterBox';
-import CaptionCard from '../../components/global/CaptionCard';
-import Form from '../../components/global/Form';
+import CenterBox from '../../components/ui/CenterBox';
+import CaptionCard from '../../components/ui/CaptionCard';
+import Form from '../../components/ui/Form';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function VerifyEmail() {

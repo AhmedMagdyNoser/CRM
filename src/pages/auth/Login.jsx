@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
 import login from '../../assets/login.svg';
-import InputField from '../../components/global/InputField';
+import InputField from '../../components/ui/InputField';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import Checkbox from '../../components/global/Checkbox';
-import AuthMaxBox from '../../components/auth/AuthMaxBox';
-import Form from '../../components/global/Form';
+import Checkbox from '../../components/ui/Checkbox';
+import AuthMaxBox from './components/AuthMaxBox';
+import Form from '../../components/ui/Form';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function Login() {

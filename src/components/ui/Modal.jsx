@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-function PopupBox({ title, setOpen, animationTime = 250, children }) {
+function Modal({ title, setOpen, animationTime = 250, children }) {
   const screen = useRef(null);
   const box = useRef(null);
 
@@ -47,4 +47,4 @@ function PopupBox({ title, setOpen, animationTime = 250, children }) {
   );
 }
 
-export default PopupBox;
+export default Modal;
