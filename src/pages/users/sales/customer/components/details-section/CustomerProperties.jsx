@@ -20,7 +20,7 @@ function CustomerProperties({ customer }) {
       <Property icon={icons.source} title="Source" value={customer.sourceName} />
       <Property icon={icons.date} title="Added On" value={new Date(customer.addedOn).toLocaleDateString()} />{' '}
       {/* Task: formatDate */}
-      <div className="mt-5 font-medium text-progray-300">Interests</div>
+      <div className="mt-5 font-medium text-gray-800">Interests</div>
       <div className="flex flex-wrap gap-2">
         {customer.userInterests.map(
           (interest) => interest.isSelected && <InterestBadge key={interest.name} interest={interest.name} />,
@@ -38,9 +38,9 @@ function Property({ icon, title, value }) {
     <div className="flex justify-between">
       <div className="space-x-2">
         <FontAwesomeIcon icon={icon} className="text-pro-200" />
-        <span className="text-nowrap text-progray-200">{title}</span>
+        <span className="text-nowrap text-gray-500">{title}</span>
       </div>
-      <p className="text-nowrap text-progray-300">{value}</p>
+      <p className="text-nowrap text-gray-800">{value}</p>
     </div>
   );
 }

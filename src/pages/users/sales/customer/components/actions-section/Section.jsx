@@ -40,7 +40,7 @@ export default ActionsSection;
 function ActionsTab({ tab, isActive, onClick }) {
   return (
     <button
-      className={`w-full text-nowrap rounded-none border-b-4 p-3 text-center font-medium transition-colors ${isActive ? 'border-pro-300 text-pro-300' : 'border-gray-50 text-progray-200'} hover:text-pro-300`}
+      className={`w-full text-nowrap rounded-none border-b-4 p-3 text-center font-medium transition-colors ${isActive ? 'border-pro-300 text-pro-300' : 'border-gray-50 text-gray-500'} hover:text-pro-300`}
       onClick={onClick}
     >
       {tab.title}
