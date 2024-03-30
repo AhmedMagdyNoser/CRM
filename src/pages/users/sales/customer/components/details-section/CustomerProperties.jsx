@@ -5,7 +5,6 @@ import InterestBadge from '../../../../../../components/global/InterestBadge';
 // Task: Need to be refactored with the new data structure
 
 function CustomerProperties({ customer }) {
-  console.log(customer);
   return (
     <>
       <Property icon={icons.phone} title="Phone" value={customer.phone} />

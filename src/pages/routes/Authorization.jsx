@@ -17,8 +17,6 @@ import useAuth from '../../hooks/useAuth';
 function Authorization({ allowedRole }) {
   const { auth } = useAuth();
 
-  console.log('Rendering Authorization', { roles: auth.roles });
-
   return auth.roles?.includes(allowedRole) ? <Outlet /> : <Unauthorized name={auth.firstName} />;
 }
 

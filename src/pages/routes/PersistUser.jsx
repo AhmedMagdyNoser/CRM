@@ -38,8 +38,6 @@ function PersistUser() {
   // in StrictMode, this component will be rendered twice causing the refreshAccessToken to be called twice.
   const effectHasRun = useRef(false);
 
-  console.log('Rendering PersistUser', { authenticated: !!auth.accessToken, persist });
-
   useEffect(() => {
     if (!accessToken && persist && !effectHasRun.current) {
       effectHasRun.current = true;

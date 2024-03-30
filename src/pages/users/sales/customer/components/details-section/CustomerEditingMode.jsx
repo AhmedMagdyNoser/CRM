@@ -57,7 +57,6 @@ function CustomerEditingMode({ customer, setEditingMode }) {
       setEditingMode(false);
     } catch (error) {
       setLoading(false);
-      console.log(error);
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
     }
   }

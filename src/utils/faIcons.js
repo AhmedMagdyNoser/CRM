@@ -13,7 +13,7 @@ import {
   faVenusMars,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default {
+const icons = {
   spinner: faSpinner,
   user: faUser,
   username: faAddressBook,
@@ -27,3 +27,5 @@ export default {
   gender: faVenusMars,
   city: faLocationDot,
 };
+
+export default icons;

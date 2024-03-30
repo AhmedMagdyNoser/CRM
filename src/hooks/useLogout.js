@@ -19,9 +19,7 @@ function useLogout() {
       setAuth({});
       localStorage.removeItem('persist');
       await axios({ method: 'POST', url: '/auth/revoke-token', withCredentials: true });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return logout;

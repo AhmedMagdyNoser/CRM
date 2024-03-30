@@ -26,8 +26,6 @@ function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  console.log('Rendering ResetPassword', { loading, error });
-
   if (!location.state?.email || !location.state?.token) return <Navigate to="/login" replace={true} />;
 
   async function handleSubmit(e) {

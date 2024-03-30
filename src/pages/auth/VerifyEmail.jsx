@@ -22,8 +22,6 @@ function VerifyEmail() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  console.log('Rendering VerifyEmail', { loading, error });
-
   if (!location.state?.email) return <Navigate to="/login" replace={true} />;
 
   async function handleSubmit(e) {

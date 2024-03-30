@@ -31,8 +31,6 @@ function Register() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  console.log('Rendering Register', { loading, error });
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (

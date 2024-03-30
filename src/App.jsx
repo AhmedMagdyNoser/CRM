@@ -22,8 +22,6 @@ import Profile from './pages/users/Profile';
 import Locked from './pages/users/Locked';
 
 function App() {
-  console.log('Rendering App');
-
   return (
     <Router>
       <Routes>

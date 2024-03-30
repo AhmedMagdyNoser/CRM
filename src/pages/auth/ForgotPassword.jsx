@@ -22,8 +22,6 @@ function ForgotPassword() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  console.log('Rendering ForgetPassword', { loading, error });
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (validEmail) {

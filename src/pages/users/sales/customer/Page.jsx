@@ -1,9 +1,6 @@
-import { useParams } from 'react-router-dom';
 import useDocumentTitle from '../../../../hooks/useDocumentTitle';
-import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
 import DetailsSection from './components/details-section/Section';
 import ActionsSection from './components/actions-section/Section';
-import ErrorAlert from '../../../../components/ui/ErrorAlert';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -12,8 +9,6 @@ import useAuth from '../../../../hooks/useAuth';
 
 function Customer() {
   useDocumentTitle('Customer Details');
-
-  // const params = useParams();
 
   const { auth } = useAuth();
   const [editingMode, setEditingMode] = useState(false);
