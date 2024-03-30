@@ -5,9 +5,9 @@ function CustomerPropertiesSkeleton({ length = 1 }) {
         <div key={index} className="flex animate-pulse justify-between">
           <div className="flex items-center gap-2">
             <div className="h-5 w-5 rounded-full bg-pro-100"></div>
-            <div className="h-4 w-20 bg-pro-100"></div>
+            <div className="h-4 w-20 rounded-xl bg-pro-100"></div>
           </div>
-          <div className="h-4 w-20 bg-pro-100"></div>
+          <div className="h-4 w-20 rounded-xl bg-pro-100"></div>
         </div>
       ))}
       <div className="mt-5 font-medium text-gray-800">Interests</div>

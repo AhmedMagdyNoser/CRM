@@ -28,7 +28,7 @@ function OnlineStatueAlert() {
         style={{ boxShadow: '0px 0px 5px 0px #0001, 0 1px 3px 0 #0002, 0 1px 2px -1px #0002' }}
       >
         <div className="flex-center flex-wrap gap-3">
-          <FontAwesomeIcon icon={faWifi} className={'sm:text-xl ' + (online ? 'text-green-600' : 'text-progray-200')} />
+          <FontAwesomeIcon icon={faWifi} className={'sm:text-xl ' + (online ? 'text-green-600' : 'text-gray-500')} />
           <p className="text-center">{online ? 'Internet connection restored' : 'Oops! It seems you are offline'}</p>
         </div>
         <button onClick={() => setShow(false)} className="text-sm">

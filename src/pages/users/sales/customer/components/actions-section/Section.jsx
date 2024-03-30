@@ -21,7 +21,7 @@ function ActionsSection({ actions }) {
 
   return (
     <div className="flex-1">
-      <nav className="flex justify-between rounded-b-none bg-gray-100 text-sm">
+      <nav className="flex justify-between overflow-hidden rounded-t-xl bg-pro-50 text-sm">
         {tabs.map((tab, index) => (
           <ActionsTab key={index} tab={tab} isActive={activeTab.title === tab.title} onClick={() => setActiveTab(tab)} />
         ))}
@@ -40,7 +40,7 @@ export default ActionsSection;
 function ActionsTab({ tab, isActive, onClick }) {
   return (
     <button
-      className={`w-full text-nowrap rounded-none border-b-4 p-3 text-center font-medium transition-colors ${isActive ? 'border-pro-300 text-pro-300' : 'border-gray-50 text-gray-500'} hover:text-pro-300`}
+      className={`w-full text-nowrap p-3 text-center font-medium transition-colors ${isActive ? 'bg-pro-300 text-white' : 'border-pro-50 text-gray-500 hover:text-pro-300'}`}
       onClick={onClick}
     >
       {tab.title}

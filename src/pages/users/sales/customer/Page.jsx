@@ -110,7 +110,7 @@ function Customer() {
         {auth.roles.includes(roles.moderator) && (
           <button
             onClick={() => setEditingMode(!editingMode)}
-            className={`btn-primary flex-center animate-fade-in-medium gap-1 px-4 py-2 text-sm font-semibold sm:text-base`}
+            className={`btn-primary flex-center animate-fade-in-medium gap-1 rounded-xl px-4 py-2 text-sm font-semibold sm:text-base`}
           >
             <FontAwesomeIcon icon={faEdit} />
             {editingMode ? 'Cancel Editing' : 'Edit'}

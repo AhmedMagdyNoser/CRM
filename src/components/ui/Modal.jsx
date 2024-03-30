@@ -27,15 +27,15 @@ function Modal({ title, setOpen, animationTime = 250, children }) {
   return (
     <div
       ref={screen}
-      className="flex-center fixed left-0 top-0 z-40 h-full w-full rounded-none bg-[#00000025] sm:bg-[#00000050]"
+      className="flex-center fixed left-0 top-0 z-40 h-full w-full bg-[#00000025] sm:bg-[#00000050]"
       style={{ animation: `fade-in ${animationTime}ms` }}
     >
       <div
         ref={box}
-        className="flex h-full w-full flex-col rounded-none bg-white sm:h-[550px] sm:w-[500px] sm:rounded-xl sm:shadow-xl lg:w-[600px]"
+        className="flex h-full w-full flex-col bg-white sm:h-[550px] sm:w-[500px] sm:rounded-xl sm:shadow-xl lg:w-[600px]"
         style={{ animation: `half-pop-up ${animationTime}ms` }}
       >
-        <header className="flex items-center justify-between rounded-none border-b p-5">
+        <header className="flex items-center justify-between border-b p-5">
           <h2 className="capitalize">{title}</h2>
           <button className="btn-light flex-center h-8 w-8" onClick={handleClose}>
             <FontAwesomeIcon icon={faXmark} />

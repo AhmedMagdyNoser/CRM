@@ -11,7 +11,7 @@ function Navbar({ className = '' }) {
   return (
     <aside
       className={
-        'fixed bottom-0 left-0 z-30 flex items-center justify-between gap-3 overflow-auto rounded-none border-t bg-white sm:flex-col sm:border-r sm:border-t-0 ' +
+        'fixed bottom-0 left-0 z-30 flex items-center justify-between gap-3 overflow-auto border-t bg-white sm:flex-col sm:border-r sm:border-t-0 ' +
         className
       }
     >
@@ -44,9 +44,7 @@ export default Navbar;
 function NavbarLink({ label, to, icon }) {
   const constClasses = 'nav-link';
   const className = ({ isActive }) =>
-    isActive
-      ? constClasses + ' text-pro-300 fill-pro-300 bg-pro-50'
-      : constClasses + ' btn-light fill-gray-500 text-progray-100';
+    isActive ? constClasses + ' fill-pro-300 bg-pro-50' : constClasses + ' btn-light fill-gray-500';
 
   return (
     <NavLink to={to} className={className}>

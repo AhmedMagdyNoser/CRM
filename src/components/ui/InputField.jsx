@@ -17,24 +17,24 @@ import { inputFieldsInstructions } from '../../utils/validation';
 function InputField({ icon, value, isValid, instructions, className = '', ...rest }) {
   return (
     <div className="w-full">
-      <div className="flex items-center overflow-hidden bg-progray-50">
+      <div className="flex items-center overflow-hidden bg-gray-100 rounded-xl">
         {icon && (
           <FontAwesomeIcon
             icon={icon}
-            className={(value && isValid ? 'text-pro-300' : 'text-progray-200') + ' pl-3 transition-colors duration-1000'}
+            className={(value && isValid ? 'text-pro-300' : 'text-gray-500') + ' pl-3 transition-colors duration-1000'}
           />
         )}
         <input
-          className={'flex-1 bg-inherit p-3 text-progray-300 outline-none placeholder:text-progray-200 ' + className}
+          className={'flex-1 bg-inherit p-3 text-gray-800 outline-none placeholder:text-gray-500 ' + className}
           value={value}
           size={1}
           {...rest}
         />
       </div>
       {isValid !== undefined && value && !isValid && (
-        <div className="flex flex-col gap-1 py-1 text-proerror-100">
-          <div className="h-[3px] animate-progress-fast rounded bg-proerror-100"></div>
-          <div className="animate-fade-in-fast text-sm">{instructions}</div>
+        <div className="flex flex-col gap-1 py-1">
+          <div className="h-[3px] animate-progress-fast rounded bg-red-500"></div>
+          <div className="animate-fade-in-fast text-sm text-red-500">{instructions}</div>
         </div>
       )}
     </div>

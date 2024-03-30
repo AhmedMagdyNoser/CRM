@@ -8,13 +8,13 @@ function LastWeekCustomersSection({ customers, loading }) {
     <section className="flex flex-col gap-2 bg-pro-50 p-4">
       <p>New customers this week</p>
       {loading ? (
-        <div className="scrollbar-hide flex gap-3 overflow-x-auto rounded-none py-1">
+        <div className="scrollbar-hide flex gap-3 overflow-x-auto py-1">
           <CustomersCardSkeleton length={3} />
         </div>
       ) : customers.length === 0 ? (
         <p className="text-gray-800">No new customers this week</p>
       ) : (
-        <div className="scrollbar-hide flex gap-3 overflow-x-auto rounded-none py-1">
+        <div className="scrollbar-hide flex gap-3 overflow-x-auto py-1">
           {customers.map((customer) => (
             <CustomerCard key={customer.customerId} customer={customer} />
           ))}

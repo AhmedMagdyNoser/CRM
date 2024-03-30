@@ -25,7 +25,7 @@ function Checkbox({ label, checked, onClick }) {
       tabIndex={0}
       onClick={onClick}
       onKeyDown={handleKeyDown}
-      className="flex cursor-pointer items-center gap-1 text-progray-300"
+      className="flex cursor-pointer items-center gap-1 text-gray-800"
     >
       <FontAwesomeIcon icon={checked ? faCheckSquare : faSquare} className="text-lg text-pro-300" />
       <p>{label}</p>

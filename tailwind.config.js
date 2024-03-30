@@ -15,16 +15,6 @@ module.exports = {
           200: '#8065FF', // Dark Background Hover
           300: '#7050FF', // Dark Background (Default Color)
         },
-        progray: {
-          50: '#F3F3F3', // Very Light Background
-          100: '#999999', // Very Light Text
-          200: '#6D6D6D', // Paragraphs
-          300: '#252525', // Titles
-        },
-        proerror: {
-          50: '#FEEAEA', // Error Background
-          100: '#EE4545', // Error Text
-        },
       },
       animation: {
         'spin-fast': 'spin 0.5s linear infinite',

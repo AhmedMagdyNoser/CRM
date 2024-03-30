@@ -73,7 +73,7 @@ function CustomerEditingMode({ customer, setEditingMode }) {
         <InputField.City value={city || ''} onChange={(e) => setCity(e.target.value)} />
         {/* sales representative - source - Interests - gender */}
       </Form>
-      <button className="btn-light w-full py-2" onClick={() => setEditingMode(false)}>
+      <button className="btn-light w-full rounded-xl py-2" onClick={() => setEditingMode(false)}>
         Cancel
       </button>
     </div>

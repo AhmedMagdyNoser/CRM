@@ -9,7 +9,7 @@ function AllCustomersHeaderSection() {
     <section className="flex items-center justify-between">
       <h1>All Customers</h1>
       <button
-        className="btn-primary flex-center gap-2 p-3 px-5 text-xs sm:text-sm"
+        className="btn-primary flex-center gap-2 rounded-xl p-3 px-5 text-xs sm:text-sm"
         onClick={() => navigate('/add-new-customer')}
       >
         <FontAwesomeIcon icon={faPlus} />

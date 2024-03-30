@@ -33,15 +33,15 @@ function AllCustomersSection({ customers, loading }) {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-t-xl">
         <table className="w-full">
           <thead className="border-b bg-gray-100">
             <tr className="text-left text-xs uppercase tracking-wider text-gray-800">
-              <th className="rounded-none px-6 py-3">Name</th>
-              <th className="rounded-none px-6 py-3">Phone</th>
-              <th className="rounded-none px-6 py-3">Interests</th>
-              <th className="rounded-none px-6 py-3">Added On</th>
-              <th className="rounded-none px-6 py-3"></th>
+              <th className="px-6 py-3">Name</th>
+              <th className="px-6 py-3">Phone</th>
+              <th className="px-6 py-3">Interests</th>
+              <th className="px-6 py-3">Added On</th>
+              <th className="px-6 py-3"></th>
             </tr>
           </thead>
           {loading ? (

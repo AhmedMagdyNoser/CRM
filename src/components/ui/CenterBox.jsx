@@ -29,7 +29,10 @@ function CenterBox({ className = '', backButton, children }) {
       >
         {children}
         {backButton && (
-          <button onClick={() => navigate(-1)} className="btn-light flex-center gap-2 self-start px-5 py-2 uppercase">
+          <button
+            onClick={() => navigate(-1)}
+            className="btn-light flex-center gap-2 self-start rounded-xl px-5 py-2 uppercase"
+          >
             <FontAwesomeIcon icon={faArrowLeft} />
             Back
           </button>

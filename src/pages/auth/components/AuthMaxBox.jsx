@@ -24,13 +24,13 @@ function AuthMaxBox({ className = '', image = defaultImage, title, leave, childr
       <section className="xl:flex-center hidden w-[500px] p-12">
         <img src={image} alt={title} className="w-[85%]" />
       </section>
-      <div className="m-12 hidden w-[1px] rounded bg-progray-50 xl:flex">{/* Divider */}</div>
+      <div className="m-12 hidden w-[1px] rounded bg-gray-100 xl:flex">{/* Divider */}</div>
       <section className="flex flex-1 flex-col gap-3">
         {title && <h1 className="mb-2">{title}</h1>}
         {children}
         {leave && (
           <div className="flex flex-wrap justify-center gap-1">
-            {leave.hint && <span className="text-progray-300">{leave.hint}</span>}
+            {leave.hint && <span className="text-gray-800">{leave.hint}</span>}
             <Link className="font-bold text-pro-300 transition-colors hover:text-pro-200" to={leave.link}>
               {leave.label}
             </Link>

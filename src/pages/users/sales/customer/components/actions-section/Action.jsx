@@ -54,7 +54,7 @@ function Action({ action: { type, date, summary } }) {
     <div ref={element} className="mb-10 flex gap-4">
       <div className="relative">
         {getActionIcon(type)}
-        <div className="absolute left-1/2 h-full w-0 -translate-x-1/2 transform rounded-none border border-dashed"></div>
+        <div className="absolute left-1/2 h-full w-0 -translate-x-1/2 transform border border-dashed"></div>
       </div>
       <div className="flex-1">
         <div className="flex items-center justify-between">
@@ -73,7 +73,7 @@ function Action({ action: { type, date, summary } }) {
             )}
           </div>
         </div>
-        <p className="mt-4 bg-gray-50 p-3 px-4">{summary}</p>
+        <p className="mt-4 rounded-xl bg-gray-50 p-3 px-4">{summary}</p>
       </div>
     </div>
   );

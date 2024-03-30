@@ -14,19 +14,19 @@ function CustomerRow({ customer }) {
           {customer.firstName} {customer.lastName}
         </span>
       </td>
-      <td className="whitespace-nowrap rounded-none px-6 py-4 text-gray-500">{customer.phone}</td>
+      <td className="whitespace-nowrap px-6 py-4 text-gray-500">{customer.phone}</td>
       <td className="flex flex-wrap gap-2 whitespace-nowrap px-6 py-4">
         {customer.userInterests.map((interest) => (
           <InterestBadge key={interest.name} interest={interest.name} />
         ))}
       </td>
-      <td className="whitespace-nowrap rounded-none px-6 py-4 text-gray-500">
+      <td className="whitespace-nowrap px-6 py-4 text-gray-500">
         {new Date(customer.additionDate).toDateString()} {/* Task: formatDate */}
       </td>
-      <td className="whitespace-nowrap rounded-none px-6 py-4">
+      <td className="whitespace-nowrap px-6 py-4">
         <Link
           to={`/customer/${customer.customerId}`}
-          className="px-4 py-2 text-pro-300 transition-colors hover:bg-pro-300 hover:text-white"
+          className="rounded-xl px-4 py-2 text-pro-300 transition-colors hover:bg-pro-300 hover:text-white"
         >
           View
         </Link>

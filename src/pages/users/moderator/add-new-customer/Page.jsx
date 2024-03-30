@@ -11,7 +11,6 @@ import { globalErrorMessage } from '../../../../utils/utils';
 import { validateCustomerFields } from '../../../../utils/validation';
 import icons from '../../../../utils/faIcons';
 
-
 // Task: This page needs to be refactored
 
 function AddNewCustomer() {
@@ -86,7 +85,7 @@ function AddNewCustomer() {
 
         {/* Required Information Fieldset */}
         <fieldset className="flex flex-col gap-3">
-          <legend className="mb-2 text-progray-200">Required information</legend>
+          <legend className="mb-2 text-gray-500">Required information</legend>
           <div className="flex flex-col gap-3 md:flex-row">
             <InputField.FirstName value={firstName} onChange={(e) => setFirstName(e.target.value)} autoFocus />
             <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} />
@@ -123,7 +122,7 @@ function AddNewCustomer() {
         {/* Optional Information Fieldset */}
         <fieldset>
           <legend
-            className="cursor-pointer text-progray-200 hover:underline"
+            className="cursor-pointer text-gray-500 hover:underline"
             onClick={() => setOpenOptionalFields(!openOptionalFields)}
           >
             More Details (Optional)

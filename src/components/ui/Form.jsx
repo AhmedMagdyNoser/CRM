@@ -28,7 +28,7 @@ function Form({ className = '', loading, error, submitLabel, submitDisabled, chi
       <div className="flex flex-col gap-3">{children}</div>
       <div className="flex flex-col gap-3">
         {error && <ErrorAlert message={error} />}
-        <button type="submit" className="btn-primary py-3 uppercase" disabled={submitDisabled || loading}>
+        <button type="submit" className="btn-primary rounded-xl py-3 uppercase" disabled={submitDisabled || loading}>
           {loading ? <FontAwesomeIcon icon={faSpinner} className="animate-spin-slow" /> : submitLabel}
         </button>
       </div>
