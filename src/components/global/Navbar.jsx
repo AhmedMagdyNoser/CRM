@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import useNavbar from '../../hooks/useNavbar';
 import useLogout from '../../hooks/useLogout';
-import { layoutDimensions, roles } from '../../utils/utils';
+import { breakboints, layoutDimensions, roles } from '../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/logo.png';
@@ -15,7 +15,7 @@ function Navbar({ className = '' }) {
   return (
     <aside
       className={`
-        fixed bottom-0 left-0 z-30 flex justify-between gap-3 border-t bg-white sm:flex-col sm:border-r sm:border-t-0 
+        scrollbar-hide fixed bottom-0 left-0 z-30 flex justify-between gap-3 border-t bg-white sm:flex-col sm:border-r sm:border-t-0 
         ${className} ${navbarExpanded ? 'overflow-hidden' : 'overflow-auto'}
         `}
       style={{ transition: `width ${layoutDimensions.navbarExpandingDuration}s` }}
@@ -61,27 +61,41 @@ function NavbarLink({ label, to, icon }) {
   const iconPosition = layoutDimensions.navbarSize / 5;
   const labelPosition = layoutDimensions.navbarSize / 1.65;
 
-  const constClasses = `relative flex flex-1 rounded-2xl transition-colors`;
+  const constClasses = `relative flex flex-1 rounded-2xl transition-colors flex-center nav-link-width`;
   const className = ({ isActive }) =>
     isActive ? constClasses + ' fill-pro-300 bg-pro-50' : constClasses + ' btn-light fill-gray-500';
 
   return (
-    <div className={`flex`} style={{ margin: `0 ${marginX}px` }}>
+    <div className={`nav-link-margin flex self-center sm:self-auto`}>
       <NavLink to={to} className={className} style={{ height: `${height}px` }}>
         {icon && (
-          <div className={`absolute top-1/2 w-5 -translate-y-1/2`} style={{ left: `${iconPosition}px` }}>
+          <div className={`w-5 sm:absolute sm:top-1/2 sm:-translate-y-1/2`} style={{ left: `${iconPosition}px` }}>
             {icon}
           </div>
         )}
         {navbarExpanded && (
           <span
-            className={`absolute top-1/2 -translate-y-1/2 transform animate-fade-in-fast text-nowrap text-sm capitalize`}
+            className={`absolute top-1/2 hidden -translate-y-1/2 transform animate-fade-in-fast text-nowrap text-sm capitalize sm:block`}
             style={{ left: `${labelPosition}px` }}
           >
             {label}
           </span>
         )}
       </NavLink>
+      <style>
+        {`
+            @media (min-width: ${breakboints.sm}) {
+              .nav-link-margin {
+                margin: 0 ${marginX}px;
+              }
+            }
+            @media (max-width: ${breakboints.sm}) {
+             .nav-link-width {
+                width: ${height}px;
+              }
+            }
+          `}
+      </style>
     </div>
   );
 }
