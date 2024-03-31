@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import useNavbar from '../../hooks/useNavbar';
 import useLogout from '../../hooks/useLogout';
-import { breakboints, layoutDimensions, roles } from '../../utils/utils';
+import { applicationName, breakboints, layoutDimensions, roles } from '../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/logo.png';
@@ -25,7 +25,13 @@ function Navbar({ className = '' }) {
         className="absolute right-0 top-0 hidden h-full w-1 cursor-col-resize bg-transparent transition-colors hover:bg-pro-200 sm:block"
       ></div>
 
-      <img src={logo} alt="Logo" className="hidden h-10 w-10 sm:block" />
+      <div className={`relative hidden w-full sm:flex`}>
+        <img src={logo} alt="Logo" className="relative left-0 top-0 mx-4 h-10 w-10" />
+        <div className={'flex flex-col ' + (!navbarExpanded && 'opacity-0')}>
+          <p className="font-bold text-pro-300">{applicationName}</p>
+          <p className="text-nowrap text-sm text-gray-500">Company Name</p>
+        </div>
+      </div>
 
       <nav className="flex flex-1 justify-between gap-1 sm:flex-grow-0 sm:flex-col">
         {auth.roles.includes(roles.manager) && (
