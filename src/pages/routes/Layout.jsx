@@ -3,16 +3,16 @@ import Navbar from '../../components/global/Navbar';
 import useAuth from '../../hooks/useAuth';
 import OnlineStatueAlert from '../../components/global/OnlineStatusAlert';
 import { layoutDimensions as dimensions } from '../../utils/utils';
-import { useState } from 'react';
+import useNavbar from '../../hooks/useNavbar';
 
 function Layout() {
   const { auth } = useAuth();
-  const [navbarExpanded, setNavbarExpanded] = useState(false);
+  const { navbarExpanded } = useNavbar();
 
   return (
     <div className="flex text-pro-300">
       <OnlineStatueAlert />
-      {auth.accessToken && <Navbar className="navbar" navbarExpanded={navbarExpanded} setNavbarExpanded={setNavbarExpanded} />}
+      {auth.accessToken && <Navbar className="navbar" />}
       {auth.accessToken ? (
         <div className={'layout-padding min-h-screen w-full'}>
           <div

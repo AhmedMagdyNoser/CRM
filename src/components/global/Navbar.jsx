@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import useNavbar from '../../hooks/useNavbar';
 import useLogout from '../../hooks/useLogout';
 import { layoutDimensions, roles } from '../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,8 +8,10 @@ import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/logo.png';
 import NavIcon from './NavIcon';
 
-function Navbar({ className = '', navbarExpanded, setNavbarExpanded }) {
+function Navbar({ className = '' }) {
   const { auth } = useAuth();
+  const { navbarExpanded, setNavbarExpanded } = useNavbar();
+
   return (
     <aside
       className={`
@@ -29,34 +32,22 @@ function Navbar({ className = '', navbarExpanded, setNavbarExpanded }) {
       <nav className="flex flex-1 justify-between gap-3 sm:flex-grow-0 sm:flex-col">
         {auth.roles.includes(roles.manager) && (
           <>
-            <NavbarLink navbarExpaned={navbarExpanded} label="Dashboard" to="/dashboard" icon={<NavIcon.Dashboard />} />
-            <NavbarLink navbarExpaned={navbarExpanded} label="Roles" to="/roles" icon={<NavIcon.Roles />} />
+            <NavbarLink label="Dashboard" to="/dashboard" icon={<NavIcon.Dashboard />} />
+            <NavbarLink label="Roles" to="/roles" icon={<NavIcon.Roles />} />
           </>
         )}
         {auth.roles.includes(roles.moderator) && (
-          <NavbarLink
-            navbarExpaned={navbarExpanded}
-            label="All Customers"
-            to="/all-customers"
-            icon={<NavIcon.AllCustomers />}
-          />
+          <NavbarLink label="All Customers" to="/all-customers" icon={<NavIcon.AllCustomers />} />
         )}
         {auth.roles.includes(roles.sales) && (
-          <NavbarLink
-            navbarExpaned={navbarExpanded}
-            label="Assigned Customers"
-            to="/assigned-customers"
-            icon={<NavIcon.AssignedCustomers />}
-          />
+          <NavbarLink label="Assigned Customers" to="/assigned-customers" icon={<NavIcon.AssignedCustomers />} />
         )}
-        {auth.roles.length === 0 && (
-          <NavbarLink navbarExpaned={navbarExpanded} label="Locked" to="/locked" icon={<NavIcon.Locked />} />
-        )}
-        <NavbarLink navbarExpaned={navbarExpanded} label="Company Info" to="/company-info" icon={<NavIcon.CompanyInfo />} />
-        <NavbarLink navbarExpaned={navbarExpanded} label="Profile" to="/profile" icon={<NavIcon.Profile />} />
+        {auth.roles.length === 0 && <NavbarLink label="Locked" to="/locked" icon={<NavIcon.Locked />} />}
+        <NavbarLink label="Company Info" to="/company-info" icon={<NavIcon.CompanyInfo />} />
+        <NavbarLink label="Profile" to="/profile" icon={<NavIcon.Profile />} />
         <LogoutButton className="block sm:hidden" />
       </nav>
-      
+
       <LogoutButton className="hidden sm:block" />
     </aside>
   );
@@ -64,8 +55,9 @@ function Navbar({ className = '', navbarExpanded, setNavbarExpanded }) {
 
 export default Navbar;
 
-function NavbarLink({ label, to, icon, navbarExpaned }) {
-  const constClasses = `flex h-12 rounded-2xl transition-colors ${navbarExpaned ? 'flex-1 mx-3 items-center gap-2 px-3' : 'w-12 flex-center'}`;
+function NavbarLink({ label, to, icon }) {
+  const { navbarExpanded } = useNavbar();
+  const constClasses = `flex h-12 rounded-2xl transition-colors ${navbarExpanded ? 'flex-1 mx-3 items-center gap-2 px-3' : 'w-12 flex-center'}`;
   const className = ({ isActive }) =>
     isActive ? constClasses + ' fill-pro-300 bg-pro-50' : constClasses + ' btn-light fill-gray-500';
 
@@ -73,7 +65,7 @@ function NavbarLink({ label, to, icon, navbarExpaned }) {
     <div className="flex w-full justify-center">
       <NavLink to={to} className={className}>
         {icon && <div className="w-6">{icon}</div>}
-        <span className={`text-nowrap ${navbarExpaned ? 'block' : 'hidden'}`}>{label}</span>
+        <span className={`text-nowrap ${navbarExpanded ? 'block' : 'hidden'}`}>{label}</span>
       </NavLink>
     </div>
   );

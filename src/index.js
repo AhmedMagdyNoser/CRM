@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import AuthProvider from './context/AuthContext';
 import './index.css';
+import NavbarProvider from './context/NavbarContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <NavbarProvider>
+        <App />
+      </NavbarProvider>
     </AuthProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
