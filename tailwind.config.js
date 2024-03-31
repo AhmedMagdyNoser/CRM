@@ -1,12 +1,9 @@
+import { breakboints } from './src/utils/utils';
+
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    screens: {
-      sm: '612px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1200px',
-    },
+    screens: breakboints,
     extend: {
       colors: {
         pro: {

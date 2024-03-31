@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../../components/global/Navbar';
 import useAuth from '../../hooks/useAuth';
 import OnlineStatueAlert from '../../components/global/OnlineStatusAlert';
-import { layoutDimensions as dimensions } from '../../utils/utils';
+import { layoutDimensions as dimensions, breakboints } from '../../utils/utils';
 import useNavbar from '../../hooks/useNavbar';
 
 function Layout() {
@@ -35,7 +35,7 @@ function Layout() {
             padding: 0 ${dimensions.navbarPadding}px;
           }
 
-          @media (min-width: 612px) {
+          @media (min-width: ${breakboints.sm}) {
             .navbar {
               height: 100vh;
               width: ${navbarExpanded ? dimensions.navbarExpanedSize : dimensions.navbarSize}px;
@@ -47,7 +47,7 @@ function Layout() {
             padding: ${dimensions.mobileLayoutPadding}px ${dimensions.mobileLayoutPadding}px ${dimensions.mobileLayoutPadding + dimensions.navbarSize}px ${dimensions.mobileLayoutPadding}px;
           }
 
-          @media (min-width: 612px) {
+          @media (min-width: ${breakboints.sm}) {
             .layout-padding {
               padding: ${dimensions.layoutPadding}px;
             }

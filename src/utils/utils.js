@@ -9,7 +9,7 @@ export const roles = {
 };
 
 export const layoutDimensions = {
-  navbarSize: 80,
+  navbarSize: 75,
   navbarExpanedSize: 200,
   navbarExpandingDuration: 0.25,
   navbarPadding: 20,
@@ -24,3 +24,10 @@ export const colorPairs = [
   { bg: '#fdf2f2', text: '#e0464a' },
   { bg: '#f5f5f5', text: '#4a5568' },
 ];
+
+export const breakboints = {
+  sm: '612px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1200px',
+};

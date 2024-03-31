@@ -22,14 +22,12 @@ function Navbar({ className = '' }) {
     >
       <div
         onClick={() => setNavbarExpanded(!navbarExpanded)}
-        className="absolute right-0 top-0 h-full w-1 cursor-col-resize bg-transparent transition-colors hover:bg-pro-200"
+        className="absolute right-0 top-0 hidden h-full w-1 cursor-col-resize bg-transparent transition-colors hover:bg-pro-200 sm:block"
       ></div>
 
-      <div>
-        <img src={logo} alt="Logo" className="h-6 w-6 sm:h-10 sm:w-10" />
-      </div>
+      <img src={logo} alt="Logo" className="hidden h-10 w-10 sm:block" />
 
-      <nav className="flex flex-1 justify-between gap-3 sm:flex-grow-0 sm:flex-col">
+      <nav className="flex flex-1 justify-between gap-1 sm:flex-grow-0 sm:flex-col">
         {auth.roles.includes(roles.manager) && (
           <>
             <NavbarLink label="Dashboard" to="/dashboard" icon={<NavIcon.Dashboard />} />
@@ -37,13 +35,13 @@ function Navbar({ className = '' }) {
           </>
         )}
         {auth.roles.includes(roles.moderator) && (
-          <NavbarLink label="All Customers" to="/all-customers" icon={<NavIcon.AllCustomers />} />
+          <NavbarLink label="All customers" to="/all-customers" icon={<NavIcon.AllCustomers />} />
         )}
         {auth.roles.includes(roles.sales) && (
-          <NavbarLink label="Assigned Customers" to="/assigned-customers" icon={<NavIcon.AssignedCustomers />} />
+          <NavbarLink label="Assigned to me" to="/assigned-customers" icon={<NavIcon.AssignedCustomers />} />
         )}
         {auth.roles.length === 0 && <NavbarLink label="Locked" to="/locked" icon={<NavIcon.Locked />} />}
-        <NavbarLink label="Company Info" to="/company-info" icon={<NavIcon.CompanyInfo />} />
+        <NavbarLink label="Company info" to="/company-info" icon={<NavIcon.CompanyInfo />} />
         <NavbarLink label="Profile" to="/profile" icon={<NavIcon.Profile />} />
         <LogoutButton className="block sm:hidden" />
       </nav>
@@ -57,15 +55,32 @@ export default Navbar;
 
 function NavbarLink({ label, to, icon }) {
   const { navbarExpanded } = useNavbar();
-  const constClasses = `flex h-12 rounded-2xl transition-colors ${navbarExpanded ? 'flex-1 mx-3 items-center gap-2 px-3' : 'w-12 flex-center'}`;
+
+  const height = layoutDimensions.navbarSize - (layoutDimensions.navbarSize / 7) * 2;
+  const marginX = layoutDimensions.navbarSize / 7;
+  const iconPosition = layoutDimensions.navbarSize / 5;
+  const labelPosition = layoutDimensions.navbarSize / 1.65;
+
+  const constClasses = `relative flex flex-1 rounded-2xl transition-colors`;
   const className = ({ isActive }) =>
     isActive ? constClasses + ' fill-pro-300 bg-pro-50' : constClasses + ' btn-light fill-gray-500';
 
   return (
-    <div className="flex w-full justify-center">
-      <NavLink to={to} className={className}>
-        {icon && <div className="w-6">{icon}</div>}
-        <span className={`text-nowrap ${navbarExpanded ? 'block' : 'hidden'}`}>{label}</span>
+    <div className={`flex`} style={{ margin: `0 ${marginX}px` }}>
+      <NavLink to={to} className={className} style={{ height: `${height}px` }}>
+        {icon && (
+          <div className={`absolute top-1/2 w-5 -translate-y-1/2`} style={{ left: `${iconPosition}px` }}>
+            {icon}
+          </div>
+        )}
+        {navbarExpanded && (
+          <span
+            className={`absolute top-1/2 -translate-y-1/2 transform animate-fade-in-fast text-nowrap text-sm capitalize`}
+            style={{ left: `${labelPosition}px` }}
+          >
+            {label}
+          </span>
+        )}
       </NavLink>
     </div>
   );
