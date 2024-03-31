@@ -1,22 +1,14 @@
 import CustomerCard from './CustomerCard';
 import CustomersCardSkeleton from './CustomerCardSkeleton';
-import { lastWeekCustomers } from '../../testingStaticData';
-import { useEffect, useState } from 'react';
+import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
 
 function LastWeekCustomersSection() {
-  const [loading, setLoading] = useState(true);
+  const { loading, data } = useOnLoadFetch('/moderator/get-last-week-customers');
 
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const lastWeekCustomers = data.items
 
   return (
-    <section className="flex flex-col gap-2 bg-pro-50 p-4 rounded-xl">
+    <section className="flex flex-col gap-2 rounded-xl bg-pro-50 p-4">
       <p>New customers this week</p>
       {loading ? (
         <div className="scrollbar-hide flex gap-3 overflow-x-auto py-1">

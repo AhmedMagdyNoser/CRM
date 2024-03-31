@@ -1,32 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import InputField from '../../../../../../components/ui/InputField';
 import CustomerRowSkeleton from './CustomerRowSkeleton';
 import CustomerRow from './CustomerRow';
-import { AllCustomers } from '../../testingStaticData';
+import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
 
-// Task: This component needs to be refactored with the new data structure
+// Task: Pagination + Search
 
 function AllCustomersSection() {
   const [search, setSearch] = useState('');
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+  const { loading, data } = useOnLoadFetch('/moderator/getCustomers');
 
-    return () => clearTimeout(timer);
-  }, []);
+  let filteredCustomers = [];
 
-  const filteredCustomers = AllCustomers.filter(
-    (customer) =>
-      customer.firstName.toLowerCase().includes(search.toLowerCase()) ||
-      customer.lastName.toLowerCase().includes(search.toLowerCase()) ||
-      customer.phone.includes(search) ||
-      (customer.email && customer.email.toLowerCase().includes(search.toLowerCase())),
-  );
+  if (!loading)
+    filteredCustomers = data.items.filter(
+      (customer) =>
+        customer.firstName.toLowerCase().includes(search.toLowerCase()) ||
+        customer.lastName.toLowerCase().includes(search.toLowerCase()) ||
+        customer.phone.includes(search) ||
+        (customer.email && customer.email.toLowerCase().includes(search.toLowerCase())),
+    );
 
   return (
     <>
@@ -51,7 +46,7 @@ function AllCustomersSection() {
               <th className="px-6 py-3">Name</th>
               <th className="px-6 py-3">Phone</th>
               <th className="px-6 py-3">Interests</th>
-              <th className="px-6 py-3 text-nowrap">Last Action</th>
+              <th className="text-nowrap px-6 py-3">Last Action</th>
               <th className="px-6 py-3">Added On</th>
               <th className="px-6 py-3"></th>
             </tr>
