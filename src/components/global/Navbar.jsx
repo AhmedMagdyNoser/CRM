@@ -43,17 +43,22 @@ function Navbar({ className = '' }) {
         {auth.roles.length === 0 && <NavbarLink label="Locked" to="/locked" icon={<NavIcon.Locked />} />}
         <NavbarLink label="Company info" to="/company-info" icon={<NavIcon.CompanyInfo />} />
         <NavbarLink label="Profile" to="/profile" icon={<NavIcon.Profile />} />
-        <LogoutButton className="block sm:hidden" />
+
+        <div className="flex sm:hidden">
+          <LogoutButton />
+        </div>
       </nav>
 
-      <LogoutButton className="hidden sm:block" />
+      <div className="hidden sm:block">
+        <LogoutButton />
+      </div>
     </aside>
   );
 }
 
 export default Navbar;
 
-function NavbarLink({ label, to, icon }) {
+function NavbarLink({ label, to, icon, onClick }) {
   const { navbarExpanded } = useNavbar();
 
   const height = layoutDimensions.navbarSize - (layoutDimensions.navbarSize / 7) * 2;
@@ -67,7 +72,7 @@ function NavbarLink({ label, to, icon }) {
 
   return (
     <div className={`nav-link-margin flex self-center sm:self-auto`}>
-      <NavLink to={to} className={className} style={{ height: `${height}px` }}>
+      <NavLink to={to} className={className} style={{ height: `${height}px` }} onClick={onClick}>
         {icon && (
           <div className={`w-5 sm:absolute sm:top-1/2 sm:-translate-y-1/2`} style={{ left: `${iconPosition}px` }}>
             {icon}
@@ -100,19 +105,19 @@ function NavbarLink({ label, to, icon }) {
   );
 }
 
-function LogoutButton({ className }) {
+function LogoutButton() {
   const logout = useLogout();
   const navigate = useNavigate();
 
   return (
-    <button
+    <NavbarLink
+      label="Logout"
+      icon={<FontAwesomeIcon icon={faRightFromBracket} className="sm:rotate-180" />}
+      to={'/'}
       onClick={() => {
         logout();
         navigate('/login'); // Redirect to login page without providing a state in the location object
       }}
-      className={'nav-link btn-light text-gray-500 ' + className}
-    >
-      <FontAwesomeIcon icon={faRightFromBracket} className="sm:rotate-180" />
-    </button>
+    />
   );
 }
