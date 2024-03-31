@@ -16,7 +16,7 @@ function Layout() {
       {auth.accessToken ? (
         <div className={'layout-padding min-h-screen w-full'}>
           <div
-            className="layout-padding-when-navbar-expanded"
+            className="layout-padding-when-navbar-expanded h-full"
             style={{ transition: `padding-left ${dimensions.navbarExpandingDuration}s` }}
           >
             <Outlet />

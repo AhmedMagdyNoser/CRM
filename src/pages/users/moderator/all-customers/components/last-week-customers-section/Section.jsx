@@ -16,7 +16,7 @@ function LastWeekCustomersSection() {
   }, []);
 
   return (
-    <section className="flex flex-col gap-2 bg-pro-50 p-4">
+    <section className="flex flex-col gap-2 bg-pro-50 p-4 rounded-xl">
       <p>New customers this week</p>
       {loading ? (
         <div className="scrollbar-hide flex gap-3 overflow-x-auto py-1">
