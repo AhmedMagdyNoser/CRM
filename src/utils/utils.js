@@ -10,6 +10,8 @@ export const roles = {
 
 export const layoutDimensions = {
   navbarSize: 80,
+  navbarExpanedSize: 200,
+  navbarExpandingDuration: 0.25,
   navbarPadding: 20,
   layoutPadding: 24,
   mobileLayoutPadding: 16,
