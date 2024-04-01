@@ -24,7 +24,7 @@ function AddNewCustomer() {
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
   const [salesRepresntativeId, setSalesRepresntativeId] = useState('');
-  const [sourceName, setSourceName] = useState('');
+  const [source, setSourceName] = useState('');
   const [interests, setInterests] = useState([]);
 
   // Optional fields
@@ -47,7 +47,7 @@ function AddNewCustomer() {
     event.preventDefault();
     try {
       setError('');
-      if (!validateCustomerFields(firstName, lastName, phone, salesRepresntativeId, sourceName, interests, setError)) return;
+      if (!validateCustomerFields(firstName, lastName, phone, salesRepresntativeId, source, interests, setError)) return;
       setLoading(true);
       await privateAxios({
         url: '/moderator/add-customer',
@@ -57,7 +57,7 @@ function AddNewCustomer() {
           lastName,
           phone,
           salesRepresntativeId,
-          sourceName,
+          source,
           interests,
           age,
           gender,
@@ -98,16 +98,16 @@ function AddNewCustomer() {
               value={salesRepresntativeId}
               setValue={setSalesRepresntativeId}
               loading={salesOptionsLoading}
-              options={salesOptions.map((sales) => ({ value: sales.userId, label: sales.name }))}
+              options={salesOptions.map((sales) => ({ value: sales.id, label: sales.name }))}
               search
             />
             <DropdownMenu
               icon={icons.source}
               placeholder="Source"
-              value={sourceName}
+              value={source}
               setValue={setSourceName}
               loading={sourcesOptionsLoading}
-              options={sourcesOptions.map((source) => ({ value: source.sourceName, label: source.sourceName }))}
+              options={sourcesOptions.map((source) => ({ value: source.name, label: source.name }))} // Task: Change the data structure
               search
             />
           </div>

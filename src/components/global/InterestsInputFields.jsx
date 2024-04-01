@@ -13,12 +13,7 @@ function InterestsInputField({ interestsOptions, interests, setInterests, loadin
           <p className="p-2">No interests found</p>
         ) : (
           interestsOptions.map((interest) => (
-            <InterestCheckbox
-              key={interest.interestID}
-              value={interest.interestName}
-              interests={interests}
-              setInterests={setInterests}
-            />
+            <InterestCheckbox key={interest.id} interest={interest} interests={interests} setInterests={setInterests} />
           ))
         )}
       </div>
@@ -28,7 +23,9 @@ function InterestsInputField({ interestsOptions, interests, setInterests, loadin
 
 export default InterestsInputField;
 
-function InterestCheckbox({ value, interests, setInterests }) {
+function InterestCheckbox({ interest, interests, setInterests }) {
+  const id = interest.id;
+  const value = interest.name;
   return (
     <div className="w-full animate-fade-in-medium rounded-xl px-4 hover:bg-gray-100">
       <label className="flex h-10 cursor-pointer items-center gap-2 text-nowrap text-sm font-medium text-gray-500 sm:text-base">
@@ -42,7 +39,7 @@ function InterestCheckbox({ value, interests, setInterests }) {
           className="hidden"
           checked={interests.includes(value)}
           onChange={(e) => {
-            if (e.target.checked) setInterests([...interests, value]);
+            if (e.target.checked) setInterests([...interests, { id }]);
             else setInterests(interests.filter((interest) => interest !== value));
           }}
         />
