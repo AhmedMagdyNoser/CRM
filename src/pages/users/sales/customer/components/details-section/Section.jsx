@@ -3,20 +3,13 @@ import icons from '../../../../../../utils/faIcons';
 import CustomerPropertiesSkeleton from './CustomerPropertiesSkeleton';
 import CustomerProperties from './CustomerProperties';
 import CustomerEditingMode from './CustomerEditingMode';
-import { useEffect, useState } from 'react';
-import { customerDetails as customer } from '../../testingStaticData';
+import { useParams } from 'react-router-dom';
+import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
 
 function DetailsSection({ editingMode, setEditingMode }) {
-  const [loading, setLoading] = useState(true);
+  const params = useParams();
 
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const { loading, data: customer } = useOnLoadFetch(`/moderator/get-customer/${params.id}`);
 
   return (
     <div className="flex w-full flex-col items-center overflow-hidden rounded-xl border lg:w-[450px]">
@@ -25,7 +18,7 @@ function DetailsSection({ editingMode, setEditingMode }) {
           <FontAwesomeIcon icon={icons.user} className="text-3xl text-pro-300" />
         </div>
       </div>
-      <h2>
+      <h2 className="text-center">
         {loading ? (
           <div className="mt-5 h-5 w-32 rounded-xl bg-pro-50"></div>
         ) : editingMode ? (

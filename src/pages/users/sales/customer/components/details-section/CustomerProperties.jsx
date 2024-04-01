@@ -16,11 +16,7 @@ function CustomerProperties({ customer }) {
         value={customer.gender === 0 ? 'N/A' : customer.gender === 1 ? 'Male' : customer.genter === 2 ? 'Female' : null}
       />
       <Property icon={icons.city} title="City" value={customer.city || 'N/A'} />
-      <Property
-        icon={icons.assign}
-        title="Sales Representative"
-        value={`${customer.salesRepresntative.firstName} ${customer.salesRepresntative.lastName}`}
-      />
+      <Property icon={icons.assign} title="Sales Representative" value={`${customer.salesRepresentative.name}`} />
       <Property icon={icons.source} title="Source" value={customer.source} />
       <Property icon={icons.date} title="Added On" value={new Date(customer.additionDate).toLocaleDateString()} />
       {/* Task: formatDate */}
@@ -31,17 +27,21 @@ function CustomerProperties({ customer }) {
         ))}
       </div>
       {/* Task: Add last action */}
-      <div className="mt-5 font-medium text-gray-800">Last Action</div>
-      <div className="rounded-xl bg-gray-100 p-3">
-        <div className="flex justify-between">
-          <p className="text-nowrap text-gray-800">
-            {customer.lastAction?.type ? customer.lastAction.type.toUpperCase() : 'N/A'}
-          </p>
-          <p className="text-nowrap text-gray-800">
-            {customer.lastAction?.date ? new Date(customer.lastAction.date).toLocaleDateString() : 'N/A'}
-          </p>
-        </div>
-      </div>
+      {customer.lastAction && (
+        <>
+          <div className="mt-5 font-medium text-gray-800">Last Action</div>
+          <div className="rounded-xl bg-gray-100 p-3">
+            <div className="flex justify-between">
+              <p className="text-nowrap text-gray-800">
+                {customer.lastAction?.type ? customer.lastAction.type.toUpperCase() : 'N/A'}
+              </p>
+              <p className="text-nowrap text-gray-800">
+                {customer.lastAction?.date ? new Date(customer.lastAction.date).toLocaleDateString() : 'N/A'}
+              </p>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }
