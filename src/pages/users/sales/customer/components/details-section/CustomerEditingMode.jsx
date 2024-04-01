@@ -4,11 +4,15 @@ import { validateCustomerFields } from '../../../../../../utils/validation';
 import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
 import InputField from '../../../../../../components/ui/InputField';
 import Form from '../../../../../../components/ui/Form';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 // Task: This page needs to be refactored with the new data structure
 
 function CustomerEditingMode({ customer, setEditingMode }) {
   const privateAxios = usePrivateAxios();
+  const navigate = useNavigate();
 
   // Required fields
   const [firstName, setFirstName] = useState(customer.firstName);
@@ -61,6 +65,17 @@ function CustomerEditingMode({ customer, setEditingMode }) {
     }
   }
 
+  async function handleDelete() {
+    try {
+      setLoading(true);
+      await privateAxios({ url: `/moderator/delete-customer/${customer.id}`, method: 'Delete' });
+      navigate('/all-customers');
+    } catch (error) {
+      setLoading(false);
+      setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
+    }
+  }
+
   return (
     <div className="flex animate-fade-in-fast flex-col gap-2">
       <Form onSubmit={handleSubmit} submitLabel="Update" loading={loading} error={error}>
@@ -72,9 +87,21 @@ function CustomerEditingMode({ customer, setEditingMode }) {
         <InputField.City value={city || ''} onChange={(e) => setCity(e.target.value)} />
         {/* sales representative - source - Interests - gender */}
       </Form>
-      <button className="btn-light w-full rounded-xl py-2" onClick={() => setEditingMode(false)}>
-        Cancel
-      </button>
+      <div className="flex gap-2">
+        <button
+          className="w-full rounded-xl bg-gray-50 py-2 text-gray-500 transition-colors hover:bg-gray-100"
+          onClick={() => setEditingMode(false)}
+        >
+          Cancel
+        </button>
+        <button
+          className="w-full rounded-xl bg-red-50 py-2 text-red-500 transition-colors hover:bg-red-100"
+          onClick={handleDelete}
+        >
+          <FontAwesomeIcon icon={faTrashCan} className="mr-2" />
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
