@@ -35,4 +35,16 @@ export const breakboints = {
 export const trancateText = (text, length) => {
   if (text.length <= length) return text;
   return `${text.slice(0, length)}...`;
-}
+};
+
+export const formatDate = (date) => {
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  const dayOfWeek = days[date.getDay()];
+  const dayOfMonth = ('0' + date.getDate()).slice(-2);
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  return `${dayOfWeek} ${dayOfMonth} ${month} ${year}`;
+};

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import InterestBadge from '../../../../../../components/global/InterestBadge';
 import { trancateText } from '../../../../../../utils/utils';
+import { formatDate } from '../../../../../../utils/utils';
 
 function CustomerRow({ customer }) {
   return (
@@ -22,9 +23,7 @@ function CustomerRow({ customer }) {
       <td className="whitespace-nowrap px-6 py-4 text-gray-500">
         {customer.lastAction?.type ? customer.lastAction.type.toUpperCase() : 'N/A'}
       </td>
-      <td className="whitespace-nowrap px-6 py-4 text-gray-500">
-        {new Date(customer.additionDate).toDateString()} {/* Task: formatDate */}
-      </td>
+      <td className="whitespace-nowrap px-6 py-4 text-gray-500">{formatDate(new Date(customer.additionDate))}</td>
       <td className="whitespace-nowrap px-6 py-4">
         <Link
           to={`/customer/${customer.id}`}

@@ -9,11 +9,13 @@ import Pagination from '../../../../../../components/ui/Pagination';
 
 const ITEMS_PER_PAGE = 15;
 
+// Task: Fix depounce search
+
 function AllCustomersSection() {
   const [search, setSearch] = useState('');
   const privateAxios = usePrivateAxios();
 
-  const { loading, data, setLoading, setData } = useOnLoadFetch(`/moderator/getCustomers?page=1&size=${ITEMS_PER_PAGE}`);
+  const { loading, data, setLoading, setData } = useOnLoadFetch(`/moderator/get-customers?page=1&size=${ITEMS_PER_PAGE}`);
 
   let customers = [];
 
@@ -23,7 +25,7 @@ function AllCustomersSection() {
     try {
       setLoading(true);
       const { data } = await privateAxios({
-        url: `/moderator/getCustomers?page=${page}&size=${ITEMS_PER_PAGE}&query=${query || ''}`,
+        url: `/moderator/get-customers?page=${page}&size=${ITEMS_PER_PAGE}&query=${query || ''}`,
       });
       setData(data);
       setLoading(false);
