@@ -4,24 +4,33 @@ import InputField from '../../../../../../components/ui/InputField';
 import CustomerRowSkeleton from './CustomerRowSkeleton';
 import CustomerRow from './CustomerRow';
 import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
+import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
+import Pagination from '../../../../../../components/ui/Pagination';
 
-// Task: Pagination + Search
+const ITEMS_PER_PAGE = 15;
 
 function AllCustomersSection() {
   const [search, setSearch] = useState('');
+  const privateAxios = usePrivateAxios();
 
-  const { loading, data } = useOnLoadFetch('/moderator/getCustomers');
+  const { loading, data, setLoading, setData } = useOnLoadFetch(`/moderator/getCustomers?page=1&size=${ITEMS_PER_PAGE}`);
 
-  let filteredCustomers = [];
+  let customers = [];
 
-  if (!loading)
-    filteredCustomers = data.items.filter(
-      (customer) =>
-        customer.firstName.toLowerCase().includes(search.toLowerCase()) ||
-        customer.lastName.toLowerCase().includes(search.toLowerCase()) ||
-        customer.phone.includes(search) ||
-        (customer.email && customer.email.toLowerCase().includes(search.toLowerCase())),
-    );
+  if (!loading) customers = data.items;
+
+  async function getCustomers(page, query) {
+    try {
+      setLoading(true);
+      const { data } = await privateAxios({
+        url: `/moderator/getCustomers?page=${page}&size=${ITEMS_PER_PAGE}&query=${query || ''}`,
+      });
+      setData(data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  }
 
   return (
     <>
@@ -33,7 +42,10 @@ function AllCustomersSection() {
             icon={faSearch}
             placeholder="Search by name, phone, or email..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              getCustomers(1, e.target.value);
+            }}
             className="px-3 py-2"
           />
         </div>
@@ -55,7 +67,7 @@ function AllCustomersSection() {
             <tbody>
               <CustomerRowSkeleton length={5} />
             </tbody>
-          ) : filteredCustomers.length === 0 ? (
+          ) : customers.length === 0 ? (
             <tbody>
               <tr>
                 <td colSpan="4" className="px-6 py-4 text-gray-500">
@@ -65,12 +77,20 @@ function AllCustomersSection() {
             </tbody>
           ) : (
             <tbody className="bg-white">
-              {filteredCustomers.map((customer) => (
+              {customers.map((customer) => (
                 <CustomerRow key={customer.id} customer={customer} />
               ))}
             </tbody>
           )}
         </table>
+      </div>
+      <div className="flex scale-90 justify-center sm:scale-100 sm:justify-end">
+        <Pagination
+          getPage={(page) => getCustomers(page)}
+          currentPage={data.currentPage}
+          totalPages={data.pages}
+          className={`gap-1 ${data.pages === 1 || loading ? 'hidden' : ''}`}
+        />
       </div>
     </>
   );

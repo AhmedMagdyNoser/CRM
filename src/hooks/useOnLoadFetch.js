@@ -30,7 +30,7 @@ function useOnLoadFetch(url) {
     };
   }, [url, privateAxios]);
 
-  return { loading, data, error };
+  return { loading, data, error, setLoading, setData, setError };
 }
 
 export default useOnLoadFetch;
