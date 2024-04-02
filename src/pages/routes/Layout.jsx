@@ -4,10 +4,13 @@ import useAuth from '../../hooks/useAuth';
 import OnlineStatueAlert from '../../components/global/OnlineStatusAlert';
 import { layoutDimensions as dimensions, breakboints } from '../../utils/utils';
 import useNavbar from '../../hooks/useNavbar';
+import useScrollToTop from '../../hooks/useScrollToTop';
 
 function Layout() {
   const { auth } = useAuth();
   const { navbarExpanded } = useNavbar();
+  
+  useScrollToTop();
 
   return (
     <div className="flex text-pro-300">

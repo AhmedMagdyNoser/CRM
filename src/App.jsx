@@ -67,3 +67,14 @@ function App() {
 }
 
 export default App;
+
+// To scroll to top on routing
+// function ScrollToTop() {
+//   const { pathname } = useLocation();
+
+//   useEffect(() => {
+//     window.scroll({ top: 0, behavior: 'instant' });
+//   }, [pathname]);
+
+//   return null;
+// }
