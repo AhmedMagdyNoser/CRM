@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import InterestBadge from '../../../../../../components/global/InterestBadge';
+import { trancateText } from '../../../../../../utils/utils';
 
 function CustomerRow({ customer }) {
   return (
@@ -10,9 +11,7 @@ function CustomerRow({ customer }) {
         <div className="flex-center h-10 w-10 rounded-full bg-pro-100">
           <FontAwesomeIcon icon={faUser} className="text-sm text-pro-200" />
         </div>
-        <span>
-          {customer.firstName} {customer.lastName}
-        </span>
+        <span>{trancateText(customer.firstName + ' ' + customer.lastName, 25)}</span>
       </td>
       <td className="whitespace-nowrap px-6 py-4 text-gray-500">{customer.phone}</td>
       <td className="flex flex-wrap gap-2 whitespace-nowrap px-6 py-4">

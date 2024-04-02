@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InterestBadge from '../../../../../../components/global/InterestBadge';
+import { trancateText } from '../../../../../../utils/utils';
 
 function CustomerCard({ customer }) {
   return (
@@ -14,7 +15,9 @@ function CustomerCard({ customer }) {
           <FontAwesomeIcon icon={faUser} className="text-pro-200" />
         </div>
         <div>
-          <h3 className="text-nowrap text-base sm:text-lg">{customer.firstName + ' ' + customer.lastName}</h3>
+          <h3 className="text-nowrap text-base sm:text-lg">
+            {trancateText(customer.firstName + ' ' + customer.lastName, 20)}
+          </h3>
           <p className="text-sm">{customer.phone}</p>
         </div>
       </div>

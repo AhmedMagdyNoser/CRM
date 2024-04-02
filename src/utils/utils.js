@@ -31,3 +31,8 @@ export const breakboints = {
   lg: '1024px',
   xl: '1200px',
 };
+
+export const trancateText = (text, length) => {
+  if (text.length <= length) return text;
+  return `${text.slice(0, length)}...`;
+}

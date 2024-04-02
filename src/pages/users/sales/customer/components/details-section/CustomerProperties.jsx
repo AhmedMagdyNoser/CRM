@@ -13,7 +13,7 @@ function CustomerProperties({ customer }) {
       <Property
         icon={icons.gender}
         title="Gender"
-        value={customer.gender === 0 ? 'N/A' : customer.gender === 1 ? 'Male' : customer.genter === 2 ? 'Female' : null}
+        value={customer.gender === 0 ? 'N/A' : customer.gender === 1 ? 'Male' : customer.gender === 2 ? 'Female' : null}
       />
       <Property icon={icons.city} title="City" value={customer.city || 'N/A'} />
       <Property icon={icons.assign} title="Sales Representative" value={`${customer.salesRepresentative.name}`} />
