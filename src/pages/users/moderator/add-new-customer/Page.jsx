@@ -10,6 +10,8 @@ import InterestsInputField from '../../../../components/global/InterestsInputFie
 import { breakboints, globalErrorMessage } from '../../../../utils/utils';
 import { validateCustomerFields } from '../../../../utils/validation';
 import icons from '../../../../utils/faIcons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function AddNewCustomer() {
   useDocumentTitle('Add New Customer');
@@ -33,13 +35,25 @@ function AddNewCustomer() {
 
   // Options
   const { data: salesOptions, loading: salesOptionsLoading } = useOnLoadFetch('/moderator/get-all-sales');
-  const { data: sourcesOptions, loading: sourcesOptionsLoading } = useOnLoadFetch('/shared/get-all-sources');
+  const {
+    data: sourcesOptions,
+    setData: setSourcesOptions,
+    loading: sourcesOptionsLoading,
+  } = useOnLoadFetch('/shared/get-all-sources');
   const { data: interestsOptions, loading: interestsOptionsLoading } = useOnLoadFetch('/shared/get-all-interests');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const [openOptionalFields, setOpenOptionalFields] = useState(false);
+
+  async function addNewSource(name) {
+    try {
+      await privateAxios({ method: 'post', url: '/moderator/add-source', data: { name } });
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -103,15 +117,24 @@ function AddNewCustomer() {
               options={salesOptions.map((sales) => ({ value: sales.id, label: `${sales.firstName} ${sales.lastName}` }))}
               searchable
             />
-            <DropdownMenu
-              icon={icons.source}
-              placeholder="Source"
-              selected={source}
-              setSelected={setSource}
-              loading={sourcesOptionsLoading}
-              options={sourcesOptions.map((source) => ({ value: source.name, label: source.name }))} // Task: Change the data structure
-              searchable
-            />
+            <div className="flex w-full gap-3">
+              <DropdownMenu
+                placeholder="Source"
+                options={sourcesOptions.map((source) => ({ value: source.name, label: source.name }))} // Task: Change the data structure
+                setOptions={setSourcesOptions}
+                selected={source}
+                setSelected={setSource}
+                searchable
+                icon={icons.source}
+                loading={sourcesOptionsLoading}
+              />
+              <button
+                type="button"
+                className="flex-center rounded-xl bg-gray-100 px-5 text-xl text-gray-500 transition-colors hover:bg-gray-200"
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+            </div>
           </div>
           <InterestsInputField
             interestsOptions={interestsOptions}
@@ -121,7 +144,6 @@ function AddNewCustomer() {
           />
         </fieldset>
 
-        {/* Optional Information Fieldset */}
         <fieldset>
           <legend
             className="cursor-pointer text-gray-500 hover:underline"
@@ -156,7 +178,7 @@ function AddNewCustomer() {
         {`
           @media (min-width: ${breakboints.md}) {
             .form-shadow {
-              box-shadow: 0 0 50px 25px rgba(0, 0, 0, 0.05), 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+              box-shadow: 0 0 100px 50px rgba(0, 0, 0, 0.05), 0 5px 10px 0 rgba(0, 0, 0, 0.1);
             }
           }
         `}

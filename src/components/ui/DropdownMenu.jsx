@@ -1,8 +1,19 @@
-import { faAngleDown, faAngleUp, faX } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+import { faAngleDown, faAngleUp, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 
-function DropdownMenu({ options = [], selected, setSelected, searchable, icon, loading, className = '', ...rest }) {
+function DropdownMenu({
+  options = [],
+  setOptions,
+  selected,
+  setSelected,
+  searchable,
+  icon,
+  loading,
+  className = '',
+  ...rest
+}) {
   const element = useRef(null);
 
   const [query, setQuery] = useState('');
@@ -33,6 +44,10 @@ function DropdownMenu({ options = [], selected, setSelected, searchable, icon, l
           setOpenMenu(false);
         }
         break;
+      case 'Escape':
+        event.preventDefault();
+        setOpenMenu(false);
+        break;
       default:
         break;
     }
@@ -60,11 +75,11 @@ function DropdownMenu({ options = [], selected, setSelected, searchable, icon, l
   }, [element]);
 
   return (
-    <div ref={element} onClick={() => setOpenMenu(!openMenu)} className="relative w-full cursor-pointer">
+    <div ref={element} className="relative w-full">
       <div className="flex items-center overflow-hidden rounded-xl bg-gray-100">
         {icon && <FontAwesomeIcon icon={icon} className="pl-3 text-gray-500" />}
         <input
-          className={`flex-1 cursor-pointer bg-inherit p-3 text-gray-800 outline-none placeholder:text-gray-500 ${className}`}
+          className={`flex-1 bg-inherit p-3 text-gray-800 outline-none placeholder:text-gray-500 ${className}`}
           value={query}
           onChange={(e) => {
             setOpenMenu(true);
@@ -76,9 +91,14 @@ function DropdownMenu({ options = [], selected, setSelected, searchable, icon, l
           {...rest}
         />
         {selected ? (
-          <MenuButton onClick={() => setQuery('')}>
-            <FontAwesomeIcon icon={faX} />
-          </MenuButton>
+          <div className="flex-center gap-2">
+            <span>
+              <FontAwesomeIcon icon={faCheck} className="text-green-500" />
+            </span>
+            <MenuButton onClick={() => setQuery('')}>
+              <FontAwesomeIcon icon={faX} />
+            </MenuButton>
+          </div>
         ) : (
           <MenuButton onClick={() => setOpenMenu(!openMenu)}>
             <FontAwesomeIcon icon={openMenu ? faAngleUp : faAngleDown} />
@@ -87,7 +107,7 @@ function DropdownMenu({ options = [], selected, setSelected, searchable, icon, l
       </div>
 
       {openMenu && (
-        <div className="absolute top-full z-50 w-full cursor-default rounded-xl border bg-white py-3 text-gray-800 shadow-md placeholder:text-gray-500">
+        <div className="absolute top-full z-50 max-h-[200px] w-full cursor-default overflow-auto rounded-xl border bg-white py-3 text-gray-800 shadow-md placeholder:text-gray-500">
           {loading ? (
             <div className="p-2 px-4 text-sm text-gray-500">Loading Options...</div>
           ) : filteredOptions.length === 0 ? (
@@ -100,6 +120,7 @@ function DropdownMenu({ options = [], selected, setSelected, searchable, icon, l
                 onClick={() => {
                   setQuery(option.label);
                   setSelected(option.value);
+                  setOpenMenu(false);
                 }}
               >
                 {option.label}
