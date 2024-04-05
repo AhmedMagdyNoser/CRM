@@ -1,26 +1,53 @@
-import { faAngleDown, faX } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 
 function DropdownMenu({ options = [], selected, setSelected, searchable, icon, loading, className = '', ...rest }) {
   const element = useRef(null);
-  const inputRef = useRef(null);
 
   const [query, setQuery] = useState('');
   const [openMenu, setOpenMenu] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
 
   let filteredOptions = options;
 
   // Filter options based on query
   if (query) filteredOptions = options.filter((option) => option.label.toLowerCase().includes(query.toLowerCase()));
 
+  const handleKeyDown = (event) => {
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        setHighlightedIndex((prev) => (prev + 1) % filteredOptions.length);
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        setHighlightedIndex((prev) => (prev - 1 + filteredOptions.length) % filteredOptions.length);
+        break;
+      case 'Enter':
+        event.preventDefault();
+        if (highlightedIndex >= 0) {
+          const selectedOption = filteredOptions[highlightedIndex];
+          setQuery(selectedOption.label);
+          setSelected(selectedOption.value);
+          setOpenMenu(false);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  // Set selected value if query matches an option
   useEffect(() => {
-    // Set selected value if query matches an option
     const matchingOption = options.find((option) => query.toLowerCase() === option.label.toLowerCase());
-    if (matchingOption) setSelected(matchingOption.value);
-    else setSelected('');
+    if (matchingOption) {
+      setSelected(matchingOption.value);
+      setQuery(matchingOption.label);
+    } else setSelected('');
   }, [query, options, setSelected]);
 
+  // Close menu when clicked outside
   useEffect(() => {
     function handleClickOutsideElement(event) {
       if (element.current && !element.current.contains(event.target)) {
@@ -32,30 +59,18 @@ function DropdownMenu({ options = [], selected, setSelected, searchable, icon, l
     return () => document.removeEventListener('mousedown', handleClickOutsideElement);
   }, [element]);
 
-  useEffect(() => {
-    function handleFocus() {
-      setOpenMenu(true);
-    }
-
-    const inputElement = inputRef.current;
-    inputElement.addEventListener('focus', handleFocus);
-    return () => {
-      inputElement.removeEventListener('focus', handleFocus);
-    };
-  }, []);
-
   return (
     <div ref={element} onClick={() => setOpenMenu(!openMenu)} className="relative w-full cursor-pointer">
       <div className="flex items-center overflow-hidden rounded-xl bg-gray-100">
         {icon && <FontAwesomeIcon icon={icon} className="pl-3 text-gray-500" />}
         <input
           className={`flex-1 cursor-pointer bg-inherit p-3 text-gray-800 outline-none placeholder:text-gray-500 ${className}`}
-          ref={inputRef}
           value={query}
           onChange={(e) => {
             setOpenMenu(true);
             setQuery(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
           readOnly={!searchable}
           size={1}
           {...rest}
@@ -65,8 +80,8 @@ function DropdownMenu({ options = [], selected, setSelected, searchable, icon, l
             <FontAwesomeIcon icon={faX} />
           </MenuButton>
         ) : (
-          <MenuButton>
-            <FontAwesomeIcon icon={faAngleDown} />
+          <MenuButton onClick={() => setOpenMenu(!openMenu)}>
+            <FontAwesomeIcon icon={openMenu ? faAngleUp : faAngleDown} />
           </MenuButton>
         )}
       </div>
@@ -78,10 +93,10 @@ function DropdownMenu({ options = [], selected, setSelected, searchable, icon, l
           ) : filteredOptions.length === 0 ? (
             <div className="p-2 px-4 text-sm text-gray-500">No options matched</div>
           ) : (
-            filteredOptions.map((option) => (
+            filteredOptions.map((option, index) => (
               <div
                 key={option.value}
-                className="selection-none cursor-pointer border-l-4 border-transparent p-2 px-4 transition-colors hover:border-pro-300 hover:bg-pro-50"
+                className={`selection-none cursor-pointer border-l-4 p-2 px-4 transition-colors hover:border-pro-300 hover:bg-pro-50 ${index === highlightedIndex ? 'border-pro-300 bg-pro-50' : 'border-transparent'}`}
                 onClick={() => {
                   setQuery(option.label);
                   setSelected(option.value);

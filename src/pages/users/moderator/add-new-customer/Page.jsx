@@ -7,11 +7,9 @@ import Form from '../../../../components/ui/Form';
 import InputField from '../../../../components/ui/InputField';
 import DropdownMenu from '../../../../components/ui/DropdownMenu';
 import InterestsInputField from '../../../../components/global/InterestsInputFields';
-import { globalErrorMessage } from '../../../../utils/utils';
+import { breakboints, globalErrorMessage } from '../../../../utils/utils';
 import { validateCustomerFields } from '../../../../utils/validation';
 import icons from '../../../../utils/faIcons';
-
-// Task: This page needs to be refactored
 
 function AddNewCustomer() {
   useDocumentTitle('Add New Customer');
@@ -83,7 +81,7 @@ function AddNewCustomer() {
         loading={loading}
         error={error}
         submitLabel="Add"
-        className="h-full w-full overflow-auto rounded-xl md:h-fit md:w-[650px] md:border md:p-8 md:shadow-md lg:w-[800px]"
+        className="form-shadow h-full w-full overflow-auto rounded-xl md:h-fit md:w-[650px] md:border md:p-8 lg:w-[800px]"
       >
         <h1>Add New Customer</h1>
 
@@ -154,6 +152,15 @@ function AddNewCustomer() {
           )}
         </fieldset>
       </Form>
+      <style>
+        {`
+          @media (min-width: ${breakboints.md}) {
+            .form-shadow {
+              box-shadow: 0 0 50px 25px rgba(0, 0, 0, 0.05), 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }
