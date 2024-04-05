@@ -24,14 +24,14 @@ function AddNewCustomer() {
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
   const [salesRepresntativeId, setSalesRepresntativeId] = useState('');
-  const [source, setSourceName] = useState('');
+  const [source, setSource] = useState('');
   const [interests, setInterests] = useState([]);
 
   // Optional fields
-  const [age, setAge] = useState(undefined);
-  const [gender, setGender] = useState(undefined);
-  const [email, setEmail] = useState(undefined);
-  const [city, setCity] = useState(undefined);
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState(0);
+  const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
 
   // Options
   const { data: salesOptions, loading: salesOptionsLoading } = useOnLoadFetch('/moderator/get-all-sales');
@@ -47,25 +47,29 @@ function AddNewCustomer() {
     event.preventDefault();
     try {
       setError('');
-      if (!validateCustomerFields(firstName, lastName, phone, salesRepresntativeId, source, interests, setError)) return;
+      const data = {
+        firstName,
+        lastName,
+        phone,
+        salesRepresntativeId,
+        source,
+        interests,
+      };
+
+      if (!validateCustomerFields(data, setError)) return;
+
+      if (age) data.age = age;
+      if (gender) data.gender = gender;
+      if (email) data.email = email;
+      if (city) data.city = city;
+
       setLoading(true);
-      await privateAxios({
+      const res = await privateAxios({
         url: '/moderator/add-customer',
         method: 'post',
-        data: {
-          firstName,
-          lastName,
-          phone,
-          salesRepresntativeId,
-          source,
-          interests,
-          age,
-          gender,
-          email,
-          city,
-        },
+        data,
       });
-      navigate('/'); // Task: Redirect to the customer's details page using the id
+      navigate(`/customer/${res.data.id}`);
     } catch (error) {
       setLoading(false);
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
@@ -79,7 +83,7 @@ function AddNewCustomer() {
         loading={loading}
         error={error}
         submitLabel="Add"
-        className="h-full w-full overflow-auto md:h-fit md:w-[650px] md:border md:p-8 md:shadow-lg lg:w-[800px]"
+        className="h-full w-full overflow-auto rounded-xl md:h-fit md:w-[650px] md:border md:p-8 md:shadow-md lg:w-[800px]"
       >
         <h1>Add New Customer</h1>
 
@@ -95,20 +99,20 @@ function AddNewCustomer() {
             <DropdownMenu
               icon={icons.assign}
               placeholder="Assign to"
-              value={salesRepresntativeId}
-              setValue={setSalesRepresntativeId}
+              selected={salesRepresntativeId}
+              setSelected={setSalesRepresntativeId}
               loading={salesOptionsLoading}
-              options={salesOptions.map((sales) => ({ value: sales.id, label: sales.name }))}
-              search
+              options={salesOptions.map((sales) => ({ value: sales.id, label: `${sales.firstName} ${sales.lastName}` }))}
+              searchable
             />
             <DropdownMenu
               icon={icons.source}
               placeholder="Source"
-              value={source}
-              setValue={setSourceName}
+              selected={source}
+              setSelected={setSource}
               loading={sourcesOptionsLoading}
               options={sourcesOptions.map((source) => ({ value: source.name, label: source.name }))} // Task: Change the data structure
-              search
+              searchable
             />
           </div>
           <InterestsInputField
@@ -134,11 +138,11 @@ function AddNewCustomer() {
                 <DropdownMenu
                   icon={icons.gender}
                   placeholder="Gender"
-                  value={gender}
-                  setValue={setGender}
+                  selected={gender}
+                  setSelected={setGender}
                   options={[
-                    { value: 0, label: 'Male' },
-                    { value: 1, label: 'Female' },
+                    { value: 1, label: 'Male' },
+                    { value: 2, label: 'Female' },
                   ]}
                 />
               </div>

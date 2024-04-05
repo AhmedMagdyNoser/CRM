@@ -5,7 +5,7 @@ import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
 function LastWeekCustomersSection() {
   const { loading, data } = useOnLoadFetch('/moderator/get-last-week-customers');
 
-  const lastWeekCustomers = data.items
+  const lastWeekCustomers = data.items;
 
   return (
     <section className="flex flex-col gap-2 rounded-xl bg-pro-50 p-4">

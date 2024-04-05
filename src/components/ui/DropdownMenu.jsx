@@ -1,12 +1,24 @@
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 
-function DropdownMenu({ icon, search, options = [], loading, value, setValue, className = '', ...rest }) {
+function DropdownMenu({ options = [], selected, setSelected, searchable, icon, loading, className = '', ...rest }) {
   const element = useRef(null);
-  const [label, setLabel] = useState('');
+
+  const [query, setQuery] = useState('');
   const [openMenu, setOpenMenu] = useState(false);
-  const [filteredOptions, setFilteredOptions] = useState(options);
+
+  let filteredOptions = options;
+
+  // Filter options based on query
+  if (query) filteredOptions = options.filter((option) => option.label.toLowerCase().includes(query.toLowerCase()));
+
+  useEffect(() => {
+    // Set selected value if query matches an option
+    const matchingOption = options.find((option) => query.toLowerCase() === option.label.toLowerCase());
+    if (matchingOption) setSelected(matchingOption.value);
+    else setSelected('');
+  }, [query, options, setSelected]);
 
   useEffect(() => {
     function handleClickOutsideElement(event) {
@@ -20,43 +32,33 @@ function DropdownMenu({ icon, search, options = [], loading, value, setValue, cl
   }, [element]);
 
   return (
-    <div
-      ref={element}
-      className="relative w-full cursor-pointer"
-      onClick={() => {
-        setOpenMenu(!openMenu);
-        setFilteredOptions(options);
-      }}
-    >
+    <div ref={element} onClick={() => setOpenMenu(!openMenu)} className="relative w-full cursor-pointer">
       <div className="flex items-center overflow-hidden rounded-xl bg-gray-100">
-        {icon && <FontAwesomeIcon icon={icon} className={'pl-3 text-gray-500 transition-colors duration-1000'} />}
+        {icon && <FontAwesomeIcon icon={icon} className="pl-3 text-gray-500" />}
         <input
-          className={
-            'flex-1 cursor-pointer bg-inherit p-3 text-gray-800 outline-none placeholder:text-gray-500 ' + className
-          }
-          value={label}
+          className={`flex-1 cursor-pointer bg-inherit p-3 text-gray-800 outline-none placeholder:text-gray-500 ${className}`}
+          value={query}
           onChange={(e) => {
-            const input = e.target.value;
-            setLabel(input);
-            setFilteredOptions(
-              options.filter((option) => {
-                if (input.toLowerCase() === option.label.toLowerCase())
-                  setValue(option.value); // If the input matches an option, set the value
-                else setValue('');
-                return option.label.toLowerCase().includes(input.toLowerCase());
-              }),
-            );
             setOpenMenu(true);
+            setQuery(e.target.value);
           }}
-          readOnly={!search}
+          readOnly={!searchable}
           size={1}
           {...rest}
         />
-        <FontAwesomeIcon icon={faAngleDown} className="pr-3 text-gray-500" />
+        {selected ? (
+          <MenuButton onClick={() => setQuery('')}>
+            <FontAwesomeIcon icon={faX} />
+          </MenuButton>
+        ) : (
+          <MenuButton>
+            <FontAwesomeIcon icon={faAngleDown} />
+          </MenuButton>
+        )}
       </div>
 
       {openMenu && (
-        <div className="absolute top-full z-50 w-full cursor-default rounded-xl border bg-white py-3 text-gray-800 shadow-md outline-none placeholder:text-gray-500">
+        <div className="absolute top-full z-50 w-full cursor-default rounded-xl border bg-white py-3 text-gray-800 shadow-md placeholder:text-gray-500">
           {loading ? (
             <div className="p-2 px-4 text-sm text-gray-500">Loading Options...</div>
           ) : filteredOptions.length === 0 ? (
@@ -65,10 +67,10 @@ function DropdownMenu({ icon, search, options = [], loading, value, setValue, cl
             filteredOptions.map((option) => (
               <div
                 key={option.value}
-                className="selection-none cursor-pointer border-l-4 border-transparent p-2 px-4 hover:border-pro-300 hover:bg-pro-50"
+                className="selection-none cursor-pointer border-l-4 border-transparent p-2 px-4 transition-colors hover:border-pro-300 hover:bg-pro-50"
                 onClick={() => {
-                  setLabel(option.label);
-                  setValue(option.value);
+                  setQuery(option.label);
+                  setSelected(option.value);
                 }}
               >
                 {option.label}
@@ -82,3 +84,15 @@ function DropdownMenu({ icon, search, options = [], loading, value, setValue, cl
 }
 
 export default DropdownMenu;
+
+function MenuButton({ children, ...rest }) {
+  return (
+    <button
+      type="button"
+      className="flex-center mr-3 h-7 w-7 rounded-full bg-gray-200 text-xs text-gray-500 transition-colors hover:bg-gray-300"
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+}
