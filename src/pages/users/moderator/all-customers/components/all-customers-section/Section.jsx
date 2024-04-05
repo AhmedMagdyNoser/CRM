@@ -1,53 +1,56 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import useDebouncedValue from '../../../../../../hooks/useDebouncedValue';
+import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import InputField from '../../../../../../components/ui/InputField';
+import Pagination from '../../../../../../components/ui/Pagination';
 import CustomerRowSkeleton from './CustomerRowSkeleton';
 import CustomerRow from './CustomerRow';
-import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
-import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
-import Pagination from '../../../../../../components/ui/Pagination';
 
 const ITEMS_PER_PAGE = 15;
 
-// Task: Fix depounce search
-
 function AllCustomersSection() {
-  const [search, setSearch] = useState('');
   const privateAxios = usePrivateAxios();
 
-  const { loading, data, setLoading, setData } = useOnLoadFetch(`/moderator/get-customers?page=1&size=${ITEMS_PER_PAGE}`);
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  let customers = [];
+  const [search, setSearch] = useState('');
+  const debouncedSearchTerm = useDebouncedValue(search, 350);
 
-  if (!loading) customers = data.items;
+  let customers = data.items || [];
 
-  async function getCustomers(page, query) {
-    try {
-      setLoading(true);
-      const { data } = await privateAxios({
-        url: `/moderator/get-customers?page=${page}&size=${ITEMS_PER_PAGE}&query=${query || ''}`,
-      });
-      setData(data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  }
+  const getCustomers = useCallback(
+    async (page, query) => {
+      try {
+        setLoading(true);
+        const { data } = await privateAxios({
+          url: `/moderator/get-customers?page=${page}&size=${ITEMS_PER_PAGE}&query=${query || ''}`,
+        });
+        setData(data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    },
+    [privateAxios],
+  );
+
+  useEffect(() => {
+    getCustomers(1, debouncedSearchTerm);
+  }, [debouncedSearchTerm, getCustomers]); // Also run with the first render, so we no longer need useOnLoadFetch
 
   return (
     <>
-      <div className="flex flex-wrap items-center justify-between">
-        <span className="my-4 rounded-full bg-pro-300 px-4 py-2 text-sm capitalize text-white">All customers</span>
+      <div className="my-4 flex flex-wrap items-center justify-between gap-4">
+        <span className="rounded-full bg-pro-300 px-4 py-2 text-sm capitalize text-white">All customers</span>
         <div className="w-full sm:w-[375px]">
           <InputField
             type="text"
             icon={faSearch}
             placeholder="Search by name, phone, or email..."
             value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              getCustomers(1, e.target.value);
-            }}
+            onChange={(e) => setSearch(e.target.value)}
             className="px-3 py-2"
           />
         </div>
