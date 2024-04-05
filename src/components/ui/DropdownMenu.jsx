@@ -1,4 +1,3 @@
-import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown, faAngleUp, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
@@ -55,11 +54,13 @@ function DropdownMenu({
 
   // Set selected value if query matches an option
   useEffect(() => {
-    const matchingOption = options.find((option) => query.toLowerCase() === option.label.toLowerCase());
-    if (matchingOption) {
-      setSelected(matchingOption.value);
-      setQuery(matchingOption.label);
-    } else setSelected('');
+    if (query) {
+      const matchingOption = options.find((option) => query.toLowerCase() === option.label.toLowerCase());
+      if (matchingOption) {
+        setSelected(matchingOption.value);
+        setQuery(matchingOption.label);
+      } else setSelected('');
+    }
   }, [query, options, setSelected]);
 
   // Close menu when clicked outside

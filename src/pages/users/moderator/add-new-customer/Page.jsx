@@ -12,6 +12,7 @@ import { validateCustomerFields } from '../../../../utils/validation';
 import icons from '../../../../utils/faIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import AddNewSourcePopup from './components/AddNewSourcePopup';
 
 function AddNewCustomer() {
   useDocumentTitle('Add New Customer');
@@ -46,14 +47,7 @@ function AddNewCustomer() {
   const [error, setError] = useState('');
 
   const [openOptionalFields, setOpenOptionalFields] = useState(false);
-
-  async function addNewSource(name) {
-    try {
-      await privateAxios({ method: 'post', url: '/moderator/add-source', data: { name } });
-    } catch (error) {
-      return Promise.reject(error);
-    }
-  }
+  const [newSourcePopup, setNewSourcePopup] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -130,10 +124,12 @@ function AddNewCustomer() {
               />
               <button
                 type="button"
+                onClick={() => setNewSourcePopup(true)}
                 className="flex-center rounded-xl bg-gray-100 px-5 text-xl text-gray-500 transition-colors hover:bg-gray-200"
               >
                 <FontAwesomeIcon icon={faPlus} />
               </button>
+              {newSourcePopup && <AddNewSourcePopup setNewSourcePopup={setNewSourcePopup} setSourcesOptions={setSourcesOptions} />}
             </div>
           </div>
           <InterestsInputField
