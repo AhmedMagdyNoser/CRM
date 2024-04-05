@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 function DropdownMenu({ options = [], selected, setSelected, searchable, icon, loading, className = '', ...rest }) {
   const element = useRef(null);
+  const inputRef = useRef(null);
 
   const [query, setQuery] = useState('');
   const [openMenu, setOpenMenu] = useState(false);
@@ -31,12 +32,25 @@ function DropdownMenu({ options = [], selected, setSelected, searchable, icon, l
     return () => document.removeEventListener('mousedown', handleClickOutsideElement);
   }, [element]);
 
+  useEffect(() => {
+    function handleFocus() {
+      setOpenMenu(true);
+    }
+
+    const inputElement = inputRef.current;
+    inputElement.addEventListener('focus', handleFocus);
+    return () => {
+      inputElement.removeEventListener('focus', handleFocus);
+    };
+  }, []);
+
   return (
     <div ref={element} onClick={() => setOpenMenu(!openMenu)} className="relative w-full cursor-pointer">
       <div className="flex items-center overflow-hidden rounded-xl bg-gray-100">
         {icon && <FontAwesomeIcon icon={icon} className="pl-3 text-gray-500" />}
         <input
           className={`flex-1 cursor-pointer bg-inherit p-3 text-gray-800 outline-none placeholder:text-gray-500 ${className}`}
+          ref={inputRef}
           value={query}
           onChange={(e) => {
             setOpenMenu(true);
