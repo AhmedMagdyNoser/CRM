@@ -1,5 +1,5 @@
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { globalErrorMessage } from '../../utils/utils';
+import { globalErrorMessage, paths } from '../../utils/utils';
 import { useState } from 'react';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
@@ -22,7 +22,7 @@ function VerifyEmail() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  if (!location.state?.email) return <Navigate to="/login" replace={true} />;
+  if (!location.state?.email) return <Navigate to={`/${paths.login}`} replace={true} />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -43,7 +43,7 @@ function VerifyEmail() {
           url: '/auth/verify-code',
           data: { purpose: location.state.purpose, email: location.state.email, code },
         });
-        navigate('/reset-password', { state: { email: location.state.email, token: response.data.token } });
+        navigate(`/${paths.resetPassword}`, { state: { email: location.state.email, token: response.data.token } });
       }
     } catch (error) {
       setLoading(false);

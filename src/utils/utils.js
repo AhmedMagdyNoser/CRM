@@ -17,13 +17,21 @@ export const layoutDimensions = {
   mobileLayoutPadding: 16,
 };
 
-export const colorPairs = [
-  { bg: '#f1f5fe', text: '#628cee' },
-  { bg: '#fff9ee', text: '#9b7127' },
-  { bg: '#eefdf3', text: '#1e833f' },
-  { bg: '#fdf2f2', text: '#e0464a' },
-  { bg: '#f5f5f5', text: '#4a5568' },
-];
+export const paths = {
+  login: 'login',
+  register: 'register',
+  verifyEmail: 'verify-email',
+  forgotPassword: 'forgot-password',
+  resetPassword: 'reset-password',
+  locked: 'locked',
+  profile: 'profile',
+  companyInfo: 'company-info',
+  dashboard: 'dashboard',
+  roles: 'roles',
+  customers: 'customers', // + /:id for a single customer
+  addNewCustomer: 'add-new-customer',
+  assignedCustomers: 'assigned-customers',
+};
 
 export const breakboints = {
   sm: '612px',
@@ -36,6 +44,14 @@ export const trancateText = (text, length) => {
   if (text.length <= length) return text;
   return `${text.slice(0, length)}...`;
 };
+
+export const colorPairs = [
+  { bg: '#f1f5fe', text: '#628cee' },
+  { bg: '#fff9ee', text: '#9b7127' },
+  { bg: '#eefdf3', text: '#1e833f' },
+  { bg: '#fdf2f2', text: '#e0464a' },
+  { bg: '#f5f5f5', text: '#4a5568' },
+];
 
 export const formatDate = (date) => {
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

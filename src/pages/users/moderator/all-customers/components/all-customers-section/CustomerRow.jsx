@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import InterestBadge from '../../../../../../components/global/InterestBadge';
-import { trancateText } from '../../../../../../utils/utils';
+import { paths, trancateText } from '../../../../../../utils/utils';
 import { formatDate } from '../../../../../../utils/utils';
 
 function CustomerRow({ customer }) {
@@ -26,7 +26,7 @@ function CustomerRow({ customer }) {
       <td className="whitespace-nowrap px-6 py-4 text-gray-500">{formatDate(new Date(customer.additionDate))}</td>
       <td className="whitespace-nowrap px-6 py-4">
         <Link
-          to={`/customer/${customer.id}`}
+          to={`/${paths.customers}/${customer.id}`}
           className="rounded-xl px-4 py-2 text-pro-300 transition-colors hover:bg-pro-300 hover:text-white"
         >
           View

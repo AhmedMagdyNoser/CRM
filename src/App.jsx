@@ -1,5 +1,5 @@
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
-import { roles } from './utils/utils';
+import { roles, paths } from './utils/utils';
 import Layout from './pages/routes/Layout';
 import Home from './pages/routes/Home';
 import NotFound from './pages/routes/NotFound';
@@ -30,32 +30,32 @@ function App() {
             <Route element={<Authentication />}>
               <Route index element={<Home />} />
 
-              <Route path="/locked" element={<Locked />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/company-info" element={<CompanyInfo />} />
+              <Route path={paths.locked} element={<Locked />} />
+              <Route path={paths.profile} element={<Profile />} />
+              <Route path={paths.companyInfo} element={<CompanyInfo />} />
 
               <Route element={<Authorization allowedRole={roles.manager} />}>
-                <Route path="/roles" element={<Roles />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path={paths.dashboard} element={<Dashboard />} />
+                <Route path={paths.roles} element={<Roles />} />
               </Route>
 
               <Route element={<Authorization allowedRole={roles.moderator} />}>
-                <Route path="/all-customers" element={<AllCustomers />} />
-                <Route path="/add-new-customer" element={<AddNewCustomer />} />
+                <Route path={paths.customers} element={<AllCustomers />} />
+                <Route path={paths.addNewCustomer} element={<AddNewCustomer />} />
               </Route>
 
               <Route element={<Authorization allowedRole={roles.sales} />}>
-                <Route path="/customer/:id" element={<Customer />} />
-                <Route path="/assigned-customers" element={<AssignedCustomers />} />
+                <Route path={`${paths.customers}/:id`} element={<Customer />} />
+                <Route path={paths.assignedCustomers} element={<AssignedCustomers />} />
               </Route>
             </Route>
 
             <Route element={<Authentication requireUnauthenticated />}>
-              <Route path="register" element={<Register />} />
-              <Route path="login" element={<Login />} />
-              <Route path="verify-email" element={<VerifyEmail />} />
-              <Route path="forgot-password" element={<ForgotPassword />} />
-              <Route path="reset-password" element={<ResetPassword />} />
+              <Route path={paths.login} element={<Login />} />
+              <Route path={paths.register} element={<Register />} />
+              <Route path={paths.verifyEmail} element={<VerifyEmail />} />
+              <Route path={paths.forgotPassword} element={<ForgotPassword />} />
+              <Route path={paths.resetPassword} element={<ResetPassword />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />

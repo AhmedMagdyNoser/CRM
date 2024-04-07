@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { applicationName, globalErrorMessage } from '../../utils/utils';
+import { applicationName, globalErrorMessage, paths } from '../../utils/utils';
 import { inputFieldsInstructions, validationRegex } from '../../utils/validation';
 import InputField from '../../components/ui/InputField';
 import axios from '../../api/axios';
@@ -49,7 +49,7 @@ function Register() {
           url: '/auth/register',
           data: { firstName, lastName, userName: username, email, password, confirmPassword },
         });
-        navigate('/verify-email', { state: { purpose: 'ConfirmNewEmail', email } });
+        navigate(`/${paths.verifyEmail}`, { state: { purpose: 'ConfirmNewEmail', email } });
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
@@ -64,7 +64,7 @@ function Register() {
     <AuthMaxBox
       image={register}
       title="Create your account"
-      leave={{ hint: 'Already have an account?', label: 'Login', link: '/login' }}
+      leave={{ hint: 'Already have an account?', label: 'Login', link: `/${paths.login}` }}
     >
       <Form
         onSubmit={handleSubmit}

@@ -2,7 +2,7 @@ import useLogout from "../../../hooks/useLogout";
 import { useNavigate, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import { breakboints, layoutDimensions } from "../../../utils/utils";
+import { breakboints, layoutDimensions, paths } from "../../../utils/utils";
 import useNavbar from "../../../hooks/useNavbar";
 
 export default function NavbarLink({ label, to, icon, onClick }) {
@@ -63,7 +63,7 @@ export function LogoutButton() {
       to={'/'}
       onClick={() => {
         logout();
-        navigate('/login'); // Redirect to login page without providing a state in the location object
+        navigate(`/${paths.login}`); // Redirect to login page without providing a state in the location object
       }}
     />
   );

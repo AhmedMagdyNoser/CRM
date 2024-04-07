@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InterestBadge from '../../../../../../components/global/InterestBadge';
-import { trancateText } from '../../../../../../utils/utils';
+import { paths, trancateText } from '../../../../../../utils/utils';
 
 function CustomerCard({ customer }) {
   return (
     <Link
-      to={`/customer/${customer.id}`}
+      to={`/${paths.customers}/${customer.id}`}
       className="flex h-[135px] min-w-[300px] flex-col justify-between overflow-hidden rounded-xl bg-white p-4 shadow hover:bg-gray-50"
     >
       <div className="flex items-center gap-3">

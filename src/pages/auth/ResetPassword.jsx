@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { globalErrorMessage } from '../../utils/utils';
+import { globalErrorMessage, paths } from '../../utils/utils';
 import { inputFieldsInstructions, validationRegex } from '../../utils/validation';
 import axios from '../../api/axios';
 import InputField from '../../components/ui/InputField';
@@ -26,7 +26,7 @@ function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  if (!location.state?.email || !location.state?.token) return <Navigate to="/login" replace={true} />;
+  if (!location.state?.email || !location.state?.token) return <Navigate to={`/${paths.login}`} replace={true} />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -46,7 +46,7 @@ function ResetPassword() {
         });
         setLoading(false);
         setSuccess(true);
-        setTimeout(() => navigate('/login', { state: null }), 3500);
+        setTimeout(() => navigate(`/${paths.login}`, { state: null }), 3500);
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);

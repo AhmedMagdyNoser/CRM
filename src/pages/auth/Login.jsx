@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { applicationName, globalErrorMessage } from '../../utils/utils';
+import { applicationName, globalErrorMessage, paths } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
@@ -51,7 +51,7 @@ function Login() {
     <AuthMaxBox
       image={login}
       title="Welcome back!"
-      leave={{ hint: "Don't have an account?", link: '/register', label: 'Register Here' }}
+      leave={{ hint: "Don't have an account?", link: `/${paths.register}`, label: 'Register Here' }}
     >
       <Form
         onSubmit={handleSubmit}
@@ -74,7 +74,7 @@ function Login() {
         <InputField.Password value={password} onChange={(e) => setPassword(e.target.value)} required />
         <div className="flex flex-wrap justify-between gap-2 px-1">
           <Checkbox label="Remember me" checked={persist} onClick={() => setPersist(!persist)} />
-          <Link to="/forgot-password" className="hover:text-pro-200">
+          <Link to={`/${paths.forgotPassword}`} className="hover:text-pro-200">
             Forgot your password?
           </Link>
         </div>

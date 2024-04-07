@@ -1,4 +1,4 @@
-import { applicationName, layoutDimensions, roles } from '../../../utils/utils';
+import { applicationName, layoutDimensions, paths, roles } from '../../../utils/utils';
 import logo from '../../../assets/logo.png';
 import useAuth from '../../../hooks/useAuth';
 import useNavbar from '../../../hooks/useNavbar';
@@ -33,22 +33,22 @@ function Navbar({ className = '' }) {
       <nav className="flex flex-1 justify-between gap-1 sm:flex-grow-0 sm:flex-col">
         {auth.roles.includes(roles.manager) && (
           <>
-            <NavbarLink label="Dashboard" to="/dashboard" icon={<NavIcon.Dashboard />} />
-            <NavbarLink label="Roles" to="/roles" icon={<NavIcon.Roles />} />
+            <NavbarLink label="Dashboard" to={`/${paths.dashboard}`} icon={<NavIcon.Dashboard />} />
+            <NavbarLink label="Roles" to={`/${paths.roles}`} icon={<NavIcon.Roles />} />
           </>
         )}
         {auth.roles.includes(roles.moderator) && (
           <>
-            <NavbarLink label="All customers" to="/all-customers" icon={<NavIcon.AllCustomers />} />
-            <NavbarLink label="New customer" to="/add-new-customer" icon={<NavIcon.NewCustomer />} />
+            <NavbarLink label="All customers" to={`/${paths.customers}`} icon={<NavIcon.AllCustomers />} />
+            <NavbarLink label="New customer" to={`/${paths.addNewCustomer}`} icon={<NavIcon.NewCustomer />} />
           </>
         )}
         {auth.roles.includes(roles.sales) && !auth.roles.includes(roles.manager) && (
-          <NavbarLink label="Assigned to me" to="/assigned-customers" icon={<NavIcon.AssignedCustomers />} />
+          <NavbarLink label="Assigned to me" to={`/${paths.assignedCustomers}`} icon={<NavIcon.AssignedCustomers />} />
         )}
-        {auth.roles.length === 0 && <NavbarLink label="Locked" to="/locked" icon={<NavIcon.Locked />} />}
-        <NavbarLink label="Company info" to="/company-info" icon={<NavIcon.CompanyInfo />} />
-        <NavbarLink label="Profile" to="/profile" icon={<NavIcon.Profile />} />
+        {auth.roles.length === 0 && <NavbarLink label="Locked" to={`/${paths.locked}`} icon={<NavIcon.Locked />} />}
+        <NavbarLink label="Company info" to={`/${paths.companyInfo}`} icon={<NavIcon.CompanyInfo />} />
+        <NavbarLink label="Profile" to={`/${paths.profile}`} icon={<NavIcon.Profile />} />
 
         <div className="flex sm:hidden">
           <LogoutButton />

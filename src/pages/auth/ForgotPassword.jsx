@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { applicationName, globalErrorMessage } from '../../utils/utils';
+import { applicationName, globalErrorMessage, paths } from '../../utils/utils';
 import { validationRegex } from '../../utils/validation';
 import axios from '../../api/axios';
 import forgotPassword from '../../assets/forgotPassword.svg';
@@ -29,7 +29,7 @@ function ForgotPassword() {
         if (error) setError('');
         setLoading(true);
         await axios({ method: 'POST', url: '/auth/forgot-password', data: { email } });
-        navigate('/verify-email', { state: { email, purpose: 'ResetPassword' } });
+        navigate(`/${paths.verifyEmail}`, { state: { email, purpose: 'ResetPassword' } });
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);

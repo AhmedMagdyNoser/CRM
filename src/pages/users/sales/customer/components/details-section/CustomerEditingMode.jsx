@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { globalErrorMessage } from '../../../../../../utils/utils';
+import { globalErrorMessage, paths } from '../../../../../../utils/utils';
 import { validateCustomerFields } from '../../../../../../utils/validation';
 import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
 import InputField from '../../../../../../components/ui/InputField';
@@ -69,7 +69,7 @@ function CustomerEditingMode({ customer, setEditingMode }) {
     try {
       setLoading(true);
       await privateAxios({ url: `/moderator/delete-customer/${customer.id}`, method: 'Delete' });
-      navigate('/all-customers');
+      navigate(`/${paths.customers}`);
     } catch (error) {
       setLoading(false);
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);

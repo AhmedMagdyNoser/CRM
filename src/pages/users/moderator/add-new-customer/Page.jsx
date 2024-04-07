@@ -7,7 +7,7 @@ import Form from '../../../../components/ui/Form';
 import InputField from '../../../../components/ui/InputField';
 import DropdownMenu from '../../../../components/ui/DropdownMenu';
 import InterestsInputField from '../../../../components/global/InterestsInputFields';
-import { breakboints, globalErrorMessage } from '../../../../utils/utils';
+import { breakboints, globalErrorMessage, paths } from '../../../../utils/utils';
 import { validateCustomerFields } from '../../../../utils/validation';
 import icons from '../../../../utils/faIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -75,7 +75,7 @@ function AddNewCustomer() {
         method: 'post',
         data,
       });
-      navigate(`/customer/${res.data.id}`);
+      navigate(`/${paths.customers}/${res.data.id}`);
     } catch (error) {
       setLoading(false);
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
@@ -129,7 +129,9 @@ function AddNewCustomer() {
               >
                 <FontAwesomeIcon icon={faPlus} />
               </button>
-              {newSourcePopup && <AddNewSourcePopup setNewSourcePopup={setNewSourcePopup} setSourcesOptions={setSourcesOptions} />}
+              {newSourcePopup && (
+                <AddNewSourcePopup setNewSourcePopup={setNewSourcePopup} setSourcesOptions={setSourcesOptions} />
+              )}
             </div>
           </div>
           <InterestsInputField
