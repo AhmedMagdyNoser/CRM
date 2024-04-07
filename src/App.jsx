@@ -40,13 +40,13 @@ function App() {
               </Route>
 
               <Route element={<Authorization allowedRole={roles.moderator} />}>
-                <Route path="/add-new-customer" element={<AddNewCustomer />} />
                 <Route path="/all-customers" element={<AllCustomers />} />
+                <Route path="/add-new-customer" element={<AddNewCustomer />} />
               </Route>
 
               <Route element={<Authorization allowedRole={roles.sales} />}>
-                <Route path="/assigned-customers" element={<AssignedCustomers />} />
                 <Route path="/customer/:id" element={<Customer />} />
+                <Route path="/assigned-customers" element={<AssignedCustomers />} />
               </Route>
             </Route>
 

@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Navbar from '../../components/global/Navbar';
+import Navbar from '../../components/global/navbar/Navbar';
 import useAuth from '../../hooks/useAuth';
 import OnlineStatueAlert from '../../components/global/OnlineStatusAlert';
 import { layoutDimensions as dimensions, breakboints } from '../../utils/utils';
@@ -9,7 +9,7 @@ import useScrollToTop from '../../hooks/useScrollToTop';
 function Layout() {
   const { auth } = useAuth();
   const { navbarExpanded } = useNavbar();
-  
+
   useScrollToTop();
 
   return (
