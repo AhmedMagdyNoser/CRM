@@ -7,7 +7,7 @@ import Form from '../../../../components/ui/Form';
 import InputField from '../../../../components/ui/InputField';
 import DropdownMenu from '../../../../components/ui/DropdownMenu';
 import InterestsInputField from '../../../../components/global/InterestsInputFields';
-import { breakboints, globalErrorMessage, paths } from '../../../../utils/utils';
+import { breakboints, globalErrorMessage, paths, roles } from '../../../../utils/utils';
 import { validateCustomerFields } from '../../../../utils/validation';
 import icons from '../../../../utils/faIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -108,7 +108,9 @@ function AddNewCustomer() {
               selected={salesRepresntativeId}
               setSelected={setSalesRepresntativeId}
               loading={salesOptionsLoading}
-              options={salesOptions.map((sales) => ({ value: sales.id, label: `${sales.firstName} ${sales.lastName}` }))}
+              options={salesOptions
+                .filter((user) => !user.roles.includes(roles.manager))
+                .map((user) => ({ value: user.id, label: `${user.firstName} ${user.lastName}` }))}
               searchable
             />
             <div className="flex w-full gap-3">
