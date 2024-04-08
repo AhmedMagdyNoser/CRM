@@ -96,7 +96,12 @@ function DropdownMenu({
             <span>
               <FontAwesomeIcon icon={faCheck} className="text-green-500" />
             </span>
-            <MenuButton onClick={() => setQuery('')}>
+            <MenuButton
+              onClick={() => {
+                setQuery('');
+                setSelected('');
+              }}
+            >
               <FontAwesomeIcon icon={faX} />
             </MenuButton>
           </div>
