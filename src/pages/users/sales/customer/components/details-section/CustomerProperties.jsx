@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import icons from '../../../../../../utils/faIcons';
-import InterestBadge from '../../../../../../components/global/InterestBadge';
+import InterestBadge from '../../../../../../components/interests/InterestBadge';
 import { formatDate, trancateText } from '../../../../../../utils/utils';
 
 function CustomerProperties({ customer }) {

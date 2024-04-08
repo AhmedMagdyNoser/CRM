@@ -6,7 +6,7 @@ import usePrivateAxios from '../../../../hooks/usePrivateAxios';
 import Form from '../../../../components/ui/Form';
 import InputField from '../../../../components/ui/InputField';
 import DropdownMenu from '../../../../components/ui/DropdownMenu';
-import InterestsInputField from '../../../../components/global/InterestsInputFields';
+import InterestsInputField from '../../../../components/interests/InterestsInputFields';
 import { breakboints, globalErrorMessage, paths, roles } from '../../../../utils/utils';
 import { validateCustomerFields } from '../../../../utils/validation';
 import icons from '../../../../utils/faIcons';
@@ -138,8 +138,8 @@ function AddNewCustomer() {
           </div>
           <InterestsInputField
             interestsOptions={interestsOptions}
-            interests={interests}
-            setInterests={setInterests}
+            selectedInterests={interests}
+            setSelectedInterests={setInterests}
             loading={interestsOptionsLoading}
           />
         </fieldset>
