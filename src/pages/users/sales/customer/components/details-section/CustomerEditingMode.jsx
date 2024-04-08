@@ -15,7 +15,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import InterestsInputField from '../../../../../../components/interests/InterestsInputFields';
 import GenderInput from '../../../../../../components/ui/GenderInput';
 
-function CustomerEditingMode({ customer, setEditingMode }) {
+function CustomerEditingMode({ customer, setCustomer, setEditingMode }) {
   const privateAxios = usePrivateAxios();
   const navigate = useNavigate();
 
@@ -72,6 +72,11 @@ function CustomerEditingMode({ customer, setEditingMode }) {
         url: `/moderator/update-customer?CustomerId=${customer.id}`,
         method: 'PUT',
         data,
+      });
+      setCustomer({
+        ...customer,
+        ...data,
+        salesRepresentative: salesOptions.find((user) => user.id === salesRepresentativeId),
       });
       setEditingMode(false);
     } catch (error) {

@@ -9,7 +9,7 @@ import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
 function DetailsSection({ editingMode, setEditingMode }) {
   const params = useParams();
 
-  const { loading, data: customer } = useOnLoadFetch(`/moderator/get-customer/${params.id}`);
+  const { loading, data: customer, setData: setCustomer } = useOnLoadFetch(`/moderator/get-customer/${params.id}`);
 
   return (
     <div className="flex w-full flex-col items-center overflow-hidden rounded-xl border lg:w-[450px]">
@@ -31,7 +31,7 @@ function DetailsSection({ editingMode, setEditingMode }) {
         {loading ? (
           <CustomerPropertiesSkeleton length={7} />
         ) : editingMode ? (
-          <CustomerEditingMode customer={customer} setEditingMode={setEditingMode} />
+          <CustomerEditingMode customer={customer} setCustomer={setCustomer} setEditingMode={setEditingMode} />
         ) : (
           <CustomerProperties customer={customer} />
         )}
