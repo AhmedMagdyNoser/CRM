@@ -13,6 +13,7 @@ import icons from '../../../../utils/faIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import AddNewSourcePopup from './components/AddNewSourcePopup';
+import GenderInput from '../../../../components/ui/GenderInput';
 
 function AddNewCustomer() {
   useDocumentTitle('Add New Customer');
@@ -153,18 +154,9 @@ function AddNewCustomer() {
           </legend>
           {openOptionalFields && (
             <div className="mt-2 flex animate-fade-in-medium flex-col gap-3">
-              <div className="flex gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <GenderInput gender={gender} setGender={setGender} className="h-12 sm:h-auto" />
                 <InputField.Age value={age} onChange={(e) => setAge(e.target.value)} />
-                <DropdownMenu
-                  icon={icons.gender}
-                  placeholder="Gender"
-                  selected={gender}
-                  setSelected={setGender}
-                  options={[
-                    { value: 1, label: 'Male' },
-                    { value: 2, label: 'Female' },
-                  ]}
-                />
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} />
