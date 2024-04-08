@@ -7,6 +7,7 @@ function DropdownMenu({
   setOptions,
   selected,
   setSelected,
+  defaultQuery = '',
   searchable,
   icon,
   loading,
@@ -15,7 +16,7 @@ function DropdownMenu({
 }) {
   const element = useRef(null);
 
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(defaultQuery);
   const [openMenu, setOpenMenu] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
 

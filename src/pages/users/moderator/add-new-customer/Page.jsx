@@ -58,7 +58,7 @@ function AddNewCustomer() {
         firstName,
         lastName,
         phone,
-        salesRepresntativeId,
+        salesRepresntativeId, // typo in salesRepresntativeId
         source,
         interests,
       };
