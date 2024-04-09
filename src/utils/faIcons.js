@@ -1,3 +1,4 @@
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import {
   faAddressBook,
   faAt,
@@ -26,6 +27,7 @@ const icons = {
   age: faSpa,
   gender: faVenusMars,
   city: faLocationDot,
+  trash: faTrashCan,
 };
 
 export default icons;

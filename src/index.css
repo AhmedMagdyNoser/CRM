@@ -41,6 +41,9 @@
   .btn-light {
     @apply text-gray-500 transition-colors hover:bg-gray-100;
   }
+  .btn-danger {
+    @apply bg-red-50 text-red-500 transition-colors hover:bg-red-100 disabled:bg-red-100 disabled:text-red-400;
+  }
   .flex-center {
     @apply flex items-center justify-center;
   }
