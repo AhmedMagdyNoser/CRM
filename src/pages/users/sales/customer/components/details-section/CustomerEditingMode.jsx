@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { globalErrorMessage, paths, roles } from '../../../../../../utils/utils';
+import { globalErrorMessage, roles } from '../../../../../../utils/utils';
 import { validateCustomerFields } from '../../../../../../utils/validation';
 import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
 import InputField from '../../../../../../components/ui/InputField';
 import Form from '../../../../../../components/ui/Form';
-import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import DropdownMenu from '../../../../../../components/ui/DropdownMenu';
 import icons from '../../../../../../utils/faIcons';
 import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
@@ -17,7 +15,6 @@ import GenderInput from '../../../../../../components/ui/GenderInput';
 
 function CustomerEditingMode({ customer, setCustomer, setEditingMode }) {
   const privateAxios = usePrivateAxios();
-  const navigate = useNavigate();
 
   // Required fields
   const [firstName, setFirstName] = useState(customer.firstName);
@@ -85,17 +82,6 @@ function CustomerEditingMode({ customer, setCustomer, setEditingMode }) {
     }
   }
 
-  async function handleDelete() {
-    try {
-      setLoading(true);
-      await privateAxios({ url: `/moderator/delete-customer/${customer.id}`, method: 'Delete' });
-      navigate(`/${paths.customers}`);
-    } catch (error) {
-      setLoading(false);
-      setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
-    }
-  }
-
   return (
     <div className="flex animate-fade-in-fast flex-col gap-2">
       <Form onSubmit={handleSubmit} submitLabel="Update" loading={loading} error={error}>
@@ -153,18 +139,11 @@ function CustomerEditingMode({ customer, setCustomer, setEditingMode }) {
       </Form>
       <div className="flex gap-2">
         <button
-          className="w-full rounded-xl bg-gray-50 py-2 text-gray-500 transition-colors hover:bg-gray-100"
+          className="w-full rounded-xl border bg-gray-50 py-2 text-gray-500 transition-colors hover:bg-gray-100"
           onClick={() => setEditingMode(false)}
         >
           Cancel
         </button>
-        {/* <button
-          className="w-full rounded-xl bg-red-50 py-2 text-red-500 transition-colors hover:bg-red-100"
-          onClick={handleDelete}
-        >
-          <FontAwesomeIcon icon={faTrashCan} className="mr-2" />
-          Delete
-        </button> */}
       </div>
     </div>
   );
