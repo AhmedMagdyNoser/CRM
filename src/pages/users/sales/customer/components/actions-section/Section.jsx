@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import { customerActions as actions } from '../../testingStaticData';
+import { useState } from 'react';
 import Action from './Action';
 import ActionSkeleton from './ActionSkeleton';
 import ActionsTab from './ActionTab';
+import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
+import { useParams } from 'react-router-dom';
+import noData from '../../../../../../assets/noData.svg';
 
 const tabs = [
   { title: 'All' },
@@ -15,17 +17,11 @@ const tabs = [
 // Task: This component needs to be refactored to allow adding new actions
 
 function ActionsSection() {
+  const params = useParams();
+
   const [activeTab, setActiveTab] = useState(tabs[0]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const { loading, data: actions } = useOnLoadFetch(`/moderator/get-customer-actions/${params.id}`);
 
   function filterActions(tab) {
     if (tab.title === 'All') return actions;
@@ -39,9 +35,14 @@ function ActionsSection() {
           <ActionsTab key={index} tab={tab} isActive={activeTab.title === tab.title} onClick={() => setActiveTab(tab)} />
         ))}
       </nav>
-      <div className="py-5 md:px-5">
+      <div className="flex flex-col-reverse py-5 md:px-5">
         {loading ? (
           <ActionSkeleton length={5} />
+        ) : filterActions(activeTab).length === 0 ? (
+          <div className="flex-center w-full flex-col gap-5 py-12">
+            <img src={noData} alt="No Data" className="h-[100px]" />
+            <p>No {activeTab.title === 'All' ? ' actions' : ` ${activeTab.title.toLowerCase()}`} found</p>
+          </div>
         ) : (
           filterActions(activeTab).map((action) => <Action key={action.id} action={action} />)
         )}
@@ -51,4 +52,3 @@ function ActionsSection() {
 }
 
 export default ActionsSection;
-
