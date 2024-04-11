@@ -65,12 +65,13 @@ function Action({ action: { type, date, summary } }) {
             <p className="text-xs sm:text-sm">{new Date(date).toDateString()}</p>
           </div>
           <div>
-            {showEdit && (
-              <button className="btn-light flex-center animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm">
-                <FontAwesomeIcon icon={faEdit} />
-                <span>Edit</span>
-              </button>
-            )}
+            {false && // Remove this
+              showEdit && (
+                <button className="btn-light flex-center animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm">
+                  <FontAwesomeIcon icon={faEdit} />
+                  <span>Edit</span>
+                </button>
+              )}
           </div>
         </div>
         <p className="mt-4 rounded-xl bg-gray-50 p-3 px-4">{summary}</p>

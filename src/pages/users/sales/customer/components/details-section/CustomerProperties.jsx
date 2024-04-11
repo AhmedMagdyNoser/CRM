@@ -17,7 +17,7 @@ function CustomerProperties({ customer }) {
       <Property icon={icons.city} title="City" value={customer.city || 'N/A'} />
       <Property
         icon={icons.assign}
-        title="Sales Representative"
+        title="Assigned To"
         value={trancateText(`${customer.salesRepresentative.firstName} ${customer.salesRepresentative.lastName}`, 18)}
       />
       <Property icon={icons.source} title="Source" value={customer.source} />
@@ -52,8 +52,8 @@ export default CustomerProperties;
 
 function Property({ icon, title, value }) {
   return (
-    <div className="flex justify-between">
-      <div className="space-x-2">
+    <div className="flex flex-nowrap justify-between gap-2">
+      <div className="flex-center gap-2">
         <FontAwesomeIcon icon={icon} className="text-pro-200" />
         <span className="text-nowrap text-gray-500">{title}</span>
       </div>

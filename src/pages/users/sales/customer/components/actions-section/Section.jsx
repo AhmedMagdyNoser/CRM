@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import noData from '../../../../../../assets/noData.svg';
 
 const tabs = [
-  { title: 'All' },
+  { title: 'All Actions' },
   { title: 'Calls', type: 'call' },
   { title: 'Messages', type: 'message' },
   { title: 'Meetings', type: 'meeting' },
@@ -24,13 +24,13 @@ function ActionsSection() {
   const { loading, data: actions } = useOnLoadFetch(`/moderator/get-customer-actions/${params.id}`);
 
   function filterActions(tab) {
-    if (tab.title === 'All') return actions;
+    if (tab.title === 'All Actions') return actions;
     else return actions.filter((action) => action.type.toLowerCase() === tab.type.toLowerCase());
   }
 
   return (
-    <div className="flex-1">
-      <nav className="flex justify-between overflow-hidden rounded-t-xl bg-pro-50">
+    <div className="w-full flex-1">
+      <nav className="scrollbar-hide flex justify-between overflow-auto rounded-t-xl bg-pro-50">
         {tabs.map((tab, index) => (
           <ActionsTab key={index} tab={tab} isActive={activeTab.title === tab.title} onClick={() => setActiveTab(tab)} />
         ))}
@@ -39,8 +39,8 @@ function ActionsSection() {
         {loading ? (
           <ActionSkeleton length={5} />
         ) : filterActions(activeTab).length === 0 ? (
-          <div className="flex-center w-full flex-col gap-5 py-12">
-            <img src={noData} alt="No Data" className="h-[100px]" />
+          <div className="flex-center w-full flex-col gap-5 py-20">
+            <img src={noData} alt="No Data" className="h-[135px]" />
             <p>No {activeTab.title === 'All' ? ' actions' : ` ${activeTab.title.toLowerCase()}`} found</p>
           </div>
         ) : (

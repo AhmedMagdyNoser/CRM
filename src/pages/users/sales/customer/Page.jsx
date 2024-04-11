@@ -13,7 +13,12 @@ function Customer() {
 
   return (
     <div className="flex h-full flex-col gap-4">
-      <CustomerHeaderSection editingMode={editingMode} setEditingMode={setEditingMode} deletePopupOpen={deletePopupOpen} setDeletePopupOpen={setDeletePopupOpen} />
+      <CustomerHeaderSection
+        editingMode={editingMode}
+        setEditingMode={setEditingMode}
+        deletePopupOpen={deletePopupOpen}
+        setDeletePopupOpen={setDeletePopupOpen}
+      />
       <div className="flex flex-1 flex-wrap gap-5">
         <DetailsSection editingMode={editingMode} setEditingMode={setEditingMode} />
         <ActionsSection />
