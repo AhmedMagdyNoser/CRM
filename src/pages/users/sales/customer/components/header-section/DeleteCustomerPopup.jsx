@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
+import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { globalErrorMessage, layoutDimensions, paths } from '../../../../../utils/utils';
+import { globalErrorMessage, layoutDimensions, paths } from '../../../../../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Modal from '../../../../../components/ui/Modal';
-import ErrorAlert from '../../../../../components/ui/ErrorAlert';
-import icons from '../../../../../utils/faIcons';
+import Modal from '../../../../../../components/ui/Modal';
+import ErrorAlert from '../../../../../../components/ui/ErrorAlert';
+import icons from '../../../../../../utils/faIcons';
 
 function DeleteCustomerPopup({ setDeletePopupOpen }) {
   const privateAxios = usePrivateAxios();
