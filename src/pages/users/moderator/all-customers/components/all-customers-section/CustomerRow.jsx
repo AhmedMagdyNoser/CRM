@@ -23,7 +23,7 @@ function CustomerRow({ customer }) {
       <td className="whitespace-nowrap px-6 py-4 text-gray-500">
         {customer.lastAction?.type ? customer.lastAction.type.toUpperCase() : 'N/A'}
       </td>
-      <td className="whitespace-nowrap px-6 py-4 text-gray-500">{formatDate(new Date(customer.additionDate))}</td>
+      <td className="whitespace-nowrap px-6 py-4 text-gray-500">{formatDate(new Date(customer.additionDate), true)}</td>
       <td className="whitespace-nowrap px-6 py-4">
         <Link
           to={`/${paths.customers}/${customer.id}`}

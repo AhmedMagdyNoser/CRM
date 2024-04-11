@@ -38,7 +38,7 @@ function CustomerProperties({ customer }) {
                 {customer.lastAction?.type ? customer.lastAction.type.toUpperCase() : 'N/A'}
               </p>
               <p className="text-nowrap text-gray-800">
-                {customer.lastAction?.date ? new Date(customer.lastAction.date).toLocaleDateString() : 'N/A'}
+                {customer.lastAction?.date ? formatDate(new Date(customer.lastAction.date)) : 'N/A'}
               </p>
             </div>
           </div>

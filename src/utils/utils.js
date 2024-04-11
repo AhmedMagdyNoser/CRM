@@ -53,14 +53,22 @@ export const colorPairs = [
   { bg: '#f5f5f5', text: '#4a5568' },
 ];
 
-export const formatDate = (date) => {
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  const dayOfWeek = days[date.getDay()];
-  const dayOfMonth = ('0' + date.getDate()).slice(-2);
-  const month = months[date.getMonth()];
+export const formatDate = (date, showDayOfWeek = false, showTime = false) => {
+  const dayOfMonth = date.getDate().toString().padStart(2, '0');
+  const month = date.toLocaleString('en-US', { month: 'short' });
   const year = date.getFullYear();
 
-  return `${dayOfWeek} ${dayOfMonth} ${month} ${year}`;
+  let dayOfWeek = '';
+  if (showDayOfWeek) dayOfWeek = `${date.toLocaleString('en-US', { weekday: 'short' })} `;
+
+  let time = '';
+  if (showTime) {
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const twelveHour = hours % 12 || 12;
+    time = ` ${twelveHour}:${minutes} ${ampm}`;
+  }
+
+  return `${dayOfWeek}${dayOfMonth} ${month} ${year}${time}`;
 };

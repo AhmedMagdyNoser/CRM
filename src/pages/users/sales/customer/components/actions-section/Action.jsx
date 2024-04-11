@@ -2,6 +2,7 @@ import { faCalendarAlt, faCommentDots, faEdit, faHandshake, faPhone } from '@for
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
 import useHover from '../../../../../../hooks/useHover';
+import { formatDate } from '../../../../../../utils/utils';
 
 function getActionIcon(type) {
   const iconClasses = `flex-center h-10 w-10 rounded-full`;
@@ -62,7 +63,7 @@ function Action({ action: { type, date, summary } }) {
             <h3 className="text-base">
               {type === 'call' ? 'Call' : type === 'message' ? 'Message' : type === 'meeting' ? 'Meeting' : 'Deal'}
             </h3>
-            <p className="text-xs sm:text-sm">{new Date(date).toDateString()}</p>
+            <p className="text-xs sm:text-sm">{formatDate(new Date(date), true, true)}</p>
           </div>
           <div>
             {false && // Remove this
