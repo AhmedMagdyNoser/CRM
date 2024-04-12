@@ -2,7 +2,8 @@ import { faCalendarAlt, faCommentDots, faEdit, faHandshake, faPhone } from '@for
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
 import useHover from '../../../../../../hooks/useHover';
-import { formatDate } from '../../../../../../utils/utils';
+import { formatDate, getCallStatus } from '../../../../../../utils/utils';
+import InterestBadge from '../../../../../../components/interests/InterestBadge';
 
 function getActionIcon(type) {
   const iconClasses = `flex-center h-10 w-10 rounded-full`;
@@ -41,7 +42,7 @@ function getActionIcon(type) {
 // - To allow editing of the action
 // - To allow deleting of the action
 
-function Action({ action: { type, date, summary } }) {
+function Action({ action }) {
   const [showEdit, setShowEdit] = useState(false);
   const element = useRef(null);
 
@@ -54,17 +55,39 @@ function Action({ action: { type, date, summary } }) {
   return (
     <div ref={element} className="mb-10 flex gap-4">
       <div className="relative">
-        {getActionIcon(type)}
+        {getActionIcon(action.type)}
         <div className="absolute left-1/2 h-full w-0 -translate-x-1/2 transform border border-dashed"></div>
       </div>
       <div className="flex-1">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-base">
-              {type === 'call' ? 'Call' : type === 'message' ? 'Message' : type === 'meeting' ? 'Meeting' : 'Deal'}
-            </h3>
-            <p className="text-xs sm:text-sm">{formatDate(new Date(date), true, true)}</p>
+            <div className="mb-2 flex items-center gap-2">
+              <h3 className="text-base">
+                {action.type === 'call'
+                  ? 'Call'
+                  : action.type === 'message'
+                    ? 'Message'
+                    : action.type === 'meeting'
+                      ? 'Meeting'
+                      : 'Deal'}
+              </h3>
+              {action.type === 'meeting' && (
+                <p className="rounded-full bg-gray-200 px-3 py-1 text-xs text-gray-500 sm:text-sm">
+                  {action.online ? 'Online' : 'Physical'}
+                </p>
+              )}
+              {action.type === 'deal' && (
+                <InterestBadge interest={`${action.interest.name} - ${action.price}$`} colorId={3} />
+              )}
+              {action.type === 'call' && (
+                <p className="rounded-full bg-gray-200 px-3 py-1 text-xs text-gray-500 sm:text-sm">
+                  {getCallStatus(action.status)}
+                </p>
+              )}
+            </div>
+            <p className="text-xs sm:text-sm">{formatDate(new Date(action.date), true, true)}</p>
           </div>
+
           <div>
             {false && // Remove this
               showEdit && (
@@ -75,7 +98,13 @@ function Action({ action: { type, date, summary } }) {
               )}
           </div>
         </div>
-        <p className="mt-4 rounded-xl bg-gray-50 p-3 px-4">{summary}</p>
+        <p className="mb-2 mt-4 rounded-xl bg-gray-50 p-3 px-4">{action.summary}</p>
+        {action.followUp && (
+          <p className="flex justify-end gap-2 text-sm">
+            Follow up on
+            <span className="font-medium">{formatDate(new Date(action.followUp), false, true)}</span>
+          </p>
+        )}
       </div>
     </div>
   );

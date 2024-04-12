@@ -72,3 +72,16 @@ export const formatDate = (date, showDayOfWeek = false, showTime = false) => {
 
   return `${dayOfWeek}${dayOfMonth} ${month} ${year}${time}`;
 };
+
+export function getCallStatus(status) {
+  switch (status) {
+    case 0:
+      return 'Answered';
+    case 1:
+      return 'Rejected';
+    case 2:
+      return 'Missed';
+    default:
+      return 'N/A';
+  }
+}
