@@ -61,7 +61,7 @@ const icons = {
   check: faCheck,
   x: faX,
   ban: faBan,
-  error: faExclamationCircle,
+  exclamationCircle: faExclamationCircle,
   wifi: faWifi,
   actions: {
     call: faPhone,

@@ -5,9 +5,8 @@ import Modal from '../../../../../components/ui/Modal';
 import InputField from '../../../../../components/ui/InputField';
 import icons from '../../../../../utils/faIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ErrorAlert from '../../../../../components/ui/ErrorAlert';
-import SuccessAlert from '../../../../../components/ui/SuccessAlert';
 import social from '../../../../../assets/social.svg';
+import Alert from '../../../../../components/ui/Alert';
 
 function AddNewSourcePopup({ setNewSourcePopup, setSourcesOptions }) {
   const [name, setName] = useState('');
@@ -71,8 +70,8 @@ function AddNewSourcePopup({ setNewSourcePopup, setSourcesOptions }) {
             {loading ? <FontAwesomeIcon icon={icons.spinner} spin /> : 'Add'}
           </button>
         </div>
-        {error && <ErrorAlert message={error} />}
-        {success && <SuccessAlert message={`${name} source added successfully`} />}
+        {error && <Alert.Error message={error} />}
+        {success && <Alert.Success message={`${name} source added successfully`} />}
       </div>
       <style>
         {`
