@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquare } from '@fortawesome/free-regular-svg-icons';
-import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import icons from '../../utils/faIcons';
 
 export default function InterestCheckbox({ interest, selectedInterests, setSelectedInterests }) {
   const { id, name } = interest;
@@ -28,7 +27,7 @@ export default function InterestCheckbox({ interest, selectedInterests, setSelec
     >
       <label className="flex h-10 cursor-pointer items-center gap-2 text-nowrap text-sm font-medium text-gray-500 sm:text-base">
         <FontAwesomeIcon
-          icon={isSelected ? faCheckSquare : faSquare}
+          icon={isSelected ? icons.checkSquare : icons.square}
           className={isSelected ? 'text-pro-300' : 'text-gray-500'}
         />
         {name}

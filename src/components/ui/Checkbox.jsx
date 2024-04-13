@@ -1,6 +1,5 @@
-import { faSquare } from '@fortawesome/free-regular-svg-icons';
-import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import icons from '../../utils/faIcons';
 
 /**
  * `Checkbox` is a component that displays a checkbox with a label.
@@ -27,7 +26,7 @@ function Checkbox({ label, checked, onClick }) {
       onKeyDown={handleKeyDown}
       className="flex cursor-pointer items-center gap-1 text-gray-800"
     >
-      <FontAwesomeIcon icon={checked ? faCheckSquare : faSquare} className="text-lg text-pro-300" />
+      <FontAwesomeIcon icon={checked ? icons.checkSquare : icons.square} className="text-lg text-pro-300" />
       <p>{label}</p>
     </div>
   );

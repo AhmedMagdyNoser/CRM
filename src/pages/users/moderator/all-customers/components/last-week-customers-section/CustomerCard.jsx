@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import InterestBadge from '../../../../../../components/interests/InterestBadge';
 import { paths, trancateText } from '../../../../../../utils/utils';
+import InterestBadge from '../../../../../../components/interests/InterestBadge';
+import icons from '../../../../../../utils/faIcons';
 
 function CustomerCard({ customer }) {
   return (
@@ -12,7 +12,7 @@ function CustomerCard({ customer }) {
     >
       <div className="flex items-center gap-3">
         <div className="flex-center min-h-10 min-w-10 rounded-full bg-pro-100">
-          <FontAwesomeIcon icon={faUser} className="text-pro-200" />
+          <FontAwesomeIcon icon={icons.user} className="text-pro-200" />
         </div>
         <div>
           <h3 className="text-nowrap text-base sm:text-lg">

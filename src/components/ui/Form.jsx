@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import ErrorAlert from './ErrorAlert';
+import icons from '../../utils/faIcons';
 
 /**
  * `Form` is a component that has a submit button displaying a loading spinner during submission and an error message if one occurs.
@@ -29,7 +29,7 @@ function Form({ className = '', loading, error, submitLabel, submitDisabled, chi
       <div className="flex flex-col gap-3">
         {error && <ErrorAlert message={error} />}
         <button type="submit" className="btn-primary rounded-xl py-3 uppercase" disabled={submitDisabled || loading}>
-          {loading ? <FontAwesomeIcon icon={faSpinner} className="animate-spin-slow" /> : submitLabel}
+          {loading ? <FontAwesomeIcon icon={icons.spinner} className="animate-spin-slow" /> : submitLabel}
         </button>
       </div>
     </form>

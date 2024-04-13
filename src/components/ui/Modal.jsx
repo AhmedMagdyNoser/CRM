@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import icons from '../../utils/faIcons';
 
 function Modal({ title, setOpen, animationTime = 250, className, children }) {
   const screen = useRef(null);
@@ -47,8 +47,8 @@ function Modal({ title, setOpen, animationTime = 250, className, children }) {
         {title && (
           <header className="flex items-center justify-between border-b p-5">
             <h2 className="capitalize">{title}</h2>
-            <button className="btn-light flex-center h-8 w-8" onClick={handleClose}>
-              <FontAwesomeIcon icon={faXmark} />
+            <button className="btn-light flex-center h-8 w-8 rounded-xl" onClick={handleClose}>
+              <FontAwesomeIcon icon={icons.x} />
             </button>
           </header>
         )}

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import icons from '../../utils/faIcons';
 
 /**
  * `ErrorAlert` is a component that displays an error message inside a styled div.
@@ -12,7 +12,7 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 function ErrorAlert({ message }) {
   return (
     <div className="flex animate-fade-in-fast items-center gap-3 rounded-xl bg-red-100 px-4 py-3 text-sm text-red-500">
-      <FontAwesomeIcon icon={faExclamationCircle} />
+      <FontAwesomeIcon icon={icons.error} />
       <div>{message}</div>
     </div>
   );

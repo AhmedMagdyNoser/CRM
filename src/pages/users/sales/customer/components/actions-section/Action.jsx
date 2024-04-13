@@ -1,9 +1,9 @@
-import { faCalendarAlt, faCommentDots, faEdit, faHandshake, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
 import useHover from '../../../../../../hooks/useHover';
 import { formatDate, getCallStatus } from '../../../../../../utils/utils';
 import InterestBadge from '../../../../../../components/interests/InterestBadge';
+import icons from '../../../../../../utils/faIcons';
 
 function getActionIcon(type) {
   const iconClasses = `flex-center h-10 w-10 rounded-full`;
@@ -11,25 +11,25 @@ function getActionIcon(type) {
     case 'call':
       return (
         <div className={`${iconClasses} bg-blue-50 text-blue-300`}>
-          <FontAwesomeIcon icon={faPhone} />
+          <FontAwesomeIcon icon={icons.actions.call} />
         </div>
       );
     case 'message':
       return (
         <div className={`${iconClasses} bg-red-50 text-red-300`}>
-          <FontAwesomeIcon icon={faCommentDots} />
+          <FontAwesomeIcon icon={icons.actions.message} />
         </div>
       );
     case 'meeting':
       return (
         <div className={`${iconClasses} bg-indigo-50 text-indigo-300`}>
-          <FontAwesomeIcon icon={faCalendarAlt} />
+          <FontAwesomeIcon icon={icons.actions.meeting} />
         </div>
       );
     case 'deal':
       return (
         <div className={`${iconClasses} bg-green-50 text-green-300`}>
-          <FontAwesomeIcon icon={faHandshake} />
+          <FontAwesomeIcon icon={icons.actions.deal} />
         </div>
       );
     default:
@@ -92,7 +92,7 @@ function Action({ action }) {
             {false && // Remove this
               showEdit && (
                 <button className="btn-light flex-center animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm">
-                  <FontAwesomeIcon icon={faEdit} />
+                  <FontAwesomeIcon icon={icons.edit} />
                   <span>Edit</span>
                 </button>
               )}

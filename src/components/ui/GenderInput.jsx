@@ -1,13 +1,12 @@
-import { faBan, faPerson, faPersonDress } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import icons from '../../utils/faIcons';
 
 function GenderInput({ gender, setGender, className = '' }) {
   return (
     <div className={`flex w-full gap-2 ${className}`}>
-      <Option value={1} label="Male" icon={faPerson} selected={gender} setSelected={setGender} />
-      <Option value={2} label="Female" icon={faPersonDress} selected={gender} setSelected={setGender} />
-      <Option value={0} label="N/A" icon={faBan} selected={gender} setSelected={setGender} />
+      <Option value={1} label="Male" icon={icons.male} selected={gender} setSelected={setGender} />
+      <Option value={2} label="Female" icon={icons.female} selected={gender} setSelected={setGender} />
+      <Option value={0} label="N/A" icon={icons.ban} selected={gender} setSelected={setGender} />
     </div>
   );
 }

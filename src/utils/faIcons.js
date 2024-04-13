@@ -1,4 +1,4 @@
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faEdit, faTrashCan, faSquare } from '@fortawesome/free-regular-svg-icons';
 import {
   faAddressBook,
   faAt,
@@ -12,6 +12,24 @@ import {
   faSpinner,
   faUser,
   faVenusMars,
+  faCheckSquare,
+  faRightFromBracket,
+  faArrowLeft,
+  faAngleDown,
+  faAngleUp,
+  faCheck,
+  faX,
+  faBan,
+  faExclamationCircle,
+  faPerson,
+  faPersonDress,
+  faCheckCircle,
+  faPlus,
+  faSearch,
+  faCalendarAlt,
+  faCommentDots,
+  faHandshake,
+  faWifi,
 } from '@fortawesome/free-solid-svg-icons';
 
 const icons = {
@@ -26,8 +44,31 @@ const icons = {
   assign: faPenClip,
   age: faSpa,
   gender: faVenusMars,
+  male: faPerson,
+  female: faPersonDress,
   city: faLocationDot,
+  edit: faEdit,
   trash: faTrashCan,
+  logout: faRightFromBracket,
+  back: faArrowLeft,
+  angleUp: faAngleUp,
+  angleDown: faAngleDown,
+  search: faSearch,
+  plus: faPlus,
+  square: faSquare,
+  checkSquare: faCheckSquare,
+  checkCircle: faCheckCircle,
+  check: faCheck,
+  x: faX,
+  ban: faBan,
+  error: faExclamationCircle,
+  wifi: faWifi,
+  actions: {
+    call: faPhone,
+    message: faCommentDots,
+    meeting: faCalendarAlt,
+    deal: faHandshake,
+  },
 };
 
 export default icons;

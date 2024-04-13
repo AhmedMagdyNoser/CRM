@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import icons from '../../utils/faIcons';
 
 /**
  * `CenterBox` is a component that wraps its children in a centered box on the screen.
@@ -33,7 +33,7 @@ function CenterBox({ className = '', backButton, children }) {
             onClick={() => navigate(-1)}
             className="btn-light flex-center gap-2 self-start rounded-xl px-5 py-2 uppercase"
           >
-            <FontAwesomeIcon icon={faArrowLeft} />
+            <FontAwesomeIcon icon={icons.back} />
             Back
           </button>
         )}

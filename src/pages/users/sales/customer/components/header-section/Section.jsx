@@ -1,9 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useAuth from '../../../../../../hooks/useAuth';
 import { roles } from '../../../../../../utils/utils';
-import DeleteCustomerPopup from './DeleteCustomerPopup';
+import useAuth from '../../../../../../hooks/useAuth';
 import icons from '../../../../../../utils/faIcons';
-import { faEdit } from '@fortawesome/free-regular-svg-icons';
+import DeleteCustomerPopup from './DeleteCustomerPopup';
 
 function CustomerHeaderSection({ editingMode, setEditingMode, deletePopupOpen, setDeletePopupOpen }) {
   const { auth } = useAuth();
@@ -29,7 +28,7 @@ function CustomerHeaderSection({ editingMode, setEditingMode, deletePopupOpen, s
             onClick={() => setEditingMode(!editingMode)}
             className={`flex-center animate-fade-in-medium gap-1 rounded-xl px-4 py-2 text-sm font-semibold sm:text-base ${editingMode ? 'btn-secondary' : 'btn-primary '}`}
           >
-            <FontAwesomeIcon icon={faEdit} />
+            <FontAwesomeIcon icon={icons.edit} />
             {editingMode ? 'Cancel Editing' : 'Edit'}
           </button>
         </div>

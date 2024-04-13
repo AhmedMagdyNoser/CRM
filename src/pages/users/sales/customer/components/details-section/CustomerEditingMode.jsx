@@ -9,7 +9,6 @@ import DropdownMenu from '../../../../../../components/ui/DropdownMenu';
 import icons from '../../../../../../utils/faIcons';
 import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
 import AddNewSourcePopup from '../../../../moderator/add-new-customer/components/AddNewSourcePopup';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import InterestsInputField from '../../../../../../components/interests/InterestsInputFields';
 import GenderInput from '../../../../../../components/ui/GenderInput';
 
@@ -118,7 +117,7 @@ function CustomerEditingMode({ customer, setCustomer, setEditingMode }) {
             onClick={() => setNewSourcePopup(true)}
             className="flex-center rounded-xl bg-gray-100 px-5 text-xl text-gray-500 transition-colors hover:bg-gray-200"
           >
-            <FontAwesomeIcon icon={faPlus} />
+            <FontAwesomeIcon icon={icons.plus} />
           </button>
           {newSourcePopup && (
             <AddNewSourcePopup setNewSourcePopup={setNewSourcePopup} setSourcesOptions={setSourcesOptions} />

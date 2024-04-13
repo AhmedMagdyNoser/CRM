@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import InterestBadge from '../../../../../../components/interests/InterestBadge';
 import { paths, trancateText } from '../../../../../../utils/utils';
 import { formatDate } from '../../../../../../utils/utils';
+import icons from '../../../../../../utils/faIcons';
 
 function CustomerRow({ customer }) {
   return (
     <tr className="border-b text-xs transition hover:bg-gray-50 sm:text-sm">
       <td className="flex items-center gap-3 whitespace-nowrap px-6 py-4 font-bold text-gray-800">
         <div className="flex-center h-10 w-10 rounded-full bg-pro-100">
-          <FontAwesomeIcon icon={faUser} className="text-sm text-pro-200" />
+          <FontAwesomeIcon icon={icons.user} className="text-sm text-pro-200" />
         </div>
         <span>{trancateText(customer.firstName + ' ' + customer.lastName, 25)}</span>
       </td>

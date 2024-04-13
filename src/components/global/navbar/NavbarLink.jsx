@@ -1,9 +1,9 @@
-import useLogout from "../../../hooks/useLogout";
-import { useNavigate, NavLink } from "react-router-dom";
+import useLogout from '../../../hooks/useLogout';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import { breakboints, layoutDimensions, paths } from "../../../utils/utils";
-import useNavbar from "../../../hooks/useNavbar";
+import { breakboints, layoutDimensions, paths } from '../../../utils/utils';
+import useNavbar from '../../../hooks/useNavbar';
+import icons from '../../../utils/faIcons';
 
 export default function NavbarLink({ label, to, icon, onClick }) {
   const { navbarExpanded } = useNavbar();
@@ -59,7 +59,7 @@ export function LogoutButton() {
   return (
     <NavbarLink
       label="Logout"
-      icon={<FontAwesomeIcon icon={faRightFromBracket} className="sm:rotate-180" />}
+      icon={<FontAwesomeIcon icon={icons.logout} className="sm:rotate-180" />}
       to={'/'}
       onClick={() => {
         logout();

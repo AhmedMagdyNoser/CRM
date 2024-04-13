@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import useDebouncedValue from '../../../../../../hooks/useDebouncedValue';
 import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import InputField from '../../../../../../components/ui/InputField';
 import Pagination from '../../../../../../components/ui/Pagination';
 import CustomerRowSkeleton from './CustomerRowSkeleton';
 import CustomerRow from './CustomerRow';
+import icons from '../../../../../../utils/faIcons';
 
 const ITEMS_PER_PAGE = 15;
 
@@ -47,7 +47,7 @@ function AllCustomersSection() {
         <div className="w-full sm:w-[375px]">
           <InputField
             type="text"
-            icon={faSearch}
+            icon={icons.search}
             placeholder="Search by name, phone, or email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}

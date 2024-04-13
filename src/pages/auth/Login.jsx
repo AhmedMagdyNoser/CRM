@@ -5,11 +5,11 @@ import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
 import login from '../../assets/login.svg';
 import InputField from '../../components/ui/InputField';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Checkbox from '../../components/ui/Checkbox';
 import AuthMaxBox from './components/AuthMaxBox';
 import Form from '../../components/ui/Form';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
+import icons from '../../utils/faIcons';
 
 function Login() {
   useDocumentTitle(`${applicationName} | Login`);
@@ -64,7 +64,7 @@ function Login() {
         <InputField
           placeholder="Username or Email"
           type="text"
-          icon={faUser}
+          icon={icons.user}
           value={identity}
           onChange={(e) => setIdentity(e.target.value)}
           maxLength={50}

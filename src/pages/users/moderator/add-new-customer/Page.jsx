@@ -11,7 +11,6 @@ import { breakboints, globalErrorMessage, paths, roles } from '../../../../utils
 import { validateCustomerFields } from '../../../../utils/validation';
 import icons from '../../../../utils/faIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import AddNewSourcePopup from './components/AddNewSourcePopup';
 import GenderInput from '../../../../components/ui/GenderInput';
 
@@ -130,7 +129,7 @@ function AddNewCustomer() {
                 onClick={() => setNewSourcePopup(true)}
                 className="flex-center rounded-xl bg-gray-100 px-5 text-xl text-gray-500 transition-colors hover:bg-gray-200"
               >
-                <FontAwesomeIcon icon={faPlus} />
+                <FontAwesomeIcon icon={icons.plus} />
               </button>
               {newSourcePopup && (
                 <AddNewSourcePopup setNewSourcePopup={setNewSourcePopup} setSourcesOptions={setSourcesOptions} />

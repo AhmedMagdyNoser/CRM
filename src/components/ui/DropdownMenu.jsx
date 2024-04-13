@@ -1,6 +1,6 @@
-import { faAngleDown, faAngleUp, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import icons from '../../utils/faIcons';
 
 function DropdownMenu({
   options = [],
@@ -95,7 +95,7 @@ function DropdownMenu({
         {selected ? (
           <div className="flex-center gap-2">
             <span>
-              <FontAwesomeIcon icon={faCheck} className="text-green-500" />
+              <FontAwesomeIcon icon={icons.check} className="text-green-500" />
             </span>
             <MenuButton
               onClick={() => {
@@ -103,12 +103,12 @@ function DropdownMenu({
                 setSelected('');
               }}
             >
-              <FontAwesomeIcon icon={faX} />
+              <FontAwesomeIcon icon={icons.x} />
             </MenuButton>
           </div>
         ) : (
           <MenuButton onClick={() => setOpenMenu(!openMenu)}>
-            <FontAwesomeIcon icon={openMenu ? faAngleUp : faAngleDown} />
+            <FontAwesomeIcon icon={openMenu ? icons.angleUp : icons.angleDown} />
           </MenuButton>
         )}
       </div>
