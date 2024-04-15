@@ -98,7 +98,7 @@ function AllCustomersSection() {
           getPage={(page) => getCustomers(page)}
           currentPage={data.currentPage}
           totalPages={data.pages}
-          className={`gap-1 ${data.pages === 1 || loading || error ? 'hidden' : ''}`}
+          className={`gap-1 ${data.pages <= 1 || loading || error ? 'hidden' : ''}`}
         />
       </div>
     </>
