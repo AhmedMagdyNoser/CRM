@@ -1,9 +1,10 @@
 import CustomerCard from './CustomerCard';
 import CustomersCardSkeleton from './CustomerCardSkeleton';
 import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
+import Alert from '../../../../../../components/ui/Alert';
 
 function LastWeekCustomersSection() {
-  const { loading, data } = useOnLoadFetch('/moderator/get-last-week-customers');
+  const { loading, data, error } = useOnLoadFetch('/moderator/get-last-week-customers');
 
   const lastWeekCustomers = data.items;
 
@@ -14,6 +15,8 @@ function LastWeekCustomersSection() {
         <div className="scrollbar-hide flex gap-3 overflow-x-auto py-1">
           <CustomersCardSkeleton length={3} />
         </div>
+      ) : error ? (
+        <Alert.Error message={error} />
       ) : lastWeekCustomers.length === 0 ? (
         <p className="text-gray-800">No new customers this week</p>
       ) : (

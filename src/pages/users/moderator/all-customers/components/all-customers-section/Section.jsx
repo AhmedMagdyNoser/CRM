@@ -6,6 +6,7 @@ import Pagination from '../../../../../../components/ui/Pagination';
 import CustomerRowSkeleton from './CustomerRowSkeleton';
 import CustomerRow from './CustomerRow';
 import icons from '../../../../../../utils/faIcons';
+import { globalErrorMessage } from '../../../../../../utils/utils';
 
 const ITEMS_PER_PAGE = 15;
 
@@ -14,6 +15,7 @@ function AllCustomersSection() {
 
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   const [search, setSearch] = useState('');
   const debouncedSearchTerm = useDebouncedValue(search, 350);
@@ -23,6 +25,7 @@ function AllCustomersSection() {
   const getCustomers = useCallback(
     async (page, query) => {
       try {
+        setError('');
         setLoading(true);
         const { data } = await privateAxios({
           url: `/moderator/get-customers?page=${page}&size=${ITEMS_PER_PAGE}&query=${query || ''}`,
@@ -30,6 +33,7 @@ function AllCustomersSection() {
         setData(data);
         setLoading(false);
       } catch (error) {
+        setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
         setLoading(false);
       }
     },
@@ -94,7 +98,7 @@ function AllCustomersSection() {
           getPage={(page) => getCustomers(page)}
           currentPage={data.currentPage}
           totalPages={data.pages}
-          className={`gap-1 ${data.pages === 1 || loading ? 'hidden' : ''}`}
+          className={`gap-1 ${data.pages === 1 || loading || error ? 'hidden' : ''}`}
         />
       </div>
     </>
