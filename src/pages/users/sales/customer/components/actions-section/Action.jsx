@@ -100,7 +100,7 @@ function Action({ action }) {
         </div>
         <p className="mb-2 mt-4 rounded-xl bg-gray-50 p-3 px-4">{action.summary}</p>
         {action.followUp && (
-          <p className="flex justify-end gap-2 text-sm">
+          <p className="flex justify-end gap-1 text-sm">
             Follow up on
             <span className="font-medium">{formatDate(new Date(action.followUp), false, true)}</span>
           </p>
