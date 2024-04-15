@@ -3,15 +3,9 @@ import icons from '../../../../../../utils/faIcons';
 import CustomerPropertiesSkeleton from './CustomerPropertiesSkeleton';
 import CustomerProperties from './CustomerProperties';
 import CustomerEditingMode from './CustomerEditingMode';
-import { useParams } from 'react-router-dom';
-import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
 import { breakboints } from '../../../../../../utils/utils';
 
-function DetailsSection({ editingMode, setEditingMode }) {
-  const params = useParams();
-
-  const { loading, data: customer, setData: setCustomer } = useOnLoadFetch(`/moderator/get-customer/${params.id}`);
-
+function DetailsSection({ loading, customer, setCustomer, editingMode, setEditingMode }) {
   return (
     <div className="flex w-full flex-col items-center overflow-hidden rounded-xl border lg:max-w-[475px] lg:flex-1">
       <div className="relative mb-14 h-32 w-full bg-pro-50">

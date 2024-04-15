@@ -4,13 +4,13 @@ import useAuth from '../../../../../../hooks/useAuth';
 import icons from '../../../../../../utils/faIcons';
 import DeleteCustomerPopup from './DeleteCustomerPopup';
 
-function CustomerHeaderSection({ editingMode, setEditingMode, deletePopupOpen, setDeletePopupOpen }) {
+function CustomerHeaderSection({ editingMode, setEditingMode, deletePopupOpen, setDeletePopupOpen, error }) {
   const { auth } = useAuth();
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-2">
       <h1>Customer Details</h1>
-      {auth.roles.includes(roles.moderator) && (
+      {!error && auth.roles.includes(roles.moderator) && (
         <div className="flex gap-2">
           {editingMode && (
             <>

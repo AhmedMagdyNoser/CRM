@@ -2,8 +2,6 @@ import { useState } from 'react';
 import Action from './Action';
 import ActionSkeleton from './ActionSkeleton';
 import ActionsTab from './ActionTab';
-import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
-import { useParams } from 'react-router-dom';
 import noData from '../../../../../../assets/noData.svg';
 
 const tabs = [
@@ -16,12 +14,8 @@ const tabs = [
 
 // Task: This component needs to be refactored to allow adding new actions
 
-function ActionsSection() {
-  const params = useParams();
-
+function ActionsSection({ loading, actions }) {
   const [activeTab, setActiveTab] = useState(tabs[0]);
-
-  const { loading, data: actions } = useOnLoadFetch(`/moderator/get-customer-actions/${params.id}`);
 
   function filterActions(tab) {
     if (tab.title === 'All Actions') return actions;
