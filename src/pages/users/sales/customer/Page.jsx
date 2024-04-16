@@ -51,7 +51,7 @@ function Customer() {
               editingMode={editingMode}
               setEditingMode={setEditingMode}
             />
-            <ActionsSection loading={loadingActions} actions={actionsData.actions} />
+            <ActionsSection loading={loadingActions} actions={actionsData} />
           </>
         )}
       </div>

@@ -12,37 +12,25 @@ import { globalErrorMessage, paths, roles } from '../../utils/utils';
 import usePrivateAxios from '../../hooks/usePrivateAxios';
 import { useNavigate } from 'react-router-dom';
 
-function CustomerForm({ title, submitLabel, newCustomer, customer, setCustomer, setEditingMode, className }) {
+function CustomerForm({ title, submitLabel, customer, setCustomer, setEditingMode, className }) {
   const privateAxios = usePrivateAxios();
   const navigate = useNavigate();
 
-  const {
-    // Required fields
-    id, // In case of editing
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    phone,
-    setPhone,
-    salesRepresentativeId,
-    setSalesRepresentativeId,
-    salesRepresentativeName, // In case of editing
-    sourceId,
-    setSourceId,
-    sourceName, // In case of editing
-    interests,
-    setInterests,
-    // Optional fields
-    age,
-    setAge,
-    gender,
-    setGender,
-    email,
-    setEmail,
-    city,
-    setCity,
-  } = customer;
+  const addingStatus = !customer;
+
+  // Required fields
+  const [firstName, setFirstName] = useState(customer?.firstName || '');
+  const [lastName, setLastName] = useState(customer?.lastName || '');
+  const [phone, setPhone] = useState(customer?.phone || '');
+  const [salesRepresentativeId, setSalesRepresentativeId] = useState(customer?.salesRepresentative?.id || '');
+  const [sourceId, setSourceId] = useState(customer?.source?.id || '');
+  const [interests, setInterests] = useState(customer?.interests || []);
+
+  // Optional fields
+  const [gender, setGender] = useState(customer?.gender || 0);
+  const [age, setAge] = useState(customer?.age || '');
+  const [email, setEmail] = useState(customer?.email || '');
+  const [city, setCity] = useState(customer?.city || '');
 
   const [openOptionalFields, setOpenOptionalFields] = useState(false);
   const [newSourcePopup, setNewSourcePopup] = useState(false);
@@ -102,7 +90,8 @@ function CustomerForm({ title, submitLabel, newCustomer, customer, setCustomer, 
 
       setLoading(true);
 
-      if (newCustomer) {
+      if (addingStatus) {
+        // Add New Customer
         const res = await privateAxios({
           url: '/moderator/add-customer',
           method: 'post',
@@ -110,8 +99,9 @@ function CustomerForm({ title, submitLabel, newCustomer, customer, setCustomer, 
         });
         navigate(`/${paths.customers}/${res.data.id}`);
       } else {
+        // Update Existing Customer
         const res = await privateAxios({
-          url: `/moderator/update-customer?CustomerId=${id}`,
+          url: `/moderator/update-customer?CustomerId=${customer.id}`,
           method: 'PUT',
           data,
         });
@@ -131,12 +121,12 @@ function CustomerForm({ title, submitLabel, newCustomer, customer, setCustomer, 
       {/* Required Information Fieldset */}
       <fieldset className="flex flex-col gap-3">
         <legend className="mb-2 text-gray-500">Required information</legend>
-        <div className={`flex flex-col gap-3 ${newCustomer ? 'md:flex-row' : ''}`}>
+        <div className={`flex flex-col gap-3 ${addingStatus ? 'md:flex-row' : ''}`}>
           <InputField.FirstName value={firstName} onChange={(e) => setFirstName(e.target.value)} autoFocus />
           <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} />
           <InputField.Phone value={phone} onChange={(e) => setPhone(e.target.value)} />
         </div>
-        <div className={`flex flex-col gap-3 ${newCustomer ? 'md:flex-row' : ''}`}>
+        <div className={`flex flex-col gap-3 ${addingStatus ? 'md:flex-row' : ''}`}>
           <DropdownMenu
             icon={icons.assign}
             placeholder="Assign to"
@@ -146,7 +136,7 @@ function CustomerForm({ title, submitLabel, newCustomer, customer, setCustomer, 
             loadingOptions={salesOptionsLoading}
             selected={salesRepresentativeId}
             setSelected={setSalesRepresentativeId}
-            defaultQuery={salesRepresentativeName || ''}
+            defaultQuery={`${customer?.salesRepresentative ? `${customer.salesRepresentative.firstName} ${customer.salesRepresentative.lastName}` : ''}`}
           />
           <div className="flex w-full gap-3">
             <DropdownMenu
@@ -157,7 +147,7 @@ function CustomerForm({ title, submitLabel, newCustomer, customer, setCustomer, 
               loadingOptions={sourcesOptionsLoading}
               selected={sourceId}
               setSelected={setSourceId}
-              defaultQuery={sourceName || ''}
+              defaultQuery={customer?.source?.name || ''}
             />
             {newSourcePopup && (
               <AddNewSourcePopup setNewSourcePopup={setNewSourcePopup} setSourcesOptions={setSourcesOptions} />
@@ -195,11 +185,11 @@ function CustomerForm({ title, submitLabel, newCustomer, customer, setCustomer, 
         </legend>
         {openOptionalFields && (
           <div className="mt-2 flex animate-fade-in-medium flex-col gap-3">
-            <div className={`flex flex-col gap-3 ${newCustomer ? 'md:flex-row' : ''}`}>
-              <GenderInput gender={gender} setGender={setGender} className={`h-12 ${newCustomer ? 'md:h-auto' : ''}`} />
+            <div className={`flex flex-col gap-3 ${addingStatus ? 'md:flex-row' : ''}`}>
+              <GenderInput gender={gender} setGender={setGender} className={`h-12 ${addingStatus ? 'md:h-auto' : ''}`} />
               <InputField.Age value={age || ''} onChange={(e) => setAge(e.target.value)} />
             </div>
-            <div className={`flex flex-col gap-3 ${newCustomer ? 'md:flex-row' : ''}`}>
+            <div className={`flex flex-col gap-3 ${addingStatus ? 'md:flex-row' : ''}`}>
               <InputField.Email value={email || ''} onChange={(e) => setEmail(e.target.value)} />
               <InputField.City value={city || ''} onChange={(e) => setCity(e.target.value)} />
             </div>
