@@ -51,6 +51,7 @@ function Login() {
     <AuthMaxBox
       image={login}
       title="Welcome back!"
+      subTitle="Please enter your credentials to proceed."
       leave={{ hint: "Don't have an account?", link: `/${paths.register}`, label: 'Register Here' }}
     >
       <Form
@@ -59,7 +60,7 @@ function Login() {
         error={error}
         submitLabel="Login"
         submitDisabled={!identity || !password}
-        className="sm:w-[500px] xl:h-[425px] xl:overflow-auto"
+        className="sm:w-[500px] xl:h-[405px] xl:overflow-auto"
       >
         <InputField
           placeholder="Username or Email"

@@ -17,7 +17,7 @@ import { inputFieldsInstructions } from '../../utils/validation';
 function InputField({ icon, value, isValid, instructions, className = '', ...rest }) {
   return (
     <div className="w-full">
-      <div className="flex items-center overflow-hidden bg-gray-100 rounded-xl">
+      <div className="flex items-center overflow-hidden rounded-xl bg-gray-100">
         {icon && (
           <FontAwesomeIcon
             icon={icon}
@@ -125,7 +125,7 @@ InputField.Username = function Username({ ...rest }) {
 InputField.Email = function Email({ ...rest }) {
   return (
     <InputField
-      type="email"
+      type="text" // replaced to text due to validation factors
       icon={icons.email}
       placeholder="Email"
       instructions={inputFieldsInstructions.email}
