@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CustomerForm from '../../../../../../components/global/CustomerForm';
+import CustomerForm from '../../../../../../components/customer/CustomerForm';
 
 function CustomerEditingMode({ customer, setCustomer, setEditingMode }) {
   // Required fields

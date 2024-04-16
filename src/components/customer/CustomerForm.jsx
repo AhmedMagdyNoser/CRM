@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useOnLoadFetch from '../../hooks/useOnLoadFetch';
-import AddNewSourcePopup from '../../pages/users/moderator/add-new-customer/components/AddNewSourcePopup';
+import AddNewSourcePopup from './AddNewSourcePopup';
 import InterestsInputField from '../interests/InterestsInputFields';
 import DropdownMenu from '../ui/DropdownMenu';
 import Form from '../ui/Form';

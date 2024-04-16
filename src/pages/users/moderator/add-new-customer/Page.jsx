@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { breakboints } from '../../../../utils/utils';
 import useDocumentTitle from '../../../../hooks/useDocumentTitle';
-import CustomerForm from '../../../../components/global/CustomerForm';
+import CustomerForm from '../../../../components/customer/CustomerForm';
 
 function AddNewCustomer() {
   useDocumentTitle('Add New Customer');

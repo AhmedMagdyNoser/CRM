@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
-import { globalErrorMessage, layoutDimensions } from '../../../../../utils/utils';
-import Modal from '../../../../../components/ui/Modal';
-import InputField from '../../../../../components/ui/InputField';
-import icons from '../../../../../utils/faIcons';
+import usePrivateAxios from '../../hooks/usePrivateAxios';
+import { globalErrorMessage, layoutDimensions } from '../../utils/utils';
+import Modal from '../ui/Modal';
+import InputField from '../ui/InputField';
+import icons from '../../utils/faIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import social from '../../../../../assets/social.svg';
-import Alert from '../../../../../components/ui/Alert';
+import social from '../../assets/social.svg';
+import Alert from '../ui/Alert';
 
 function AddNewSourcePopup({ setNewSourcePopup, setSourcesOptions }) {
   const [name, setName] = useState('');
@@ -52,6 +52,7 @@ function AddNewSourcePopup({ setNewSourcePopup, setSourcesOptions }) {
         <img src={social} alt="Sources" className="absolute left-0 top-0 scale-125" />
       </div>
       <div className="flex flex-col gap-3 p-3">
+        <p>Automatically deleted after one day, unused sources will be removed.</p>
         <div className="flex gap-3">
           <InputField
             type="text"
