@@ -76,11 +76,15 @@ export const formatDate = (date, showDayOfWeek = false, showTime = false) => {
 export function getCallStatus(status) {
   switch (status) {
     case 0:
-      return 'Answered';
+      return 'Completed';
     case 1:
-      return 'Rejected';
-    case 2:
       return 'Missed';
+    case 2:
+      return 'Cancelled';
+    case 3:
+      return 'Busy';
+    case 4:
+      return 'Failed';
     default:
       return 'N/A';
   }
