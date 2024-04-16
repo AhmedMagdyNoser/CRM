@@ -47,12 +47,12 @@ function CustomerForm({ title, submitLabel, newCustomer, customer, setCustomer, 
   const [openOptionalFields, setOpenOptionalFields] = useState(false);
   const [newSourcePopup, setNewSourcePopup] = useState(false);
 
-  const { data: salesOptions, loading: salesOptionsLoading } = useOnLoadFetch('/moderator/get-all-sales');
   const {
     data: sourcesOptions,
     loading: sourcesOptionsLoading,
     setData: setSourcesOptions,
   } = useOnLoadFetch('/shared/get-all-sources');
+  const { data: salesOptions, loading: salesOptionsLoading } = useOnLoadFetch('/moderator/get-all-sales');
   const { data: interestsOptions, loading: interestsOptionsLoading } = useOnLoadFetch('/shared/get-all-interests');
 
   const [loading, setLoading] = useState(false);
@@ -131,12 +131,12 @@ function CustomerForm({ title, submitLabel, newCustomer, customer, setCustomer, 
       {/* Required Information Fieldset */}
       <fieldset className="flex flex-col gap-3">
         <legend className="mb-2 text-gray-500">Required information</legend>
-        <div className="flex flex-col gap-3 md:flex-row">
+        <div className={`flex flex-col gap-3 ${newCustomer ? 'md:flex-row' : ''}`}>
           <InputField.FirstName value={firstName} onChange={(e) => setFirstName(e.target.value)} autoFocus />
           <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} />
           <InputField.Phone value={phone} onChange={(e) => setPhone(e.target.value)} />
         </div>
-        <div className="flex flex-col gap-3 sm:flex-row">
+        <div className={`flex flex-col gap-3 ${newCustomer ? 'md:flex-row' : ''}`}>
           <DropdownMenu
             icon={icons.assign}
             placeholder="Assign to"
@@ -195,13 +195,13 @@ function CustomerForm({ title, submitLabel, newCustomer, customer, setCustomer, 
         </legend>
         {openOptionalFields && (
           <div className="mt-2 flex animate-fade-in-medium flex-col gap-3">
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <GenderInput gender={gender} setGender={setGender} className="h-12 sm:h-auto" />
-              <InputField.Age value={age} onChange={(e) => setAge(e.target.value)} />
+            <div className={`flex flex-col gap-3 ${newCustomer ? 'md:flex-row' : ''}`}>
+              <GenderInput gender={gender} setGender={setGender} className={`h-12 ${newCustomer ? 'md:h-auto' : ''}`} />
+              <InputField.Age value={age || ''} onChange={(e) => setAge(e.target.value)} />
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} />
-              <InputField.City value={city} onChange={(e) => setCity(e.target.value)} />
+            <div className={`flex flex-col gap-3 ${newCustomer ? 'md:flex-row' : ''}`}>
+              <InputField.Email value={email || ''} onChange={(e) => setEmail(e.target.value)} />
+              <InputField.City value={city || ''} onChange={(e) => setCity(e.target.value)} />
             </div>
           </div>
         )}
