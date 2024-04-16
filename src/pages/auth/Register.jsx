@@ -83,6 +83,7 @@ function Register() {
         }
         className="sm:h-[425px] sm:w-[500px] sm:overflow-auto"
       >
+        <p className="-translate-y-1 text-sm">Please fill in all the fields to proceed.</p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <InputField.FirstName
             value={firstName}
