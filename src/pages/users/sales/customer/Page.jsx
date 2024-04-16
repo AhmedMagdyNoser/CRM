@@ -24,7 +24,7 @@ function Customer() {
   } = useOnLoadFetch(`/moderator/get-customer/${params.id}`);
   const {
     loading: loadingActions,
-    data: actions,
+    data: actionsData,
     error: actionsError,
   } = useOnLoadFetch(`/moderator/get-customer-actions/${params.id}`);
 
@@ -51,7 +51,7 @@ function Customer() {
               editingMode={editingMode}
               setEditingMode={setEditingMode}
             />
-            <ActionsSection loading={loadingActions} actions={actions} />
+            <ActionsSection loading={loadingActions} actions={actionsData.actions} />
           </>
         )}
       </div>

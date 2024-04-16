@@ -3,14 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import icons from '../../utils/faIcons';
 
 function DropdownMenu({
+  icon,
   options = [],
   setOptions,
+  loadingOptions,
   selected,
   setSelected,
   defaultQuery = '',
-  searchable,
-  icon,
-  loading,
   className = '',
   ...rest
 }) {
@@ -88,7 +87,6 @@ function DropdownMenu({
             setQuery(e.target.value);
           }}
           onKeyDown={handleKeyDown}
-          readOnly={!searchable}
           size={1}
           {...rest}
         />
@@ -115,7 +113,7 @@ function DropdownMenu({
 
       {openMenu && (
         <div className="absolute top-full z-50 max-h-[200px] w-full cursor-default overflow-auto rounded-xl border bg-white py-3 text-gray-800 shadow-md placeholder:text-gray-500">
-          {loading ? (
+          {loadingOptions ? (
             <div className="p-2 px-4 text-sm text-gray-500">Loading Options...</div>
           ) : filteredOptions.length === 0 ? (
             <div className="p-2 px-4 text-sm text-gray-500">No options matched</div>

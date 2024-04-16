@@ -1,26 +1,13 @@
 import { useState } from 'react';
-import { globalErrorMessage, roles } from '../../../../../../utils/utils';
-import { validateCustomerFields } from '../../../../../../utils/validation';
-import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
-import InputField from '../../../../../../components/ui/InputField';
-import Form from '../../../../../../components/ui/Form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import DropdownMenu from '../../../../../../components/ui/DropdownMenu';
-import icons from '../../../../../../utils/faIcons';
-import useOnLoadFetch from '../../../../../../hooks/useOnLoadFetch';
-import AddNewSourcePopup from '../../../../moderator/add-new-customer/components/AddNewSourcePopup';
-import InterestsInputField from '../../../../../../components/interests/InterestsInputFields';
-import GenderInput from '../../../../../../components/ui/GenderInput';
+import CustomerForm from '../../../../../../components/global/CustomerForm';
 
 function CustomerEditingMode({ customer, setCustomer, setEditingMode }) {
-  const privateAxios = usePrivateAxios();
-
   // Required fields
   const [firstName, setFirstName] = useState(customer.firstName);
   const [lastName, setLastName] = useState(customer.lastName);
   const [phone, setPhone] = useState(customer.phone);
   const [salesRepresentativeId, setSalesRepresentativeId] = useState(customer.salesRepresentative.id);
-  const [source, setSource] = useState(customer.source);
+  const [sourceId, setSourceId] = useState(customer.source.id);
   const [interests, setInterests] = useState(customer.interests);
 
   // Optional fields
@@ -29,113 +16,40 @@ function CustomerEditingMode({ customer, setCustomer, setEditingMode }) {
   const [email, setEmail] = useState(customer.email);
   const [city, setCity] = useState(customer.city);
 
-  // Options
-  const { data: salesOptions, loading: salesOptionsLoading } = useOnLoadFetch('/moderator/get-all-sales');
-  const {
-    data: sourcesOptions,
-    setData: setSourcesOptions,
-    loading: sourcesOptionsLoading,
-  } = useOnLoadFetch('/shared/get-all-sources');
-  const { data: interestsOptions, loading: interestsOptionsLoading } = useOnLoadFetch('/shared/get-all-interests');
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const [newSourcePopup, setNewSourcePopup] = useState(false);
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    try {
-      setError('');
-      const data = {
-        firstName,
-        lastName,
-        phone,
-        salesRepresntativeId: salesRepresentativeId, // typo in salesRepresntativeId
-        source,
-        interests,
-      };
-
-      if (!validateCustomerFields(data, setError)) return;
-
-      if (age) data.age = age;
-      if (gender) data.gender = gender;
-      if (email) data.email = email;
-      if (city) data.city = city;
-
-      setLoading(true);
-      await privateAxios({
-        url: `/moderator/update-customer?CustomerId=${customer.id}`,
-        method: 'PUT',
-        data,
-      });
-      setCustomer({
-        ...customer,
-        ...data,
-        salesRepresentative: salesOptions.find((user) => user.id === salesRepresentativeId),
-      });
-      setEditingMode(false);
-    } catch (error) {
-      setLoading(false);
-      setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
-    }
-  }
-
   return (
     <div className="flex animate-fade-in-fast flex-col gap-2">
-      <Form onSubmit={handleSubmit} submitLabel="Update" loading={loading} error={error}>
-        {/* Required fields */}
-        <InputField.FirstName value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        <InputField.LastName value={lastName} onChange={(e) => setLastName(e.target.value)} />
-        <InputField.Phone value={phone} onChange={(e) => setPhone(e.target.value)} />
-        <DropdownMenu
-          icon={icons.assign}
-          placeholder="Assign to"
-          defaultQuery={`${customer.salesRepresentative.firstName} ${customer.salesRepresentative.lastName}`}
-          selected={salesRepresentativeId}
-          setSelected={setSalesRepresentativeId}
-          loading={salesOptionsLoading}
-          options={salesOptions
-            .filter((user) => !user.roles.includes(roles.manager))
-            .map((user) => ({ value: user.id, label: `${user.firstName} ${user.lastName}` }))}
-          searchable
-        />
-        <div className="flex w-full gap-3">
-          <DropdownMenu
-            placeholder="Source"
-            options={sourcesOptions.map((source) => ({ value: source.name, label: source.name }))} // Task: Change the data structure
-            setOptions={setSourcesOptions}
-            selected={source}
-            defaultQuery={source}
-            setSelected={setSource}
-            searchable
-            icon={icons.source}
-            loading={sourcesOptionsLoading}
-          />
-          <button
-            type="button"
-            onClick={() => setNewSourcePopup(true)}
-            className="flex-center rounded-xl bg-gray-100 px-5 text-xl text-gray-500 transition-colors hover:bg-gray-200"
-          >
-            <FontAwesomeIcon icon={icons.plus} />
-          </button>
-          {newSourcePopup && (
-            <AddNewSourcePopup setNewSourcePopup={setNewSourcePopup} setSourcesOptions={setSourcesOptions} />
-          )}
-        </div>
-        <InterestsInputField
-          interestsOptions={interestsOptions}
-          selectedInterests={interests}
-          setSelectedInterests={setInterests}
-          loading={interestsOptionsLoading}
-        />
-
-        {/* Optional fields */}
-        <GenderInput gender={gender || 0} setGender={setGender} className="h-12" />
-        <InputField.Age value={age || ''} onChange={(e) => setAge(e.target.value)} />
-        <InputField.Email value={email || ''} onChange={(e) => setEmail(e.target.value)} />
-        <InputField.City value={city || ''} onChange={(e) => setCity(e.target.value)} />
-      </Form>
+      <CustomerForm
+        submitLabel="Update"
+        setEditingMode={setEditingMode}
+        setCustomer={setCustomer}
+        customer={{
+          // Required fields
+          id: customer.id,
+          firstName,
+          setFirstName,
+          lastName,
+          setLastName,
+          phone,
+          setPhone,
+          salesRepresentativeId,
+          setSalesRepresentativeId,
+          salesRepresentativeName: `${customer.salesRepresentative.firstName} ${customer.salesRepresentative.lastName}`,
+          sourceId,
+          setSourceId,
+          sourceName: customer.source.name,
+          interests,
+          setInterests,
+          // Optional fields
+          age,
+          setAge,
+          gender,
+          setGender,
+          email,
+          setEmail,
+          city,
+          setCity,
+        }}
+      />
       <div className="flex gap-2">
         <button
           className="w-full rounded-xl border bg-gray-50 py-2 text-gray-500 transition-colors hover:bg-gray-100"
