@@ -1,20 +1,24 @@
 {
   "files": {
-    "main.css": "/Pro-Sales/static/css/main.f026c674.css",
-    "main.js": "/Pro-Sales/static/js/main.f79cd9a0.js",
-    "static/media/forgotPassword.svg": "/Pro-Sales/static/media/forgotPassword.3e3aa802f33bd818a9d00e253946fdca.svg",
-    "static/media/register.svg": "/Pro-Sales/static/media/register.c885aaa3e714668a1def9e7978d7e015.svg",
-    "static/media/pageNotFound.svg": "/Pro-Sales/static/media/pageNotFound.01a3400847c9976978521d48add476d8.svg",
-    "static/media/success.svg": "/Pro-Sales/static/media/success.395daf13635b2b0cb725848208c41b5a.svg",
-    "static/media/defaultImage.svg": "/Pro-Sales/static/media/defaultImage.782e374a658abd47664c5ecd960262fd.svg",
-    "static/media/login.svg": "/Pro-Sales/static/media/login.e430d0b39c791b132dd8cb81fa828af9.svg",
-    "static/media/email.svg": "/Pro-Sales/static/media/email.7cd04cc7a59fc6fe28871fce1aa6acbe.svg",
+    "main.css": "/Pro-Sales/static/css/main.2bf23a89.css",
+    "main.js": "/Pro-Sales/static/js/main.e616334f.js",
+    "static/media/forgotPassword.svg": "/Pro-Sales/static/media/forgotPassword.9bb148075547ef30c09bc1791b1581b5.svg",
+    "static/media/social.svg": "/Pro-Sales/static/media/social.d018410493e8c7b3e5e97244dce4f457.svg",
+    "static/media/register.svg": "/Pro-Sales/static/media/register.9c3dc65c6e6ae7c6216951e5b6747f64.svg",
+    "static/media/pageNotFound.svg": "/Pro-Sales/static/media/pageNotFound.36d70e8d28213d4527ffb8df4ff6fa03.svg",
+    "static/media/logo.png": "/Pro-Sales/static/media/logo.ad489b7dab2a3c3cae73.png",
+    "static/media/success.svg": "/Pro-Sales/static/media/success.c77e0c57ad813e0c78ff8be3f47873b4.svg",
+    "static/media/unauthorized.svg": "/Pro-Sales/static/media/unauthorized.75ea8b74f888f3eb28e18720edd28167.svg",
+    "static/media/defaultImage.svg": "/Pro-Sales/static/media/defaultImage.c006bc5b4f06cba9b33849058eaa10c8.svg",
+    "static/media/login.svg": "/Pro-Sales/static/media/login.83d79968daf5232a237ab2231f90557a.svg",
+    "static/media/noData.svg": "/Pro-Sales/static/media/noData.9a523fac75fb0c1452af48a9386f7938.svg",
+    "static/media/email.svg": "/Pro-Sales/static/media/email.b8b225568567f7b34559c848dad741ab.svg",
     "index.html": "/Pro-Sales/index.html",
-    "main.f026c674.css.map": "/Pro-Sales/static/css/main.f026c674.css.map",
-    "main.f79cd9a0.js.map": "/Pro-Sales/static/js/main.f79cd9a0.js.map"
+    "main.2bf23a89.css.map": "/Pro-Sales/static/css/main.2bf23a89.css.map",
+    "main.e616334f.js.map": "/Pro-Sales/static/js/main.e616334f.js.map"
   },
   "entrypoints": [
-    "static/css/main.f026c674.css",
-    "static/js/main.f79cd9a0.js"
+    "static/css/main.2bf23a89.css",
+    "static/js/main.e616334f.js"
   ]
 }
