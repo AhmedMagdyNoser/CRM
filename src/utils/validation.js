@@ -17,16 +17,16 @@ export const inputFieldsInstructions = {
   confirmPassword: 'Confirm password must match the entered password.',
 };
 
-export function validateCustomerFields({ firstName, lastName, phone, salesRepresntativeId, source, interests }, setError) {
+export function validateCustomerFields({ firstName, lastName, phone, salesRepresentativeId, sourceId, interests }, setError) {
   if (!firstName) {
     setError('Please provide a first name');
   } else if (!lastName) {
     setError('Please provide a last name');
   } else if (!phone) {
     setError('Please provide a phone number');
-  } else if (!salesRepresntativeId) {
+  } else if (!salesRepresentativeId) {
     setError('Please assign this customer to a sales representative');
-  } else if (!source) {
+  } else if (!sourceId) {
     setError('Please select the source of this customer');
   } else if (interests.length === 0) {
     setError('Please select at least one interest');

@@ -24,8 +24,8 @@ function AddNewCustomer() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
-  const [salesRepresntativeId, setSalesRepresntativeId] = useState('');
-  const [source, setSource] = useState('');
+  const [salesRepresentativeId, setSalesRepresentativeId] = useState('');
+  const [sourceId, setSourceId] = useState('');
   const [interests, setInterests] = useState([]);
 
   // Optional fields
@@ -57,8 +57,8 @@ function AddNewCustomer() {
         firstName,
         lastName,
         phone,
-        salesRepresntativeId, // typo in salesRepresntativeId
-        source,
+        salesRepresentativeId,
+        sourceId,
         interests,
       };
 
@@ -105,8 +105,8 @@ function AddNewCustomer() {
             <DropdownMenu
               icon={icons.assign}
               placeholder="Assign to"
-              selected={salesRepresntativeId}
-              setSelected={setSalesRepresntativeId}
+              selected={salesRepresentativeId}
+              setSelected={setSalesRepresentativeId}
               loading={salesOptionsLoading}
               options={salesOptions
                 .filter((user) => !user.roles.includes(roles.manager))
@@ -116,10 +116,10 @@ function AddNewCustomer() {
             <div className="flex w-full gap-3">
               <DropdownMenu
                 placeholder="Source"
-                options={sourcesOptions.map((source) => ({ value: source.name, label: source.name }))} // Task: Change the data structure
+                options={sourcesOptions.map((source) => ({ value: source.id, label: source.name }))}
                 setOptions={setSourcesOptions}
-                selected={source}
-                setSelected={setSource}
+                selected={sourceId}
+                setSelected={setSourceId}
                 searchable
                 icon={icons.source}
                 loading={sourcesOptionsLoading}
@@ -146,8 +146,15 @@ function AddNewCustomer() {
 
         <fieldset>
           <legend
+            tabIndex={0}
             className="cursor-pointer text-gray-500 hover:underline"
             onClick={() => setOpenOptionalFields(!openOptionalFields)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                setOpenOptionalFields(!openOptionalFields);
+              }
+            }}
           >
             More Details (Optional)
           </legend>

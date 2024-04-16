@@ -20,7 +20,7 @@ function CustomerProperties({ customer }) {
         title="Assigned To"
         value={trancateText(`${customer.salesRepresentative.firstName} ${customer.salesRepresentative.lastName}`, 18)}
       />
-      <Property icon={icons.source} title="Source" value={customer.source} />
+      <Property icon={icons.source} title="Source" value={customer.source.name} />
       <Property icon={icons.date} title="Added On" value={formatDate(new Date(customer.additionDate))} />
       <div className="mt-5 font-medium text-gray-800">Interests</div>
       <div className="flex flex-wrap gap-2">
