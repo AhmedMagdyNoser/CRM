@@ -104,11 +104,18 @@ function Register() {
           isValid={isValidUserName}
           required
         />
-        <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} isValid={isValidEmail} required />
+        <InputField.Email
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          isValid={isValidEmail}
+          autoComplete="off"
+          required
+        />
         <InputField.Password
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           isValid={isValidPassword}
+          autoComplete="new-password"
           required
         />
         <InputField.Password
