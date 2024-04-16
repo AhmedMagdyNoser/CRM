@@ -64,6 +64,7 @@ function Register() {
     <AuthMaxBox
       image={register}
       title="Create your account"
+      subTitle="Please fill in all the fields to proceed."
       leave={{ hint: 'Already have an account?', label: 'Login', link: `/${paths.login}` }}
     >
       <Form
@@ -81,9 +82,8 @@ function Register() {
             isValidConfirmPassword
           )
         }
-        className="sm:h-[425px] sm:w-[500px] sm:overflow-auto"
+        className="sm:h-[405px] sm:w-[500px] sm:overflow-auto"
       >
-        <p className="-translate-y-1 text-sm">Please fill in all the fields to proceed.</p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <InputField.FirstName
             value={firstName}
