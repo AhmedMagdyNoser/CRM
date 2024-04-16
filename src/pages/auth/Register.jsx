@@ -47,7 +47,7 @@ function Register() {
         await axios({
           method: 'POST',
           url: '/auth/register',
-          data: { firstName, lastName, userName: username, email, password, confirmPassword }, // typo in userName
+          data: { firstName, lastName, username, email, password, confirmPassword },
         });
         navigate(`/${paths.verifyEmail}`, { state: { purpose: 'ConfirmNewEmail', email } });
       } catch (error) {

@@ -1,7 +1,10 @@
+const EMAIL_PART_REGEX = /[a-zA-Z\d]([a-zA-Z\d.-]*[a-zA-Z\d])?/;
+const EMAIL_REGEX = new RegExp(`^${EMAIL_PART_REGEX.source}@${EMAIL_PART_REGEX.source}\\.[a-zA-Z\d]+$`);
+
 export const validationRegex = {
   name: /^[^0-9 !@#$%^&*()_+\-={}[\]\\|'";:/?.>,<].*/,
   username: /^[a-zA-Z0-9_]*$/,
-  email: /^[\w.-]+@[a-zA-Z\d.-]+/,
+  email: EMAIL_REGEX,
   password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/,
 };
 
@@ -14,10 +17,7 @@ export const inputFieldsInstructions = {
   confirmPassword: 'Confirm password must match the entered password.',
 };
 
-export function validateCustomerFields(
-  { firstName, lastName, phone, salesRepresntativeId, source, interests },
-  setError,
-) {
+export function validateCustomerFields({ firstName, lastName, phone, salesRepresntativeId, source, interests }, setError) {
   if (!firstName) {
     setError('Please provide a first name');
   } else if (!lastName) {
