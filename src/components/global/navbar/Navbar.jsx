@@ -1,12 +1,14 @@
-import { applicationName, layoutDimensions, paths, roles } from '../../../utils/utils';
+import { applicationName, layoutDimensions, paths, roles, trancateText } from '../../../utils/utils';
 import logo from '../../../assets/logo.png';
 import useAuth from '../../../hooks/useAuth';
 import useNavbar from '../../../hooks/useNavbar';
 import NavIcon from './NavIcon';
 import NavbarLink, { LogoutButton } from './NavbarLink';
+import useCompany from '../../../hooks/useCompany';
 
 function Navbar({ className = '' }) {
   const { auth } = useAuth();
+  const { company } = useCompany();
   const { navbarExpanded, setNavbarExpanded } = useNavbar();
 
   return (
@@ -24,9 +26,15 @@ function Navbar({ className = '' }) {
 
       <div className={`relative hidden w-full items-center sm:flex`}>
         <img src={logo} alt="Logo" className="relative left-0 top-0 mx-4 h-10 w-10" />
-        <div className={'flex flex-col ' + (!navbarExpanded && 'opacity-0')}>
-          <p className="text-sm font-bold text-pro-300">{applicationName}</p>
-          <p className="text-nowrap text-sm text-gray-500">Company Name</p>
+        <div className={'flex flex-col gap-1 text-gray-500 ' + (!navbarExpanded && 'opacity-0')}>
+          <p className="text-nowrap font-bold text-pro-300">{applicationName}</p>
+          {company.loading ? (
+            <p className="text-nowrap text-sm">Loading...</p>
+          ) : company.error ? (
+            <p className="text-nowrap text-sm">An error occurred</p>
+          ) : (
+            <p className="text-nowrap text-sm">{trancateText(company.data.name, 15)}</p>
+          )}
         </div>
       </div>
 
