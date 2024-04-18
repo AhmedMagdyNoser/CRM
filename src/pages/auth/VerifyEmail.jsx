@@ -1,15 +1,18 @@
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { globalErrorMessage } from '../../utils/utils';
+import { globalErrorMessage, paths } from '../../utils/utils';
 import { useState } from 'react';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
-import InputField from '../../components/global/InputField';
+import InputField from '../../components/ui/InputField';
 import email from '../../assets/email.svg';
-import CenterBox from '../../components/global/CenterBox';
-import CaptionCard from '../../components/global/CaptionCard';
-import Form from '../../components/global/Form';
+import CenterBox from '../../components/ui/CenterBox';
+import CaptionCard from '../../components/ui/CaptionCard';
+import Form from '../../components/ui/Form';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function VerifyEmail() {
+  useDocumentTitle('Verify Your Email');
+
   const location = useLocation();
   const navigate = useNavigate();
   const { setAuth } = useAuth();
@@ -19,9 +22,7 @@ function VerifyEmail() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  console.log('Rendering VerifyEmail', { loading, error });
-
-  if (!location.state?.email) return <Navigate to="/login" replace={true} />;
+  if (!location.state?.email) return <Navigate to={`/${paths.login}`} replace={true} />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -42,7 +43,7 @@ function VerifyEmail() {
           url: '/auth/verify-code',
           data: { purpose: location.state.purpose, email: location.state.email, code },
         });
-        navigate('/reset-password', { state: { email: location.state.email, token: response.data.token } });
+        navigate(`/${paths.resetPassword}`, { state: { email: location.state.email, token: response.data.token } });
       }
     } catch (error) {
       setLoading(false);

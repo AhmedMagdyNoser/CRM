@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { globalErrorMessage } from '../../utils/utils';
-import { validationRegex } from '../../utils/utils';
+import { applicationName, globalErrorMessage, paths } from '../../utils/utils';
+import { validationRegex } from '../../utils/validation';
 import axios from '../../api/axios';
 import forgotPassword from '../../assets/forgotPassword.svg';
-import InputField from '../../components/global/InputField';
-import CaptionCard from '../../components/global/CaptionCard';
-import CenterBox from '../../components/global/CenterBox';
-import Form from '../../components/global/Form';
+import InputField from '../../components/ui/InputField';
+import CaptionCard from '../../components/ui/CaptionCard';
+import CenterBox from '../../components/ui/CenterBox';
+import Form from '../../components/ui/Form';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function ForgotPassword() {
+  useDocumentTitle(`${applicationName} | Forgot Password?`);
+
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -19,8 +22,6 @@ function ForgotPassword() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  console.log('Rendering ForgetPassword', { loading, error });
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (validEmail) {
@@ -28,7 +29,7 @@ function ForgotPassword() {
         if (error) setError('');
         setLoading(true);
         await axios({ method: 'POST', url: '/auth/forgot-password', data: { email } });
-        navigate('/verify-email', { state: { email, purpose: 'ResetPassword' } });
+        navigate(`/${paths.verifyEmail}`, { state: { email, purpose: 'ResetPassword' } });
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
@@ -41,7 +42,7 @@ function ForgotPassword() {
 
   return (
     <CenterBox backButton className="flex-col">
-      <CaptionCard image={forgotPassword} title="Forgot password?" paragraph="Please enter your email address below." />
+      <CaptionCard image={forgotPassword} title="Forgot password" paragraph="Please enter your email address below." />
       <Form
         onSubmit={handleSubmit}
         loading={loading}

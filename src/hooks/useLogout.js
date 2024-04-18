@@ -16,12 +16,10 @@ function useLogout() {
 
   const logout = async () => {
     try {
+      setAuth({});
       localStorage.removeItem('persist');
       await axios({ method: 'POST', url: '/auth/revoke-token', withCredentials: true });
-      setAuth({});
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return logout;

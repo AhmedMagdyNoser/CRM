@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
-import InputField from '../../components/global/InputField';
+import { applicationName, globalErrorMessage, paths } from '../../utils/utils';
+import { inputFieldsInstructions, validationRegex } from '../../utils/validation';
+import InputField from '../../components/ui/InputField';
 import axios from '../../api/axios';
 import register from '../../assets/register.svg';
-import AuthMaxBox from '../../components/auth/AuthMaxBox';
-import Form from '../../components/global/Form';
+import AuthMaxBox from './components/AuthMaxBox';
+import Form from '../../components/ui/Form';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function Register() {
+  useDocumentTitle(`${applicationName} | Register`);
+
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
@@ -27,8 +31,6 @@ function Register() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  console.log('Rendering Register', { loading, error });
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (
@@ -45,9 +47,9 @@ function Register() {
         await axios({
           method: 'POST',
           url: '/auth/register',
-          data: { firstName, lastName, userName: username, email, password, confirmPassword },
+          data: { firstName, lastName, username, email, password, confirmPassword },
         });
-        navigate('/verify-email', { state: { purpose: 'ConfirmNewEmail', email } });
+        navigate(`/${paths.verifyEmail}`, { state: { purpose: 'ConfirmNewEmail', email } });
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
@@ -62,7 +64,8 @@ function Register() {
     <AuthMaxBox
       image={register}
       title="Create your account"
-      leave={{ hint: 'Already have an account?', label: 'Login', link: '/login' }}
+      subTitle="Please fill in all the fields to proceed."
+      leave={{ hint: 'Already have an account?', label: 'Login', link: `/${paths.login}` }}
     >
       <Form
         onSubmit={handleSubmit}
@@ -79,7 +82,7 @@ function Register() {
             isValidConfirmPassword
           )
         }
-        className="sm:h-[425px] sm:w-[500px] sm:overflow-auto"
+        className="sm:h-[405px] sm:w-[500px] sm:overflow-auto"
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <InputField.FirstName
@@ -102,11 +105,18 @@ function Register() {
           isValid={isValidUserName}
           required
         />
-        <InputField.Email value={email} onChange={(e) => setEmail(e.target.value)} isValid={isValidEmail} required />
+        <InputField.Email
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          isValid={isValidEmail}
+          autoComplete="off"
+          required
+        />
         <InputField.Password
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           isValid={isValidPassword}
+          autoComplete="new-password"
           required
         />
         <InputField.Password

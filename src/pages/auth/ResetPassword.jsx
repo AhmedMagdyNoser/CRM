@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { globalErrorMessage, inputFieldsInstructions, validationRegex } from '../../utils/utils';
+import { globalErrorMessage, paths } from '../../utils/utils';
+import { inputFieldsInstructions, validationRegex } from '../../utils/validation';
 import axios from '../../api/axios';
-import InputField from '../../components/global/InputField';
+import InputField from '../../components/ui/InputField';
 import success from '../../assets/success.svg';
-import CenterBox from '../../components/global/CenterBox';
-import CaptionCard from '../../components/global/CaptionCard';
-import Form from '../../components/global/Form';
+import CenterBox from '../../components/ui/CenterBox';
+import CaptionCard from '../../components/ui/CaptionCard';
+import Form from '../../components/ui/Form';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 function ResetPassword() {
+  useDocumentTitle('Reset Your Password');
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -22,9 +26,7 @@ function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  console.log('Rendering ResetPassword', { loading, error });
-
-  if (!location.state?.email || !location.state?.token) return <Navigate to="/login" replace={true} />;
+  if (!location.state?.email || !location.state?.token) return <Navigate to={`/${paths.login}`} replace={true} />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -44,7 +46,7 @@ function ResetPassword() {
         });
         setLoading(false);
         setSuccess(true);
-        setTimeout(() => navigate('/login', { state: null }), 3500);
+        setTimeout(() => navigate(`/${paths.login}`, { state: null }), 3500);
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
