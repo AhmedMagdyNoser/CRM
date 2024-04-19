@@ -5,11 +5,7 @@ import { globalErrorMessage } from '../utils/utils';
 export const InterestsContext = createContext(null);
 
 export default function InterestsProvider({ children }) {
-  const [interests, setInterests] = useState({
-    data: [],
-    loading: true,
-    error: '',
-  });
+  const [interests, setInterests] = useState({ data: {}, loading: true, error: '' });
 
   const privateAxios = usePrivateAxios();
 
@@ -20,7 +16,9 @@ export default function InterestsProvider({ children }) {
     (async function fetchData() {
       try {
         const { data } = await privateAxios({ url: '/shared/get-all-interests', signal: controller.signal });
-        if (!canceled) setInterests({ data, loading: false, error: '' });
+        const enabled = data.filter((interest) => !interest.isDisabled);
+        const disabled = data.filter((interest) => interest.isDisabled);
+        if (!canceled) setInterests({ data: { enabled, disabled }, loading: false, error: '' });
       } catch (error) {
         if (!canceled)
           setInterests({
