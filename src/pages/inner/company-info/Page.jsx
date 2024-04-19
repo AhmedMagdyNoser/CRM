@@ -7,7 +7,7 @@ export default function CompanyInfo() {
   useDocumentTitle('Company Info');
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex min-h-full flex-col gap-6">
       <CompanyInfoHeaderSection />
       <CompanyInfoSection />
       <InterestsSection />
