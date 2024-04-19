@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { formatDate, getCallStatus } from '../../../../../utils/utils';
 import useHover from '../../../../../hooks/useHover';
-import InterestBadge from '../../../../../components/interests/InterestBadge';
+import InterestBadge from '../../../../../components/global/InterestBadge';
 import icons from '../../../../../utils/faIcons';
 
 function getActionIcon(type) {

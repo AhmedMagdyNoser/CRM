@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import icons from '../../utils/faIcons';
+import icons from '../../../utils/faIcons';
 
 export default function InterestCheckbox({ interest, selectedInterests, setSelectedInterests }) {
   const { id, name } = interest;

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { roles } from '../../../../../utils/utils';
+import { paths, roles } from '../../../../../utils/utils';
 import useAuth from '../../../../../hooks/useAuth';
 import DeleteCustomerPopup from './DeleteCustomerPopup';
 import icons from '../../../../../utils/faIcons';
@@ -13,7 +13,7 @@ function CustomerHeaderSection({ editingMode, setEditingMode, deletePopupOpen, s
     <div className="flex flex-wrap items-center justify-between gap-2">
       <div className="flex-center gap-2">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(`/${paths.customers}`)}
           className="h-10 w-10 rounded-full text-xl text-gray-800 transition-colors hover:bg-gray-100"
         >
           <FontAwesomeIcon icon={icons.back} />
