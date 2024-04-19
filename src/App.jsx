@@ -3,23 +3,23 @@ import { roles, paths } from './utils/utils';
 import Layout from './pages/routes/Layout';
 import Home from './pages/routes/Home';
 import NotFound from './pages/routes/NotFound';
-import Register from './pages/auth/Register';
-import Login from './pages/auth/Login';
-import VerifyEmail from './pages/auth/VerifyEmail';
-import ForgotPassword from './pages/auth/ForgotPassword';
-import ResetPassword from './pages/auth/ResetPassword';
+import Register from './pages/outer/Register';
+import Login from './pages/outer/Login';
+import VerifyEmail from './pages/outer/VerifyEmail';
+import ForgotPassword from './pages/outer/ForgotPassword';
+import ResetPassword from './pages/outer/ResetPassword';
 import PersistUser from './pages/routes/PersistUser';
 import Authentication from './pages/routes/Authentication';
 import Authorization from './pages/routes/Authorization';
-import Dashboard from './pages/users/manager/dashboard/Page';
-import Roles from './pages/users/manager/roles/Page';
-import AddNewCustomer from './pages/users/moderator/add-new-customer/Page';
-import AllCustomers from './pages/users/moderator/all-customers/Page';
-import AssignedCustomers from './pages/users/sales/assigned-customers/Page';
-import Customer from './pages/users/sales/customer/Page';
-import CompanyInfo from './pages/users/company-info/Page';
-import Profile from './pages/users/Profile';
-import Locked from './pages/users/Locked';
+import Dashboard from './pages/inner/dashboard/Page';
+import Roles from './pages/inner/roles/Page';
+import AddNewCustomer from './pages/inner/add-new-customer/Page';
+import Customers from './pages/inner/customers/Page';
+import Customer from './pages/inner/customer/Page';
+import AssignedCustomers from './pages/inner/assigned-customers/Page';
+import CompanyInfo from './pages/inner/company-info/Page';
+import Profile from './pages/inner/profile/Page';
+import Locked from './pages/inner/locked/Page';
 
 function App() {
   return (
@@ -40,7 +40,7 @@ function App() {
               </Route>
 
               <Route element={<Authorization allowedRole={roles.moderator} />}>
-                <Route path={paths.customers} element={<AllCustomers />} />
+                <Route path={paths.customers} element={<Customers />} />
                 <Route path={paths.addNewCustomer} element={<AddNewCustomer />} />
               </Route>
 
