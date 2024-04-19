@@ -17,7 +17,7 @@ import AddNewCustomer from './pages/users/moderator/add-new-customer/Page';
 import AllCustomers from './pages/users/moderator/all-customers/Page';
 import AssignedCustomers from './pages/users/sales/assigned-customers/Page';
 import Customer from './pages/users/sales/customer/Page';
-import CompanyInfo from './pages/users/CompanyInfo';
+import CompanyInfo from './pages/users/company-info/Page';
 import Profile from './pages/users/Profile';
 import Locked from './pages/users/Locked';
 
