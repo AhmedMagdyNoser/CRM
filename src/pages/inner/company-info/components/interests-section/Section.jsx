@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useInterests from '../../../../../hooks/useInterests';
+import useAuth from '../../../../../hooks/useAuth';
 import InterestsList from './InterestsList';
 import icons from '../../../../../utils/faIcons';
 import Alert from '../../../../../components/ui/Alert';
+import { roles } from '../../../../../utils/utils';
 
 export default function InterestsSection() {
   const { interests } = useInterests();
+  const { auth } = useAuth();
 
   const [showDisabled, setShowDisabled] = useState(false);
 
@@ -25,11 +28,12 @@ export default function InterestsSection() {
       ) : (
         <>
           <InterestsList interests={interests.data.enabled} />
-          {interests.data.disabled.length > 0 && (
-            <button className="w-fit font-semibold text-pro-200 hover:text-pro-300" onClick={toggleDisabledInterests}>
-              {showDisabled ? 'Hide' : 'Show'} Disabled Interests
-            </button>
-          )}
+          {interests.data.disabled.length &&
+            (auth.roles.includes(roles.manager) || auth.roles.includes(roles.moderator)) > 0 && (
+              <button className="w-fit font-semibold text-pro-200 hover:text-pro-300" onClick={toggleDisabledInterests}>
+                {showDisabled ? 'Hide' : 'Show'} Disabled Interests
+              </button>
+            )}
           {showDisabled && <InterestsList interests={interests.data.disabled} />}
         </>
       )}

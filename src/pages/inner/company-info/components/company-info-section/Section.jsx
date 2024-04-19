@@ -21,7 +21,7 @@ export default function CompanyInfoSection() {
       </div>
       <div>
         <p>Description</p>
-        <p className="mt-2 rounded-xl bg-gray-100 p-5 text-lg">{company.data.description}</p>
+        <p className="mt-2 rounded-xl bg-gray-100 p-5 text">{company.data.description}</p>
       </div>
     </section>
   );
