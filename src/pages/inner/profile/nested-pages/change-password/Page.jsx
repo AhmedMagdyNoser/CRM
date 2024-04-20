@@ -3,6 +3,7 @@ import { inputFieldsInstructions, validationRegex } from '../../../../../utils/v
 import { globalErrorMessage } from '../../../../../utils/utils';
 import useDocumentTitle from '../../../../../hooks/useDocumentTitle';
 import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
+import useLogout from '../../../../../hooks/useLogout';
 import Form from '../../../../../components/ui/Form';
 import InputField from '../../../../../components/ui/InputField';
 
@@ -10,6 +11,8 @@ export default function ChangePasswordPage() {
   useDocumentTitle('Change Password');
 
   const privateAxios = usePrivateAxios();
+
+  const logout = useLogout();
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -32,7 +35,7 @@ export default function ChangePasswordPage() {
           url: '/userprofile/update-password',
           data: { currentPassword, newPassword, confirmPassword },
         });
-        setLoading(false);
+        logout();
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
