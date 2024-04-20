@@ -6,6 +6,8 @@ import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
 import useLogout from '../../../../../hooks/useLogout';
 import Form from '../../../../../components/ui/Form';
 import InputField from '../../../../../components/ui/InputField';
+import CaptionCard from '../../../../../components/ui/CaptionCard';
+import successImg from '../../../../../assets/success.svg';
 
 export default function ChangePasswordPage() {
   useDocumentTitle('Change Password');
@@ -23,6 +25,7 @@ export default function ChangePasswordPage() {
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -35,7 +38,9 @@ export default function ChangePasswordPage() {
           url: '/userprofile/update-password',
           data: { currentPassword, newPassword, confirmPassword },
         });
-        logout();
+        setLoading(false);
+        setSuccess(true);
+        setTimeout(() => logout(), 3500);
       } catch (error) {
         setLoading(false);
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
@@ -46,7 +51,14 @@ export default function ChangePasswordPage() {
     }
   }
 
-  return (
+  return success ? (
+    <CaptionCard
+      image={successImg}
+      title="Password reset successfully"
+      paragraph="Now you can login with your new password."
+      className="px-10"
+    />
+  ) : (
     <div>
       <h1 className="mb-8">Change Password</h1>
       <Form

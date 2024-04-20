@@ -2,14 +2,12 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { globalErrorMessage, layoutDimensions } from '../../../../utils/utils';
 import usePrivateAxios from '../../../../hooks/usePrivateAxios';
-import useLogout from '../../../../hooks/useLogout';
 import InputField from '../../../../components/ui/InputField';
 import Modal from '../../../../components/ui/Modal';
 import Alert from '../../../../components/ui/Alert';
 import icons from '../../../../utils/faIcons';
 
 function DeleteModal({ setDeletePopupOpen }) {
-  const logout = useLogout();
   const privateAxios = usePrivateAxios();
 
   const [password, setPassword] = useState('');
