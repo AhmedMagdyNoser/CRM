@@ -18,8 +18,11 @@ import Customers from './pages/inner/customers/Page';
 import Customer from './pages/inner/customer/Page';
 import AssignedCustomers from './pages/inner/assigned-customers/Page';
 import CompanyInfo from './pages/inner/company-info/Page';
-import Profile from './pages/inner/profile/Page';
 import Locked from './pages/inner/locked/Page';
+import Profile from './pages/inner/profile/IndexPage';
+import BasicInfoPage from './pages/inner/profile/nested-pages/basic-info/Page';
+import ChangePasswordPage from './pages/inner/profile/nested-pages/change-password/Page';
+import Notifications from './pages/inner/profile/nested-pages/notifications/Page';
 
 function App() {
   return (
@@ -29,10 +32,6 @@ function App() {
           <Route element={<Layout />}>
             <Route element={<Authentication />}>
               <Route index element={<Home />} />
-
-              <Route path={paths.locked} element={<Locked />} />
-              <Route path={paths.profile} element={<Profile />} />
-              <Route path={paths.companyInfo} element={<CompanyInfo />} />
 
               <Route element={<Authorization allowedRole={roles.manager} />}>
                 <Route path={paths.dashboard} element={<Dashboard />} />
@@ -47,6 +46,15 @@ function App() {
               <Route element={<Authorization allowedRole={roles.sales} />}>
                 <Route path={`${paths.customers}/:id`} element={<Customer />} />
                 <Route path={paths.assignedCustomers} element={<AssignedCustomers />} />
+              </Route>
+
+              <Route path={paths.locked} element={<Locked />} />
+              <Route path={paths.companyInfo} element={<CompanyInfo />} />
+
+              <Route path={paths.profile} element={<Profile />}>
+                <Route index element={<BasicInfoPage />} />
+                <Route path="change-password" element={<ChangePasswordPage />} />
+                <Route path="notifications" element={<Notifications />} />
               </Route>
             </Route>
 
