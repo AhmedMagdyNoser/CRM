@@ -1,16 +1,16 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { globalErrorMessage, paths, roles } from '../../utils/utils';
+import usePrivateAxios from '../../hooks/usePrivateAxios';
 import useOnLoadFetch from '../../hooks/useOnLoadFetch';
 import AddNewSourcePopup from './AddNewSourcePopup';
-import InterestsInputField from '../interests/InterestsInputFields';
+import InterestsInputField from './interestsInputField/InterestsInputField';
 import DropdownMenu from '../ui/DropdownMenu';
 import Form from '../ui/Form';
 import InputField from '../ui/InputField';
 import GenderInput from '../ui/GenderInput';
-import { useState } from 'react';
 import icons from '../../utils/faIcons';
-import { globalErrorMessage, paths, roles } from '../../utils/utils';
-import usePrivateAxios from '../../hooks/usePrivateAxios';
-import { useNavigate } from 'react-router-dom';
 
 function CustomerForm({ title, submitLabel, customer, setCustomer, setEditingMode, className }) {
   const privateAxios = usePrivateAxios();
@@ -35,13 +35,12 @@ function CustomerForm({ title, submitLabel, customer, setCustomer, setEditingMod
   const [openOptionalFields, setOpenOptionalFields] = useState(false);
   const [newSourcePopup, setNewSourcePopup] = useState(false);
 
+  const { data: salesOptions, loading: salesOptionsLoading } = useOnLoadFetch('/moderator/get-all-sales');
   const {
     data: sourcesOptions,
     loading: sourcesOptionsLoading,
     setData: setSourcesOptions,
   } = useOnLoadFetch('/shared/get-all-sources');
-  const { data: salesOptions, loading: salesOptionsLoading } = useOnLoadFetch('/moderator/get-all-sales');
-  const { data: interestsOptions, loading: interestsOptionsLoading } = useOnLoadFetch('/shared/get-all-interests');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -161,12 +160,7 @@ function CustomerForm({ title, submitLabel, customer, setCustomer, setEditingMod
             </button>
           </div>
         </div>
-        <InterestsInputField
-          interestsOptions={interestsOptions}
-          selectedInterests={interests}
-          setSelectedInterests={setInterests}
-          loading={interestsOptionsLoading}
-        />
+        <InterestsInputField selectedInterests={interests} setSelectedInterests={setInterests} />
       </fieldset>
 
       <fieldset>
