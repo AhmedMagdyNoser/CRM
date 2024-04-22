@@ -4,7 +4,7 @@ import Alert from '../../../../../components/ui/Alert';
 import icons from '../../../../../utils/faIcons';
 import EditMode from './EditMode';
 
-export default function CompanyInfoSection({ editMode }) {
+export default function CompanyInfoSection({ handleUpdate, editMode, loading, error }) {
   const { company } = useCompany();
 
   return company.loading ? (
@@ -15,7 +15,7 @@ export default function CompanyInfoSection({ editMode }) {
   ) : company.error ? (
     <Alert.Error message={company.error} />
   ) : editMode ? (
-    <EditMode />
+    <EditMode handleUpdate={handleUpdate} loading={loading} error={error} />
   ) : (
     <section className="flex flex-col gap-3">
       <p className="rounded-xl bg-gray-100 p-6 text-3xl font-bold text-gray-800">{company.data.name}</p>
