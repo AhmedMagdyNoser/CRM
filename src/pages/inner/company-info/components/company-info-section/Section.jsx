@@ -2,8 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useCompany from '../../../../../hooks/useCompany';
 import Alert from '../../../../../components/ui/Alert';
 import icons from '../../../../../utils/faIcons';
+import EditMode from './EditMode';
 
-export default function CompanyInfoSection() {
+export default function CompanyInfoSection({ editMode }) {
   const { company } = useCompany();
 
   return company.loading ? (
@@ -13,6 +14,8 @@ export default function CompanyInfoSection() {
     </section>
   ) : company.error ? (
     <Alert.Error message={company.error} />
+  ) : editMode ? (
+    <EditMode />
   ) : (
     <section className="flex flex-col gap-3">
       <p className="rounded-xl bg-gray-100 p-6 text-3xl font-bold text-gray-800">{company.data.name}</p>
