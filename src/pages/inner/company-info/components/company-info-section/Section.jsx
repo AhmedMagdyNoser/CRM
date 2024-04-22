@@ -15,8 +15,8 @@ export default function CompanyInfoSection() {
     <Alert.Error message={company.error} />
   ) : (
     <section className="flex flex-col gap-3">
-      <p className="mt-2 rounded-xl bg-gray-100 p-5 text-3xl font-bold text-gray-800">{company.data.name}</p>
-      <p className="mt-2 rounded-xl bg-gray-100 p-5">{company.data.description}</p>
+      <p className="rounded-xl bg-gray-100 p-6 text-3xl font-bold text-gray-800">{company.data.name}</p>
+      <p className="rounded-xl bg-gray-100 p-6">{company.data.description}</p>
     </section>
   );
 }
