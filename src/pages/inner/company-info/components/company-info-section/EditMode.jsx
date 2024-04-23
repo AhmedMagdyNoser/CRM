@@ -53,7 +53,7 @@ export default function EditMode({ setEditMode }) {
       />
       <textarea
         placeholder="Description (Optional)"
-        className="resize-none rounded-xl border-none bg-gray-100 p-6 text-gray-800 outline-none"
+        className="h-48 resize-none rounded-xl border-none bg-gray-100 p-6 text-gray-800 outline-none"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         disabled={loading}

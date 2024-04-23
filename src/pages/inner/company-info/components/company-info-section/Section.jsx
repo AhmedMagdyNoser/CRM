@@ -18,8 +18,10 @@ export default function CompanyInfoSection({ editMode, setEditMode }) {
     <EditMode setEditMode={setEditMode} />
   ) : (
     <section className="flex flex-col gap-3">
-      <p className="rounded-xl bg-gray-100 p-6 text-3xl font-bold text-gray-800">{company.data.name}</p>
-      <p className="rounded-xl bg-gray-100 p-6">{company.data.description}</p>
+      <p className="text-nowrap rounded-xl bg-gray-100 p-6 text-xl font-bold text-gray-800 sm:text-3xl">
+        {company.data.name}
+      </p>
+      {company.data.description && <p className="rounded-xl bg-gray-100 p-6">{company.data.description}</p>}
     </section>
   );
 }
