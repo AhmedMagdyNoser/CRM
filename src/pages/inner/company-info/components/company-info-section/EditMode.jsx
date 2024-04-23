@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { globalErrorMessage } from '../../../../../utils/utils';
 import useCompany from '../../../../../hooks/useCompany';
+import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
 import InputField from '../../../../../components/ui/InputField';
 import Alert from '../../../../../components/ui/Alert';
 import icons from '../../../../../utils/faIcons';
 
-function EditMode({ setEditMode }) {
-  const { company } = useCompany();
+export default function EditMode({ setEditMode }) {
+  const { company, setCompany } = useCompany();
+
+  const privateAxios = usePrivateAxios();
 
   const [name, setName] = useState(company.data.name);
   const [description, setDescription] = useState(company.data.description);
@@ -14,8 +18,31 @@ function EditMode({ setEditMode }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  async function handleUpdate(e) {
+    e.preventDefault();
+    if (name) {
+      try {
+        setError('');
+        setLoading(true);
+        await privateAxios({
+          method: 'PUT',
+          url: '/manager/update-business-info',
+          data: { companyName: name, description },
+        });
+        setCompany({ data: { name, description }, loading: false, error: '' });
+        setEditMode(false);
+      } catch (error) {
+        setLoading(false);
+        setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
+      }
+    } else {
+      // If the submit button is enabled with JS hacks
+      setError('Please fill all the fields');
+    }
+  }
+
   return (
-    <form className={`flex flex-col gap-3 transition-opacity ${loading ? 'opacity-75' : ''}`}>
+    <form onSubmit={handleUpdate} className={`flex flex-col gap-3 transition-opacity ${loading ? 'opacity-75' : ''}`}>
       <InputField
         placeholder="Company Name (Required)"
         className="p-6 text-3xl font-bold"
@@ -53,5 +80,3 @@ function EditMode({ setEditMode }) {
     </form>
   );
 }
-
-export default EditMode;
