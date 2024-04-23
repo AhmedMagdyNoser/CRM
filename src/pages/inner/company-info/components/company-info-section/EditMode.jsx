@@ -45,7 +45,7 @@ export default function EditMode({ setEditMode }) {
     <form onSubmit={handleUpdate} className={`flex flex-col gap-3 transition-opacity ${loading ? 'opacity-75' : ''}`}>
       <InputField
         placeholder="Company Name (Required)"
-        className="p-6 text-3xl font-bold"
+        className="p-6 text-xl font-bold sm:text-3xl "
         value={name}
         onChange={(e) => setName(e.target.value)}
         disabled={loading}
@@ -53,7 +53,7 @@ export default function EditMode({ setEditMode }) {
       />
       <textarea
         placeholder="Description (Optional)"
-        className="h-48 resize-none rounded-xl border-none bg-gray-100 p-6 text-gray-800 outline-none"
+        className="h-48 resize-none rounded-xl border-none bg-gray-100 p-6 text-sm text-gray-800 outline-none sm:text-base"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         disabled={loading}
