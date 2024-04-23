@@ -3,7 +3,7 @@ import { roles } from '../../../../../utils/utils';
 import useAuth from '../../../../../hooks/useAuth';
 import icons from '../../../../../utils/faIcons';
 
-export default function CompanyInfoHeaderSection({ editMode, setEditMode, loading }) {
+export default function CompanyInfoHeaderSection({ editMode, setEditMode }) {
   const { auth } = useAuth();
 
   return (
@@ -11,28 +11,12 @@ export default function CompanyInfoHeaderSection({ editMode, setEditMode, loadin
       <h1>Company Info</h1>
       {auth.roles.includes(roles.manager) &&
         (editMode ? (
-          <div className="flex gap-2">
-            <button
-              onClick={() => setEditMode(false)}
-              className="btn-primary flex-center gap-2 rounded-xl p-3 px-5 text-xs sm:text-sm"
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <FontAwesomeIcon icon={icons.spinner} spin />
-                  <span>Updating</span>
-                </>
-              ) : (
-                <span>Update</span>
-              )}
-            </button>
-            <button
-              onClick={() => setEditMode(false)}
-              className="flex-center gap-2 rounded-xl bg-gray-100 p-3 px-5 text-xs transition-colors hover:bg-gray-200 sm:text-sm"
-            >
-              <span>Cancel</span>
-            </button>
-          </div>
+          <button
+            onClick={() => setEditMode(false)}
+            className="flex-center gap-2 rounded-xl bg-gray-100 p-3 px-5 text-xs text-gray-500 transition-colors hover:bg-gray-200 sm:text-sm"
+          >
+            <span>Cancel</span>
+          </button>
         ) : (
           <button
             onClick={() => setEditMode(true)}
