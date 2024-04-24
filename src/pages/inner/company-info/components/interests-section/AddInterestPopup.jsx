@@ -50,7 +50,7 @@ function AddInterestPopup({ setOpen }) {
         submitLabel="Add"
         submitDisabled={loading || !input}
       >
-        <InputField placeholder="Interest Name" value={input} onChange={(e) => setInput(e.target.value)} />
+        <InputField placeholder="Interest Name" value={input} onChange={(e) => setInput(e.target.value)} autoFocus />
         {success && <Alert.Success message={`${input} added successfully`} />}
       </Form>
       <style>
