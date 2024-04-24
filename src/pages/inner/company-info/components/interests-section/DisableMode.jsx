@@ -22,17 +22,22 @@ export default function DisableMode({ interest, setDisableMode }) {
         const res = await privateAxios({
           method: 'put',
           url: '/manager/update-interest',
-          data: { id: interest.id, name: interest.name, isDisabled: true },
+          data: { id: interest.id, name: interest.name, isDisabled: !interest.isDisabled },
         });
         setInterests((prev) => {
-          return {
-            data: {
-              disabled: [...prev.data.disabled, res.data],
+          let data;
+          if (interest.isDisabled) {
+            data = {
+              enabled: [...prev.data.enabled, res.data],
+              disabled: prev.data.disabled.filter((i) => i.id !== res.data.id),
+            };
+          } else {
+            data = {
               enabled: prev.data.enabled.filter((i) => i.id !== res.data.id),
-            },
-            loading: false,
-            error: '',
-          };
+              disabled: [...prev.data.disabled, res.data],
+            };
+          }
+          return { data, loading: false, error: '' };
         });
         setDisableMode(false);
       } catch (error) {
@@ -41,7 +46,7 @@ export default function DisableMode({ interest, setDisableMode }) {
         setLoading(false);
       }
     },
-    [privateAxios, interest.id, interest.name, setDisableMode, setInterests],
+    [privateAxios, interest.id, interest.name, interest.isDisabled, setDisableMode, setInterests],
   );
 
   // On Enter key press
@@ -56,7 +61,9 @@ export default function DisableMode({ interest, setDisableMode }) {
 
   return (
     <>
-      <p className="flex-1 px-3 text-sm font-semibold sm:text-base">Are you sure you want to disable this interest?</p>
+      <p className="flex-1 px-3 text-sm font-bold sm:text-base">
+        Are you sure you want to {interest.isDisabled ? 'enable' : 'disable'} the interest '{interest.name}'?
+      </p>
 
       <div className="flex gap-2">
         {error && (
@@ -66,16 +73,16 @@ export default function DisableMode({ interest, setDisableMode }) {
         )}
         <button
           onClick={handleUpdate}
-          className="btn-danger flex-center h-10 gap-2 rounded-xl px-4 text-sm font-semibold"
+          className={`${interest.isDisabled ? 'btn-secondary' : 'btn-danger'} flex-center h-10 gap-2 rounded-xl px-4 text-sm font-semibold`}
           disabled={loading}
         >
           {loading ? (
             <>
               <FontAwesomeIcon icon={icons.spinner} spin />
-              <span>Disabling</span>
+              <span>{interest.isDisabled ? 'Enabling' : 'Disabling'}</span>
             </>
           ) : (
-            <span>Disable</span>
+            <span>{interest.isDisabled ? 'Enable' : 'Disable'}</span>
           )}
         </button>
         <button

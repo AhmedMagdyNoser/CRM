@@ -39,24 +39,36 @@ export default function InterestCard({ interest }) {
             >
               {interest.name}
             </span>
-            {auth.roles.includes(roles.manager) && !interest.isDisabled && showOptions && (
-              <div className="flex animate-fade-in-fast gap-2 px-1">
-                <button
-                  title="Disable"
-                  onClick={() => setDisableMode(true)}
-                  className="btn-danger flex-center h-10 w-10 rounded-xl"
-                >
-                  <FontAwesomeIcon icon={icons.eyeSlash} />
-                </button>
-                <button
-                  title="Update"
-                  onClick={() => setEditMode(true)}
-                  className="btn-secondary flex-center h-10 w-10 rounded-xl"
-                >
-                  <FontAwesomeIcon icon={icons.edit} />
-                </button>
-              </div>
-            )}
+            {auth.roles.includes(roles.manager) &&
+              showOptions &&
+              (!interest.isDisabled ? (
+                <div className="flex animate-fade-in-fast gap-2 px-1">
+                  <button
+                    title="Disable"
+                    onClick={() => setDisableMode(true)}
+                    className="btn-danger flex-center h-10 w-10 rounded-xl"
+                  >
+                    <FontAwesomeIcon icon={icons.eyeSlash} />
+                  </button>
+                  <button
+                    title="Update"
+                    onClick={() => setEditMode(true)}
+                    className="btn-secondary flex-center h-10 w-10 rounded-xl"
+                  >
+                    <FontAwesomeIcon icon={icons.edit} />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex animate-fade-in-fast gap-2 px-1">
+                  <button
+                    title="Enable"
+                    onClick={() => setDisableMode(true)}
+                    className="btn-secondary flex-center h-10 w-10 rounded-xl"
+                  >
+                    <FontAwesomeIcon icon={icons.eye} />
+                  </button>
+                </div>
+              ))}
           </>
         )}
       </div>
