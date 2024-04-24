@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { globalErrorMessage } from '../../../../../utils/utils';
 import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
@@ -15,32 +15,45 @@ function EditMode({ interest, setEditMode }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  async function handleUpdate(e) {
-    e.preventDefault();
-    try {
-      setError('');
-      setLoading(true);
-      const res = await privateAxios({
-        method: 'put',
-        url: '/manager/update-interest',
-        data: { id: interest.id, name, isDisabled: interest.isDisabled },
-      });
-      setInterests((prev) => {
-        const prevEnabled = prev.data.enabled;
-        prevEnabled[prevEnabled.findIndex((prevInterest) => prevInterest.id === interest.id)] = res.data;
-        return {
-          data: { disabled: prev.data.disabled, enabled: prevEnabled },
-          loading: false,
-          error: '',
-        };
-      });
-      setEditMode(false);
-    } catch (error) {
-      setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
-    } finally {
-      setLoading(false);
+  const handleUpdate = useCallback(
+    async (e) => {
+      e.preventDefault();
+      try {
+        setError('');
+        setLoading(true);
+        const res = await privateAxios({
+          method: 'put',
+          url: '/manager/update-interest',
+          data: { id: interest.id, name, isDisabled: interest.isDisabled },
+        });
+        setInterests((prev) => {
+          const prevEnabled = prev.data.enabled;
+          prevEnabled[prevEnabled.findIndex((prevInterest) => prevInterest.id === interest.id)] = res.data;
+          return {
+            data: { disabled: prev.data.disabled, enabled: prevEnabled },
+            loading: false,
+            error: '',
+          };
+        });
+        setEditMode(false);
+      } catch (error) {
+        setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [privateAxios, interest.id, interest.isDisabled, name, setEditMode, setInterests],
+  );
+
+  // on Enter key press
+  useEffect(() => {
+    function handleEnterKey(event) {
+      if (event.key === 'Enter') handleUpdate(event);
     }
-  }
+
+    document.addEventListener('keydown', handleEnterKey);
+    return () => document.removeEventListener('keydown', handleEnterKey);
+  }, [handleUpdate]);
 
   return (
     <>
