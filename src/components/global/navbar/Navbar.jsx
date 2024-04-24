@@ -33,7 +33,9 @@ function Navbar({ className = '' }) {
           ) : company.error ? (
             <p className="text-nowrap text-sm">An error occurred</p>
           ) : (
-            <p className="text-nowrap text-sm">{trancateText(company.data.name, 15)}</p>
+            <p className="text-nowrap text-sm" title={company.data.name}>
+              {trancateText(company.data.name, 15)}
+            </p>
           )}
         </div>
       </div>
