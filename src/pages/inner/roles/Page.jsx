@@ -23,14 +23,15 @@ function Roles() {
   }, [privateAxios]);
 
   return (
-    <section>
-      <h1 className="mb-2">Roles</h1>
+    <div>
+      <h1>Roles</h1>
+      <p className="my-3">Under construction...</p>
       <div className="flex flex-col gap-3">
         {users.map((user) => (
           <UserCard key={user.id} user={user} />
         ))}
       </div>
-    </section>
+    </div>
   );
 }
 

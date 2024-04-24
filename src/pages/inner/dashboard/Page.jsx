@@ -4,9 +4,10 @@ function Dashboard() {
   useDocumentTitle('Manager Dashboard');
 
   return (
-    <section>
+    <div>
       <h1>Manager Dashboard</h1>
-    </section>
+      <p className='my-3'>Under construction...</p>
+    </div>
   );
 }
 
