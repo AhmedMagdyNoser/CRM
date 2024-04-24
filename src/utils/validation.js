@@ -1,5 +1,5 @@
-const EMAIL_PART_REGEX = /[a-zA-Z\d]([a-zA-Z\d.-]*[a-zA-Z\d])?/;
-const EMAIL_REGEX = new RegExp(`^${EMAIL_PART_REGEX.source}@${EMAIL_PART_REGEX.source}\\.[a-zA-Z0-9]+$`);
+const EMAIL_PART_REGEX = /[a-zA-Z_\d]([a-zA-Z_\d.-]*[a-zA-Z_\d])?/;
+const EMAIL_REGEX = new RegExp(`^${EMAIL_PART_REGEX.source}@${EMAIL_PART_REGEX.source}\\.[a-zA-Z0-9]{2,}$`);
 
 export const validationRegex = {
   name: /^[^0-9 !@#$%^&*()_+\-={}[\]\\|'";:/?.>,<].*/,
