@@ -2,8 +2,12 @@ import { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useHover from '../../../../../hooks/useHover';
 import icons from '../../../../../utils/faIcons';
+import useAuth from '../../../../../hooks/useAuth';
+import { roles } from '../../../../../utils/utils';
 
 export default function InterestCard({ interest }) {
+  const { auth } = useAuth();
+
   const [showEdit, setShowEdit] = useState(false);
   const element = useRef(null);
 
@@ -20,7 +24,7 @@ export default function InterestCard({ interest }) {
     >
       <div className="flex w-full items-center justify-between p-3">
         <span className="px-3">{interest.name}</span>
-        {showEdit && (
+        {auth.roles.includes(roles.manager) && showEdit && (
           <div className="flex animate-fade-in-fast gap-2 px-1">
             <button className="btn-danger flex-center h-10 w-10 rounded-xl">
               <FontAwesomeIcon icon={icons.trash} />

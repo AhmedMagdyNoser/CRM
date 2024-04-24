@@ -21,7 +21,7 @@ export default function InterestsSection() {
     <section className="flex flex-1 flex-col gap-4 rounded-xl bg-gray-100 p-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Interests</h2>
-        {!(interests.loading || interests.error) && (
+        {auth.roles.includes(roles.manager) && !(interests.loading || interests.error) && (
           <button
             onClick={() => setShowAddPopup(true)}
             className="btn-primary flex-center gap-2 rounded-xl p-3 px-5 text-xs sm:text-sm"
@@ -41,7 +41,7 @@ export default function InterestsSection() {
       ) : (
         <>
           <InterestsList interests={interests.data.enabled} />
-          {interests.data.disabled.length > 0 && auth.roles.includes(roles.manager) && (
+          {auth.roles.includes(roles.manager) && interests.data.disabled.length > 0 && (
             <button className="w-fit text-gray-500 transition-colors hover:text-gray-800" onClick={toggleDisabledInterests}>
               {showDisabled ? 'Hide' : 'Show'} Disabled Interests
             </button>
