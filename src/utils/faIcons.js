@@ -1,4 +1,4 @@
-import { faEdit, faTrashCan, faSquare, faBell, faUserCircle } from '@fortawesome/free-regular-svg-icons';
+import { faEdit, faTrashCan, faSquare, faBell, faUserCircle, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import {
   faAddressBook,
   faAt,
@@ -65,6 +65,8 @@ const icons = {
   wifi: faWifi,
   notifications: faBell,
   profile: faUserCircle,
+  eye: faEye,
+  eyeSlash: faEyeSlash,
   actions: {
     call: faPhone,
     message: faCommentDots,

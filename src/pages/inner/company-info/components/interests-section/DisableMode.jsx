@@ -5,12 +5,10 @@ import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
 import useInterests from '../../../../../hooks/useInterests';
 import icons from '../../../../../utils/faIcons';
 
-function EditMode({ interest, setEditMode }) {
+export default function DisableMode({ interest, setDisableMode }) {
   const privateAxios = usePrivateAxios();
 
   const { setInterests } = useInterests();
-
-  const [name, setName] = useState(interest.name);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -24,25 +22,26 @@ function EditMode({ interest, setEditMode }) {
         const res = await privateAxios({
           method: 'put',
           url: '/manager/update-interest',
-          data: { id: interest.id, name, isDisabled: interest.isDisabled },
+          data: { id: interest.id, name: interest.name, isDisabled: true },
         });
         setInterests((prev) => {
-          const prevEnabled = prev.data.enabled;
-          prevEnabled[prevEnabled.findIndex((prevInterest) => prevInterest.id === interest.id)] = res.data;
           return {
-            data: { disabled: prev.data.disabled, enabled: prevEnabled },
+            data: {
+              disabled: [...prev.data.disabled, res.data],
+              enabled: prev.data.enabled.filter((i) => i.id !== res.data.id),
+            },
             loading: false,
             error: '',
           };
         });
-        setEditMode(false);
+        setDisableMode(false);
       } catch (error) {
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
       } finally {
         setLoading(false);
       }
     },
-    [privateAxios, interest.id, interest.isDisabled, name, setEditMode, setInterests],
+    [privateAxios, interest.id, interest.name, setDisableMode, setInterests],
   );
 
   // On Enter key press
@@ -57,14 +56,7 @@ function EditMode({ interest, setEditMode }) {
 
   return (
     <>
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Interest Name"
-        className="flex-1 px-3 text-sm font-bold text-gray-800 outline-none placeholder:font-normal sm:text-base"
-        autoFocus
-        size={1}
-      />
+      <p className="flex-1 px-3 text-sm font-semibold sm:text-base">Are you sure you want to disable this interest?</p>
 
       <div className="flex gap-2">
         {error && (
@@ -74,20 +66,20 @@ function EditMode({ interest, setEditMode }) {
         )}
         <button
           onClick={handleUpdate}
-          className="btn-secondary flex-center h-10 gap-2 rounded-xl px-4 text-sm font-semibold"
-          disabled={loading || !name}
+          className="btn-danger flex-center h-10 gap-2 rounded-xl px-4 text-sm font-semibold"
+          disabled={loading}
         >
           {loading ? (
             <>
               <FontAwesomeIcon icon={icons.spinner} spin />
-              <span>Updating</span>
+              <span>Disabling</span>
             </>
           ) : (
-            <span>Update</span>
+            <span>Disable</span>
           )}
         </button>
         <button
-          onClick={() => setEditMode(false)}
+          onClick={() => setDisableMode(false)}
           className="flex-center h-10 rounded-xl bg-gray-100 px-4 text-sm font-normal text-gray-500 hover:bg-gray-200"
         >
           Cancel
@@ -96,5 +88,3 @@ function EditMode({ interest, setEditMode }) {
     </>
   );
 }
-
-export default EditMode;

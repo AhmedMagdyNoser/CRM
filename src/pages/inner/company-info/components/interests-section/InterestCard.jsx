@@ -5,35 +5,44 @@ import useHover from '../../../../../hooks/useHover';
 import useAuth from '../../../../../hooks/useAuth';
 import icons from '../../../../../utils/faIcons';
 import EditMode from './EditMode';
+import DisableMode from './DisableMode';
 
 export default function InterestCard({ interest }) {
   const { auth } = useAuth();
 
   const [editMode, setEditMode] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
+  const [disableMode, setDisableMode] = useState(false);
+
+  const [showOptions, setShowOptions] = useState(false);
   const element = useRef(null);
 
   useHover(
     element,
-    () => setShowEdit(true),
-    () => setShowEdit(false),
+    () => setShowOptions(true),
+    () => setShowOptions(false),
   );
 
   return (
     <div
       ref={element}
-      className={`flex h-[75px] animate-fade-in-fast items-center justify-between rounded-xl bg-white text-lg font-bold -tracking-wider shadow-sm ${interest.isDisabled ? 'text-gray-500' : 'text-gray-800'}`}
+      className={`flex h-[75px] animate-fade-in-fast items-center justify-between rounded-xl bg-white shadow-sm`}
     >
       <div className="flex w-full items-center justify-between gap-2 p-3">
         {editMode ? (
           <EditMode interest={interest} setEditMode={setEditMode} />
+        ) : disableMode ? (
+          <DisableMode interest={interest} setDisableMode={setDisableMode} />
         ) : (
           <>
-            <span className="px-3">{interest.name}</span>
-            {auth.roles.includes(roles.manager) && showEdit && (
+            <span
+              className={`px-3 text-lg font-bold -tracking-wider ${interest.isDisabled ? 'text-gray-500' : 'text-gray-800'}`}
+            >
+              {interest.name}
+            </span>
+            {auth.roles.includes(roles.manager) && showOptions && (
               <div className="flex animate-fade-in-fast gap-2 px-1">
-                <button className="btn-danger flex-center h-10 w-10 rounded-xl">
-                  <FontAwesomeIcon icon={icons.trash} />
+                <button onClick={() => setDisableMode(true)} className="btn-danger flex-center h-10 w-10 rounded-xl">
+                  <FontAwesomeIcon icon={icons.eyeSlash} />
                 </button>
                 <button onClick={() => setEditMode(true)} className="btn-secondary flex-center h-10 w-10 rounded-xl">
                   <FontAwesomeIcon icon={icons.edit} />
