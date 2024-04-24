@@ -61,7 +61,7 @@ function EditMode({ interest, setEditMode }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Interest Name"
-        className="flex-1 px-3 outline-none placeholder:font-normal"
+        className="flex-1 px-3 text-sm outline-none placeholder:font-normal sm:text-base"
         autoFocus
         size={1}
       />
