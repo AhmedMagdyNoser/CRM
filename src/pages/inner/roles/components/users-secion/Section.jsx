@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import Card from './Card';
+import Alert from '../../../../../components/ui/Alert';
+import CardSkeleton from './CardSkeleton';
 
-export default function UserSection({ users }) {
+export default function UserSection({ users, loading, error }) {
   const [selectedRole, setSelectedRole] = useState('All Users');
 
   const roles = [
@@ -43,11 +45,21 @@ export default function UserSection({ users }) {
         ))}
       </div>
 
-      <div className="grid-col-1 xxl:grid-cols-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {filteredUsers.map((user) => (
-          <Card key={user.id} user={user} />
-        ))}
-      </div>
+      {loading ? (
+        <div className="grid-col-1 xxl:grid-cols-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <CardSkeleton length={3} />
+        </div>
+      ) : error ? (
+        <Alert.Error message={error} />
+      ) : filteredUsers.length === 0 ? (
+        <p>No users found</p>
+      ) : (
+        <div className="grid-col-1 xxl:grid-cols-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {filteredUsers.map((user) => (
+            <Card key={user.id} user={user} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
