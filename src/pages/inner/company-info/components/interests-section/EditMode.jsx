@@ -74,7 +74,7 @@ function EditMode({ interest, setEditMode }) {
         )}
         <button
           onClick={handleUpdate}
-          className="btn-secondary flex-center h-10 gap-2 rounded-xl px-4 text-sm font-semibold"
+          className="btn-secondary flex-center h-10 gap-2 rounded-xl px-3 text-xs font-semibold sm:px-4 sm:text-sm"
           disabled={loading || !name}
         >
           {loading ? (
@@ -88,7 +88,7 @@ function EditMode({ interest, setEditMode }) {
         </button>
         <button
           onClick={() => setEditMode(false)}
-          className="flex-center h-10 rounded-xl bg-gray-100 px-4 text-sm font-normal text-gray-500 hover:bg-gray-200"
+          className="flex-center h-10 rounded-xl bg-gray-100 px-3 text-xs text-gray-500 hover:bg-gray-200 sm:px-4 sm:text-sm"
         >
           Cancel
         </button>

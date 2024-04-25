@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { roles } from '../../../../../utils/utils';
 import useInterests from '../../../../../hooks/useInterests';
 import useAuth from '../../../../../hooks/useAuth';
 import InterestsList from './InterestsList';
+import AddInterestPopup from './AddInterestPopup';
 import icons from '../../../../../utils/faIcons';
 import Alert from '../../../../../components/ui/Alert';
-import { roles } from '../../../../../utils/utils';
-import AddInterestPopup from './AddInterestPopup';
 
 export default function InterestsSection() {
   const { interests } = useInterests();
@@ -18,7 +18,7 @@ export default function InterestsSection() {
   const toggleDisabledInterests = () => setShowDisabled(!showDisabled);
 
   return (
-    <section className="flex flex-1 flex-col gap-4 rounded-xl bg-gray-100 p-6">
+    <section className="flex flex-1 flex-col gap-4 rounded-xl bg-gray-100 px-4 py-6 sm:px-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Interests</h2>
         {auth.roles.includes(roles.manager) && !(interests.loading || interests.error) && (

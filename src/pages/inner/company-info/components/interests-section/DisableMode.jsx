@@ -61,8 +61,8 @@ export default function DisableMode({ interest, setDisableMode }) {
 
   return (
     <>
-      <p className="flex-1 px-3 text-sm font-bold sm:text-base">
-        Are you sure you want to {interest.isDisabled ? 'enable' : 'disable'} the interest '{interest.name}'?
+      <p className="font- flex-1 pl-3 text-xs sm:text-sm md:text-base">
+        {interest.isDisabled ? 'Enable' : 'Disable'} the interest '{interest.name}'?
       </p>
 
       <div className="flex gap-2">
@@ -73,7 +73,7 @@ export default function DisableMode({ interest, setDisableMode }) {
         )}
         <button
           onClick={handleUpdate}
-          className={`${interest.isDisabled ? 'btn-secondary' : 'btn-danger'} flex-center h-10 gap-2 rounded-xl px-4 text-sm font-semibold`}
+          className={`${interest.isDisabled ? 'btn-secondary' : 'btn-danger'} flex-center h-10 gap-2 rounded-xl px-3 text-xs font-semibold sm:px-4 sm:text-sm`}
           disabled={loading}
         >
           {loading ? (
@@ -87,7 +87,7 @@ export default function DisableMode({ interest, setDisableMode }) {
         </button>
         <button
           onClick={() => setDisableMode(false)}
-          className="flex-center h-10 rounded-xl bg-gray-100 px-4 text-sm font-normal text-gray-500 hover:bg-gray-200"
+          className="flex-center h-10 rounded-xl bg-gray-100 px-3 text-xs text-gray-500 hover:bg-gray-200 sm:px-4 sm:text-sm"
         >
           Cancel
         </button>
