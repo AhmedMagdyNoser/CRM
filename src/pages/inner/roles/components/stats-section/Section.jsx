@@ -31,23 +31,20 @@ function getUsersStats(users) {
   };
 
   users.forEach((user) => {
-    if (!user.emailConfirmed) {
-      stats.unconfirmed++;
-    } else {
-      const numRoles = user.roles ? user.roles.length : 0;
-      switch (numRoles) {
-        case 3:
-          stats.managers++;
-          break;
-        case 2:
-          stats.marketingModerators++;
-          break;
-        case 1:
-          stats.salesRepresentatives++;
-          break;
-        default:
-          stats.noRoles++;
-      }
+    if (!user.emailConfirmed) stats.unconfirmed++;
+    const numRoles = user.roles ? user.roles.length : 0;
+    switch (numRoles) {
+      case 3:
+        stats.managers++;
+        break;
+      case 2:
+        stats.marketingModerators++;
+        break;
+      case 1:
+        stats.salesRepresentatives++;
+        break;
+      default:
+        stats.noRoles++;
     }
   });
 

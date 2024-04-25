@@ -9,7 +9,7 @@ export default function Roles() {
   const { data: users, loading, error } = useOnLoadFetch('/manager/get-all-users');
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       <h1>Roles</h1>
       <StatsSection users={users} loading={loading} error={error} />
       <UserSection users={users} loading={loading} error={error} />

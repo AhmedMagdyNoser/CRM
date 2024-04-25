@@ -62,7 +62,7 @@ export default function Card({ user }) {
         <p>{user.username}</p>
         <p>{user.email}</p>
       </div>
-      
+
       <div className="flex flex-col items-center gap-2">
         <span
           className={`flex-center rounded-full bg-gray-200 px-4 py-2 text-sm font-semibold ${user.emailConfirmed ? 'text-gray-500' : 'text-red-500'}`}
