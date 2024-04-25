@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { roles } from '../../../../../utils/utils';
 import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
+import icons from '../../../../../utils/faIcons';
 
 export default function Card({ user }) {
   const privateAxios = usePrivateAxios();
@@ -49,14 +51,36 @@ export default function Card({ user }) {
   }
 
   return (
-    <div className="flex flex-col gap-2 bg-pro-50 p-4 shadow">
-      <span>
-        Name: {user.firstName} {user.lastName}
-      </span>
-      <span>Username: {user.username}</span>
-      <span>Email: {user.email}</span>
-      <span>{JSON.stringify(user.roles)}</span>
-      <div className="flex flex-wrap gap-2">
+    <div className="flex flex-col items-center gap-8 rounded-xl bg-gray-100 px-4 py-10 shadow-sm">
+      <div className="flex flex-col items-center gap-2">
+        <div className="flex-center h-20 w-20 rounded-full bg-pro-100">
+          <FontAwesomeIcon icon={icons.user} className="text-3xl" />
+        </div>
+        <p className="text-xl text-gray-800">
+          {user.firstName} {user.lastName}
+        </p>
+        <p>{user.username}</p>
+        <p>{user.email}</p>
+      </div>
+      
+      <div className="flex flex-col items-center gap-2">
+        <span
+          className={`flex-center rounded-full bg-gray-200 px-4 py-2 text-sm font-semibold ${user.emailConfirmed ? 'text-gray-500' : 'text-red-500'}`}
+        >
+          {!user.emailConfirmed
+            ? 'Unconfirmed Account'
+            : user.roles.length === 3
+              ? 'Manager'
+              : user.roles.length === 2
+                ? 'Marketing Moderator'
+                : user.roles.length === 1
+                  ? 'Sales Representative'
+                  : 'No Role'}
+        </span>
+        <button className="btn-primary rounded-full px-5 py-3">Change Role</button>
+      </div>
+
+      <div className="hidden flex-wrap gap-2">
         <button className="btn-primary px-4 py-2" onClick={makeManager}>
           Make a Manger
         </button>
