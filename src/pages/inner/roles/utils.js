@@ -51,4 +51,5 @@ export const permissions = {
   ],
   moderator: ['View all customers', 'Add, edit, and delete customers', 'Manage actions on assigned customers'],
   sales: ['View only assigned customers', 'Manage actions on assigned customers'],
+  noRoles: ['Users without roles will be deleted after 5 days.'],
 };
