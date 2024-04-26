@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import Card from './Card';
-import Alert from '../../../../../components/ui/Alert';
-import CardSkeleton from './CardSkeleton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Card from './Card';
+import CardSkeleton from './CardSkeleton';
+import Alert from '../../../../../components/ui/Alert';
 import icons from '../../../../../utils/faIcons';
+import InputField from '../../../../../components/ui/InputField';
 
 export default function UserSection({ users, loading, error }) {
   const [selectedRole, setSelectedRole] = useState('All Users');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const roles = [
     'All Users',
@@ -17,7 +19,7 @@ export default function UserSection({ users, loading, error }) {
     'Unconfirmed Accounts',
   ];
 
-  const filteredUsers =
+  const filteredUsers = (
     selectedRole === 'All Users'
       ? users
       : users.filter((user) =>
@@ -31,20 +33,47 @@ export default function UserSection({ users, loading, error }) {
                   : selectedRole === 'Sales Representatives'
                     ? 1
                     : 0),
-        );
+        )
+  ).filter((user) => {
+    const term = searchTerm.toLowerCase();
+    return (
+      (user.firstName + ' ' + user.lastName).toLowerCase().includes(term) ||
+      user.username.toLowerCase().includes(term) ||
+      user.email.toLowerCase().includes(term)
+    );
+  });
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="scrollbar-hide flex gap-2 overflow-x-auto py-1">
-        {roles.map((role) => (
+      <div className="flex flex-wrap justify-between gap-x-14 gap-y-6">
+        <div className="scrollbar-hide flex gap-2 overflow-x-auto py-1">
+          {roles.map((role) => (
+            <button
+              key={role}
+              className={`${role === selectedRole ? 'bg-pro-300 text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'} text-nowrap rounded-full px-4 py-2 text-xs transition-colors sm:text-sm`}
+              onClick={() => setSelectedRole(role)}
+            >
+              {role}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex flex-1 gap-2">
+          <InputField
+            type="text"
+            icon={icons.search}
+            className="min-w-60 text-sm"
+            placeholder="Search users by name, username, or email..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <button
-            key={role}
-            className={`${role === selectedRole ? 'bg-pro-300 text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'} text-nowrap rounded-full px-4 py-2 text-xs transition-colors sm:text-sm`}
-            onClick={() => setSelectedRole(role)}
+            onClick={() => setSearchTerm('')}
+            className="rounded-xl bg-gray-100 px-4 py-3 text-xs text-gray-500 transition-colors hover:bg-gray-200 sm:text-sm"
           >
-            {role}
+            <FontAwesomeIcon icon={icons.x} />
           </button>
-        ))}
+        </div>
       </div>
 
       {loading ? (
