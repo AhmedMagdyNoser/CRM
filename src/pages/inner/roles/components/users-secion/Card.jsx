@@ -2,9 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { roles } from '../../../../../utils/utils';
 import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
 import icons from '../../../../../utils/faIcons';
+import ChangeRoleModal from './ChangeRoleModal';
+import { useState } from 'react';
 
 export default function Card({ user }) {
   const privateAxios = usePrivateAxios();
+  const [changeRoleModaleOpen, setChangeRoleModaleOpen] = useState(false);
 
   function updateRole(roles) {
     try {
@@ -77,7 +80,9 @@ export default function Card({ user }) {
                   ? 'Sales Representative'
                   : 'No Role'}
         </span>
-        <button className="btn-primary rounded-full px-5 py-3">Change Role</button>
+        <button onClick={() => setChangeRoleModaleOpen(true)} className="btn-primary rounded-full px-5 py-3">
+          Change Role
+        </button>
       </div>
 
       <div className="hidden flex-wrap gap-2">
@@ -94,6 +99,7 @@ export default function Card({ user }) {
           Revoke Role
         </button>
       </div>
+      {changeRoleModaleOpen && <ChangeRoleModal user={user} setChangeRoleModaleOpen={() => setChangeRoleModaleOpen(false)} />}
     </div>
   );
 }

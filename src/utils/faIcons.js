@@ -1,4 +1,4 @@
-import { faEdit, faTrashCan, faSquare, faBell, faUserCircle, faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { faEdit, faTrashCan, faSquare, faBell, faUserCircle, faEye, faEyeSlash, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import {
   faAddressBook,
   faAt,
@@ -30,7 +30,10 @@ import {
   faCommentDots,
   faHandshake,
   faWifi,
-  faLeaf
+  faLeaf,
+  faUserTie,
+  faBullhorn,
+  faHeadset,
 } from '@fortawesome/free-solid-svg-icons';
 
 const icons = {
@@ -61,6 +64,7 @@ const icons = {
   checkCircle: faCheckCircle,
   check: faCheck,
   x: faX,
+  xCircle: faCircleXmark,
   ban: faBan,
   exclamationCircle: faExclamationCircle,
   wifi: faWifi,
@@ -69,6 +73,9 @@ const icons = {
   eye: faEye,
   eyeSlash: faEyeSlash,
   leaf: faLeaf,
+  manager: faUserTie,
+  moderator: faBullhorn,
+  sales: faHeadset,
   actions: {
     call: faPhone,
     message: faCommentDots,
