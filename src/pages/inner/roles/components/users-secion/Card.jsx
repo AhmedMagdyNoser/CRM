@@ -4,6 +4,7 @@ import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
 import icons from '../../../../../utils/faIcons';
 import ChangeRoleModal from './ChangeRoleModal';
 import { useState } from 'react';
+import { getRoleName } from '../../utils';
 
 export default function Card({ user }) {
   const privateAxios = usePrivateAxios();
@@ -70,15 +71,7 @@ export default function Card({ user }) {
         <span
           className={`flex-center rounded-full bg-gray-200 px-4 py-2 text-sm font-semibold ${user.emailConfirmed ? 'text-gray-500' : 'text-red-500'}`}
         >
-          {!user.emailConfirmed
-            ? 'Unconfirmed Account'
-            : user.roles.length === 3
-              ? 'Manager'
-              : user.roles.length === 2
-                ? 'Marketing Moderator'
-                : user.roles.length === 1
-                  ? 'Sales Representative'
-                  : 'No Role'}
+          {!user.emailConfirmed ? 'Unconfirmed Account' : getRoleName(user)}
         </span>
         <button onClick={() => setChangeRoleModaleOpen(true)} className="btn-primary rounded-full px-5 py-3">
           Change Role
@@ -99,7 +92,9 @@ export default function Card({ user }) {
           Revoke Role
         </button>
       </div>
-      {changeRoleModaleOpen && <ChangeRoleModal user={user} setChangeRoleModaleOpen={() => setChangeRoleModaleOpen(false)} />}
+      {changeRoleModaleOpen && (
+        <ChangeRoleModal user={user} setChangeRoleModaleOpen={() => setChangeRoleModaleOpen(false)} />
+      )}
     </div>
   );
 }

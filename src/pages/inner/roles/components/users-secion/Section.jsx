@@ -46,6 +46,7 @@ export default function UserSection({ users, loading, error }) {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap justify-between gap-x-14 gap-y-6">
+        {/* Roles filter */}
         <div className="scrollbar-hide flex gap-2 overflow-x-auto py-1">
           {roles.map((role) => (
             <button
@@ -58,6 +59,7 @@ export default function UserSection({ users, loading, error }) {
           ))}
         </div>
 
+        {/* Search bar */}
         <div className="flex flex-1 gap-2">
           <InputField
             type="text"
