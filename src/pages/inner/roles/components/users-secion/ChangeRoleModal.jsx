@@ -8,7 +8,7 @@ import Modal from '../../../../../components/ui/Modal';
 import Alert from '../../../../../components/ui/Alert';
 import icons from '../../../../../utils/faIcons';
 
-export default function ChangeRoleModal({ user, setChangeRoleModaleOpen }) {
+export default function ChangeRoleModal({ user, setUsers, setChangeRoleModaleOpen }) {
   const privateAxios = usePrivateAxios();
 
   const [roles, setRoles] = useState(user.roles.length);
@@ -28,6 +28,14 @@ export default function ChangeRoleModal({ user, setChangeRoleModaleOpen }) {
         data: { id: user.id, roles: roles },
       });
       setSuccess(true);
+      setUsers((users) =>
+        users.map((u) => {
+          if (u.id === user.id) {
+            return { ...u, roles: roles.filter((role) => role.isSelected).map((role) => role.name) };
+          }
+          return u;
+        }),
+      );
     } catch (error) {
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
     } finally {
@@ -120,7 +128,7 @@ export default function ChangeRoleModal({ user, setChangeRoleModaleOpen }) {
         </div>
         <div className="flex flex-wrap justify-between gap-3">
           <div className="min-w-56 flex-1">
-            {success && <Alert.Success message="Role changed successfully." />}
+            {success && <Alert.Success message={`${user.firstName} is now a ${getRoleName(roles)}.`} />}
             {error && <Alert.Error message={error} />}
           </div>
           <div className="flex justify-end">

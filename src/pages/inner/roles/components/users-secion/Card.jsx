@@ -4,7 +4,7 @@ import { getRoleName } from '../../utils';
 import ChangeRoleModal from './ChangeRoleModal';
 import icons from '../../../../../utils/faIcons';
 
-export default function Card({ user }) {
+export default function Card({ user, setUsers }) {
   const [changeRoleModaleOpen, setChangeRoleModaleOpen] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ export default function Card({ user }) {
       </div>
 
       {changeRoleModaleOpen && (
-        <ChangeRoleModal user={user} setChangeRoleModaleOpen={() => setChangeRoleModaleOpen(false)} />
+        <ChangeRoleModal user={user} setUsers={setUsers} setChangeRoleModaleOpen={() => setChangeRoleModaleOpen(false)} />
       )}
     </div>
   );

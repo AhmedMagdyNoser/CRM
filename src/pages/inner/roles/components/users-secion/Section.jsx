@@ -6,7 +6,7 @@ import Alert from '../../../../../components/ui/Alert';
 import icons from '../../../../../utils/faIcons';
 import InputField from '../../../../../components/ui/InputField';
 
-export default function UserSection({ users, loading, error }) {
+export default function UserSection({ users, setUsers, loading, error }) {
   const [selectedRole, setSelectedRole] = useState('All Users');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -92,7 +92,7 @@ export default function UserSection({ users, loading, error }) {
       ) : (
         <div className="grid-col-1 xxl:grid-cols-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {filteredUsers.map((user) => (
-            <Card key={user.id} user={user} />
+            <Card key={user.id} user={user} setUsers={setUsers} />
           ))}
         </div>
       )}
