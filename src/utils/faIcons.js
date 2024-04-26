@@ -30,6 +30,7 @@ import {
   faCommentDots,
   faHandshake,
   faWifi,
+  faLeaf
 } from '@fortawesome/free-solid-svg-icons';
 
 const icons = {
@@ -67,6 +68,7 @@ const icons = {
   profile: faUserCircle,
   eye: faEye,
   eyeSlash: faEyeSlash,
+  leaf: faLeaf,
   actions: {
     call: faPhone,
     message: faCommentDots,
