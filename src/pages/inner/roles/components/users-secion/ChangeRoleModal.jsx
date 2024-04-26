@@ -1,18 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getRoleName } from '../../utils';
+import { getRoleName, permissions } from '../../utils';
 import Modal from '../../../../../components/ui/Modal';
 import icons from '../../../../../utils/faIcons';
 import { useState } from 'react';
+import { breakboints } from '../../../../../utils/utils';
 
 export default function ChangeRoleModal({ user, setChangeRoleModaleOpen }) {
   const [roles, setRoles] = useState(user.roles.length);
 
   return (
-    <Modal title="Change User Role" setOpen={setChangeRoleModaleOpen}>
+    <Modal title="Change User Role" setOpen={setChangeRoleModaleOpen} className="modal-height">
       <div className="flex flex-col gap-4 p-5">
         <p className="text-sm">
-          {user.firstName} is now a <b>{getRoleName(user)}</b>. You can change their role by selecting one of the following
-          options.
+          {user.firstName} is now a <b>{getRoleName(user.roles.length)}</b>. You can change their role by selecting one of
+          the following options.
         </p>
         <div className="grid grid-cols-2 gap-3">
           <RoleButton
@@ -48,7 +49,26 @@ export default function ChangeRoleModal({ user, setChangeRoleModaleOpen }) {
             }}
           />
         </div>
+        {roles > 0 && (
+          <div className="h-[185px] rounded-xl bg-gray-50 p-4 text-gray-500">
+            <span className="mb-2 block font-semibold">{getRoleName(roles)} Permissions</span>
+            <ul className="list-disc pl-5">
+              {permissions[roles === 3 ? 'manager' : roles === 2 ? 'moderator' : 'sales'].map((state) => (
+                <li>{state}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
+      <style>
+        {`
+        @media (min-width: ${breakboints.sm}) {
+          .modal-height {
+            height: auto !important;
+          }
+        }
+        `}
+      </style>
     </Modal>
   );
 }

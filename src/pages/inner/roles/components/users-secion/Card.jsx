@@ -71,7 +71,7 @@ export default function Card({ user }) {
         <span
           className={`flex-center rounded-full bg-gray-200 px-4 py-2 text-sm font-semibold ${user.emailConfirmed ? 'text-gray-500' : 'text-red-500'}`}
         >
-          {!user.emailConfirmed ? 'Unconfirmed Account' : getRoleName(user)}
+          {!user.emailConfirmed ? 'Unconfirmed Account' : getRoleName(user.roles.length)}
         </span>
         <button onClick={() => setChangeRoleModaleOpen(true)} className="btn-primary rounded-full px-5 py-3">
           Change Role

@@ -28,8 +28,7 @@ export function getUsersStats(users) {
   return stats;
 }
 
-export function getRoleName(user) {
-  const numRoles = user.roles ? user.roles.length : 0;
+export function getRoleName(numRoles) {
   switch (numRoles) {
     case 3:
       return 'Manager';
@@ -41,3 +40,15 @@ export function getRoleName(user) {
       return 'No Role';
   }
 }
+
+export const permissions = {
+  manager: [
+    'View dashboard and analytics',
+    'Manage users roles and permissions',
+    'Update company information',
+    'View all customers',
+    'Add, edit, and delete customers',
+  ],
+  moderator: ['View all customers', 'Add, edit, and delete customers', 'Manage actions on assigned customers'],
+  sales: ['View only assigned customers', 'Manage actions on assigned customers'],
+};
