@@ -1,17 +1,71 @@
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getRoleName, permissions } from '../../utils';
+import { breakboints, globalErrorMessage } from '../../../../../utils/utils';
+import { roles as staticRoles } from '../../../../../utils/utils';
+import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
 import Modal from '../../../../../components/ui/Modal';
-import icons from '../../../../../utils/faIcons';
-import { useState } from 'react';
-import { breakboints } from '../../../../../utils/utils';
 import Alert from '../../../../../components/ui/Alert';
+import icons from '../../../../../utils/faIcons';
 
 export default function ChangeRoleModal({ user, setChangeRoleModaleOpen }) {
+  const privateAxios = usePrivateAxios();
+
   const [roles, setRoles] = useState(user.roles.length);
 
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  async function updateRole(roles) {
+    try {
+      setError('');
+      setLoading(true);
+      setSuccess(false);
+      await privateAxios({
+        method: 'PUT',
+        url: '/manager/update-user-roles',
+        data: { id: user.id, roles: roles },
+      });
+      setSuccess(true);
+    } catch (error) {
+      setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function makeManager() {
+    updateRole([
+      { name: staticRoles.manager, isSelected: true },
+      { name: staticRoles.moderator, isSelected: true },
+      { name: staticRoles.sales, isSelected: true },
+    ]);
+  }
+
+  function makeModerator() {
+    updateRole([
+      { name: staticRoles.manager, isSelected: false },
+      { name: staticRoles.moderator, isSelected: true },
+      { name: staticRoles.sales, isSelected: true },
+    ]);
+  }
+
+  function makeSales() {
+    updateRole([
+      { name: staticRoles.manager, isSelected: false },
+      { name: staticRoles.moderator, isSelected: false },
+      { name: staticRoles.sales, isSelected: true },
+    ]);
+  }
+
+  function revokeRole() {
+    updateRole([
+      { name: staticRoles.manager, isSelected: false },
+      { name: staticRoles.moderator, isSelected: false },
+      { name: staticRoles.sales, isSelected: false },
+    ]);
+  }
 
   return (
     <Modal title="Change User Role" setOpen={setChangeRoleModaleOpen} className="modal-height">
@@ -70,7 +124,13 @@ export default function ChangeRoleModal({ user, setChangeRoleModaleOpen }) {
             {error && <Alert.Error message={error} />}
           </div>
           <div className="flex justify-end">
-            <button disabled={loading} className="btn-primary flex-center gap-1 rounded-xl px-4 py-3 text-sm">
+            <button
+              onClick={() => {
+                roles === 3 ? makeManager() : roles === 2 ? makeModerator() : roles === 1 ? makeSales() : revokeRole();
+              }}
+              disabled={loading}
+              className="btn-primary flex-center gap-1 rounded-xl px-4 py-3 text-sm"
+            >
               {loading ? (
                 <>
                   <FontAwesomeIcon icon={icons.spinner} spin className="mr-1" />

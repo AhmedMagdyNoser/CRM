@@ -1,58 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { roles } from '../../../../../utils/utils';
-import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
-import icons from '../../../../../utils/faIcons';
-import ChangeRoleModal from './ChangeRoleModal';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getRoleName } from '../../utils';
+import ChangeRoleModal from './ChangeRoleModal';
+import icons from '../../../../../utils/faIcons';
 
 export default function Card({ user }) {
-  const privateAxios = usePrivateAxios();
   const [changeRoleModaleOpen, setChangeRoleModaleOpen] = useState(false);
-
-  function updateRole(roles) {
-    try {
-      privateAxios({
-        method: 'PUT',
-        url: '/manager/update-user-roles',
-        data: { id: user.id, roles: roles },
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  function makeManager() {
-    updateRole([
-      { name: roles.manager, isSelected: true },
-      { name: roles.moderator, isSelected: true },
-      { name: roles.sales, isSelected: true },
-    ]);
-  }
-
-  function makeModerator() {
-    updateRole([
-      { name: roles.manager, isSelected: false },
-      { name: roles.moderator, isSelected: true },
-      { name: roles.sales, isSelected: true },
-    ]);
-  }
-
-  function makeSales() {
-    updateRole([
-      { name: roles.manager, isSelected: false },
-      { name: roles.moderator, isSelected: false },
-      { name: roles.sales, isSelected: true },
-    ]);
-  }
-
-  function revokeRole() {
-    updateRole([
-      { name: roles.manager, isSelected: false },
-      { name: roles.moderator, isSelected: false },
-      { name: roles.sales, isSelected: false },
-    ]);
-  }
 
   return (
     <div className="flex flex-col items-center gap-8 rounded-xl bg-gray-100 px-4 py-10 shadow-sm">
@@ -78,20 +31,6 @@ export default function Card({ user }) {
         </button>
       </div>
 
-      <div className="hidden flex-wrap gap-2">
-        <button className="btn-primary px-4 py-2" onClick={makeManager}>
-          Make a Manger
-        </button>
-        <button className="btn-primary px-4 py-2" onClick={makeModerator}>
-          Make a Moderator
-        </button>
-        <button className="btn-primary px-4 py-2" onClick={makeSales}>
-          Make a Sales
-        </button>
-        <button className="btn-primary px-4 py-2" onClick={revokeRole}>
-          Revoke Role
-        </button>
-      </div>
       {changeRoleModaleOpen && (
         <ChangeRoleModal user={user} setChangeRoleModaleOpen={() => setChangeRoleModaleOpen(false)} />
       )}
