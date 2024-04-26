@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Pro-Sales/static/css/main.ed4994ac.css",
-    "main.js": "/Pro-Sales/static/js/main.ce3e911d.js",
+    "main.css": "/Pro-Sales/static/css/main.c25f818d.css",
+    "main.js": "/Pro-Sales/static/js/main.9f05a479.js",
     "static/media/forgotPassword.svg": "/Pro-Sales/static/media/forgotPassword.9bb148075547ef30c09bc1791b1581b5.svg",
     "static/media/social.svg": "/Pro-Sales/static/media/social.d018410493e8c7b3e5e97244dce4f457.svg",
     "static/media/register.svg": "/Pro-Sales/static/media/register.9c3dc65c6e6ae7c6216951e5b6747f64.svg",
@@ -14,11 +14,11 @@
     "static/media/noData.svg": "/Pro-Sales/static/media/noData.9a523fac75fb0c1452af48a9386f7938.svg",
     "static/media/email.svg": "/Pro-Sales/static/media/email.b8b225568567f7b34559c848dad741ab.svg",
     "index.html": "/Pro-Sales/index.html",
-    "main.ed4994ac.css.map": "/Pro-Sales/static/css/main.ed4994ac.css.map",
-    "main.ce3e911d.js.map": "/Pro-Sales/static/js/main.ce3e911d.js.map"
+    "main.c25f818d.css.map": "/Pro-Sales/static/css/main.c25f818d.css.map",
+    "main.9f05a479.js.map": "/Pro-Sales/static/js/main.9f05a479.js.map"
   },
   "entrypoints": [
-    "static/css/main.ed4994ac.css",
-    "static/js/main.ce3e911d.js"
+    "static/css/main.c25f818d.css",
+    "static/js/main.9f05a479.js"
   ]
 }
