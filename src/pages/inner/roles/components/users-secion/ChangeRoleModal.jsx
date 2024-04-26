@@ -126,29 +126,27 @@ export default function ChangeRoleModal({ user, setUsers, setChangeRoleModaleOpe
             )}
           </ul>
         </div>
-        <div className="flex flex-wrap justify-between gap-3">
-          <div className="min-w-56 flex-1">
+        <div className="flex flex-col gap-3">
+          <button
+            onClick={() => {
+              roles === 3 ? makeManager() : roles === 2 ? makeModerator() : roles === 1 ? makeSales() : revokeRole();
+            }}
+            disabled={loading}
+            className="btn-primary flex-center w-full gap-1 rounded-xl px-4 py-3 text-sm"
+          >
+            {loading ? (
+              <>
+                <FontAwesomeIcon icon={icons.spinner} spin className="mr-1" />
+                <span>Changing</span>
+              </>
+            ) : (
+              'Change'
+            )}
+            <span>Role</span>
+          </button>
+          <div className="flex-1">
             {success && <Alert.Success message={`${user.firstName} is now a ${getRoleName(roles)}.`} />}
             {error && <Alert.Error message={error} />}
-          </div>
-          <div className="flex justify-end">
-            <button
-              onClick={() => {
-                roles === 3 ? makeManager() : roles === 2 ? makeModerator() : roles === 1 ? makeSales() : revokeRole();
-              }}
-              disabled={loading}
-              className="btn-primary flex-center gap-1 rounded-xl px-4 py-3 text-sm"
-            >
-              {loading ? (
-                <>
-                  <FontAwesomeIcon icon={icons.spinner} spin className="mr-1" />
-                  <span>Changing</span>
-                </>
-              ) : (
-                'Change'
-              )}
-              <span>Role</span>
-            </button>
           </div>
         </div>
       </div>
