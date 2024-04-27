@@ -60,7 +60,11 @@ export default function EditMode({ setEditMode }) {
       />
       {error && <Alert.Error message={error} />}
       <div className="flex justify-end gap-2">
-        <button type="submit" className="btn-primary font-semibold flex-center gap-2 rounded-xl px-4 py-3" disabled={loading || !name}>
+        <button
+          type="submit"
+          className="btn-primary flex-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold sm:text-sm"
+          disabled={loading || !name}
+        >
           {loading ? (
             <>
               <FontAwesomeIcon icon={icons.spinner} spin />
