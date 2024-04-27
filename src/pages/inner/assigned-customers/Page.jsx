@@ -1,7 +1,8 @@
 import { Navigate } from 'react-router-dom';
+import { roles } from '../../../utils/utils';
 import useAuth from '../../../hooks/useAuth';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
-import { roles } from '../../../utils/utils';
+import CustomersTable from '../../../components/customer/customersTable.jsx/CustomersTable';
 
 function AssignedCustomers() {
   useDocumentTitle('Assigned Customers');
@@ -13,7 +14,7 @@ function AssignedCustomers() {
   return (
     <div>
       <h1>Customers assigned to me</h1>
-      <p className="my-3">Under construction...</p>
+      <CustomersTable url='SalesRep/customers' />
     </div>
   );
 }

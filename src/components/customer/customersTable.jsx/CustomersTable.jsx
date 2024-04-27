@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
-import { globalErrorMessage } from '../../../../../utils/utils';
-import useDebouncedValue from '../../../../../hooks/useDebouncedValue';
-import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
-import InputField from '../../../../../components/ui/InputField';
-import Pagination from '../../../../../components/ui/Pagination';
+import { globalErrorMessage } from '../../../utils/utils';
+import usePrivateAxios from '../../../hooks/usePrivateAxios';
+import useDebouncedValue from '../../../hooks/useDebouncedValue';
+import InputField from '../../ui/InputField';
 import CustomerRowSkeleton from './CustomerRowSkeleton';
 import CustomerRow from './CustomerRow';
-import icons from '../../../../../utils/faIcons';
+import Pagination from '../../ui/Pagination';
+import icons from '../../../utils/faIcons';
 
 const ITEMS_PER_PAGE = 15;
 
-function AllCustomersSection() {
+export default function CustomersTable({ url }) {
   const privateAxios = usePrivateAxios();
 
   const [data, setData] = useState({});
@@ -28,7 +28,7 @@ function AllCustomersSection() {
         setError('');
         setLoading(true);
         const { data } = await privateAxios({
-          url: `/moderator/get-customers?page=${page}&size=${ITEMS_PER_PAGE}&query=${query || ''}`,
+          url: `/${url}?page=${page}&size=${ITEMS_PER_PAGE}&query=${query || ''}`,
         });
         setData(data);
         setLoading(false);
@@ -45,7 +45,7 @@ function AllCustomersSection() {
   }, [debouncedSearchTerm, getCustomers]); // Also run with the first render, so we no longer need useOnLoadFetch
 
   return (
-    <>
+    <div className="flex flex-col gap-3">
       <div className="my-4 flex flex-wrap items-center justify-between gap-4">
         <span className="rounded-full bg-pro-300 px-4 py-2 text-sm capitalize text-white">All customers</span>
         <div className="w-full sm:w-[375px]">
@@ -101,8 +101,6 @@ function AllCustomersSection() {
           className={`gap-1 ${data.pages <= 1 || loading || error ? 'hidden' : ''}`}
         />
       </div>
-    </>
+    </div>
   );
 }
-
-export default AllCustomersSection;

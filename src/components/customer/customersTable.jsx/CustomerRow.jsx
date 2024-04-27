@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { paths, trancateText, formatDate } from '../../../../../utils/utils';
-import InterestBadge from '../../../../../components/global/InterestBadge';
-import icons from '../../../../../utils/faIcons';
+import { paths, trancateText, formatDate } from '../../../utils/utils';
+import InterestBadge from '../../global/InterestBadge';
+import icons from '../../../utils/faIcons';
 
 function CustomerRow({ customer }) {
   return (
