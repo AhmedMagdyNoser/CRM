@@ -67,7 +67,7 @@ export default function DisableMode({ interest, setDisableMode }) {
 
       <div className="flex gap-2">
         {error && (
-          <div className="flex-center h-10 rounded-xl bg-red-100 px-4 text-sm text-red-500">
+          <div title={error} className="flex-center h-10 rounded-xl bg-red-100 px-4 text-sm text-red-500">
             <FontAwesomeIcon icon={icons.exclamationCircle} />
           </div>
         )}
