@@ -18,7 +18,7 @@ function useRefresh() {
   const refreshAccessToken = async () => {
     const { data } = await axios({ url: '/Auth/refresh-token', withCredentials: true });
     setAuth(extractUserInfo(data));
-    return data.accessToken;
+    return data;
   };
 
   return refreshAccessToken;
