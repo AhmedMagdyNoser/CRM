@@ -41,7 +41,11 @@ function InputField({ icon, value, error, isValid, instructions, className = '',
           <div className="animate-fade-in-fast text-sm text-red-500">{instructions}</div>
         </div>
       )}
-      <div className="mt-1"> {error && <Alert.Error message={error} />}</div>
+      {error && (
+        <div className="mt-1">
+          <Alert.Error message={error} />
+        </div>
+      )}
     </div>
   );
 }

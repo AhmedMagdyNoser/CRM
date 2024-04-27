@@ -37,7 +37,7 @@ export default function CustomersTable({ url }) {
         setLoading(false);
       }
     },
-    [privateAxios],
+    [privateAxios, url],
   );
 
   useEffect(() => {
@@ -45,19 +45,16 @@ export default function CustomersTable({ url }) {
   }, [debouncedSearchTerm, getCustomers]); // Also run with the first render, so we no longer need useOnLoadFetch
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="my-4 flex flex-wrap items-center justify-between gap-4">
-        <span className="rounded-full bg-pro-300 px-4 py-2 text-sm capitalize text-white">All customers</span>
-        <div className="w-full sm:w-[375px]">
-          <InputField
-            type="text"
-            icon={icons.search}
-            placeholder="Search by name, phone, or email..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="px-3 py-2"
-          />
-        </div>
+    <div className="flex flex-col gap-6">
+      <div className="w-full">
+        <InputField
+          type="text"
+          icon={icons.search}
+          placeholder="Search by name, phone, or email..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="px-3 py-2"
+        />
       </div>
 
       <div className="overflow-x-auto rounded-t-xl">

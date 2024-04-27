@@ -7,7 +7,7 @@ function Customers() {
   useDocumentTitle('All Customers');
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-6">
       <AllCustomersHeaderSection />
       <LastWeekCustomersSection />
       <CustomersTable url="moderator/get-customers" />

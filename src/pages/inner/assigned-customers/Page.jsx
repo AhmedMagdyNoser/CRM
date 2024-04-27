@@ -12,7 +12,7 @@ function AssignedCustomers() {
   if (auth.roles.includes(roles.manager)) return <Navigate to="/" replace={true} />;
 
   return (
-    <div>
+    <div className='flex flex-col gap-6'>
       <h1>Customers assigned to me</h1>
       <CustomersTable url='SalesRep/customers' />
     </div>

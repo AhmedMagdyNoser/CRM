@@ -71,7 +71,7 @@ export default function UserSection({ users, setUsers, loading, error }) {
           />
           <button
             onClick={() => setSearchTerm('')}
-            className="rounded-xl bg-gray-100 px-4 py-3 text-xs text-gray-500 transition-colors hover:bg-gray-200 sm:text-sm"
+            className="rounded-xl bg-gray-100 px-4 text-xs text-gray-500 transition-colors hover:bg-gray-200 sm:text-sm"
           >
             <FontAwesomeIcon icon={icons.x} />
           </button>
