@@ -3,11 +3,11 @@ import ProfileSidebar from './components/ProfileSideBar';
 
 export default function Profile() {
   return (
-    <div className="flex gap-5">
-      <div className="w-[275px]">
+    <div className="flex flex-col lg:flex-row lg:gap-5">
+      <div className="w-full lg:w-[275px]">
         <ProfileSidebar />
       </div>
-      <div>
+      <div >
         <Outlet />
       </div>
     </div>

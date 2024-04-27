@@ -60,39 +60,45 @@ export default function ChangePasswordPage() {
     />
   ) : (
     <div>
-      <h1 className="mb-8">Change Password</h1>
+      <h1 className="text-2xl lg:mb-8">Change Password</h1>
       <Form
         onSubmit={handleSubmit}
         loading={loading}
         error={error}
         submitLabel="Save Changes"
         submitDisabled={!(isValidNewPassword && isValidConfirmNewPassword)}
-        className="sm:w-[500px] sm:overflow-auto"
+        className="w-full sm:w-[500px] sm:overflow-auto"
       >
         <p>Please provide the following details.</p>
-        <div className="sm:flex-column flex flex-col gap-5">
-          <InputField.Password
-            placeholder="Current Password"
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            isValid={!!currentPassword}
-            required
-          />
-          <InputField.Password
-            placeholder="New Password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            isValid={isValidNewPassword}
-            required
-          />
-          <InputField.Password
-            placeholder="Confirm New Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmNewPassword(e.target.value)}
-            instructions={inputFieldsInstructions.confirmPassword}
-            isValid={isValidConfirmNewPassword}
-            required
-          />
+        <div className="sm:flex sm:flex-col lg:mb-5">
+          <div className="mb-3 lg:mb-5">
+            <InputField.Password
+              placeholder="Current Password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              isValid={!!currentPassword}
+              required
+            />
+          </div>
+          <div className="mb-3 lg:mb-5">
+            <InputField.Password
+              placeholder="New Password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              isValid={isValidNewPassword}
+              required
+            />
+          </div>
+          <div className="mb-3 lg:mb-5">
+            <InputField.Password
+              placeholder="Confirm New Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmNewPassword(e.target.value)}
+              instructions={inputFieldsInstructions.confirmPassword}
+              isValid={isValidConfirmNewPassword}
+              required
+            />
+          </div>
         </div>
       </Form>
     </div>
