@@ -1,3 +1,5 @@
+import { jwtDecode } from 'jwt-decode';
+
 export const applicationName = 'Pro Sales';
 
 export const globalErrorMessage = 'Something went wrong. Please try again later.';
@@ -89,4 +91,11 @@ export function getCallStatus(status) {
     default:
       return 'N/A';
   }
+}
+
+export function extractUserInfo(accessToken) {
+  let { firstName, lastName, username, email, roles } = jwtDecode(accessToken);
+  if (!roles) roles = [];
+  if (typeof roles === 'string') roles = roles.split(',');
+  return { firstName, lastName, username, email, roles, accessToken };
 }

@@ -1,5 +1,5 @@
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { globalErrorMessage, paths } from '../../utils/utils';
+import { extractUserInfo, globalErrorMessage, paths } from '../../utils/utils';
 import { useState } from 'react';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
@@ -36,7 +36,7 @@ function VerifyEmail() {
           data: { purpose: location.state.purpose, email: location.state.email, code },
           withCredentials: true,
         });
-        setAuth(response.data);
+        setAuth(extractUserInfo(response.data));
       } else if (location.state?.purpose === 'ResetPassword') {
         let response = await axios({
           method: 'POST',

@@ -1,3 +1,4 @@
+import { extractUserInfo } from '../utils/utils';
 import axios from '../api/axios';
 import useAuth from './useAuth';
 
@@ -16,7 +17,7 @@ function useRefresh() {
 
   const refreshAccessToken = async () => {
     const { data } = await axios({ url: '/Auth/refresh-token', withCredentials: true });
-    setAuth(data);
+    setAuth(extractUserInfo(data));
     return data.accessToken;
   };
 
