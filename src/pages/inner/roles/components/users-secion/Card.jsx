@@ -8,12 +8,12 @@ export default function Card({ user, setUsers }) {
   const [changeRoleModaleOpen, setChangeRoleModaleOpen] = useState(false);
 
   return (
-    <div className="flex flex-col items-center gap-8 rounded-xl bg-gray-100 px-4 py-10 shadow-sm">
+    <div className="flex flex-col items-center gap-5 rounded-xl bg-gray-100 px-4 py-10 shadow-sm sm:gap-8">
       <div className="flex flex-col items-center gap-2">
-        <div className="flex-center h-20 w-20 rounded-full bg-pro-100">
+        <div className="flex-center h-20 w-20 rounded-full border-2 border-white bg-pro-100">
           <FontAwesomeIcon icon={icons.user} className="text-3xl" />
         </div>
-        <p className="text-xl text-gray-800">
+        <p className="text-base text-gray-800 sm:text-xl">
           {user.firstName} {user.lastName}
         </p>
         <p>{user.username}</p>
@@ -27,7 +27,10 @@ export default function Card({ user, setUsers }) {
           {!user.emailConfirmed ? 'Unconfirmed Account' : getRoleName(user.roles.length)}
         </span>
         {user.emailConfirmed && (
-          <button onClick={() => setChangeRoleModaleOpen(true)} className="btn-primary rounded-full px-5 py-3">
+          <button
+            onClick={() => setChangeRoleModaleOpen(true)}
+            className="btn-primary rounded-full px-5 py-3 text-xs sm:text-sm"
+          >
             Change Role
           </button>
         )}
