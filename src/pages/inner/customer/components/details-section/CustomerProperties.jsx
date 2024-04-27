@@ -18,7 +18,11 @@ function CustomerProperties({ customer }) {
       <Property
         icon={icons.assign}
         title="Assigned To"
-        value={trancateText(`${customer.salesRepresentative.firstName} ${customer.salesRepresentative.lastName}`, 18)}
+        value={
+          customer.salesRepresentative
+            ? trancateText(`${customer.salesRepresentative.firstName} ${customer.salesRepresentative.lastName}`, 18)
+            : 'N/A'
+        }
       />
       <Property icon={icons.source} title="Source" value={customer.source.name} />
       <Property icon={icons.date} title="Added On" value={formatDate(new Date(customer.additionDate))} />
