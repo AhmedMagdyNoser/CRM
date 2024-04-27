@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { applicationName, globalErrorMessage, paths } from '../../utils/utils';
+import { extractUserInfo } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
@@ -35,7 +36,7 @@ function Login() {
           data: { loginIdentifier: identity, password },
           withCredentials: true,
         });
-        setAuth(response.data);
+        setAuth(extractUserInfo(response.data));
         persist && localStorage.setItem('persist', 'true');
       } catch (error) {
         setLoading(false);

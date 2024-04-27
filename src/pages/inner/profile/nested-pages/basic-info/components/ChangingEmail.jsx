@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { globalErrorMessage } from '../../../../../../utils/utils';
+import { extractUserInfo, globalErrorMessage } from '../../../../../../utils/utils';
 import { validationRegex } from '../../../../../../utils/validation';
 import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
 import useAuth from '../../../../../../hooks/useAuth';
@@ -51,12 +51,12 @@ export default function ChangingEmail() {
     try {
       setError('');
       setLoading(true);
-      await privateAxios({
+      const { data } = await privateAxios({
         method: 'POST',
         url: '/Auth/verify-code',
         data: { email, code, purpose: 'ConfirmNewEmail' },
       });
-      setAuth({ ...auth, email });
+      setAuth(extractUserInfo(data));
       setEmailUpdated(true);
       setLoading(false);
     } catch (error) {
