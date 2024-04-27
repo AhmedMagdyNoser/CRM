@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { paths } from '../../../../utils/utils';
@@ -27,30 +27,48 @@ const routes = [
 ];
 
 export default function ProfileSidebar() {
+  
   const [deletePopupOpen, setDeletePopupOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <div className="px-5">
+    <div className="lg:px-5">
       {routes.map((route) => (
         <NavLink
-          className="flex items-center gap-2 rounded-xl p-4 font-semibold text-gray-800 transition-colors hover:bg-gray-100"
+          className="lg:flex items-center gap-2 rounded-xl p-3 lg:p-5 font-semibold text-gray-800 transition-colors hover:bg-gray-100"
           key={route.id}
           to={route.path}
         >
-          <FontAwesomeIcon icon={route.icon} />
+          {window.innerWidth >= 1024 && <FontAwesomeIcon icon={route.icon} />}
           <span>{route.title}</span>
         </NavLink>
       ))}
-      <div className="my-5 h-[1px] w-full bg-gray-100"></div>
-      <button
-        className="flex w-full items-center gap-2 rounded-xl p-4 text-red-500 transition-colors hover:bg-red-50"
-        onClick={() => setDeletePopupOpen(true)}
-      >
-        <FontAwesomeIcon icon={icons.trash} />
-        Delete your Account
-      </button>
+      <div className="lg:my-5 my-3 h-[2px] lg:w-full bg-gray-100"></div>
+      {!isMobile && (
+        <button
+          className="flex w-full items-center gap-2 rounded-xl p-4 text-red-500 transition-colors hover:bg-red-50"
+          onClick={() => setDeletePopupOpen(true)}
+        >
+          <FontAwesomeIcon icon={icons.trash} />
+          Delete your Account
+        </button>
+      )}
       <style>
-        {` .active { color: #7050FF; } `}
+        {`.active { color: #7050FF; }`}
       </style>
       {deletePopupOpen && <DeleteModal setDeletePopupOpen={setDeletePopupOpen} />}
     </div>
