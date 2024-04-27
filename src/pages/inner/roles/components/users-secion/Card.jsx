@@ -26,9 +26,11 @@ export default function Card({ user, setUsers }) {
         >
           {!user.emailConfirmed ? 'Unconfirmed Account' : getRoleName(user.roles.length)}
         </span>
-        <button onClick={() => setChangeRoleModaleOpen(true)} className="btn-primary rounded-full px-5 py-3">
-          Change Role
-        </button>
+        {user.emailConfirmed && (
+          <button onClick={() => setChangeRoleModaleOpen(true)} className="btn-primary rounded-full px-5 py-3">
+            Change Role
+          </button>
+        )}
       </div>
 
       {changeRoleModaleOpen && (
