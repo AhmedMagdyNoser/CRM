@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { paths, roles } from '../../../../../utils/utils';
 import useAuth from '../../../../../hooks/useAuth';
 import DeleteCustomerPopup from './DeleteCustomerPopup';
+import AddNewActionPopup from './AddNewActionPopup';
 import icons from '../../../../../utils/faIcons';
 
 function CustomerHeaderSection({ editingMode, setEditingMode, customer, error }) {
@@ -12,6 +13,7 @@ function CustomerHeaderSection({ editingMode, setEditingMode, customer, error })
   const navigate = useNavigate();
 
   const [deletePopupOpen, setDeletePopupOpen] = useState(false);
+  const [addNewActionPopupOpen, setAddNewActionPopupOpen] = useState(false);
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-2">
@@ -27,14 +29,18 @@ function CustomerHeaderSection({ editingMode, setEditingMode, customer, error })
       {!error && auth.roles.includes(roles.moderator) && (
         <div className="flex gap-2">
           {auth.id === customer.salesRepresentative?.id && (
-            <button
-              className={`flex-center btn-primary animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm font-semibold sm:text-base`}
-            >
-              <>
-                <FontAwesomeIcon icon={icons.plus} />
-                <span>New Action</span>
-              </>
-            </button>
+            <>
+              <button
+                onClick={() => setAddNewActionPopupOpen(true)}
+                className={`flex-center btn-primary animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm font-semibold sm:text-base`}
+              >
+                <>
+                  <FontAwesomeIcon icon={icons.plus} />
+                  <span>New Action</span>
+                </>
+              </button>
+              {addNewActionPopupOpen && <AddNewActionPopup setAddNewActionPopupOpen={setAddNewActionPopupOpen} />}
+            </>
           )}
           {editingMode && (
             <>
