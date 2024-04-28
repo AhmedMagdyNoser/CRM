@@ -94,8 +94,8 @@ export function getCallStatus(status) {
 }
 
 export function extractUserInfo(accessToken) {
-  let { firstName, lastName, username, email, roles } = jwtDecode(accessToken);
+  let { id, firstName, lastName, username, email, roles } = jwtDecode(accessToken);
   if (!roles) roles = [];
   if (typeof roles === 'string') roles = roles.split(',');
-  return { firstName, lastName, username, email, roles, accessToken };
+  return { id, firstName, lastName, username, email, roles, accessToken };
 }
