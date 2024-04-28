@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { paths, roles } from '../../../../../utils/utils';
@@ -5,9 +6,12 @@ import useAuth from '../../../../../hooks/useAuth';
 import DeleteCustomerPopup from './DeleteCustomerPopup';
 import icons from '../../../../../utils/faIcons';
 
-function CustomerHeaderSection({ editingMode, setEditingMode, deletePopupOpen, setDeletePopupOpen, error }) {
+function CustomerHeaderSection({ editingMode, setEditingMode, customer, error }) {
   const { auth } = useAuth();
+
   const navigate = useNavigate();
+
+  const [deletePopupOpen, setDeletePopupOpen] = useState(false);
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-2">
@@ -40,6 +44,12 @@ function CustomerHeaderSection({ editingMode, setEditingMode, deletePopupOpen, s
           >
             <FontAwesomeIcon icon={editingMode ? icons.x : icons.edit} />
             {editingMode ? 'Cancel Editing' : 'Edit'}
+          </button>
+          <button
+            className={`flex-center animate-fade-in-medium gap-2 rounded-xl bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600 sm:text-base`}
+          >
+            <FontAwesomeIcon icon={icons.plus} />
+            New Action
           </button>
         </div>
       )}

@@ -18,8 +18,6 @@ function Customer() {
 
   const [editingMode, setEditingMode] = useState(false);
 
-  const [deletePopupOpen, setDeletePopupOpen] = useState(false);
-
   const {
     loading: loadingDetails,
     data: details,
@@ -41,8 +39,7 @@ function Customer() {
       <CustomerHeaderSection
         editingMode={editingMode}
         setEditingMode={setEditingMode}
-        deletePopupOpen={deletePopupOpen}
-        setDeletePopupOpen={setDeletePopupOpen}
+        customer={details}
         error={(detailsError || actionsError) && (detailsError || actionsError)}
       />
       <div className="flex flex-1 flex-wrap gap-5">
