@@ -38,18 +38,22 @@ function CustomerHeaderSection({ editingMode, setEditingMode, customer, error })
               {deletePopupOpen && <DeleteCustomerPopup setDeletePopupOpen={setDeletePopupOpen} />}
             </>
           )}
+          {auth.id === customer.salesRepresentative?.id && (
+            <button
+              className={`flex-center animate-fade-in-medium gap-2 rounded-xl bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600 sm:text-base`}
+            >
+              <>
+                <FontAwesomeIcon icon={icons.plus} />
+                <span>New Action</span>
+              </>
+            </button>
+          )}
           <button
             onClick={() => setEditingMode(!editingMode)}
             className={`flex-center animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm font-semibold sm:text-base ${editingMode ? 'btn-secondary' : 'btn-primary '}`}
           >
             <FontAwesomeIcon icon={editingMode ? icons.x : icons.edit} />
             {editingMode ? 'Cancel Editing' : 'Edit'}
-          </button>
-          <button
-            className={`flex-center animate-fade-in-medium gap-2 rounded-xl bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600 sm:text-base`}
-          >
-            <FontAwesomeIcon icon={icons.plus} />
-            New Action
           </button>
         </div>
       )}
