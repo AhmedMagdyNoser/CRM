@@ -26,6 +26,16 @@ function CustomerHeaderSection({ editingMode, setEditingMode, customer, error })
       </div>
       {!error && auth.roles.includes(roles.moderator) && (
         <div className="flex gap-2">
+          {auth.id === customer.salesRepresentative?.id && (
+            <button
+              className={`flex-center btn-primary animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm font-semibold sm:text-base`}
+            >
+              <>
+                <FontAwesomeIcon icon={icons.plus} />
+                <span>New Action</span>
+              </>
+            </button>
+          )}
           {editingMode && (
             <>
               <button
@@ -37,16 +47,6 @@ function CustomerHeaderSection({ editingMode, setEditingMode, customer, error })
               </button>
               {deletePopupOpen && <DeleteCustomerPopup setDeletePopupOpen={setDeletePopupOpen} />}
             </>
-          )}
-          {auth.id === customer.salesRepresentative?.id && (
-            <button
-              className={`flex-center animate-fade-in-medium gap-2 rounded-xl bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600 sm:text-base`}
-            >
-              <>
-                <FontAwesomeIcon icon={icons.plus} />
-                <span>New Action</span>
-              </>
-            </button>
           )}
           <button
             onClick={() => setEditingMode(!editingMode)}
