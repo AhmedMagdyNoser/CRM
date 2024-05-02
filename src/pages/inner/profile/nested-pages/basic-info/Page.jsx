@@ -7,11 +7,10 @@ import ChangingUsername from './components/ChangingUsername';
 import ChangingEmail from './components/ChangingEmail';
 import icons from '../../../../../utils/faIcons';
 import DeleteModal from '../../components/DeleteModal';
+import profileImage from '../../../../../assets/Profile.jpg';
 
 export default function BasicInfoPage() {
   useDocumentTitle('Profile Basic Info');
-
-  const profileImage = require('../../../../../assets/Profile.jpg');
 
   const { auth } = useAuth();
 
