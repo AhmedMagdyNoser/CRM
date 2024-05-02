@@ -62,7 +62,14 @@ export default function DealForm() {
           />
         </div>
         <div className="min-w-48 flex-1">
-          <InputField icon={icons.money} placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
+          <InputField
+            icon={icons.money}
+            placeholder="Price"
+            value={price}
+            onChange={(e) => {
+              /^[0-9]*$/.test(e.target.value) && setPrice(e.target.value);
+            }}
+          />
         </div>
       </div>
       <textarea
