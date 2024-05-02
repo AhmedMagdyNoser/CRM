@@ -5,13 +5,12 @@ import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
 import Form from '../../../../../../components/ui/Form';
 import Alert from '../../../../../../components/ui/Alert';
 
-function CallForm() {
+export default function MessageForm() {
   const privateAxios = usePrivateAxios();
 
   const id = useParams().id;
 
   const [summary, setSummary] = useState('');
-  const [status, setStatus] = useState(0);
 
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,8 +23,8 @@ function CallForm() {
       setLoading(true);
       await privateAxios({
         method: 'POST',
-        url: '/SalesRep/AddCall',
-        data: { customerId: +id, status, summary, date: new Date(), followUp: null },
+        url: '/SalesRep/AddMessage',
+        data: { customerId: +id, summary, date: new Date(), followUp: null },
       });
       setSuccess(true);
     } catch (error) {
@@ -44,21 +43,8 @@ function CallForm() {
       submitLabel="Add Action"
       className="animate-fade-in-fast p-5"
     >
-      <p>Call Status:</p>
-      <div className="scrollbar-hide flex gap-2 overflow-x-auto">
-        {['Completed', 'Missed', 'Cancelled', 'Busy', 'Failed'].map((statusName, index) => (
-          <button
-            type="button"
-            key={statusName}
-            className={`rounded-xl px-4 py-2 text-sm font-semibold ${index === status ? 'btn-primary' : 'btn-secondary'}`}
-            onClick={() => setStatus(index)}
-          >
-            {statusName}
-          </button>
-        ))}
-      </div>
       <textarea
-        placeholder="Summary"
+        placeholder="Message Content"
         className="h-32 resize-none rounded-xl bg-gray-100 p-4 text-gray-500 outline-none"
         value={summary}
         onChange={(e) => setSummary(e.target.value)}
@@ -68,5 +54,3 @@ function CallForm() {
     </Form>
   );
 }
-
-export default CallForm;
