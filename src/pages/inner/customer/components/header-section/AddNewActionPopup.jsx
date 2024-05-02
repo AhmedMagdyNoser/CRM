@@ -4,6 +4,7 @@ import Modal from '../../../../../components/ui/Modal';
 import CallForm from './actions-form/CallForm';
 import MessageForm from './actions-form/MessageForm';
 import MeetingForm from './actions-form/MeatingForm';
+import DealForm from './actions-form/DealForm';
 
 const types = ['Call', 'Message', 'Meeting', 'Deal'];
 
@@ -31,8 +32,7 @@ export default function AddNewActionPopup({ setAddNewActionPopupOpen }) {
         ) : selectedType === 'Meeting' ? (
           <MeetingForm />
         ) : selectedType === 'Deal' ? (
-          // <DealForm />
-          <div>Deal Form</div>
+          <DealForm />
         ) : null}
       </div>
       <style>
