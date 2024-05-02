@@ -3,6 +3,7 @@ import { breakboints } from '../../../../../utils/utils';
 import Modal from '../../../../../components/ui/Modal';
 import CallForm from './actions-form/CallForm';
 import MessageForm from './actions-form/MessageForm';
+import MeetingForm from './actions-form/MeatingForm';
 
 const types = ['Call', 'Message', 'Meeting', 'Deal'];
 
@@ -28,8 +29,7 @@ export default function AddNewActionPopup({ setAddNewActionPopupOpen }) {
         ) : selectedType === 'Message' ? (
           <MessageForm />
         ) : selectedType === 'Meeting' ? (
-          // <MeetingForm />
-          <div>Meeting Form</div>
+          <MeetingForm />
         ) : selectedType === 'Deal' ? (
           // <DealForm />
           <div>Deal Form</div>
