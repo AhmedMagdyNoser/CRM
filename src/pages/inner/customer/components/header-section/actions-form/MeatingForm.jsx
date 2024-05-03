@@ -45,18 +45,7 @@ export default function MeetingForm() {
       submitLabel="Add Action"
       className="animate-fade-in-fast p-5"
     >
-      {/* <p>Meeting Type:</p> */}
       <div className="scrollbar-hide flex gap-2 overflow-x-auto">
-        {/* {['Online', 'Offline'].map((statusName, index) => (
-          <button
-            type="button"
-            key={statusName}
-            className={`rounded-xl px-4 py-2 text-sm font-semibold ${statusName === 'Online' ? 'btn-primary' : 'btn-secondary'}`}
-            onClick={() => setStatus(index)}
-          >
-            {statusName}
-          </button>
-        ))} */}
         <Checkbox label='Online Meeting' checked={online} onClick={() => setOnline(!online)} />
       </div>
       <textarea
