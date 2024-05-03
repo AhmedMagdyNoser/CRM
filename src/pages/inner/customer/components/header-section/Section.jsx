@@ -26,7 +26,7 @@ function CustomerHeaderSection({ editingMode, setEditingMode, customer, error })
         </button>
         <h1>Customer Details</h1>
       </div>
-      {!error && auth.roles.includes(roles.moderator) && (
+      {!error && (
         <div className="flex gap-2">
           {auth.id === customer.salesRepresentative?.id && (
             <>
@@ -42,7 +42,7 @@ function CustomerHeaderSection({ editingMode, setEditingMode, customer, error })
               {addNewActionPopupOpen && <AddNewActionPopup setAddNewActionPopupOpen={setAddNewActionPopupOpen} />}
             </>
           )}
-          {editingMode && (
+          {auth.roles.includes(roles.moderator) && editingMode && (
             <>
               <button
                 className="btn-danger flex-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold sm:text-base"
@@ -54,13 +54,15 @@ function CustomerHeaderSection({ editingMode, setEditingMode, customer, error })
               {deletePopupOpen && <DeleteCustomerPopup setDeletePopupOpen={setDeletePopupOpen} />}
             </>
           )}
-          <button
-            onClick={() => setEditingMode(!editingMode)}
-            className={`flex-center animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm font-semibold sm:text-base ${editingMode ? 'btn-secondary' : 'btn-primary '}`}
-          >
-            <FontAwesomeIcon icon={editingMode ? icons.x : icons.edit} />
-            {editingMode ? 'Cancel Editing' : 'Edit'}
-          </button>
+          {auth.roles.includes(roles.moderator) && (
+            <button
+              onClick={() => setEditingMode(!editingMode)}
+              className={`flex-center animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm font-semibold sm:text-base ${editingMode ? 'btn-secondary' : 'btn-primary '}`}
+            >
+              <FontAwesomeIcon icon={editingMode ? icons.x : icons.edit} />
+              {editingMode ? 'Cancel Editing' : 'Edit'}
+            </button>
+          )}
         </div>
       )}
     </div>
