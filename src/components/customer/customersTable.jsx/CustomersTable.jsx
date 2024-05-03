@@ -8,7 +8,7 @@ import CustomerRow from './CustomerRow';
 import Pagination from '../../ui/Pagination';
 import icons from '../../../utils/faIcons';
 
-const ITEMS_PER_PAGE = 15;
+const ITEMS_PER_PAGE = 10;
 
 export default function CustomersTable({ url }) {
   const privateAxios = usePrivateAxios();
