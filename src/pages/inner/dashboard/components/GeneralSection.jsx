@@ -19,7 +19,7 @@ const data = {
 
 export default function GeneralSection() {
   return (
-    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4">
       <StatSquare
         title="Customers"
         total={data.customers.total}
@@ -50,7 +50,9 @@ export default function GeneralSection() {
 
 function StatSquare({ title, total, thisWeek, gradient }) {
   return (
-    <div className={`rounded-xl bg-gradient-to-r sm:rounded-3xl ${gradient} p-4 text-gray-800 shadow sm:p-6`}>
+    <div
+      className={`animate-fade-in-fast rounded-xl bg-gradient-to-r sm:rounded-3xl ${gradient} p-4 text-gray-800 shadow sm:p-6`}
+    >
       <h3 className="text-base font-semibold text-gray-800 sm:text-lg">{title}</h3>
       <div className="mt-8 flex flex-col flex-wrap gap-2 md:flex-row md:items-end">
         <span className="text-xl font-semibold sm:text-2xl lg:text-3xl">{total}</span>
