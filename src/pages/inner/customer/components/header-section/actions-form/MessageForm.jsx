@@ -7,7 +7,7 @@ import Alert from '../../../../../../components/ui/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import icons from '../../../../../../utils/faIcons';
 
-export default function MessageForm({ setSelectedType }) {
+export default function MessageForm({ setSelectedType, setActions }) {
   const privateAxios = usePrivateAxios();
 
   const id = useParams().id;
@@ -23,12 +23,17 @@ export default function MessageForm({ setSelectedType }) {
     try {
       setError('');
       setLoading(true);
-      await privateAxios({
+      const { data } = await privateAxios({
         method: 'POST',
         url: '/SalesRep/AddMessage',
         data: { customerId: +id, summary, date: new Date(), followUp: null },
       });
       setSuccess(true);
+      // Backend issues: 1. The added action object returned in an array. 2. The type is not included in the object.
+      // Let's fix this:
+      const newMessage = data[0];
+      newMessage.type = 'message';
+      setActions((actions) => [...actions, newMessage]);
     } catch (error) {
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
     } finally {

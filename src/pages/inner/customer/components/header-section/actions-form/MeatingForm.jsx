@@ -8,7 +8,7 @@ import Checkbox from '../../../../../../components/ui/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import icons from '../../../../../../utils/faIcons';
 
-export default function MeetingForm({ setSelectedType }) {
+export default function MeetingForm({ setSelectedType, setActions }) {
   const privateAxios = usePrivateAxios();
 
   const id = useParams().id;
@@ -25,12 +25,17 @@ export default function MeetingForm({ setSelectedType }) {
     try {
       setError('');
       setLoading(true);
-      await privateAxios({
+      const { data } = await privateAxios({
         method: 'POST',
         url: '/SalesRep/AddMeeting',
         data: { customerId: +id, online, summary, date: new Date(), followUp: null },
       });
       setSuccess(true);
+      // Backend issues: 1. The added action object returned in an array. 2. The type is not included in the object.
+      // Let's fix this:
+      const newMeeting = data[0];
+      newMeeting.type = 'meeting';
+      setActions((actions) => [...actions, newMeeting]);
     } catch (error) {
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
     } finally {

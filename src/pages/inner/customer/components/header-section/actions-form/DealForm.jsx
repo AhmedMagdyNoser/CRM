@@ -10,7 +10,7 @@ import icons from '../../../../../../utils/faIcons';
 import useInterests from '../../../../../../hooks/useInterests';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function DealForm({ setSelectedType }) {
+export default function DealForm({ setSelectedType, setActions }) {
   const privateAxios = usePrivateAxios();
 
   const id = useParams().id;
@@ -30,12 +30,17 @@ export default function DealForm({ setSelectedType }) {
     try {
       setError('');
       setLoading(true);
-      await privateAxios({
+      let { data } = await privateAxios({
         method: 'POST',
         url: '/SalesRep/AddDeal',
         data: { customerId: +id, price, interestId, summary, date: new Date(), followUp: null },
       });
       setSuccess(true);
+      // Backend issues: 1. The added action object returned in an array. 2. The type is not included in the object.
+      // Let's fix this:
+      const newDeal = data[0];
+      newDeal.type = 'deal';
+      setActions((actions) => [...actions, newDeal]);
     } catch (error) {
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
     } finally {

@@ -10,7 +10,7 @@ import icons from '../../../../../utils/faIcons';
 
 const types = ['Call', 'Message', 'Meeting', 'Deal'];
 
-export default function AddNewActionPopup({ setAddNewActionPopupOpen }) {
+export default function AddNewActionPopup({ setAddNewActionPopupOpen, setActions = { setActions } }) {
   const [selectedType, setSelectedType] = useState(null);
 
   return (
@@ -35,13 +35,13 @@ export default function AddNewActionPopup({ setAddNewActionPopupOpen }) {
 
       <div className="hiddena">
         {selectedType === 'Call' ? (
-          <CallForm setSelectedType={setSelectedType} />
+          <CallForm setSelectedType={setSelectedType} setActions={setActions} />
         ) : selectedType === 'Message' ? (
-          <MessageForm setSelectedType={setSelectedType} />
+          <MessageForm setSelectedType={setSelectedType} setActions={setActions} />
         ) : selectedType === 'Meeting' ? (
-          <MeetingForm setSelectedType={setSelectedType} />
+          <MeetingForm setSelectedType={setSelectedType} setActions={setActions} />
         ) : selectedType === 'Deal' ? (
-          <DealForm setSelectedType={setSelectedType} />
+          <DealForm setSelectedType={setSelectedType} setActions={setActions} />
         ) : null}
       </div>
 

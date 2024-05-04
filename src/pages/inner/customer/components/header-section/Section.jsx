@@ -7,7 +7,7 @@ import DeleteCustomerPopup from './DeleteCustomerPopup';
 import AddNewActionPopup from './AddNewActionPopup';
 import icons from '../../../../../utils/faIcons';
 
-function CustomerHeaderSection({ editingMode, setEditingMode, customer, error }) {
+function CustomerHeaderSection({ editingMode, setEditingMode, customer, setActions, error }) {
   const { auth } = useAuth();
 
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ function CustomerHeaderSection({ editingMode, setEditingMode, customer, error })
                   <span>New Action</span>
                 </>
               </button>
-              {addNewActionPopupOpen && <AddNewActionPopup setAddNewActionPopupOpen={setAddNewActionPopupOpen} />}
+              {addNewActionPopupOpen && <AddNewActionPopup setAddNewActionPopupOpen={setAddNewActionPopupOpen} setActions={setActions} />}
             </>
           )}
           {auth.roles.includes(roles.moderator) && editingMode && (
