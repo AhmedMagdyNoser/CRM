@@ -6,12 +6,12 @@ function Dashboard() {
   useDocumentTitle('Manager Dashboard');
 
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <h1>Manager Dashboard</h1>
-      <p className='my-3'>Under construction...</p>
+      <p>Under construction...</p>
 
       <GeneralSection />
-      {/* <DailyReport /> */}
+      <DailyReport />
     </div>
   );
 }

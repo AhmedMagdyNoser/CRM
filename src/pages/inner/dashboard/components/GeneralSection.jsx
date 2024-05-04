@@ -41,7 +41,7 @@ export default function GeneralSection() {
       <StatSquare
         title="Revenue"
         total={`$${formatPrice(data.revenue.total)}`}
-        thisWeek={`$${formatPrice(data.revenue.thisWeek)}`}
+        thisWeek={`${formatPrice(data.revenue.thisWeek)}`}
         gradient="from-blue-200 to-green-200"
       />
     </div>
@@ -50,9 +50,9 @@ export default function GeneralSection() {
 
 function StatSquare({ title, total, thisWeek, gradient }) {
   return (
-    <div className={`rounded-xl bg-gradient-to-r bg sm:rounded-3xl ${gradient} p-4 text-gray-800 shadow sm:p-6`}>
+    <div className={`rounded-xl bg-gradient-to-r sm:rounded-3xl ${gradient} p-4 text-gray-800 shadow sm:p-6`}>
       <h3 className="text-base font-semibold text-gray-800 sm:text-lg">{title}</h3>
-      <div className="mt-8 flex flex-wrap items-end gap-1 sm:gap-3">
+      <div className="mt-8 flex flex-col flex-wrap gap-2 md:flex-row md:items-end">
         <span className="text-xl font-semibold sm:text-2xl lg:text-3xl">{total}</span>
         <span className="text-xs sm:text-sm">+{thisWeek} this week</span>
       </div>
