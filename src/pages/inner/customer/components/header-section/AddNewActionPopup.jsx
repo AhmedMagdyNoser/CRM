@@ -10,7 +10,7 @@ import icons from '../../../../../utils/faIcons';
 
 const types = ['Call', 'Message', 'Meeting', 'Deal'];
 
-export default function AddNewActionPopup({ setAddNewActionPopupOpen, setActions = { setActions } }) {
+export default function AddNewActionPopup({ setAddNewActionPopupOpen, setActions }) {
   const [selectedType, setSelectedType] = useState(null);
 
   return (
