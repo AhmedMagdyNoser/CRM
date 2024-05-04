@@ -29,6 +29,7 @@ function Customer() {
   const {
     loading: loadingActions,
     data: actionsData,
+    setData: setActionsData,
     error: actionsError,
   } = useOnLoadFetch(
     `/${auth.roles.includes(roles.moderator) ? 'moderator/get-customer-actions' : 'SalesRep/ActionsForCustomersAssignedToSales'}/${params.id}`,
@@ -40,6 +41,7 @@ function Customer() {
         editingMode={editingMode}
         setEditingMode={setEditingMode}
         customer={details}
+        setActions={setActionsData}
         error={(detailsError || actionsError) && (detailsError || actionsError)}
       />
       <div className="flex flex-1 flex-wrap gap-5">

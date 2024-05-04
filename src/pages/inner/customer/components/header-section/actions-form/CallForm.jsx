@@ -4,8 +4,10 @@ import { globalErrorMessage } from '../../../../../../utils/utils';
 import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
 import Form from '../../../../../../components/ui/Form';
 import Alert from '../../../../../../components/ui/Alert';
+import icons from '../../../../../../utils/faIcons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function CallForm() {
+function CallForm({ setSelectedType, setActions }) {
   const privateAxios = usePrivateAxios();
 
   const id = useParams().id;
@@ -22,12 +24,17 @@ function CallForm() {
     try {
       setError('');
       setLoading(true);
-      await privateAxios({
+      const { data } = await privateAxios({
         method: 'POST',
         url: '/SalesRep/AddCall',
         data: { customerId: +id, status, summary, date: new Date(), followUp: null },
       });
       setSuccess(true);
+      // Backend issues: 1. The added action object returned in an array. 2. The type is not included in the object.
+      // Let's fix this:
+      const newCall = data[0];
+      newCall.type = 'call';
+      setActions((actions) => [...actions, newCall]);
     } catch (error) {
       setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
     } finally {
@@ -44,6 +51,19 @@ function CallForm() {
       submitLabel="Add Action"
       className="animate-fade-in-fast p-5"
     >
+      <div className="flex items-center gap-1">
+        <button type="button" className="btn-light h-10 w-10 rounded-full" onClick={() => setSelectedType(null)}>
+          <FontAwesomeIcon icon={icons.back} />
+        </button>
+        <h2 className="text-xl font-semibold">Add New Call</h2>
+      </div>
+      <textarea
+        placeholder="Summary"
+        className="h-32 resize-none rounded-xl bg-gray-100 p-4 text-gray-500 outline-none"
+        value={summary}
+        onChange={(e) => setSummary(e.target.value)}
+        autoFocus
+      />
       <p>Call Status:</p>
       <div className="scrollbar-hide flex gap-2 overflow-x-auto">
         {['Completed', 'Missed', 'Cancelled', 'Busy', 'Failed'].map((statusName, index) => (
@@ -57,13 +77,6 @@ function CallForm() {
           </button>
         ))}
       </div>
-      <textarea
-        placeholder="Summary"
-        className="h-32 resize-none rounded-xl bg-gray-100 p-4 text-gray-500 outline-none"
-        value={summary}
-        onChange={(e) => setSummary(e.target.value)}
-        autoFocus
-      />
       {success && <Alert.Success message="Action added successfully." />}
     </Form>
   );
