@@ -5,8 +5,10 @@ import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
 import Form from '../../../../../../components/ui/Form';
 import Alert from '../../../../../../components/ui/Alert';
 import Checkbox from '../../../../../../components/ui/Checkbox';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import icons from '../../../../../../utils/faIcons';
 
-export default function MeetingForm() {
+export default function MeetingForm({ setSelectedType }) {
   const privateAxios = usePrivateAxios();
 
   const id = useParams().id;
@@ -45,8 +47,11 @@ export default function MeetingForm() {
       submitLabel="Add Action"
       className="animate-fade-in-fast p-5"
     >
-      <div className="scrollbar-hide flex gap-2 overflow-x-auto">
-        <Checkbox label='Online Meeting' checked={online} onClick={() => setOnline(!online)} />
+      <div className="flex items-center gap-1">
+        <button type="button" className="btn-light h-10 w-10 rounded-full" onClick={() => setSelectedType(null)}>
+          <FontAwesomeIcon icon={icons.back} />
+        </button>
+        <h2 className="text-xl font-semibold">Add New Meeting</h2>
       </div>
       <textarea
         placeholder="Summary"
@@ -55,6 +60,9 @@ export default function MeetingForm() {
         onChange={(e) => setSummary(e.target.value)}
         autoFocus
       />
+      <div className="scrollbar-hide flex gap-2 overflow-x-auto">
+        <Checkbox label="Online Meeting" checked={online} onClick={() => setOnline(!online)} />
+      </div>
       {success && <Alert.Success message="Action added successfully." />}
     </Form>
   );

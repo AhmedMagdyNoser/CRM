@@ -8,8 +8,9 @@ import InputField from '../../../../../../components/ui/InputField';
 import DropdownMenu from '../../../../../../components/ui/DropdownMenu';
 import icons from '../../../../../../utils/faIcons';
 import useInterests from '../../../../../../hooks/useInterests';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function DealForm() {
+export default function DealForm({ setSelectedType }) {
   const privateAxios = usePrivateAxios();
 
   const id = useParams().id;
@@ -51,6 +52,12 @@ export default function DealForm() {
       submitLabel="Add Action"
       className="animate-fade-in-fast p-5"
     >
+      <div className="flex items-center gap-1">
+        <button type="button" className="btn-light h-10 w-10 rounded-full" onClick={() => setSelectedType(null)}>
+          <FontAwesomeIcon icon={icons.back} />
+        </button>
+        <h2 className="text-xl font-semibold">Add New Deal</h2>
+      </div>
       <div className="flex flex-wrap gap-2">
         <div className="min-w-48 flex-1">
           <DropdownMenu
