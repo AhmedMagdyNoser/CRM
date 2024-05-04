@@ -89,13 +89,12 @@ function Action({ action }) {
           </div>
 
           <div>
-            {false && // Remove this
-              showEdit && (
-                <button className="btn-light flex-center animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm">
-                  <FontAwesomeIcon icon={icons.edit} />
-                  <span>Edit</span>
-                </button>
-              )}
+            {false && showEdit && (
+              <button className="btn-light flex-center animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm">
+                <FontAwesomeIcon icon={icons.edit} />
+                <span>Edit</span>
+              </button>
+            )}
           </div>
         </div>
         <p className="mb-2 mt-4 rounded-xl bg-gray-50 p-3 px-4">{action.summary}</p>

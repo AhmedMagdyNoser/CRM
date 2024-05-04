@@ -24,8 +24,8 @@ function AddNewSourcePopup({ setNewSourcePopup, setSourcesOptions }) {
         setError('');
         setSuccess(false);
         setLoading(true);
-        await privateAxios({ method: 'post', url: '/moderator/add-source', data: { name } });
-        setSourcesOptions((prev) => [...prev, { name }]);
+        const res = await privateAxios({ method: 'post', url: '/moderator/add-source', data: { name } });
+        setSourcesOptions((prev) => [...prev, { id: res.data.id, name }]);
         setSuccess(true);
       } catch (error) {
         setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);

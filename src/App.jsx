@@ -24,7 +24,7 @@ import BasicInfoPage from './pages/inner/profile/nested-pages/basic-info/Page';
 import ChangePasswordPage from './pages/inner/profile/nested-pages/change-password/Page';
 import Notifications from './pages/inner/profile/nested-pages/notifications/Page';
 
-function App() {
+export default function App() {
   return (
     <Router>
       <Routes>
@@ -73,16 +73,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;
-
-// To scroll to top on routing
-// function ScrollToTop() {
-//   const { pathname } = useLocation();
-
-//   useEffect(() => {
-//     window.scroll({ top: 0, behavior: 'instant' });
-//   }, [pathname]);
-
-//   return null;
-// }

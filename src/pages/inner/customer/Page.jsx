@@ -6,35 +6,40 @@ import DetailsSection from './components/details-section/Section';
 import ActionsSection from './components/actions-section/Section';
 import CustomerHeaderSection from './components/header-section/Section';
 import Alert from '../../../components/ui/Alert';
+import useAuth from '../../../hooks/useAuth';
+import { roles } from '../../../utils/utils';
 
 function Customer() {
   useDocumentTitle('Customer Details');
 
   const params = useParams();
 
-  const [editingMode, setEditingMode] = useState(false);
+  const { auth } = useAuth();
 
-  const [deletePopupOpen, setDeletePopupOpen] = useState(false);
+  const [editingMode, setEditingMode] = useState(false);
 
   const {
     loading: loadingDetails,
     data: details,
     setData: setDetails,
     error: detailsError,
-  } = useOnLoadFetch(`/moderator/get-customer/${params.id}`);
+  } = useOnLoadFetch(
+    `/${auth.roles.includes(roles.moderator) ? 'moderator/get-customer' : 'SalesRep/GetCustomerAssignedToSales'}/${params.id}`,
+  );
   const {
     loading: loadingActions,
     data: actionsData,
     error: actionsError,
-  } = useOnLoadFetch(`/moderator/get-customer-actions/${params.id}`);
+  } = useOnLoadFetch(
+    `/${auth.roles.includes(roles.moderator) ? 'moderator/get-customer-actions' : 'SalesRep/ActionsForCustomersAssignedToSales'}/${params.id}`,
+  );
 
   return (
     <div className="flex h-full flex-col gap-4">
       <CustomerHeaderSection
         editingMode={editingMode}
         setEditingMode={setEditingMode}
-        deletePopupOpen={deletePopupOpen}
-        setDeletePopupOpen={setDeletePopupOpen}
+        customer={details}
         error={(detailsError || actionsError) && (detailsError || actionsError)}
       />
       <div className="flex flex-1 flex-wrap gap-5">

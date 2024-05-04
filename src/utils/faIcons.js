@@ -34,6 +34,8 @@ import {
   faUserTie,
   faBullhorn,
   faHeadset,
+  faDollar,
+  faBagShopping,
 } from '@fortawesome/free-solid-svg-icons';
 
 const icons = {
@@ -76,6 +78,8 @@ const icons = {
   manager: faUserTie,
   moderator: faBullhorn,
   sales: faHeadset,
+  money: faDollar,
+  interest: faBagShopping,
   actions: {
     call: faPhone,
     message: faCommentDots,

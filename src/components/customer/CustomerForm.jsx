@@ -11,6 +11,7 @@ import Form from '../ui/Form';
 import InputField from '../ui/InputField';
 import GenderInput from '../ui/GenderInput';
 import icons from '../../utils/faIcons';
+import { validationRegex } from '../../utils/validation';
 
 function CustomerForm({ title, submitLabel, customer, setCustomer, setEditingMode, className }) {
   const privateAxios = usePrivateAxios();
@@ -52,23 +53,23 @@ function CustomerForm({ title, submitLabel, customer, setCustomer, setEditingMod
 
       // Required Fields
       const data = {
-        firstName,
-        lastName,
-        phone,
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        phone: phone.trim(),
         salesRepresentativeId,
         sourceId,
         interests,
       };
 
       // Validation
-      if (!firstName) {
-        setError('Please provide a first name');
+      if (!validationRegex.name.test(firstName.trim())) {
+        setError('Please provide a valid first name');
         return;
-      } else if (!lastName) {
-        setError('Please provide a last name');
+      } else if (!validationRegex.name.test(lastName.trim())) {
+        setError('Please provide a valid last name');
         return;
-      } else if (!phone) {
-        setError('Please provide a phone number');
+      } else if (!/^[0-9]{4,18}$/.test(phone.trim())) {
+        setError('Please provide a valid phone number');
         return;
       } else if (!salesRepresentativeId) {
         setError('Please assign this customer to a sales representative');
@@ -79,13 +80,16 @@ function CustomerForm({ title, submitLabel, customer, setCustomer, setEditingMod
       } else if (interests.length === 0) {
         setError('Please select at least one interest');
         return;
+      } else if (email && !validationRegex.email.test(email.trim())) {
+        setError('Please provide a valid email address');
+        return;
       }
 
       // Adding Optional Field If Provided
       if (age) data.age = age;
       if (gender) data.gender = gender;
-      if (email) data.email = email;
-      if (city) data.city = city;
+      if (email) data.email = email.trim();
+      if (city) data.city = city.trim();
 
       setLoading(true);
 
