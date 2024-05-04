@@ -89,7 +89,7 @@ function Action({ action }) {
           </div>
 
           <div>
-            {showEdit && (
+            {false && showEdit && (
               <button className="btn-light flex-center animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm">
                 <FontAwesomeIcon icon={icons.edit} />
                 <span>Edit</span>
