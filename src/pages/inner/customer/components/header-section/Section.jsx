@@ -33,7 +33,7 @@ function CustomerHeaderSection({ editingMode, setEditingMode, customer, error })
             <>
               <button
                 onClick={() => setAddNewActionPopupOpen(true)}
-                className={`flex-center btn-primary animate-fade-in-medium gap-2 rounded-xl px-4 py-2 text-sm font-semibold sm:text-base`}
+                className={`flex-center animate-fade-in-medium gap-2 rounded-xl bg-green-100 px-4 py-2 text-sm font-semibold text-green-800 shadow transition-colors hover:bg-green-200 sm:text-base`}
               >
                 <>
                   <FontAwesomeIcon icon={icons.plus} />
