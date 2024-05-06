@@ -1,24 +1,21 @@
-const data = {
-  customers: {
-    total: 210,
-    thisWeek: 35,
-  },
-  actions: {
-    total: 825,
-    thisWeek: 150,
-  },
-  deals: {
-    total: 75,
-    thisWeek: 12,
-  },
-  revenue: {
-    total: 17450,
-    thisWeek: 3000,
-  },
-};
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
+import icons from '../../../../utils/faIcons';
 
 export default function GeneralSection() {
-  return (
+  let { data, loading, error } = useOnLoadFetch('reports/global-statistics');
+
+  return loading ? (
+    <div className={`flex-center flex-col gap-3 rounded-xl bg-gray-100 py-10 text-gray-500 shadow sm:rounded-3xl sm:p-12`}>
+      <FontAwesomeIcon icon={icons.spinner} spin />
+      <span className="text-center">Loading Statistics..</span>
+    </div>
+  ) : error ? (
+    <div className={`flex-center flex-col gap-3 rounded-xl bg-red-100 py-10 text-red-500 shadow sm:rounded-3xl sm:p-12`}>
+      <FontAwesomeIcon icon={icons.exclamationCircle} />
+      <span className="text-center">Failed to load statistics</span>
+    </div>
+  ) : (
     <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4">
       <StatSquare
         title="Customers"
