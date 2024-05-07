@@ -19,7 +19,7 @@ function LastWeekCustomersSection() {
         <Alert.Error message={error} />
       ) : lastWeekCustomers.length === 0 ? (
         <p className="text-gray-800">No new customers this week</p>
-      ) : (
+      ) : ( 
         <div className="scrollbar-hide flex gap-3 overflow-x-auto py-1">
           {lastWeekCustomers.map((customer) => (
             <CustomerCard key={customer.id} customer={customer} />

@@ -8,7 +8,7 @@ function Dashboard() {
     <div>
       <h1>Manager Dashboard</h1>
       <p className='my-3'>Under construction...</p>
-
+      
       <DailyReport />
     </div>
   );
