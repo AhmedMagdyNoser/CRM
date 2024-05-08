@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+
 const data = [
   {
     name: 'Instagram',
@@ -25,6 +27,12 @@ export default function SourcesStats() {
   const maxValue = Math.max(...data.map((item) => item.count));
   const scale = 100 / maxValue;
 
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
+
   return (
     <div className="rounded-xl bg-gray-100 p-4 shadow sm:p-5">
       <h2 className="mb-5">Sources Statistics</h2>
@@ -34,7 +42,10 @@ export default function SourcesStats() {
             {item.name}
           </div>
           <div className="col-span-8 flex-1 rounded-md bg-gray-200 lg:col-span-10">
-            <div className="h-full rounded-md bg-pro-300" style={{ width: `${item.count * scale}%` }}></div>
+            <div
+              className="h-full rounded-md bg-pro-300 transition-all duration-1000"
+              style={{ width: loaded ? `${item.count * scale}%` : 0 }}
+            ></div>
           </div>
           <div
             title={`${item.count} Customers`}
