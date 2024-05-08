@@ -99,3 +99,11 @@ export function extractUserInfo(accessToken) {
   if (typeof roles === 'string') roles = roles.split(',');
   return { id, firstName, lastName, username, email, roles, accessToken };
 }
+
+
+export const periodOptions = [
+  { value: '', label: 'Total' },
+  { value: 'Daily', label: 'Today' },
+  { value: 'Weekly', label: 'Last Week' },
+  { value: 'Monthly', label: 'Last Month' },
+];
