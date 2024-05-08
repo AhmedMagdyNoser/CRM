@@ -6,6 +6,7 @@ import GlobalStatistics from './components/GlobalStatistics';
 import SalesStats from './components/SalesStats';
 import Loading from './components/status/Loading';
 import usePrivateAxios from '../../../hooks/usePrivateAxios';
+import Error from './components/status/Error';
 
 function Dashboard() {
   useDocumentTitle('Manager Dashboard');
@@ -16,7 +17,7 @@ function Dashboard() {
 
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     let controller = new AbortController();
@@ -36,7 +37,7 @@ function Dashboard() {
         ]);
         if (!canceled) setData(results);
       } catch (error) {
-        if (!canceled) setError('Error while generating your report.');
+        if (!canceled) setError(true);
       } finally {
         if (!canceled) setLoading(false);
       }
@@ -57,7 +58,7 @@ function Dashboard() {
       {loading ? (
         <Loading />
       ) : error ? (
-        <div className="flex-center">{error}</div>
+        <Error />
       ) : (
         <>
           <GlobalStatistics data={data.globalStatistics} period={selectedPeriod} />

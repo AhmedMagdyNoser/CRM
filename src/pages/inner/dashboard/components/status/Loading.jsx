@@ -23,7 +23,9 @@ export default function Loading() {
       <div className={backBoxClasses}>
         <BackgroundImg img={statsImg4} />
       </div>
-      <div className={`flex-center ${centerPosistion} h-full w-full rounded-xl border bg-gray-200 shadow sm:h-80 sm:w-96`}>
+      <div
+        className={`flex-center ${centerPosistion} h-full w-full rounded-xl border ${true ? 'bg-gray-200 sm:h-80 sm:w-96' : 'bg-gray-100'}`}
+      >
         <div className="flex flex-col gap-5">
           <FontAwesomeIcon icon={icons.spinner} spin className="text-xl text-gray-500 sm:text-3xl" />
           <span className="text-center text-sm text-gray-500 sm:text-base">Generating your report...</span>
@@ -36,7 +38,7 @@ export default function Loading() {
 function BackgroundImg({ img }) {
   return (
     <div className={`${centerPosistion} animate-pulse`}>
-      <img src={img} alt="Loading" className="scale-50 opacity-20" />
+      <img src={img} alt="Loading" className="h-20 opacity-20" />
     </div>
   );
 }
