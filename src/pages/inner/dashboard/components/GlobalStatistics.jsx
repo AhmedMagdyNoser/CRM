@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
 import icons from '../../../../utils/faIcons';
 
-export default function GeneralSection() {
+export default function GlobalStatistics() {
   let { data, loading, error } = useOnLoadFetch('reports/global-statistics');
 
   return loading ? (

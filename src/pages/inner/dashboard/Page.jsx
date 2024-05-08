@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
 import DashboardHeaderSection from './components/header-section/Section';
-import GeneralSection from './components/GeneralSection';
+import GlobalStatistics from './components/GlobalStatistics';
 import DailyReport from './components/DailyReport';
 
 const periodOptions = [
@@ -25,7 +25,7 @@ function Dashboard() {
 
       <p>Under construction...</p>
 
-      <GeneralSection />
+      <GlobalStatistics />
       <DailyReport />
     </div>
   );
