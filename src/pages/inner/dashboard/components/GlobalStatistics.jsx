@@ -1,22 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { periodOptions } from '../../../../utils/utils';
-import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
-import icons from '../../../../utils/faIcons';
 
-export default function GlobalStatistics({ period }) {
-  let { data, loading, error } = useOnLoadFetch('reports/global-statistics');
-
-  return loading ? (
-    <div className={`flex-center flex-col gap-3 rounded-xl bg-gray-100 py-10 text-gray-500 shadow sm:rounded-3xl sm:p-12`}>
-      <FontAwesomeIcon icon={icons.spinner} spin />
-      <span className="text-center">Loading Statistics..</span>
-    </div>
-  ) : error ? (
-    <div className={`flex-center flex-col gap-3 rounded-xl bg-red-100 py-10 text-red-500 shadow sm:rounded-3xl sm:p-12`}>
-      <FontAwesomeIcon icon={icons.exclamationCircle} />
-      <span className="text-center">Failed to load statistics</span>
-    </div>
-  ) : (
+export default function GlobalStatistics({ data, period }) {
+  return (
     <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4">
       <StatSquare title="Customers" data={data.customers} period={period.value} gradient="from-violet-200 to-pink-200" />
       <StatSquare title="Actions" data={data.actions} period={period.value} gradient="from-green-200 to-lime-200" />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { globalErrorMessage, periodOptions } from '../../../utils/utils';
+import { periodOptions } from '../../../utils/utils';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
 import DashboardHeaderSection from './components/header-section/Section';
 import GlobalStatistics from './components/GlobalStatistics';
@@ -14,7 +14,7 @@ function Dashboard() {
 
   const privateAxios = usePrivateAxios();
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -35,7 +35,7 @@ function Dashboard() {
         ]);
         if (!canceled) setData(results);
       } catch (error) {
-        if (!canceled) setError((error.response?.data?.errors && error.response.data.errors[0]) || globalErrorMessage);
+        if (!canceled) setError('Error while generating your report.');
       } finally {
         if (!canceled) setLoading(false);
       }
@@ -60,7 +60,7 @@ function Dashboard() {
       ) : (
         <>
           <GlobalStatistics data={data.globalStatistics} period={selectedPeriod} />
-          <SalesStats data={data.salesStats} period={selectedPeriod} />
+          <SalesStats data={data.salesStats} />
         </>
       )}
     </div>
