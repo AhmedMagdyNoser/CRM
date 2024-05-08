@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { periodOptions } from '../../../utils/utils';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
-import DashboardHeaderSection from './components/header-section/Section';
-import GlobalStatistics from './components/GlobalStatistics';
-import SalesStats from './components/SalesStats';
-import Loading from './components/status/Loading';
 import usePrivateAxios from '../../../hooks/usePrivateAxios';
+import DashboardHeaderSection from './components/header-section/Section';
+import Loading from './components/status/Loading';
 import Error from './components/status/Error';
+import GlobalStats from './components/GlobalStats';
+import SalesStats from './components/SalesStats';
 import SourcesStats from './components/SourcesStats';
 
 function Dashboard() {
@@ -35,6 +35,9 @@ function Dashboard() {
           privateAxios({ url: `/reports/main-report?within=${selectedPeriod.value}`, signal: controller.signal }).then(
             (response) => (results.salesStats = response.data),
           ),
+          privateAxios({ url: `/reports/sources-report?within=${selectedPeriod.value}`, signal: controller.signal }).then(
+            (response) => (results.sources = response.data),
+          ),
         ]);
         if (!canceled) setData(results);
       } catch (error) {
@@ -51,7 +54,7 @@ function Dashboard() {
   }, [privateAxios, selectedPeriod.value]);
 
   return (
-    <div className="flex h-full flex-col gap-5">
+    <div className="flex h-full flex-col gap-6">
       <DashboardHeaderSection selectedPeriod={selectedPeriod} setSelectedPeriod={setSelectedPeriod} />
 
       {loading ? (
@@ -60,8 +63,8 @@ function Dashboard() {
         <Error />
       ) : (
         <>
-          <GlobalStatistics data={data.globalStatistics} period={selectedPeriod} />
-          <SourcesStats />
+          <GlobalStats data={data.globalStatistics} period={selectedPeriod} />
+          <SourcesStats data={data.sources} />
           <SalesStats data={data.salesStats} />
         </>
       )}

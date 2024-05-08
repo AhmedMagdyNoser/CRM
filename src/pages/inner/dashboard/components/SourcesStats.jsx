@@ -1,29 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const data = [
-  {
-    name: 'Instagram',
-    count: 32,
-  },
-  {
-    name: 'Facebook',
-    count: 13,
-  },
-  {
-    name: 'Linkedin',
-    count: 14,
-  },
-  {
-    name: 'Linkedinn',
-    count: 4,
-  },
-  {
-    name: 'Abo Mota',
-    count: 1,
-  },
-];
-
-export default function SourcesStats() {
+export default function SourcesStats({data}) {
   const maxValue = Math.max(...data.map((item) => item.count));
   const scale = 100 / maxValue;
 

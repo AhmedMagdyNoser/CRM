@@ -1,6 +1,6 @@
 import { periodOptions } from '../../../../utils/utils';
 
-export default function GlobalStatistics({ data, period }) {
+export default function GlobalStats({ data, period }) {
   return (
     <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4">
       <StatSquare title="Customers" data={data.customers} period={period.value} gradient="from-violet-200 to-pink-200" />
