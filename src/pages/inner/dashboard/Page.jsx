@@ -7,6 +7,7 @@ import SalesStats from './components/SalesStats';
 import Loading from './components/status/Loading';
 import usePrivateAxios from '../../../hooks/usePrivateAxios';
 import Error from './components/status/Error';
+import SourcesStats from './components/SourcesStats';
 
 function Dashboard() {
   useDocumentTitle('Manager Dashboard');
@@ -53,8 +54,6 @@ function Dashboard() {
     <div className="flex h-full flex-col gap-5">
       <DashboardHeaderSection selectedPeriod={selectedPeriod} setSelectedPeriod={setSelectedPeriod} />
 
-      <p>Under construction...</p>
-
       {loading ? (
         <Loading />
       ) : error ? (
@@ -62,6 +61,7 @@ function Dashboard() {
       ) : (
         <>
           <GlobalStatistics data={data.globalStatistics} period={selectedPeriod} />
+          <SourcesStats />
           <SalesStats data={data.salesStats} />
         </>
       )}
