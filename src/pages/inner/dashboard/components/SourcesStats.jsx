@@ -35,10 +35,10 @@ export default function SourcesStats() {
 
   return (
     <div className="rounded-xl bg-gray-100 p-4 shadow sm:p-5">
-      <h2 className="mb-5">Sources Statistics</h2>
+      <h2 className="mb-5">Customer Source Breakdown</h2>
       {data.map((item, index) => (
         <div key={index} className="mb-2 grid grid-cols-12 gap-2">
-          <div className="col-span-3 text-nowrap rounded-md bg-gray-200 px-2 py-1 text-center text-xs text-gray-800 sm:text-sm lg:col-span-1">
+          <div className="col-span-3 text-nowrap rounded-md bg-gray-200 px-2 py-1 text-center text-xs text-gray-500 sm:text-sm lg:col-span-1">
             {item.name}
           </div>
           <div className="col-span-8 flex-1 rounded-md bg-gray-200 lg:col-span-10">

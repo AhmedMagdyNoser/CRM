@@ -1,7 +1,7 @@
 export default function SalesStats({ data }) {
   return (
     <div>
-      <h2 className="my-4">Sales Statistics</h2>
+      <h2 className="mb-4">Sales Representatives Statistics</h2>
       <div className="overflow-x-auto rounded-t-xl">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100">
