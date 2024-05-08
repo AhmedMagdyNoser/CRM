@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { paths, roles } from '../../../../../utils/utils';
+import { roles } from '../../../../../utils/utils';
 import useAuth from '../../../../../hooks/useAuth';
 import DeleteCustomerPopup from './DeleteCustomerPopup';
 import AddNewActionPopup from './AddNewActionPopup';

@@ -24,6 +24,7 @@ function Dashboard() {
 
     (async function fetchData() {
       try {
+        setLoading(true);
         const results = {};
         await Promise.all([
           privateAxios({ url: '/reports/global-statistics', signal: controller.signal }).then(
@@ -45,7 +46,7 @@ function Dashboard() {
       canceled = true;
       controller.abort();
     };
-  }, [privateAxios]);
+  }, [privateAxios, selectedPeriod.value]);
 
   return (
     <div className="flex h-full flex-col gap-5">
