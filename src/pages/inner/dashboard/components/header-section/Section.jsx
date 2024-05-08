@@ -1,4 +1,6 @@
-export default function DashboardHeaderSection({ periodOptions, selectedPeriod, setSelectedPeriod }) {
+import { periodOptions } from '../../../../../utils/utils';
+
+export default function DashboardHeaderSection({ selectedPeriod, setSelectedPeriod }) {
   return (
     <section className="flex flex-wrap items-center justify-between gap-4">
       <h1>Manager Dashboard</h1>

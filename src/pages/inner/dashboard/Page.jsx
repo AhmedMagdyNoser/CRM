@@ -12,16 +12,12 @@ function Dashboard() {
 
   return (
     <div className="flex flex-col gap-5">
-      <DashboardHeaderSection
-        periodOptions={periodOptions}
-        selectedPeriod={selectedPeriod}
-        setSelectedPeriod={setSelectedPeriod}
-      />
+      <DashboardHeaderSection selectedPeriod={selectedPeriod} setSelectedPeriod={setSelectedPeriod} />
 
       <p>Under construction...</p>
 
       <GlobalStatistics period={selectedPeriod} />
-      <SalesStats />
+      <SalesStats period={selectedPeriod} />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
 import Alert from '../../../../components/ui/Alert';
 
-export default function SalesStats() {
-  const { data, loading, error } = useOnLoadFetch('/Reports/main-report');
+export default function SalesStats({ period }) {
+  const { data, loading, error } = useOnLoadFetch(`/Reports/main-report?within=${period.value}`);
 
   if (error) {
     return (
