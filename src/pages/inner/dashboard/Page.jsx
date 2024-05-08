@@ -6,7 +6,7 @@ import DashboardHeaderSection from './components/header-section/Section';
 import Loading from './components/status/Loading';
 import Error from './components/status/Error';
 import GlobalStats from './components/GlobalStats';
-import SalesStats from './components/SalesStats';
+import EmployeesStats from './components/EmployeesStats';
 import SourcesStats from './components/SourcesStats';
 
 function Dashboard() {
@@ -65,7 +65,7 @@ function Dashboard() {
         <>
           <GlobalStats data={data.globalStatistics} period={selectedPeriod} />
           <SourcesStats data={data.sources} />
-          <SalesStats data={data.salesStats} />
+          <EmployeesStats data={data.salesStats} />
         </>
       )}
     </div>
