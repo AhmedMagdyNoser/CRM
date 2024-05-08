@@ -1,7 +1,7 @@
 import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
 import Alert from '../../../../components/ui/Alert';
 
-export default function DailyReport() { 
+export default function SalesStats() {
   // Fetch the data from the server
   const { data, loading, error } = useOnLoadFetch('/Reports/main-report');
 
@@ -17,10 +17,10 @@ export default function DailyReport() {
 
   return (
     <div>
-      <h1 className="mb-7 mt-7 text-2xl font-bold">Daily Report</h1>
+      <h1 className="mb-7 mt-7 text-2xl font-bold">Sales Stats</h1>
 
       <table className="min-w-full divide-y divide-gray-200 ">
-        <thead >
+        <thead>
           <tr>
             <th className="bg-gray-50 px-6 py-3 text-left text-xs font-bold uppercase tracking-wider text-black">
               First Name
@@ -124,5 +124,4 @@ export default function DailyReport() {
       </table>
     </div>
   );
-
 }

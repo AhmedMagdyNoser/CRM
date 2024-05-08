@@ -3,11 +3,11 @@ import { periodOptions } from '../../../utils/utils';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
 import DashboardHeaderSection from './components/header-section/Section';
 import GlobalStatistics from './components/GlobalStatistics';
-import DailyReport from './components/DailyReport';
+import SalesStats from './components/SalesStats';
 
 function Dashboard() {
   useDocumentTitle('Manager Dashboard');
-  
+
   const [selectedPeriod, setSelectedPeriod] = useState(periodOptions[0]);
 
   return (
@@ -21,7 +21,7 @@ function Dashboard() {
       <p>Under construction...</p>
 
       <GlobalStatistics period={selectedPeriod} />
-      <DailyReport />
+      <SalesStats />
     </div>
   );
 }
