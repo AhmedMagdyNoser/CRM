@@ -65,11 +65,11 @@ function Dashboard() {
       ) : (
         <>
           <GlobalStats data={data.globalStatistics} period={selectedPeriod} />
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
-            <div className="lg:col-span-3">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-5">
+            <div className="xl:col-span-3">
               <InterestsStats />
             </div>
-            <div className="lg:col-span-2">
+            <div className="xl:col-span-2">
               <SourcesStats data={data.sources} />
             </div>
           </div>

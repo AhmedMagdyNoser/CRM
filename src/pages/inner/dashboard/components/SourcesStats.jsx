@@ -23,7 +23,7 @@ export default function SourcesStats({ data }) {
   };
 
   return (
-    <div className="rounded-3xl bg-gray-100 p-6">
+    <div className="h-full rounded-3xl bg-gray-100 p-6">
       <h2 className="mb-4">Customer Source Breakdown</h2>
       {data.length === 0 ? (
         <div className="flex-center flex-col gap-4 py-6">
