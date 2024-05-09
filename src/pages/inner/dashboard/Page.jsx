@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { periodOptions } from '../../../utils/utils';
+import { paths, periodOptions } from '../../../utils/utils';
 import useDocumentTitle from '../../../hooks/useDocumentTitle';
 import usePrivateAxios from '../../../hooks/usePrivateAxios';
 import DashboardHeaderSection from './components/header-section/Section';
@@ -74,6 +75,9 @@ function Dashboard() {
             </div>
           </div>
           <EmployeesStats data={data.salesStats} />
+          <Link to={`${paths.employees}`} className="btn-primary rounded-xl py-4 text-center">
+            Employees Reports
+          </Link>
         </>
       )}
     </div>

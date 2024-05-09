@@ -23,6 +23,7 @@ import Profile from './pages/inner/profile/IndexPage';
 import BasicInfoPage from './pages/inner/profile/nested-pages/basic-info/Page';
 import ChangePasswordPage from './pages/inner/profile/nested-pages/change-password/Page';
 import Notifications from './pages/inner/profile/nested-pages/notifications/Page';
+import EmployeesStats from './pages/inner/dashboard/employees-stats/Page';
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
 
               <Route element={<Authorization allowedRole={roles.manager} />}>
                 <Route path={paths.dashboard} element={<Dashboard />} />
+                <Route path={`${paths.dashboard}/${paths.employees}`} element={<EmployeesStats />} />
                 <Route path={paths.roles} element={<Roles />} />
               </Route>
 

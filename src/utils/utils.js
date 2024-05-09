@@ -29,6 +29,7 @@ export const paths = {
   profile: 'profile',
   companyInfo: 'company-info',
   dashboard: 'dashboard',
+  employees: 'employees',
   roles: 'roles',
   customers: 'customers', // + /:id for a single customer
   addNewCustomer: 'add-new-customer',
