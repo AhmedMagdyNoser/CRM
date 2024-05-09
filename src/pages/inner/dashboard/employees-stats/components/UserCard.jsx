@@ -4,7 +4,7 @@ import icons from '../../../../../utils/faIcons';
 
 export default function EmployeeCard({ user }) {
   return (
-    <button className="flex flex-col items-center gap-5 rounded-xl bg-gray-100 px-4 py-10 shadow-sm transition-colors hover:bg-gray-200 sm:gap-8">
+    <button className="flex animate-fade-in-fast flex-col items-center gap-5 rounded-xl bg-gray-100 px-4 py-10 shadow-sm transition-colors hover:bg-gray-200 sm:gap-8">
       <div className="flex flex-col items-center gap-2">
         <div className="flex-center h-20 w-20 rounded-full border-2 border-white bg-pro-100">
           <FontAwesomeIcon icon={icons.user} className="text-3xl" />
