@@ -8,6 +8,7 @@ import Error from './components/status/Error';
 import GlobalStats from './components/GlobalStats';
 import EmployeesStats from './components/EmployeesStats';
 import SourcesStats from './components/SourcesStats';
+import InterestsStats from './components/InterestsStats';
 
 function Dashboard() {
   useDocumentTitle('Manager Dashboard');
@@ -64,7 +65,14 @@ function Dashboard() {
       ) : (
         <>
           <GlobalStats data={data.globalStatistics} period={selectedPeriod} />
-          <SourcesStats data={data.sources} />
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
+            <div className="lg:col-span-3">
+              <InterestsStats />
+            </div>
+            <div className="lg:col-span-2">
+              <SourcesStats data={data.sources} />
+            </div>
+          </div>
           <EmployeesStats data={data.salesStats} />
         </>
       )}

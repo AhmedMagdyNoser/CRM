@@ -1,37 +1,42 @@
-import { useEffect, useState } from 'react';
+import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
 
-export default function SourcesStats({data}) {
-  const maxValue = Math.max(...data.map((item) => item.count));
-  const scale = 100 / maxValue;
+Chart.register(ArcElement, Tooltip, Legend);
 
-  const [loaded, setLoaded] = useState(false);
+const colors = ['#E94144', '#F3722C', '#F8961E', '#F9C74F', '#90BE6D', '#43AA8B', '#577590'];
 
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
+export default function SourcesStats({ data }) {
+  data = data.filter((item) => item.count);
+
+  const dataset = {
+    labels: data.map((item) => item.name),
+    datasets: [
+      {
+        label: 'Customers',
+        data: data.map((item) => item.count),
+        backgroundColor: colors,
+        hoverOffset: 5,
+        radius: '90%',
+      },
+    ],
+  };
 
   return (
-    <div className="rounded-xl bg-gray-100 p-4 shadow sm:p-5">
-      <h2 className="mb-5">Customer Source Breakdown</h2>
-      {data.map((item, index) => (
-        <div key={index} className="mb-2 grid grid-cols-12 gap-2">
-          <div className="col-span-3 text-nowrap rounded-md bg-gray-200 px-2 py-1 text-center text-xs text-gray-500 sm:text-sm lg:col-span-1">
-            {item.name}
-          </div>
-          <div className="col-span-8 flex-1 rounded-md bg-gray-200 lg:col-span-10">
-            <div
-              className="h-full rounded-md bg-pro-300 transition-all duration-1000"
-              style={{ width: loaded ? `${item.count * scale}%` : 0 }}
-            ></div>
-          </div>
-          <div
-            title={`${item.count} Customers`}
-            className="rounded-md bg-gray-200 px-2 py-1 text-center text-sm text-gray-800"
-          >
-            {item.count}
-          </div>
-        </div>
-      ))}
+    <div className="rounded-3xl bg-gray-100 p-6">
+      <h2 className="mb-4">Customer Source Breakdown</h2>
+      <Doughnut
+        data={dataset}
+        options={{
+          plugins: {
+            legend: {
+              align: 'start',
+              labels: {
+                boxWidth: 20,
+              },
+            },
+          },
+        }}
+      />
     </div>
   );
 }
