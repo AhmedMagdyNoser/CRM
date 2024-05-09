@@ -5,8 +5,6 @@ import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
 import EmployeeCard from './components/UserCard';
 import icons from '../../../../utils/faIcons';
 
-
-
 export default function EmployeesStats() {
   const { data, loading, error } = useOnLoadFetch('manager/get-all-users');
 
@@ -14,7 +12,7 @@ export default function EmployeesStats() {
 
   return (
     <div className="flex h-full flex-col gap-5">
-      <h1>Employees Stats</h1>
+      <h1>Employees Reports</h1>
       <Link
         to={`/${paths.dashboard}`}
         className="w-fit rounded-xl bg-gray-100 px-4 py-3 text-xs text-gray-500 transition-colors hover:bg-gray-200 sm:text-sm"

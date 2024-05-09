@@ -4,7 +4,7 @@ import icons from '../../../../../utils/faIcons';
 
 export default function EmployeeCard({ user }) {
   return (
-    <div className="flex flex-col items-center gap-5 rounded-xl bg-gray-100 px-4 py-10 shadow-sm sm:gap-8">
+    <button className="flex flex-col items-center gap-5 rounded-xl bg-gray-100 px-4 py-10 shadow-sm transition-colors hover:bg-gray-200 sm:gap-8">
       <div className="flex flex-col items-center gap-2">
         <div className="flex-center h-20 w-20 rounded-full border-2 border-white bg-pro-100">
           <FontAwesomeIcon icon={icons.user} className="text-3xl" />
@@ -18,11 +18,11 @@ export default function EmployeeCard({ user }) {
 
       <div className="flex flex-col items-center gap-2">
         <span
-          className={`flex-center rounded-full bg-gray-200 px-4 py-2 text-sm font-semibold ${user.emailConfirmed ? 'text-gray-500' : 'text-red-500'}`}
+          className={`flex-center rounded-full border border-white bg-gray-200 px-4 py-2 text-sm font-semibold ${user.emailConfirmed ? 'text-gray-500' : 'text-red-500'}`}
         >
           {!user.emailConfirmed ? 'Unconfirmed Account' : getRoleName(user.roles.length)}
         </span>
       </div>
-    </div>
+    </button>
   );
 }
