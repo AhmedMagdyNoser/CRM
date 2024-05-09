@@ -15,7 +15,7 @@ export default function SourcesStats({ data }) {
         label: 'Customers',
         data: data.map((item) => item.count),
         backgroundColor: colors,
-        hoverOffset: 5,
+        borderRadius: 5,
         radius: '90%',
       },
     ],
@@ -30,9 +30,12 @@ export default function SourcesStats({ data }) {
           plugins: {
             legend: {
               align: 'start',
-              labels: {
-                boxWidth: 20,
-              },
+            },
+            tooltip: {
+              backgroundColor: 'rgba(0, 0, 0, 0.75)',
+              displayColors: false, // Hide color box in tooltip body
+              cornerRadius: 10,
+              padding: 10,
             },
           },
         }}
