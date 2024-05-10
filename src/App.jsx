@@ -23,8 +23,8 @@ import Profile from './pages/inner/profile/IndexPage';
 import BasicInfoPage from './pages/inner/profile/nested-pages/basic-info/Page';
 import ChangePasswordPage from './pages/inner/profile/nested-pages/change-password/Page';
 import Notifications from './pages/inner/profile/nested-pages/notifications/Page';
-import EmployeesStats from './pages/inner/dashboard/employees-stats/Page';
-import EmployeeStats from './pages/inner/dashboard/employee-stats/Page';
+import EmployeesStats from './pages/inner/dashboard/nested-pages/all-employees/Page';
+import EmployeeStats from './pages/inner/dashboard/nested-pages/employee/Page';
 
 export default function App() {
   return (

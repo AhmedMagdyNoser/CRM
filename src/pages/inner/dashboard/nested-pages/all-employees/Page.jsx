@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { paths, roles } from '../../../../utils/utils';
+import { paths, roles } from '../../../../../utils/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
+import useOnLoadFetch from '../../../../../hooks/useOnLoadFetch';
 import EmployeeCard from './components/UserCard';
-import icons from '../../../../utils/faIcons';
-import InputField from '../../../../components/ui/InputField';
+import icons from '../../../../../utils/faIcons';
+import InputField from '../../../../../components/ui/InputField';
 
 export default function EmployeesStats() {
   const [searchTerm, setSearchTerm] = useState('');

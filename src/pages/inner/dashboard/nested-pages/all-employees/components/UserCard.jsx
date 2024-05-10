@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { getRoleName } from '../../../roles/utils';
+import { getRoleName } from '../../../../roles/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import icons from '../../../../../utils/faIcons';
+import icons from '../../../../../../utils/faIcons';
 
 export default function EmployeeCard({ user }) {
   return (

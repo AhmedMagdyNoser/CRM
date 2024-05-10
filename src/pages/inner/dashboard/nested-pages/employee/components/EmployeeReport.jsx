@@ -1,5 +1,5 @@
-import InterestsStats from '../../../assigned-customers/InterestsStats';
-import SourcesStats from '../../components/SourcesStats';
+import InterestsStats from '../../../../assigned-customers/InterestsStats';
+import SourcesStats from '../../../components/SourcesStats';
 
 // IMPORTANT NOTES
 // I have displayed the doneDeals and sources data in section element blow. Don't remove it.

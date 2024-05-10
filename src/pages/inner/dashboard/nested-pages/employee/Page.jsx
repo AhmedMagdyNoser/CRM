@@ -1,13 +1,12 @@
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useParams } from 'react-router-dom';
-import { paths, periodOptions } from '../../../../utils/utils';
-import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
-import icons from '../../../../utils/faIcons';
-import Loading from '../components/status/Loading';
-import Error from '../components/status/Error';
+import { paths, periodOptions } from '../../../../../utils/utils';
+import usePrivateAxios from '../../../../../hooks/usePrivateAxios';
 import EmployeeReport from './components/EmployeeReport';
-import { useEffect, useState } from 'react';
-import usePrivateAxios from '../../../../hooks/usePrivateAxios';
+import Loading from '../../components/status/Loading';
+import Error from '../../components/status/Error';
+import icons from '../../../../../utils/faIcons';
 
 export default function EmployeeStats() {
   const id = useParams().id;
