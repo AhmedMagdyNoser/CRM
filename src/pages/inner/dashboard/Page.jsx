@@ -9,7 +9,7 @@ import Error from './components/status/Error';
 import GlobalStats from './components/GlobalStats';
 import EmployeesStats from './components/EmployeesStats';
 import SourcesStats from './components/SourcesStats';
-import InterestsStats from './components/InterestsStats';
+import InterestsStats from '../assigned-customers/InterestsStats';
 
 function Dashboard() {
   useDocumentTitle('Manager Dashboard');

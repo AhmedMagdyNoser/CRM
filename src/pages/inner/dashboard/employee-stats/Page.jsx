@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import { paths } from '../../../../utils/utils';
 import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
 import icons from '../../../../utils/faIcons';
+import Loading from '../components/status/Loading';
+import Error from '../components/status/Error';
 
 export default function EmployeeStats() {
   const id = useParams().id;
@@ -19,6 +21,15 @@ export default function EmployeeStats() {
         <FontAwesomeIcon icon={icons.back} className="mr-2" />
         Back to Employees
       </Link>
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <Error />
+      ) : (
+        <div>
+          {data.firstName} {data.lastName} Report
+        </div>
+      )}
     </div>
   );
 }
