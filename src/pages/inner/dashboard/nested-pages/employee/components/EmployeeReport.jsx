@@ -1,4 +1,4 @@
-import InterestsStats from '../../../../assigned-customers/InterestsStats';
+import InterestsStats from '../../../components/InterestsStats';
 import SourcesStats from '../../../components/SourcesStats';
 
 // IMPORTANT NOTES
