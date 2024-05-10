@@ -5,6 +5,7 @@ import useOnLoadFetch from '../../../../hooks/useOnLoadFetch';
 import icons from '../../../../utils/faIcons';
 import Loading from '../components/status/Loading';
 import Error from '../components/status/Error';
+import EmployeeReport from './components/EmployeeReport';
 
 export default function EmployeeStats() {
   const id = useParams().id;
@@ -26,9 +27,7 @@ export default function EmployeeStats() {
       ) : error ? (
         <Error />
       ) : (
-        <div>
-          {data.firstName} {data.lastName} Report
-        </div>
+        <EmployeeReport employee={data} />
       )}
     </div>
   );
