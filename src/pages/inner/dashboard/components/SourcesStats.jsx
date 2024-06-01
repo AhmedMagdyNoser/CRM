@@ -16,17 +16,17 @@ export default function SourcesStats({ data }) {
         label: 'Customers',
         data: data.map((item) => item.count),
         backgroundColor: colors,
-        borderRadius: 5,
-        radius: '90%',
+        borderRadius: 1,
+        radius: '92%',
       },
     ],
   };
 
   return (
-    <div className="h-full rounded-3xl bg-gray-100 p-6">
-      <h2 className="mb-4">Customer Source Breakdown</h2>
+    <div className="flex h-full flex-col gap-4 rounded-xl bg-gray-100 p-5 sm:rounded-3xl sm:p-8">
+      <h2>Customer Source Breakdown</h2>
       {data.length === 0 ? (
-        <div className="flex-center flex-col gap-4 py-6">
+        <div className="flex-center flex-1 flex-col gap-4 py-6">
           <img src={noData} alt="No Data" className="w-1/4" />
           <p>No data available for this period.</p>
         </div>

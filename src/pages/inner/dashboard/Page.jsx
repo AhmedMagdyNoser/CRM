@@ -28,6 +28,7 @@ function Dashboard() {
 
     (async function fetchData() {
       try {
+        setError(false);
         setLoading(true);
         const results = {};
         await Promise.all([
@@ -39,6 +40,9 @@ function Dashboard() {
           ),
           privateAxios({ url: `/reports/sources-report?within=${selectedPeriod.value}`, signal: controller.signal }).then(
             (response) => (results.sources = response.data),
+          ),
+          privateAxios({ url: `/reports/deals-report?within=${selectedPeriod.value}`, signal: controller.signal }).then(
+            (response) => (results.interests = response.data),
           ),
         ]);
         if (!canceled) setData(results);
@@ -68,7 +72,7 @@ function Dashboard() {
           <GlobalStats data={data.globalStatistics} period={selectedPeriod} />
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-5">
             <div className="xl:col-span-3">
-              <InterestsStats />
+              <InterestsStats data={data.interests} />
             </div>
             <div className="xl:col-span-2">
               <SourcesStats data={data.sources} />
