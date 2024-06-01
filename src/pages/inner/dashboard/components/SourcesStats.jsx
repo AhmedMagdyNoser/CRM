@@ -16,8 +16,8 @@ export default function SourcesStats({ data }) {
         label: 'Customers',
         data: data.map((item) => item.count),
         backgroundColor: colors,
-        borderRadius: 5,
-        radius: '90%',
+        borderRadius: 1,
+        radius: '92%',
       },
     ],
   };

@@ -20,12 +20,13 @@ export default function InterestsStats({ data }) {
     <div className="flex h-full flex-col gap-4 rounded-xl bg-gray-100 p-5 sm:rounded-3xl sm:p-8">
       <h2>Interests Revenue Breakdown</h2>
       <p>The chart below shows the revenue generated from each interest.</p>
-      <div className="flex-1">
+      <div className="min-h-[350px] flex-1">
         <Bar
           data={displayedData}
           options={{
-            responsive: true,
-            aspectRatio: 1.75,
+            // responsive: true,
+            // aspectRatio: 1.75,
+            maintainAspectRatio: false,
             plugins: {
               legend: {
                 display: false,
@@ -35,6 +36,13 @@ export default function InterestsStats({ data }) {
                 displayColors: false, // Hide color box in tooltip body
                 cornerRadius: 15,
                 padding: 10,
+              },
+            },
+            scales: {
+              y: {
+                ticks: {
+                  display: window.innerWidth > 1200 ? true : false, // this will remove the y-axis labels on mobile screens
+                },
               },
             },
           }}
