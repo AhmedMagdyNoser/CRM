@@ -3,8 +3,9 @@ import icons from '../../../../../../utils/faIcons';
 import InterestsStats from '../../../components/InterestsStats';
 import SourcesStats from '../../../components/SourcesStats';
 import medalImg from '../../../../../../assets/medal.png';
+import { periodOptions } from '../../../../../../utils/utils';
 
-export default function EmployeeReport({ employee }) {
+export default function EmployeeReport({ employee, period }) {
   console.log(employee); // See the data in console, then remove this line
 
   return (
@@ -22,9 +23,33 @@ export default function EmployeeReport({ employee }) {
         </div>
       </div>
 
+      {/* Actions Stats */}
+      <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4">
+        <StatSquare
+          title="Calls"
+          hover={Object.entries(employee.calls)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join('\n')}
+          data={Object.values(employee.calls).reduce((acc, val) => acc + val, 0)} // Sum of all values
+          period={period.value}
+          gradient="from-violet-200 to-pink-200"
+        />
+        <StatSquare title="Messages" data={employee.messages} period={period.value} gradient="from-green-200 to-lime-200" />
+        <StatSquare
+          title="Meetings"
+          hover={Object.entries(employee.meetings)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join('\n')}
+          data={Object.values(employee.meetings).reduce((acc, val) => acc + val, 0)} // Sum of all values
+          period={period.value}
+          gradient="from-yellow-200 to-red-200"
+        />
+        <StatSquare title="Deals" data={employee.deals} period={period.value} gradient="from-blue-200 to-green-200" />
+      </div>
+
       {/* Employee Best Deal */}
       {employee.bestDeal && (
-        <div className="relative flex items-center justify-between gap-5 rounded-xl bg-gradient-to-r from-sky-500 to-pro-300 px-8 py-6">
+        <div className="relative flex items-center justify-between gap-5 rounded-3xl bg-gradient-to-r from-sky-500 to-pro-300 px-8 py-6">
           <div className="flex gap-5">
             <div className="flex-center h-14 min-w-14 rounded-full border-2 border-white bg-white sm:h-20 sm:min-w-20">
               <FontAwesomeIcon icon={icons.star} className="text-xl text-yellow-500 hover:animate-pulse sm:text-3xl" />
@@ -67,5 +92,38 @@ function BestDealBadge({ icon, title }) {
       {/* <span className='bg-pro-300 h-3 w-3 rounded-full'></span> */}
       <span className="text-nowrap text-gray-800">{title}</span>
     </span>
+  );
+}
+
+function StatSquare({ title, hover, data, period, gradient }) {
+  return (
+    <div
+      title={hover}
+      className={`animate-fade-in-fast rounded-xl bg-gradient-to-r sm:rounded-3xl ${gradient} p-4 text-gray-800 shadow sm:p-6`}
+    >
+      <h3 className="text-base font-semibold text-gray-800 sm:text-lg">{title}</h3>
+      <div className="mt-8 flex flex-col flex-wrap gap-2 md:flex-row md:items-end">
+        <span className="text-xl font-semibold sm:text-2xl lg:text-3xl">
+          {period === periodOptions[0].value
+            ? data
+            : period === periodOptions[1].value
+              ? data
+              : period === periodOptions[2].value
+                ? data
+                : period === periodOptions[3].value
+                  ? data
+                  : null}
+        </span>
+        {period === periodOptions[0].value ? (
+          <span className="text-xs sm:text-sm">{title}</span>
+        ) : period === periodOptions[1].value ? (
+          <span className="text-xs sm:text-sm">{periodOptions[1].label}</span>
+        ) : period === periodOptions[2].value ? (
+          <span className="text-xs sm:text-sm">{periodOptions[2].label}</span>
+        ) : period === periodOptions[3].value ? (
+          <span className="text-xs sm:text-sm">{periodOptions[3].label}</span>
+        ) : null}
+      </div>
+    </div>
   );
 }

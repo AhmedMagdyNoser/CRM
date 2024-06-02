@@ -68,7 +68,7 @@ export default function EmployeeStats() {
         <FontAwesomeIcon icon={icons.back} className="mr-2" />
         Back to Employees
       </Link>
-      {loading ? <Loading /> : error ? <Error /> : <EmployeeReport employee={data} />}
+      {loading ? <Loading /> : error ? <Error /> : <EmployeeReport employee={data} period={selectedPeriod} />}
     </div>
   );
 }
