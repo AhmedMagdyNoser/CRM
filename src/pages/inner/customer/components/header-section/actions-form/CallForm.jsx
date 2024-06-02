@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { globalErrorMessage } from '../../../../../../utils/utils';
 import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
@@ -6,6 +6,8 @@ import Form from '../../../../../../components/ui/Form';
 import Alert from '../../../../../../components/ui/Alert';
 import icons from '../../../../../../utils/faIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useDebouncedValue from '../../../../../../hooks/useDebouncedValue';
+import axios from '../../../../../../api/axios';
 
 function CallForm({ setSelectedType, setActions }) {
   const privateAxios = usePrivateAxios();
@@ -20,6 +22,27 @@ function CallForm({ setSelectedType, setActions }) {
   const [error, setError] = useState('');
 
   const [sentiment, setSentiment] = useState('idle'); // idle, loading, error, positive, negative, neutral, irrelevant
+
+  const debouncedSummary = useDebouncedValue(summary, 350);
+
+  useEffect(() => {
+    if (debouncedSummary) {
+      setSentiment('loading');
+      axios({
+        method: 'POST',
+        url: 'https://gp-1-6xxd.onrender.com/predict',
+        data: { comments: [debouncedSummary] },
+      })
+        .then(({ data }) => {
+          setSentiment(data[1].sentiment);
+        })
+        .catch(() => {
+          setSentiment('error');
+        });
+    } else {
+      setSentiment('idle');
+    }
+  }, [debouncedSummary, privateAxios]);
 
   async function handleSubmit(e) {
     e.preventDefault();
