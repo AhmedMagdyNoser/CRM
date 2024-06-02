@@ -10,12 +10,15 @@ export default function EmployeeReport({ employee }) {
     <div className="flex flex-col gap-4">
       {/* Employee Name */}
       <div className="flex items-center gap-5 rounded-xl bg-pro-50 p-5">
-        <div className="flex-center h-16 w-16 rounded-full border-2 border-white bg-white">
-          <FontAwesomeIcon icon={icons.user} className="text-2xl" />
+        <div className="flex-center h-20 w-20 rounded-full border-2 border-white bg-white">
+          <FontAwesomeIcon icon={icons.user} className="text-3xl" />
         </div>
-        <h1>
-          {employee.firstName} {employee.lastName}
-        </h1>
+        <div>
+          <h1>
+            {employee.firstName} {employee.lastName}
+          </h1>
+          <p className="mt-1">Assigned Customers: {employee.customers}</p>
+        </div>
       </div>
 
       {/* Employee Charts */}
