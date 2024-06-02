@@ -1,17 +1,24 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import icons from '../../../../../../utils/faIcons';
 import InterestsStats from '../../../components/InterestsStats';
 import SourcesStats from '../../../components/SourcesStats';
 
-// IMPORTANT NOTES
-// I have displayed the doneDeals and sources data in section element blow. Don't remove it.
-// Your task is to display the employee other data like name, bestDeal, etc.
-
 export default function EmployeeReport({ employee }) {
   console.log(employee); // See the data in console, then remove this line
-  
-  return (
-    <div>
-      {/* Display employee data here*/}
 
+  return (
+    <div className="flex flex-col gap-4">
+      {/* Employee Name */}
+      <div className="flex items-center gap-5 rounded-xl bg-pro-50 p-5">
+        <div className="flex-center h-16 w-16 rounded-full border-2 border-white bg-white">
+          <FontAwesomeIcon icon={icons.user} className="text-2xl" />
+        </div>
+        <h1>
+          {employee.firstName} {employee.lastName}
+        </h1>
+      </div>
+
+      {/* Employee Charts */}
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-5">
         <div className="xl:col-span-3">
           <InterestsStats data={employee.doneDeals} />
@@ -20,8 +27,6 @@ export default function EmployeeReport({ employee }) {
           <SourcesStats data={employee.sources} />
         </div>
       </section>
-
-      {/* Or display it data here, or both*/}
     </div>
   );
 }
