@@ -18,12 +18,12 @@ const routes = [
     path: `/${paths.profile}/change-password`,
     icon: icons.password,
   },
-  {
-    id: 3,
-    title: 'Notifications',
-    path: `/${paths.profile}/notifications`,
-    icon: icons.notifications,
-  },
+  // {
+  //   id: 3,
+  //   title: 'Notifications',
+  //   path: `/${paths.profile}/notifications`,
+  //   icon: icons.notifications,
+  // },
 ];
 
 export default function ProfileSidebar() {
