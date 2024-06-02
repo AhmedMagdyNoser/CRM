@@ -1,4 +1,16 @@
-import { faEdit, faTrashCan, faSquare, faBell, faUserCircle, faEye, faEyeSlash, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import {
+  faEdit,
+  faTrashCan,
+  faSquare,
+  faBell,
+  faUserCircle,
+  faEye,
+  faEyeSlash,
+  faCircleXmark,
+  faFaceSmile,
+  faFaceMeh,
+  faFaceFrown,
+} from '@fortawesome/free-regular-svg-icons';
 import {
   faAddressBook,
   faAt,
@@ -82,6 +94,11 @@ const icons = {
   money: faDollar,
   star: faStar,
   interest: faBagShopping,
+  sentiment: {
+    positive: faFaceSmile,
+    neutral: faFaceMeh,
+    negative: faFaceFrown,
+  },
   actions: {
     call: faPhone,
     message: faCommentDots,
