@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSentiment } from './sentiment-analysis/useSentiment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { globalErrorMessage } from '../../../../../../utils/utils';
 import usePrivateAxios from '../../../../../../hooks/usePrivateAxios';
+import SentimentEmoji from './sentiment-analysis/SentimentEmoji';
 import Form from '../../../../../../components/ui/Form';
 import Alert from '../../../../../../components/ui/Alert';
 import icons from '../../../../../../utils/faIcons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useDebouncedValue from '../../../../../../hooks/useDebouncedValue';
-import axios from '../../../../../../api/axios';
 
 function CallForm({ setSelectedType, setActions }) {
   const privateAxios = usePrivateAxios();
@@ -21,31 +21,7 @@ function CallForm({ setSelectedType, setActions }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const [sentiment, setSentiment] = useState('idle'); // idle, loading, error, Positive, Negative, Neutral, Irrelevant
-
-  const debouncedSummary = useDebouncedValue(summary, 350);
-
-  useEffect(() => {
-    const fetchSentiment = async () => {
-      if (debouncedSummary) {
-        setSentiment('loading');
-        try {
-          const response = await axios({
-            method: 'POST',
-            url: 'https://gp-1-6xxd.onrender.com/predict',
-            data: { comments: [debouncedSummary] },
-          });
-          setSentiment(response.data[0].sentiment);
-        } catch (error) {
-          setSentiment('error');
-        }
-      } else {
-        setSentiment('idle');
-      }
-    };
-
-    fetchSentiment();
-  }, [debouncedSummary, privateAxios]);
+  const sentiment = useSentiment(summary);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -93,34 +69,7 @@ function CallForm({ setSelectedType, setActions }) {
           onChange={(e) => setSummary(e.target.value)}
           autoFocus
         />
-        {sentiment === 'error' || sentiment === 'idle' ? null : (
-          <span className="flex-center absolute bottom-2 right-2 h-8 w-8 rounded-xl bg-white text-sm sm:text-lg">
-            {sentiment === 'loading' && (
-              <FontAwesomeIcon title="Analyzing..." icon={icons.spinner} spin className="text-gray-500" />
-            )}
-            {sentiment === 'Positive' && (
-              <FontAwesomeIcon
-                title="Positive"
-                icon={icons.sentiment.positive}
-                className="animate-fade-in-fast text-green-600"
-              />
-            )}
-            {sentiment === 'Negative' && (
-              <FontAwesomeIcon
-                title="Negative"
-                icon={icons.sentiment.negative}
-                className="animate-fade-in-fast text-red-500"
-              />
-            )}
-            {(sentiment === 'Neutral' || sentiment === 'Irrelevant') && (
-              <FontAwesomeIcon
-                title="Neutral"
-                icon={icons.sentiment.neutral}
-                className="animate-fade-in-fast text-orange-500"
-              />
-            )}
-          </span>
-        )}
+        <SentimentEmoji sentiment={sentiment} />
       </div>
 
       <p>Call Status:</p>
