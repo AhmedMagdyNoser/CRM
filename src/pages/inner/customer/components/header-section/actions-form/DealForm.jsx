@@ -9,6 +9,8 @@ import DropdownMenu from '../../../../../../components/ui/DropdownMenu';
 import icons from '../../../../../../utils/faIcons';
 import useInterests from '../../../../../../hooks/useInterests';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSentiment } from './sentiment-analysis/useSentiment';
+import SentimentEmoji from './sentiment-analysis/SentimentEmoji';
 
 export default function DealForm({ setSelectedType, setActions }) {
   const privateAxios = usePrivateAxios();
@@ -24,6 +26,8 @@ export default function DealForm({ setSelectedType, setActions }) {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const sentiment = useSentiment(summary);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -84,13 +88,16 @@ export default function DealForm({ setSelectedType, setActions }) {
           />
         </div>
       </div>
-      <textarea
-        placeholder="Summary"
-        className="h-32 resize-none rounded-xl bg-gray-100 p-4 text-gray-500 outline-none"
-        value={summary}
-        onChange={(e) => setSummary(e.target.value)}
-        autoFocus
-      />
+      <div className="relative flex">
+        <textarea
+          placeholder="Summary"
+          className="h-32 w-full resize-none rounded-xl bg-gray-100 p-4 text-gray-500 outline-none"
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+          autoFocus
+        />
+        <SentimentEmoji sentiment={sentiment} />
+      </div>
       {success && <Alert.Success message="Action added successfully." />}
     </Form>
   );

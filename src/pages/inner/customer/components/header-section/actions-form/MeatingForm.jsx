@@ -7,6 +7,8 @@ import Alert from '../../../../../../components/ui/Alert';
 import Checkbox from '../../../../../../components/ui/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import icons from '../../../../../../utils/faIcons';
+import SentimentEmoji from './sentiment-analysis/SentimentEmoji';
+import { useSentiment } from './sentiment-analysis/useSentiment';
 
 export default function MeetingForm({ setSelectedType, setActions }) {
   const privateAxios = usePrivateAxios();
@@ -20,6 +22,8 @@ export default function MeetingForm({ setSelectedType, setActions }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const sentiment = useSentiment(summary);
+  
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -58,13 +62,16 @@ export default function MeetingForm({ setSelectedType, setActions }) {
         </button>
         <h2 className="text-xl font-semibold">Add New Meeting</h2>
       </div>
-      <textarea
-        placeholder="Summary"
-        className="h-32 resize-none rounded-xl bg-gray-100 p-4 text-gray-500 outline-none"
-        value={summary}
-        onChange={(e) => setSummary(e.target.value)}
-        autoFocus
-      />
+      <div className="relative flex">
+        <textarea
+          placeholder="Summary"
+          className="h-32 w-full resize-none rounded-xl bg-gray-100 p-4 text-gray-500 outline-none"
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+          autoFocus
+        />
+        <SentimentEmoji sentiment={sentiment} />
+      </div>
       <div className="scrollbar-hide flex gap-2 overflow-x-auto">
         <Checkbox label="Online Meeting" checked={online} onClick={() => setOnline(!online)} />
       </div>
