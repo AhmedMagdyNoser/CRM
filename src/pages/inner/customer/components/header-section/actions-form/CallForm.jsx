@@ -21,27 +21,30 @@ function CallForm({ setSelectedType, setActions }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const [sentiment, setSentiment] = useState('idle'); // idle, loading, error, positive, negative, neutral, irrelevant
+  const [sentiment, setSentiment] = useState('idle'); // idle, loading, error, Positive, Negative, Neutral, Irrelevant
 
   const debouncedSummary = useDebouncedValue(summary, 350);
 
   useEffect(() => {
-    if (debouncedSummary) {
-      setSentiment('loading');
-      axios({
-        method: 'POST',
-        url: 'https://gp-1-6xxd.onrender.com/predict',
-        data: { comments: [debouncedSummary] },
-      })
-        .then(({ data }) => {
-          setSentiment(data[1].sentiment);
-        })
-        .catch(() => {
+    const fetchSentiment = async () => {
+      if (debouncedSummary) {
+        setSentiment('loading');
+        try {
+          const response = await axios({
+            method: 'POST',
+            url: 'https://gp-1-6xxd.onrender.com/predict',
+            data: { comments: [debouncedSummary] },
+          });
+          setSentiment(response.data[0].sentiment);
+        } catch (error) {
           setSentiment('error');
-        });
-    } else {
-      setSentiment('idle');
-    }
+        }
+      } else {
+        setSentiment('idle');
+      }
+    };
+
+    fetchSentiment();
   }, [debouncedSummary, privateAxios]);
 
   async function handleSubmit(e) {
@@ -95,21 +98,21 @@ function CallForm({ setSelectedType, setActions }) {
             {sentiment === 'loading' && (
               <FontAwesomeIcon title="Analyzing..." icon={icons.spinner} spin className="text-gray-500" />
             )}
-            {sentiment === 'positive' && (
+            {sentiment === 'Positive' && (
               <FontAwesomeIcon
                 title="Positive"
                 icon={icons.sentiment.positive}
                 className="animate-fade-in-fast text-green-600"
               />
             )}
-            {sentiment === 'negative' && (
+            {sentiment === 'Negative' && (
               <FontAwesomeIcon
                 title="Negative"
                 icon={icons.sentiment.negative}
                 className="animate-fade-in-fast text-red-500"
               />
             )}
-            {(sentiment === 'neutral' || sentiment === 'irrelevant') && (
+            {(sentiment === 'Neutral' || sentiment === 'Irrelevant') && (
               <FontAwesomeIcon
                 title="Neutral"
                 icon={icons.sentiment.neutral}
