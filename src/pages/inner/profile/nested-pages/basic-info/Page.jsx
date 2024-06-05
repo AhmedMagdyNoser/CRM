@@ -47,12 +47,12 @@ export default function BasicInfoPage() {
             <div className="flex flex-col gap-1 lg:w-[500px] lg:gap-1">
               <ChangingName />
               <button
-                className="btn-light flex-center flex w-fit items-center gap-2 rounded-xl lg:px-3 lg:py-1 "
-                onClick={() => setEditname(!editName)}
-              >
-                <FontAwesomeIcon icon={icons.back} />
-                Back
-              </button>
+              className="btn-light flex-center flex w-fit items-center gap-2 rounded-xl lg:px-3 lg:py-1"
+              onClick={() => setEditname(!editName)}
+            >
+              <FontAwesomeIcon icon={icons.back} style={{ color: '#7050FF' }} />
+              <strong style={{ color: '#7050FF' }}>Back</strong>
+            </button>
             </div>
           ) : (
             <div className="flex  lg:gap-20">
@@ -87,8 +87,8 @@ export default function BasicInfoPage() {
                 className="btn-light flex-center flex w-fit items-center gap-2 rounded-xl lg:px-3 lg:py-1"
                 onClick={() => setEditUsername(!editUserName)}
               >
-                <FontAwesomeIcon icon={icons.back} />
-                Back
+              <FontAwesomeIcon icon={icons.back} style={{ color: '#7050FF' }} />
+              <strong style={{ color: '#7050FF' }}>Back</strong>
               </button>
             </div>
           ) : (
@@ -119,8 +119,8 @@ export default function BasicInfoPage() {
                 className="btn-light flex-center flex w-fit items-center gap-2 rounded-xl px-3 py-1"
                 onClick={() => setEditEmail(!editEmail)}
               >
-                <FontAwesomeIcon icon={icons.back} />
-                Back
+              <FontAwesomeIcon icon={icons.back} style={{ color: '#7050FF' }} />
+              <strong style={{ color: '#7050FF' }}>Back</strong>
               </button>
             </div>
           ) : (
