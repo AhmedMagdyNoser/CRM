@@ -83,7 +83,10 @@ function CustomerForm({ title, submitLabel, customer, setCustomer, setEditingMod
       } else if (email && !validationRegex.email.test(email.trim())) {
         setError('Please provide a valid email address');
         return;
-      }
+      } else if (age && (age < 1 || age > 120)) {
+        setError('Please provide a valid age');
+        return;
+      } 
 
       // Adding Optional Field If Provided
       if (age) data.age = age;
