@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { applicationName, globalErrorMessage, paths } from '../../utils/utils';
-import { extractUserInfo } from '../../utils/utils';
+import { applicationName, globalErrorMessage, paths } from '@utils/utils';
+import { extractUserInfo } from '@utils/utils';
 import { Link } from 'react-router-dom';
 import axios from '../../api/axios';
-import useAuth from '../../hooks/useAuth';
-import login from '../../assets/login.svg';
-import InputField from '../../components/ui/InputField';
-import Checkbox from '../../components/ui/Checkbox';
+import useAuth from '@hooks/useAuth';
+import login from '@assets/login.svg';
+import InputField from '@components/ui/InputField';
+import Checkbox from '@components/ui/Checkbox';
+import Form from '@components/ui/Form';
 import AuthMaxBox from './components/AuthMaxBox';
-import Form from '../../components/ui/Form';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
-import icons from '../../utils/faIcons';
+import useDocumentTitle from '@hooks/useDocumentTitle';
+import icons from '@utils/faIcons';
 
 function Login() {
   useDocumentTitle(`${applicationName} | Login`);
