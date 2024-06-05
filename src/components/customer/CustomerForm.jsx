@@ -86,7 +86,10 @@ function CustomerForm({ title, submitLabel, customer, setCustomer, setEditingMod
       } else if (age && (age < 1 || age > 120)) {
         setError('Please provide a valid age');
         return;
-      } 
+      } else if (city && !/^[a-zA-Z\s]{2,30}$/.test(city.trim())) {
+        setError('Please provide a valid city name');
+        return;
+      }
 
       // Adding Optional Field If Provided
       if (age) data.age = age;
