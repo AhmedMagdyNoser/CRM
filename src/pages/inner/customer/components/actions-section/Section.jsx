@@ -35,7 +35,7 @@ function ActionsSection({ loading, actions }) {
         ) : filterActions(activeTab).length === 0 ? (
           <div className="flex-center w-full flex-col gap-5 py-20">
             <img src={noData} alt="No Data" className="h-[135px]" />
-            <p>No {activeTab.title === 'All' ? ' actions' : ` ${activeTab.title.toLowerCase()}`} found</p>
+            <p>No {activeTab.title === 'All Actions' ? ' actions' : ` ${activeTab.title.toLowerCase()}`} found</p>
           </div>
         ) : (
           filterActions(activeTab).map((action) => <Action key={action.id} action={action} />)
