@@ -6,8 +6,11 @@ import useOnLoadFetch from '../../../../../hooks/useOnLoadFetch';
 import EmployeeCard from './components/UserCard';
 import icons from '../../../../../utils/faIcons';
 import InputField from '../../../../../components/ui/InputField';
+import useDocumentTitle from '../../../../../hooks/useDocumentTitle';
 
 export default function EmployeesStats() {
+  useDocumentTitle('Employees Reports');
+
   const [searchTerm, setSearchTerm] = useState('');
 
   const { data, loading, error } = useOnLoadFetch('manager/get-all-users');

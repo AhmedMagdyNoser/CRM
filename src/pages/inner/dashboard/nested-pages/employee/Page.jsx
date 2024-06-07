@@ -7,8 +7,11 @@ import EmployeeReport from './components/EmployeeReport';
 import Loading from '../../components/status/Loading';
 import Error from '../../components/status/Error';
 import icons from '../../../../../utils/faIcons';
+import useDocumentTitle from '../../../../../hooks/useDocumentTitle';
 
 export default function EmployeeStats() {
+  useDocumentTitle('Employees Report');
+
   const id = useParams().id;
 
   const [selectedPeriod, setSelectedPeriod] = useState(periodOptions[0]);
