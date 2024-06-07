@@ -6,12 +6,14 @@ import useAuth from '../../../../../../hooks/useAuth';
 import InputField from '../../../../../../components/ui/InputField';
 import Form from '../../../../../../components/ui/Form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Alert from '../../../../../../components/ui/Alert';
 import icons from '../../../../../../utils/faIcons';
 
 export default function ChangingUsername() {
   const privateAxios = usePrivateAxios();
 
   const { auth, setAuth } = useAuth();
+  const [userNameUpdated, setUserNameUpdated] = useState(false);
 
   const [username, setUsername] = useState(auth.username);
 
@@ -36,6 +38,7 @@ export default function ChangingUsername() {
           data: { username },
         });
         setAuth({ ...auth, username });
+        setUserNameUpdated(true);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -47,6 +50,9 @@ export default function ChangingUsername() {
     }
   }
 
+  if (userNameUpdated) {
+    return <Alert.Success message="Username updated successfully!" />;
+  }
   return (
     <div className="flex lg:gap-20 gap-1">
       <div className="flex lg:w-[400px]">

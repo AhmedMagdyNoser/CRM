@@ -6,12 +6,14 @@ import useAuth from '../../../../../../hooks/useAuth';
 import InputField from '../../../../../../components/ui/InputField';
 import Form from '../../../../../../components/ui/Form';
 import icons from '../../../../../../utils/faIcons';
+import Alert from '../../../../../../components/ui/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function ChangingName() {
   const privateAxios = usePrivateAxios();
 
   const { auth, setAuth } = useAuth();
+  const [nameUpdated, setNameUpdated] = useState(false);
 
   const [firstName, setFirstName] = useState(auth.firstName);
   const [lastName, setLastName] = useState(auth.lastName);
@@ -38,6 +40,7 @@ export default function ChangingName() {
           data: { firstName, lastName },
         });
         setAuth({ ...auth, firstName, lastName });
+        setNameUpdated(true);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -47,6 +50,10 @@ export default function ChangingName() {
       // If the submit button is enabled with JS hacks
       setError('Please enter valid information');
     }
+  }
+
+  if (nameUpdated) {
+    return <Alert.Success message="Name updated successfully!" />;
   }
 
   return (
